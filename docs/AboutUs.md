@@ -11,51 +11,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Long Nguyen Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/longnguyentan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/longnguyentan)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing, Integration
 
-### James Doe
+### Aaron Joel Tan Tze Ern
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aaronjt1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/aaronjt1)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking, Git Expert
+
+### Lee Thien My
+
+<img src="images/thienmy0.png" width="200px">
+
+[[github](http://github.com/thienmy0)] [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and Deadline
+
+### Mehta Riya Mehulbhai
+
+<img src="images/RiyaMehta2211.png" width="200px">
+
+[[github](http://github.com/RiyaMehta2211)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+
+### Wu Jingya
+
+<img src="images/wujy28.png" width="200px">
+
+[[github](http://github.com/wujy28)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
