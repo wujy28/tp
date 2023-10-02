@@ -1,7 +1,4 @@
----
-  layout: longng.md
-  title: "Long's Project Portfolio Page"
----
+# Long's Project Portfolio Page
 
 ## Project: Advanced&Efficient (A&E)
 Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and connecting patients with relevant departments and doctors under time pressure during an emergency.
