@@ -13,10 +13,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Long Nguyen Tan
 
-<img src="images/longnguyentan.png" width="200px">
+<img src="images/longng.png" width="200px">
 
 [[github](https://github.com/longnguyentan)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/longng.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Integration
