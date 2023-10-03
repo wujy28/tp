@@ -60,6 +60,30 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
+
+
+### List All Patients: `list`
+
+Lists all patients in the system.
+
+Format: `list patients`
+
+![UG_listPatients.png](images%2Fug%2FUG_listPatients.png)
+
+### Delete a Patient: `delete`
+
+Deletes the patient with the specified IC number from the system. Inputs are case-insensitive (e.g., `T1234567A` is the same as `t1234567a`). The order of the inputs does not matter.
+
+Format: `delete i/IC_NUMBER`
+
+Examples:
+
+- `delete i/T1234567A`
+- `delete i/T2468012A`
+
+
+
+
 ### Adding a person: `add`
 
 Adds a person to the address book.
