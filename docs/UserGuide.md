@@ -10,9 +10,14 @@ Advanced&Efficient (A&E) is a Command-Line Interface (CLI) focussed app that hel
 
 <!-- * Table of Contents -->
 - [Quick-start](#quick-start)
-- [Features](#Features)
-  - [Subsection 1.1](#subsection-1-1)
-  - [Subsection 1.2](#subsection-1-2)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Listing all patients: `list patients`](#list-all-patients--list)
+  - [Delete a patient: `delete`](#delete-a-patient--delete)
+  - [Viewing a patient record : `view`](#subsection-1-1)
+  - [Edit a patient record : `record`](#subsection-1-1)
+  - [Assign patient to department : `assign`](#subsection-1-1)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
 - [FAQ](#FAQ)
 - [Known Issues](#Known-issues)
 - [Command summary](#Command-summary)
