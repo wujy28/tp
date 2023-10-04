@@ -53,7 +53,7 @@ Advanced&Efficient (A&E) is a Command-Line Interface (CLI) focussed app that hel
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -72,16 +72,14 @@ Format: `list patients`
 
 ### Delete a Patient: `delete`
 
-Deletes the patient with the specified IC number from the system. Inputs are case-insensitive (e.g., `T1234567A` is the same as `t1234567a`). The order of the inputs does not matter.
+Deletes the patient with the specified IC number from the system. Inputs are not case-sensitive (e.g., `T1234567A` is the same as `t1234567a`). The order of the inputs does not matter.
 
 Format: `delete i/IC_NUMBER`
 
 Examples:
 
 - `delete i/T1234567A`
-- `delete i/T2468012A`
-
-
+- `delete i/T2468012a`
 
 
 ### Adding a person: `add`
