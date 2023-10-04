@@ -14,6 +14,7 @@ Advanced&Efficient (A&E) is a Command-Line Interface (CLI) focussed app that hel
   - [Viewing help : `help`](#viewing-help--help)
   - [Listing all patients: `list patients`](#list-all-patients--list)
   - [Delete a patient: `delete`](#delete-a-patient--delete)
+  - [Adding a patient: `add`](#adding-a-patient--add)
   - [Viewing a patient record : `view`](#subsection-1-1)
   - [Edit a patient record : `record`](#subsection-1-1)
   - [Assign patient to department : `assign`](#subsection-1-1)
@@ -89,7 +90,7 @@ Examples:
 
 ### Adding a Patient: `add`
 
-Adds the specified patient to the system.
+Adds the specified patient into the system.
 
 Format: `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 + Only the `i/IC_NUMBER` field is compulsory.
