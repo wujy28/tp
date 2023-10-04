@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Advanced&Efficient (A&E) Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
