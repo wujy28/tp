@@ -152,11 +152,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Assigning a patient to a department : `assign`
 
-Clears all entries from the address book.
+Assigns the patient to relevant doctor.
 
-Format: `clear`
+Format: `assign i/IC_NUMBER d/DEPARTMENT`
+* All fields are compulsory
+* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`
+* `DEPARTMENT` must adhere to British spelling conventions
+
+Examples:
+* `assign i/T02012345A d/cardiology`
 
 ### Exiting the program : `exit`
 
