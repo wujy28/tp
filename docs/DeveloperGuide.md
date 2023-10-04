@@ -377,47 +377,160 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is the `Advanced&Efficient` and the **Actor** is the `ED doctor`, unless specified
 otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a patient**
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+1. ED doctor requests to add a new patient with given details. 
+2. Advanced&Efficient adds the patient to the patient list.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Advanced&Efficient detects that given details are invalid. 
+  * 1a1. Advanced&Efficient shows an error message saying the given details are invalid. 
+  * 1a2. Advanced&Efficient requests for correct details. 
+  * 1a3. ED doctor enters the requested details.
 
-  Use case ends.
+    Steps 1a1-1a3 are repeated until the details are valid.
+  
+    Use case resumes from step 2.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. Advanced&Efficient detects that not all required details are given.
+    * 1b1. Advanced&Efficient shows an error message saying that not all required details are given.
+    * 1b2. Advanced&Efficient requests for all the required details.
+    * 1b3. ED doctor enters the required details.
+  
+      Steps 1b1-1b3 are repeated until all the required details are given.
+  
+      Use case resumes from step 2.
 
-      Use case resumes at step 2.
 
-*{More to be added}*
+* 1c. Advanced&Efficient detects that the given patient is already in the patient list.
+    * 1c1. Advanced&Efficient shows an error message saying patient is already added.
+
+      Use case ends.
+
+**Use case: UC02 - Delete a patient**
+
+**MSS**
+
+1. ED doctor requests to delete a patient of the given IC number. 
+2. Advanced&Efficient deletes the patient’s details from the list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the given IC number is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given IC number is invalid.
+    * 1a2. Advanced&Efficient requests for correct IC number.
+    * 1a3. ED doctor enters the IC number.
+
+      Steps 1a1-1a3 are repeated until the IC number is valid.
+  
+      Use case resumes from step 2.
+
+
+* 1b. Advanced&Efficient detects that the specified patient does not exist.
+    * 1b1. Advanced&Efficient shows message saying patient does not exist.
+
+      Use case ends.
+
+
+**Use case: UC03 - View list of patients**
+
+**MSS**
+1. ED doctor requests to view list of all patients. 
+2. Advanced&Efficient shows a list of all patients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that list is empty.
+    * 1a1. Advanced&Efficient shows message saying list is empty.
+  
+      Use case ends.
+
+**Use case: UC04 - View patient record**
+
+**MSS**
+1. ED doctor requests to view a patient’s record. 
+2. Advanced&Efficient shows the patient’s record.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the specified patient does not exist.
+    * 1a1. Advanced&Efficient shows message saying patient does not exist.
+
+      Use case ends.
+
+**Use case: UC05 - Edit patient record**
+
+**MSS**
+
+1. ED doctor requests to edit a patient’s records. 
+2. Advanced&Efficient edits the patient’s records as ED doctor specifies.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the specified patient does not exist.
+    * 1a1. Advanced&Efficient shows message saying patient does not exist. 
+      Use case ends.
+
+
+* 1b. Advanced&Efficient detects that given details are invalid.
+    * 1b1. Advanced&Efficient shows an error message saying the given details are invalid.
+    * 1b2. Advanced&Efficient requests for correct details.
+    * 1b3. ED doctor enters the requested details.
+
+      Steps 1b1-1b3 are repeated until the details are valid.
+  
+      Use case resumes from step 2.
+
+
+**Use case: UC06 - Assign patient to a department**
+
+**MSS**
+
+1. ED doctor requests to assign a patient to a department. 
+2. Advanced&Efficient assigns the patient to the department based on the input.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the given department is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given department is invalid.
+    * 1a2. Advanced&Efficient requests for correct department.
+    * 1a3. ED doctor enters the department.
+
+      Steps 1a1-1a3 are repeated until the department is valid.
+  
+      Use case resumes from step 2.
+
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
-   able to accomplish most of the tasks faster using commands than using the mouse.
+2. Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
+3. A ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
