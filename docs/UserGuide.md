@@ -86,6 +86,27 @@ Examples:
 - `delete i/T1234567A`
 - `delete i/T2468012a`
 
+### Viewing a patient: `view`
+
+Shows a medical record of a patient
+
+Format: `view i/IC_NUMBER`
+* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`
+
+Examples:
+* `view i/T02012345A`
+
+### Editing a patient record: `record`
+
+Edits a medical record for a patient.
+
+Format: `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`
+* Only i/IC_NUMBER field is compulsory.
+* Inputs are case-insensitive e.g. T1234567A is the same as t1234567a
+* The order of the inputs does not matter
+
+Examples:
+* `record i/T02012345A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes`
 
 ### Adding a person: `add`
 
