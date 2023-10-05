@@ -13,14 +13,14 @@ import seedu.address.model.patient.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A patient is considered unique by comparing using {@code Patient#isSamePerson(Patient)}. As such, adding and updating of
- * persons uses Patient#isSamePerson(Patient) for equality so as to ensure that the patient being added or updated is
+ * A patient is considered unique by comparing using {@code Patient#isSamePatient(Patient)}. As such, adding and updating of
+ * persons uses Patient#isSamePatient(Patient) for equality so as to ensure that the patient being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a patient uses Patient#equals(Object) so
  * as to ensure that the patient with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Patient#isSamePerson(Patient)
+ * @see Patient#isSamePatient(Patient)
  */
 public class UniquePersonList implements Iterable<Patient> {
 
@@ -33,7 +33,7 @@ public class UniquePersonList implements Iterable<Patient> {
      */
     public boolean contains(Patient toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSamePatient);
     }
 
     /**
@@ -61,7 +61,7 @@ public class UniquePersonList implements Iterable<Patient> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPatient) && contains(editedPatient)) {
+        if (!target.isSamePatient(editedPatient) && contains(editedPatient)) {
             throw new DuplicatePersonException();
         }
 
@@ -140,7 +140,7 @@ public class UniquePersonList implements Iterable<Patient> {
     private boolean personsAreUnique(List<Patient> patients) {
         for (int i = 0; i < patients.size() - 1; i++) {
             for (int j = i + 1; j < patients.size(); j++) {
-                if (patients.get(i).isSamePerson(patients.get(j))) {
+                if (patients.get(i).isSamePatient(patients.get(j))) {
                     return false;
                 }
             }
