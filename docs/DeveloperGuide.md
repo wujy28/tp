@@ -332,13 +332,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has to log patient records into system
-* has to assign patients to relevant department
+* has to log patient records into the system
+* has to assign patients to the relevant departments
 * has to work under time pressure during an emergency
-* faces frequent interruption due to emergency
-* has above average typing speed
+* faces frequent interruption due to emergencies
+* has an above average typing speed
 * prefers typing over mouse/voice commands
-* comfortable using CLI apps
+* is comfortable using CLI apps
 
 **Value proposition**: Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and
 assigning patients to relevant departments under time pressure during an emergency, using the CLI.
@@ -347,39 +347,38 @@ assigning patients to relevant departments under time pressure during an emergen
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​   | I want to …​                                                                                         | So that I can…​                                                                                                                                       |
-|-----------|-----------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`   | ED Doctor | View the record of a patient                                                                         | Keep track of every patient’s condition and treatment plan                                                                                            |
-| `* * *`   | ED Doctor | Assign a patient to a department                                                                     | Keep track of where each patient is receiving further treatment                                                                                       |
-| `* * *`   | ED Doctor | Edit the existing record of a patient                                                                | Keep the patient’s record relevant and up-to-date                                                                                                     |
-| `* * *`   | ED Doctor | Delete a patient from my list                                                                        | Declutter and only keep the active patients on my listÏÏ                                                                                              |
-| `* * *`   | ED Doctor | Add a patient to the list                                                                            | -                                                                                                                                                     |
-| `* * *` Ï | ED Doctor | View the list of patients                                                                            | -                                                                                                                                                     |
-| `* *`     | ED Doctor | Undo my latest action                                                                                | Quickly revert a mistake I made                                                                                                                       |
-| `* *`     | ED Doctor | Tag patients                                                                                         | Better organize patients into categories so as to better keep track of them                                                                           |
-| `* *`     | ED Doctor | Assign the priority to the patient with respect to the severity of the case                          | So that I can keep track of the more critical cases                                                                                                   |
-| `* *`     | ED Doctor | Find patients from the list that match a given property (e.g. name, IC number, priority)             | Quickly narrow down the list to view the patients of my interest                                                                                      |
-| `*`       | ED Doctor | Quickly view the availability status of a doctor                                                     | Assign them patients                                                                                                                                  |
-| `*`       | ED Doctor | Message and communicate with other healthcare staff                                                  | Coordinate patient care effectively                                                                                                                   |
-| `*`       | ED Doctor | Sort my list of active patients by priority/severity                                                 | Provide timely treatment to the patients in critical condition                                                                                        |
-| `*`       | ED Doctor | Retrieve the patient’s medical history from the (national) database after logging them in the system | Gather more information/evidence to make a more informed/accurate diagnosis and as such provide effective treatment for the patient                   |
-| `*`       | ED Doctor | Customize shortcuts for my most commonly-used commands                                               | Make my workflow more efficient and convenient                                                                                                        |
-| `*`       | ED Doctor | Backup the data in my app                                                                            | Ensure that all the patient information is not completely lost in the event that the data file gets corrupted or the computer’s hardware malfunctions |
-| `*`       | ED Doctor | Login into the system only using hospital credentials                                                | Ensure the confidentiality and security of patient information and limit its access to hospital personnel only                                        |
-| `*`       | ED Doctor | Securely send a patient’s records to the relevant department                                         | Ensure that the other department I am handing my patient to is on the same page as to/updated on the current condition of the patient                 |
-| `*`       | ED Doctor | Access clinical guidelines and resources within the application                                      | Diagnose and treat patients with greater ease                                                                                                         |
-| `*`       | ED Doctor | View real-time vitals of patients                                                                    | Monitor patient’s condition efficiently                                                                                                               |
-| `*`       | ED Doctor | Receive notifications for critical situations                                                        | Provide timely intervention and efficiently handle critical patient conditions                                                                        |
-| `*`       | ED Doctor | Save a draft of a message I am writing into local repository                                         | Return to work on it after an emergency call                                                                                                          |
-| `*`       | ED Doctor | Filter a list of doctors according to their department                                               | I can easily identify doctors to assign to from a specific department                                                                                 |
-| `*`       | ED Doctor | View the list of doctors                                                                             | I know who I can refer my patients for further treatment to                                                                                           |
-| `*`       | ED Doctor | View a list of commands                                                                              | Know the commands needed to carry out my action                                                                                                       |Ï
+| Priority | As a …​   | I want to …​                                                                                       | So that I can…​                                                                                                                                       |
+|----------|-----------|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | ED Doctor | View the record of a patient                                                                       | Keep track of every patient’s condition and treatment plan                                                                                            |
+| `* * *`  | ED Doctor | Assign a patient to a department                                                                   | Keep track of where each patient is receiving further treatment                                                                                       |
+| `* * *`  | ED Doctor | Edit the existing record of a patient                                                              | Keep the patient’s record relevant and up-to-date                                                                                                     |
+| `* * *`  | ED Doctor | Delete a patient from my list                                                                      | Declutter and only keep the active patients on my list                                                                                                |
+| `* * *`  | ED Doctor | Add a patient to the list                                                                          | -                                                                                                                                                     |
+| `* * *`  | ED Doctor | View the list of patients                                                                          | -                                                                                                                                                     |
+| `* *`    | ED Doctor | Undo my latest action                                                                              | Quickly revert a mistake I made                                                                                                                       |
+| `* *`    | ED Doctor | Tag patients                                                                                       | Better organize patients into categories so as to better keep track of them                                                                           |
+| `* *`    | ED Doctor | Assign the priority to the patient with respect to the severity of the case                        | So that I can keep track of the more critical cases                                                                                                   |
+| `* *`    | ED Doctor | Find patients from the list that match a given property (e.g. name, IC number, priority)           | Quickly narrow down the list to view the patients of my interest                                                                                      |
+| `*`      | ED Doctor | Quickly view the availability status of a doctor                                                   | Assign them patients                                                                                                                                  |
+| `*`      | ED Doctor | Message and communicate with other healthcare staff                                                | Coordinate patient care effectively                                                                                                                   |
+| `*`      | ED Doctor | Sort my list of active patients by priority/severity                                               | Provide timely treatment to the patients in critical condition                                                                                        |
+| `*`      | ED Doctor | Retrieve the patient’s medical history from the national database after logging them in the system | Gather more information to make a more informed diagnosis and as such provide effective treatment for the patient                                     |
+| `*`      | ED Doctor | Customize shortcuts for my most commonly-used commands                                             | Make my workflow more efficient and convenient                                                                                                        |
+| `*`      | ED Doctor | Backup the data in my app                                                                          | Ensure that all the patient information is not completely lost in the event that the data file gets corrupted or the computer’s hardware malfunctions |
+| `*`      | ED Doctor | Login into the system only using hospital credentials                                              | Ensure the confidentiality and security of patient information and limit its access to hospital personnel only                                        |
+| `*`      | ED Doctor | Securely send a patient’s records to the relevant department                                       | Ensure that the other department I am handing my patient to is on the same page as to/updated on the current condition of the patient                 |
+| `*`      | ED Doctor | Access clinical guidelines and resources within the application                                    | Diagnose and treat patients with greater ease                                                                                                         |
+| `*`      | ED Doctor | View real-time vitals of patients                                                                  | Monitor patient’s condition efficiently                                                                                                               |
+| `*`      | ED Doctor | Receive notifications for critical situations                                                      | Provide timely intervention and efficiently handle critical patient conditions                                                                        |
+| `*`      | ED Doctor | Save a draft of a message I am writing into the local repository                                   | Return to work on it after an emergency call                                                                                                          |
+| `*`      | ED Doctor | Filter a list of doctors according to their department                                             | I can easily identify doctors to assign to from a specific department                                                                                 |
+| `*`      | ED Doctor | View the list of doctors                                                                           | I know who I can refer my patients for further treatment to                                                                                           |
+| `*`      | ED Doctor | View a list of commands                                                                            | Know the commands needed to carry out my action                                                                                                       |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Advanced&Efficient` and the **Actor** is the `ED doctor`, unless
-specified
-otherwise)
+(For all use cases below, the **System** is the `Advanced&Efficient`application and the **Actor** is the `ED doctor`, 
+unless specified otherwise)
 
 **Use case: UC01 - Add a patient**
 
@@ -392,7 +391,7 @@ otherwise)
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that given details are invalid.
+* 1a. Advanced&Efficient detects that the given details are invalid.
     * 1a1. Advanced&Efficient shows an error message saying the given details are invalid.
     * 1a2. Advanced&Efficient requests for correct details.
     * 1a3. ED doctor enters the requested details.
@@ -412,7 +411,7 @@ otherwise)
       Use case resumes from step 2.
 
 
-* 1c. Advanced&Efficient detects that the given patient is already in the patient list.
+* 1c. Advanced&Efficient detects that the given patient is already on the patient list.
     * 1c1. Advanced&Efficient shows an error message saying patient is already added.
 
       Use case ends.
@@ -422,7 +421,7 @@ otherwise)
 **MSS**
 
 1. ED doctor requests to delete a patient of the given IC number.
-2. Advanced&Efficient deletes the patient’s details from the list.
+2. Advanced&Efficient deletes the patient from the list.
 
    Use case ends.
 
@@ -443,23 +442,23 @@ otherwise)
 
       Use case ends.
 
-**Use case: UC03 - View list of patients**
+**Use case: UC03 - View the list of patients**
 
 **MSS**
 
-1. ED doctor requests to view list of all patients.
+1. ED doctor requests to view the list of all patients.
 2. Advanced&Efficient shows a list of all patients.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that list is empty.
-    * 1a1. Advanced&Efficient shows message saying list is empty.
+* 1a. Advanced&Efficient detects that the list is empty.
+    * 1a1. Advanced&Efficient shows a message saying that the list is empty.
 
       Use case ends.
 
-**Use case: UC04 - View patient record**
+**Use case: UC04 - View a patient record**
 
 **MSS**
 
@@ -471,36 +470,36 @@ otherwise)
 **Extensions**
 
 * 1a. Advanced&Efficient detects that the specified patient does not exist.
-    * 1a1. Advanced&Efficient shows message saying patient does not exist.
+    * 1a1. Advanced&Efficient shows message saying the patient does not exist.
 
       Use case ends.
 
-**Use case: UC05 - Edit patient record**
+**Use case: UC05 - Edit a patient record**
 
 **MSS**
 
-1. ED doctor requests to edit a patient’s records.
-2. Advanced&Efficient edits the patient’s records as ED doctor specifies.
+1. ED doctor requests to edit a patient’s record.
+2. Advanced&Efficient edits the patient’s record as the ED doctor specifies.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. Advanced&Efficient detects that the specified patient does not exist.
-    * 1a1. Advanced&Efficient shows message saying patient does not exist.
+    * 1a1. Advanced&Efficient shows message saying the patient does not exist.
       Use case ends.
 
 
-* 1b. Advanced&Efficient detects that given details are invalid.
+* 1b. Advanced&Efficient detects that the given details are invalid.
     * 1b1. Advanced&Efficient shows an error message saying the given details are invalid.
-    * 1b2. Advanced&Efficient requests for correct details.
+    * 1b2. Advanced&Efficient requests for the correct details.
     * 1b3. ED doctor enters the requested details.
 
       Steps 1b1-1b3 are repeated until the details are valid.
 
       Use case resumes from step 2.
 
-**Use case: UC06 - Assign patient to a department**
+**Use case: UC06 - Assign a patient to a department**
 
 **MSS**
 
@@ -513,7 +512,7 @@ otherwise)
 
 * 1a. Advanced&Efficient detects that the given department is invalid.
     * 1a1. Advanced&Efficient shows an error message saying the given department is invalid.
-    * 1a2. Advanced&Efficient requests for correct department.
+    * 1a2. Advanced&Efficient requests for the correct department.
     * 1a3. ED doctor enters the department.
 
       Steps 1a1-1a3 are repeated until the department is valid.

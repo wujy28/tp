@@ -6,7 +6,7 @@ pageNav: 3
 
 # Advanced&Efficient (A&E) User Guide
 
-Advanced&Efficient (A&E) is a Command-Line Interface (CLI) focussed app that helps Emergency Department (ED) doctors log
+Advanced&Efficient (A&E) is a **Command-Line Interface (CLI)** focussed app that helps Emergency Department (ED) doctors log
 patient reports and connect them to the relevant departments. It is suited for users who type fast and prefer typing
 over other modes of inputs.
 
@@ -14,14 +14,14 @@ over other modes of inputs.
 
 - [Quick-start](#quick-start)
 - [Features](#features)
-    - [Viewing help : `help`](#viewing-help-help)
-    - [Listing all patients: `list patients`](#listing-all-patients-list)
-    - [Adding a patient: `add`](#adding-a-patient-add)
-    - [Deleting a patient: `delete`](#deleting-a-patient-delete)
-    - [Viewing a patient record : `view`](#viewing-a-patient-record-view)
-    - [Editing a patient record : `record`](#editing-a-patient-record-record)
-    - [Assigning a patient to department : `assign`](#assigning-a-patient-to-a-department-assign)
-    - [Exiting the program : `exit`](#exiting-the-program-exit)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Listing all patients: `list`](#listing-all-patients--list)
+    - [Adding a patient: `add`](#adding-a-patient--add)
+    - [Deleting a patient: `delete`](#deleting-a-patient--delete)
+    - [Viewing a patient record : `view`](#viewing-a-patient-record--view)
+    - [Editing a patient record : `record`](#editing-a-patient-record--record)
+    - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department--assign)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command summary](#command-summary)
@@ -45,12 +45,6 @@ over other modes of inputs.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -70,21 +64,21 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all Patients: `list`
+### Listing all patients: `list`
 
 Lists all patients in the system.
 
-Format: `list patients`
+Format: `list`
 
 ![UG_listPatients.png](images/ug/listPatients.png)
 
-### Adding a Patient: `add`
+### Adding a patient: `add`
 
 Adds the specified patient into the system.
 
 Format: `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
-+ Only the `i/IC_NUMBER` field is compulsory.
++ Only the `IC_NUMBER` field is compulsory.
 + Input fields are case-insensitive e.g. `john doe` is the same as `JOHN DOE`.
 + The order of the input fields does not matter.
 
@@ -93,43 +87,45 @@ Examples:
 * `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe p/87386298 a/20 g/Female b/02-02-2003 e/betsycrowe@example.com a/Brighton Town i/T6543210F`
 
-### Deleting a Patient: `delete`
+### Deleting a patient: `delete`
 
-Deletes the patient with the specified IC number from the system. Inputs are not case-sensitive (e.g., `T1234567A` is
-the same as `t1234567a`). The order of the inputs does not matter.
+Deletes the patient with the specified IC number from the system.
 
 Format: `delete i/IC_NUMBER`
 
++ Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
++ The order of the input fields does not matter.
+
 Examples:
 
-- `delete i/T1234567A`
-- `delete i/T2468012a`
++ `delete i/T1234567A`
++ `delete i/T2468012a`
 
 ### Viewing a patient record: `view`
 
-Shows a medical record of a patient
+Shows the medical record of the patient with the specified IC number.
 
 Format: `view i/IC_NUMBER`
 
-* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`
+* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
 
 Examples:
 
-* `view i/T02012345A`
+* `view i/T0201234A`
 
 ### Editing a patient record: `record`
 
-Edits a medical record for a patient.
+Edits the medical record of the patient with the specified IC number.
 
 Format: `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`
 
-* Only i/IC_NUMBER field is compulsory.
-* Inputs are case-insensitive e.g. T1234567A is the same as t1234567a
-* The order of the inputs does not matter
+* Only the `IC_NUMBER` field is compulsory.
+* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
+* The order of the input fields does not matter.
 
 Examples:
 
-* `record i/T02012345A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes`
+* `record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes`
 
 ### Assigning a patient to a department : `assign`
 
@@ -137,13 +133,13 @@ Assigns the patient to relevant doctor.
 
 Format: `assign i/IC_NUMBER d/DEPARTMENT`
 
-* All fields are compulsory
-* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`
-* `DEPARTMENT` must adhere to British spelling conventions
+* All input fields are compulsory.
+* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
+* `DEPARTMENT` must adhere to British spelling conventions.
 
 Examples:
 
-* `assign i/T02012345A d/cardiology`
+* `assign i/T0201234A d/cardiology`
 
 ### Exiting the program : `exit`
 
@@ -153,18 +149,18 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+Advanced&Efficient data are saved in the hard disk automatically after any command that changes the data. There is no need to
 save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+Advanced&Efficient data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty
+If your changes to the data file makes its format invalid, Advanced&Efficient will discard all data and start with an empty
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
@@ -188,12 +184,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples                                                                                                                                                      
-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
-**Clear**  | `clear`                                                                                                                                                               
-**Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
-**List**   | `list`                                                                                                                                                                
-**Help**   | `help`                                                                                                                                                                
+| Action     | Format, Examples                                                                                                                                                                                                                |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`               |
+| **Delete** | `delete i/IC_NUMBER`<br> e.g., `delete i/T2468012A`                                                                                                                                                                             |
+| **View**   | `view i/IC_NUMBER`<br> e.g., `view i/T0201234A`                                                                                                                                                                                 |
+| **Record** | `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`<br> e.g.,`record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes` |
+| **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                   |
+| **List**   | `list`                                                                                                                                                                                                                          |
+| **Help**   | `help`                                                                                                                                                                                                                          |
+| **Exit**   | `exit`                                                                                                                                                                                                                          |
