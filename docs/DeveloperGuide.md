@@ -377,37 +377,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Advanced&Efficient` and the **Actor** is the `ED doctor`, unless specified
+(For all use cases below, the **System** is the `Advanced&Efficient` and the **Actor** is the `ED doctor`, unless
+specified
 otherwise)
 
 **Use case: UC01 - Add a patient**
 
 **MSS**
 
-1. ED doctor requests to add a new patient with given details. 
+1. ED doctor requests to add a new patient with given details.
 2. Advanced&Efficient adds the patient to the patient list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that given details are invalid. 
-  * 1a1. Advanced&Efficient shows an error message saying the given details are invalid. 
-  * 1a2. Advanced&Efficient requests for correct details. 
-  * 1a3. ED doctor enters the requested details.
+* 1a. Advanced&Efficient detects that given details are invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given details are invalid.
+    * 1a2. Advanced&Efficient requests for correct details.
+    * 1a3. ED doctor enters the requested details.
 
-    Steps 1a1-1a3 are repeated until the details are valid.
-  
-    Use case resumes from step 2.
+      Steps 1a1-1a3 are repeated until the details are valid.
+
+      Use case resumes from step 2.
 
 
 * 1b. Advanced&Efficient detects that not all required details are given.
     * 1b1. Advanced&Efficient shows an error message saying that not all required details are given.
     * 1b2. Advanced&Efficient requests for all the required details.
     * 1b3. ED doctor enters the required details.
-  
+
       Steps 1b1-1b3 are repeated until all the required details are given.
-  
+
       Use case resumes from step 2.
 
 
@@ -420,7 +421,7 @@ otherwise)
 
 **MSS**
 
-1. ED doctor requests to delete a patient of the given IC number. 
+1. ED doctor requests to delete a patient of the given IC number.
 2. Advanced&Efficient deletes the patient’s details from the list.
 
    Use case ends.
@@ -433,7 +434,7 @@ otherwise)
     * 1a3. ED doctor enters the IC number.
 
       Steps 1a1-1a3 are repeated until the IC number is valid.
-  
+
       Use case resumes from step 2.
 
 
@@ -442,11 +443,11 @@ otherwise)
 
       Use case ends.
 
-
 **Use case: UC03 - View list of patients**
 
 **MSS**
-1. ED doctor requests to view list of all patients. 
+
+1. ED doctor requests to view list of all patients.
 2. Advanced&Efficient shows a list of all patients.
 
    Use case ends.
@@ -455,13 +456,14 @@ otherwise)
 
 * 1a. Advanced&Efficient detects that list is empty.
     * 1a1. Advanced&Efficient shows message saying list is empty.
-  
+
       Use case ends.
 
 **Use case: UC04 - View patient record**
 
 **MSS**
-1. ED doctor requests to view a patient’s record. 
+
+1. ED doctor requests to view a patient’s record.
 2. Advanced&Efficient shows the patient’s record.
 
    Use case ends.
@@ -477,7 +479,7 @@ otherwise)
 
 **MSS**
 
-1. ED doctor requests to edit a patient’s records. 
+1. ED doctor requests to edit a patient’s records.
 2. Advanced&Efficient edits the patient’s records as ED doctor specifies.
 
    Use case ends.
@@ -485,7 +487,7 @@ otherwise)
 **Extensions**
 
 * 1a. Advanced&Efficient detects that the specified patient does not exist.
-    * 1a1. Advanced&Efficient shows message saying patient does not exist. 
+    * 1a1. Advanced&Efficient shows message saying patient does not exist.
       Use case ends.
 
 
@@ -495,15 +497,14 @@ otherwise)
     * 1b3. ED doctor enters the requested details.
 
       Steps 1b1-1b3 are repeated until the details are valid.
-  
-      Use case resumes from step 2.
 
+      Use case resumes from step 2.
 
 **Use case: UC06 - Assign patient to a department**
 
 **MSS**
 
-1. ED doctor requests to assign a patient to a department. 
+1. ED doctor requests to assign a patient to a department.
 2. Advanced&Efficient assigns the patient to the department based on the input.
 
    Use case ends.
@@ -516,15 +517,15 @@ otherwise)
     * 1a3. ED doctor enters the department.
 
       Steps 1a1-1a3 are repeated until the department is valid.
-  
-      Use case resumes from step 2.
 
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
-3. A ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks
+   faster using commands than using the mouse.
 
 *{More to be added}*
 
