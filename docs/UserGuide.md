@@ -14,6 +14,7 @@ Advanced&Efficient (A&E) is a Command-Line Interface (CLI) focussed app that hel
   - [Viewing help : `help`](#viewing-help--help)
   - [Listing all patients: `list patients`](#list-all-patients--list)
   - [Delete a patient: `delete`](#delete-a-patient--delete)
+  - [Adding a patient: `add`](#adding-a-patient--add)
   - [Viewing a patient record : `view`](#subsection-1-1)
   - [Edit a patient record : `record`](#subsection-1-1)
   - [Assign patient to department : `assign`](#subsection-1-1)
@@ -60,7 +61,7 @@ Advanced&Efficient (A&E) is a Command-Line Interface (CLI) focussed app that hel
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/ug/helpMessage.png)
 
 Format: `help`
 
@@ -73,7 +74,7 @@ Lists all patients in the system.
 
 Format: `list patients`
 
-![UG_listPatients.png](images%2Fug%2FUG_listPatients.png)
+![UG_listPatients.png](images/ug/listPatients.png)
 
 ### Delete a Patient: `delete`
 
@@ -108,20 +109,18 @@ Format: `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS
 Examples:
 * `record i/T02012345A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes`
 
-### Adding a person: `add`
+### Adding a Patient: `add`
 
-Adds a person to the address book.
+Adds the specified patient into the system.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
+Format: `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
++ Only the `i/IC_NUMBER` field is compulsory.
++ Input fields are case-insensitive e.g. `john doe` is the same as `JOHN DOE`.
++ The order of the input fields does not matter.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe p/87386298 a/20 g/Female b/02-02-2003 e/betsycrowe@example.com a/Brighton Town i/T6543210F`
 
 ### Listing all persons : `list`
 
