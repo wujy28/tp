@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Mehta Riya Mehulbhai
 
-<img src="images/RiyaMehta2211.png" width="200px">
+<img src="images/riyamehta2211.png" width="200px">
 
 [[github](http://github.com/RiyaMehta2211)]
 [[portfolio](team/riyamehta2211.md)]
