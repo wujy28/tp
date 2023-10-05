@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/RiyaMehta2211.png" width="200px">
 
 [[github](http://github.com/RiyaMehta2211)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/riyamehta2211.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality
