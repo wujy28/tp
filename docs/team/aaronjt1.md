@@ -13,7 +13,7 @@ Here are my contributions to the project.
 
 * Features implemented
     * to be added soon
-  
+
 * Enhancement to existing features:
     * to be added soon
 
