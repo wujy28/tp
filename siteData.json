@@ -114,7 +114,9 @@
         "viewing-help-help": "Viewing help : help",
         "list-all-patients-list": "List All Patients: list",
         "delete-a-patient-delete": "Delete a Patient: delete",
-        "adding-a-person-add": "Adding a person: add",
+        "viewing-a-patient-view": "Viewing a patient: view",
+        "editing-a-patient-record-record": "Editing a patient record: record",
+        "adding-a-patient-add": "Adding a Patient: add",
         "listing-all-persons-list": "Listing all persons : list",
         "editing-a-person-edit": "Editing a person : edit",
         "locating-persons-by-name-find": "Locating persons by name: find",
@@ -161,6 +163,14 @@
       "src": "team/longnguyentan.md",
       "headings": {
         "long-s-project-portfolio-page": "Long's Project Portfolio Page",
+        "project-advanced-and-amp-efficient-a-and-amp-e": "Project: Advanced&amp;Efficient (A&amp;E)"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/riyamehta2211.md",
+      "headings": {
+        "riya-s-project-portfolio-page": "Riya's Project Portfolio Page",
         "project-advanced-and-amp-efficient-a-and-amp-e": "Project: Advanced&amp;Efficient (A&amp;E)"
       },
       "headingKeywords": {}
