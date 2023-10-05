@@ -1,3 +1,4 @@
+[![CI Status](https://github.com/AY2324S1-CS2103T-T14-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-T14-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T14-2/tp/graph/badge.svg?token=OANNMRPP8F)](https://codecov.io/gh/AY2324S1-CS2103T-T14-2/tp)
 
 ![Ui](docs/images/Ui.png)
@@ -6,8 +7,7 @@
   patient records and connecting patients to relevant departments. <br>
 
 * Features:
-    * Has a Graphical User Interface (GUI) while also supporting user interactions via a **Command-Line Interface (CLI)
-      **
+    * Has a Graphical User Interface (GUI) while also supporting user interactions via a **Command-Line Interface (CLI)**
       for increased convenience and efficiency for users
     * Allows ED doctors to easily manage and organize a database of patients through actions such as adding and deleting
       patient entries, editing and tagging records, and searching
@@ -18,5 +18,4 @@
       [SE-EDU initiative](https://se-education.org).
     * It is **written in OOP fashion** and provides a **reasonably well-written** code base (around 6 KLoC).
     * It comes with a **reasonable level of user and developer documentation**.
-* For the detailed documentation of this project, see the *
-  *[Advanced&Efficient (A&E) Product Website](https://ay2324s1-cs2103t-t14-2.github.io/tp/)**.
+* For the detailed documentation of this project, see the **[Advanced&Efficient (A&E) Product Website](https://ay2324s1-cs2103t-t14-2.github.io/tp/)**.

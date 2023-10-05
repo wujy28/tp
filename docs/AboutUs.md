@@ -35,7 +35,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/thienmy0.png" width="200px">
 
-[[github](http://github.com/thienmy0)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/thienmy0)]
+[[portfolio](team/thienmy0.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and Deadline
@@ -55,7 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/wujy28.png" width="200px">
 
 [[github](http://github.com/wujy28)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/wujy28.md)]
 
 * Role: Developer
 * Responsibilities: Documentation
