@@ -72,7 +72,8 @@ public interface Model {
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the address book.
-     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the address book.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the address
+     * book.
      */
     void setPatient(Patient target, Patient editedPatient);
 
@@ -81,6 +82,7 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);

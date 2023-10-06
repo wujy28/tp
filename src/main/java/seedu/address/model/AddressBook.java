@@ -28,7 +28,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         patients = new UniquePatientList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Patients in the {@code toBeCopied}
@@ -78,7 +79,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given patient {@code target} in the list with {@code editedPatient}.
      * {@code target} must exist in the address book.
-     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the address book.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the address
+     * book.
      */
     public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
@@ -98,9 +100,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("patients", patients)
-                .toString();
+        return new ToStringBuilder(this).add("patients", patients).toString();
     }
 
     @Override
