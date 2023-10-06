@@ -115,7 +115,7 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void remove_PatientDoesNotExist_throwsPatientNotFoundException() {
+    public void remove_patientDoesNotExist_throwsPatientNotFoundException() {
         assertThrows(PatientNotFoundException.class, () -> uniquePatientList.remove(ALICE));
     }
 
