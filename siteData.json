@@ -62,7 +62,7 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-person": "Deleting a person",
+        "deleting-a-patient": "Deleting a patient",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
@@ -112,9 +112,9 @@
         "coming-soon": "[coming soon]",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
-        "listing-all-patients-list": "Listing all Patients: list",
-        "adding-a-patient-add": "Adding a Patient: add",
-        "deleting-a-patient-delete": "Deleting a Patient: delete",
+        "listing-all-patients-list": "Listing all patients: list",
+        "adding-a-patient-add": "Adding a patient: add",
+        "deleting-a-patient-delete": "Deleting a patient: delete",
         "viewing-a-patient-record-view": "Viewing a patient record: view",
         "editing-a-patient-record-record": "Editing a patient record: record",
         "assigning-a-patient-to-a-department-assign": "Assigning a patient to a department : assign",
