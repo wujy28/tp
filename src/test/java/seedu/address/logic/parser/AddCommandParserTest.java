@@ -33,6 +33,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPatients.BOB;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -46,7 +48,6 @@ import seedu.address.model.patient.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PatientBuilder;
 
-import java.util.Arrays;
 
 public class AddCommandParserTest {
     private final AddCommandParser parser = new AddCommandParser();
@@ -230,8 +231,7 @@ public class AddCommandParserTest {
 
 
         // Required field Name missing while optional fields present
-        expectedMessage = String.format(MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT,
-            Arrays.toString(REQUIRED_PREFIXES));
+        expectedMessage = String.format(MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT, Arrays.toString(REQUIRED_PREFIXES));
 
         assertParseFailure(parser,
             PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, expectedMessage);

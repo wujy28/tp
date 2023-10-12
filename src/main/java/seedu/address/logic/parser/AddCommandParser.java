@@ -67,7 +67,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public static Patient createPatientFromPrefixes(ArgumentMultimap argMultimap, Prefix[] prefixes)
-        throws ParseException {
+            throws ParseException {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = new Phone("12345678");
         Email email = new Email("default_email@gmail.com");
