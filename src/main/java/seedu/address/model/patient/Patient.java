@@ -24,6 +24,7 @@ public class Patient {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Record medicalRecord;
 
     /**
      * Every field must be present and not null.
@@ -35,6 +36,7 @@ public class Patient {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.medicalRecord = new Record(this);
     }
 
     public Name getName() {
