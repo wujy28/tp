@@ -5,15 +5,16 @@
 
 # AddressBook Level-3
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2324S1-CS2103T-T14-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-T14-2/tp/actions)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T14-2/tp/graph/badge.svg?token=OANNMRPP8F)](https://codecov.io/gh/AY2324S1-CS2103T-T14-2/tp)
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**Advanced&Efficient (A&E)** is a desktop application that helps Emergency Department (ED) doctors in managing
+patient records and connecting patients to relevant departments. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using A&E, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#quick-start).
+* If you are interested about developing A&E, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.
 
 
 **Acknowledgements**

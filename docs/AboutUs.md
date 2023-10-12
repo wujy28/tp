@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/aaronjt1.png" width="200px">
 
 [[github](http://github.com/aaronjt1)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/aaronjt1.md)]
 
 * Role: Developer
 * Responsibilities: Scheduling and tracking, Git Expert
@@ -35,17 +35,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/thienmy0.png" width="200px">
 
-[[github](http://github.com/thienmy0)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/thienmy0)]
+[[portfolio](team/thienmy0.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and Deadline
 
 ### Mehta Riya Mehulbhai
 
-<img src="images/RiyaMehta2211.png" width="200px">
+<img src="images/riyamehta2211.png" width="200px">
 
 [[github](http://github.com/RiyaMehta2211)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/riyamehta2211.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality
@@ -55,7 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/wujy28.png" width="200px">
 
 [[github](http://github.com/wujy28)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/wujy28.md)]
 
 * Role: Developer
 * Responsibilities: Documentation
