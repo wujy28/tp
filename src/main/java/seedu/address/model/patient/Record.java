@@ -3,6 +3,10 @@ package seedu.address.model.patient;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+
+
 /**
  * Represents a medical record associated with a patient.
  * Stores information about the patient's visits, initial observations, diagnosis, and treatment plan.
@@ -60,5 +64,18 @@ public class Record {
     public void setTreatmentPlan(String treatmentPlan) {
         this.treatmentPlan = treatmentPlan;
     }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("patient", patient)
+                .add("departmentsVisited", departmentsVisited)
+                .add("initialObservations", initialObservations)
+                .add("diagnosis", diagnosis)
+                .add("treatmentPlan", treatmentPlan)
+                .toString();
+    }
+
+
 }
 
