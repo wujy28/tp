@@ -62,7 +62,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public static Patient createPatientFromPrefixes(ArgumentMultimap argMultimap, Prefix[] prefixes)
         throws ParseException {
-        Name name = new Name("Name not added");
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = new Phone("12345678");
         Email email = new Email("default_email@gmail.com");
         Address address = new Address("Address not added");
@@ -70,9 +70,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         for (Prefix p : prefixes) {
             switch (p.getPrefix()) {
-            case "n/":
-                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-                break;
             case "p/":
                 phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
                 break;
@@ -109,14 +106,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Patient patient = createPatientFromPrefixes(argMultimap, prefixesPresent);
         return new AddCommand(patient);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**

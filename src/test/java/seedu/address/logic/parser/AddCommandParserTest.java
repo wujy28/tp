@@ -26,6 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.AddCommandParser.RELEVANT_PREFIXES;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPatients.AMY;
@@ -35,13 +36,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.Assert;
 import seedu.address.testutil.PatientBuilder;
 
 public class AddCommandParserTest {
@@ -50,11 +51,9 @@ public class AddCommandParserTest {
 
     @Test
     public void getPrefixesPresent_namePrefixPresent_returnedCorrectPrefixList() {
-        String userInput = NAME_DESC_AMY;
         Prefix[] expectedPrefixesList = new Prefix[]{PREFIX_NAME};
 
-        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE,
-            PREFIX_EMAIL, PREFIX_ADDRESS);
+        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(NAME_DESC_AMY, RELEVANT_PREFIXES);
         Prefix[] actualPrefixesList = AddCommandParser.getPrefixesPresent(testArgMultimap);
         assertEquals(expectedPrefixesList.length, actualPrefixesList.length);
         for (int i = 0; i < expectedPrefixesList.length; i++) {
@@ -67,8 +66,7 @@ public class AddCommandParserTest {
         String userInput = NAME_DESC_AMY + PHONE_DESC_AMY;
         Prefix[] expectedPrefixesList = new Prefix[]{PREFIX_NAME, PREFIX_PHONE};
 
-        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE,
-            PREFIX_EMAIL, PREFIX_ADDRESS);
+        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, RELEVANT_PREFIXES);
         Prefix[] actualPrefixesList = AddCommandParser.getPrefixesPresent(testArgMultimap);
         assertEquals(expectedPrefixesList.length, actualPrefixesList.length);
         for (int i = 0; i < expectedPrefixesList.length; i++) {
@@ -95,8 +93,7 @@ public class AddCommandParserTest {
         String userInput = NAME_DESC_AMY + PREFIX_PHONE;
         Prefix[] expectedPrefixesList = new Prefix[]{PREFIX_NAME};
 
-        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE,
-            PREFIX_EMAIL, PREFIX_ADDRESS);
+        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, RELEVANT_PREFIXES);
         Prefix[] actualPrefixesList = AddCommandParser.getPrefixesPresent(testArgMultimap);
         assertEquals(expectedPrefixesList.length, actualPrefixesList.length);
         for (int i = 0; i < expectedPrefixesList.length; i++) {
@@ -104,6 +101,30 @@ public class AddCommandParserTest {
         }
     }
 
+
+    @Test
+    public void createPatientFromPrefixes_allFieldsPresent_correctPatientCreated() throws ParseException {
+        String userInput =
+            NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
+        Patient expectedPatient = new PatientBuilder(BOB).build();
+
+        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, RELEVANT_PREFIXES);
+
+        Patient actualPatient = AddCommandParser.createPatientFromPrefixes(testArgMultimap, RELEVANT_PREFIXES);
+        assertEquals(expectedPatient, actualPatient);
+    }
+
+    @Test
+    public void createPatientFromPrefixes_nameFieldPresent_correctPatientCreated() throws ParseException {
+        String userInput = NAME_DESC_BOB;
+        Patient expectedPatient = new PatientBuilder(BOB).withPhone("12345678").withEmail("default_email@gmail.com")
+            .withAddress("Address " + "not added").withTags().build();
+
+        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, RELEVANT_PREFIXES);
+
+        Patient actualPatient = AddCommandParser.createPatientFromPrefixes(testArgMultimap, new Prefix[]{PREFIX_NAME});
+        assertEquals(expectedPatient, actualPatient);
+    }
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -187,12 +208,29 @@ public class AddCommandParserTest {
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
 
+
     @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-            new AddCommand(expectedPatient));
+    public void parse_requiredFieldPresent_success() {
+        // Required field Name present while optional fields missing
+        Patient expectedPatient = new PatientBuilder(BOB).withEmail("default_email@gmail.com").withPhone("12345678")
+            .withAddress("Address not added").withTags().build();
+
+        assertParseSuccess(parser, NAME_DESC_BOB, new AddCommand(expectedPatient));
+    }
+
+    @Test
+    public void parse_requiredFieldMissing_failure() {
+        // Required field Name missing while optional fields missing
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, "", expectedMessage);
+
+
+        // Required field Name missing while optional fields present
+        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser,
+            PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, expectedMessage);
     }
 
     @Test
@@ -202,22 +240,6 @@ public class AddCommandParserTest {
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
             expectedMessage);
-
-//        // missing phone prefix
-//        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-//            expectedMessage);
-//
-//        // missing email prefix
-//        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-//            expectedMessage);
-//
-//        // missing address prefix
-//        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-//            expectedMessage);
-//
-//        // all prefixes missing
-//        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-//            expectedMessage);
     }
 
     @Test
@@ -227,6 +249,30 @@ public class AddCommandParserTest {
         // missing name value
         assertParseFailure(parser, PREFIX_NAME + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
     }
+
+    @Test
+    public void parse_optionalFieldMissing_success() {
+        // optional field Phone number missing (ie default phone number used)
+        Patient expectedPatient = new PatientBuilder(BOB).withPhone("12345678").build();
+
+        assertParseSuccess(parser,
+            NAME_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+            new AddCommand(expectedPatient));
+
+        // optional field Email missing (ie default email used)
+        expectedPatient = new PatientBuilder(BOB).withEmail("default_email@gmail.com").build();
+
+        assertParseSuccess(parser,
+            NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+            new AddCommand(expectedPatient));
+
+        // optional field address missing (ie default address used)
+        expectedPatient = new PatientBuilder(BOB).withAddress("Address not added").build();
+
+        assertParseSuccess(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+            new AddCommand(expectedPatient));
+    }
+
 
     @Test
     public void parse_duplicatePrefixes_failure() {
