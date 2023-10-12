@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -19,17 +20,17 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.AddCommandParser.RELEVANT_PREFIXES;
+import static seedu.address.logic.parser.AddCommandParser.REQUIRED_PREFIXES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPatients.AMY;
 import static seedu.address.testutil.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -44,6 +45,8 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PatientBuilder;
+
+import java.util.Arrays;
 
 public class AddCommandParserTest {
     private final AddCommandParser parser = new AddCommandParser();
@@ -220,14 +223,15 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_requiredFieldMissing_failure() {
-        // Required field Name missing while optional fields missing
+        //Required field Name missing while optional fields missing
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, "", expectedMessage);
 
 
         // Required field Name missing while optional fields present
-        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        expectedMessage = String.format(MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT,
+            Arrays.toString(REQUIRED_PREFIXES));
 
         assertParseFailure(parser,
             PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, expectedMessage);

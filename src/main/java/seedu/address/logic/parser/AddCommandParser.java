@@ -1,13 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -53,7 +58,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
-     * Takes in a list of prefixes and creates patients with its corresponding values in argMultimap
+     * Takes in a list of prefixes and creates patients with its corresponding values in argMultimap, if
+     * optional field values are missing, fill it with default instead.
      *
      * @param argMultimap Argument multimap which contains prefix to value mapping
      * @param prefixes    List of prefixes present
@@ -67,7 +73,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = new Email("default_email@gmail.com");
         Address address = new Address("Address not added");
         Set<Tag> tagList = new HashSet<>();
-
         for (Prefix p : prefixes) {
             switch (p.getPrefix()) {
             case "p/":
@@ -82,6 +87,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             case "t/":
                 tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
                 break;
+            default:
             }
         }
         return new Patient(name, phone, email, address, tagList);
@@ -96,12 +102,16 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, RELEVANT_PREFIXES);
 
-        // check if required prefixes are present and not empty
-        if (!areRequiredPrefixesPresent(argMultimap, REQUIRED_PREFIXES) || !argMultimap.getPreamble().isEmpty()) {
+        // check if any prefixes present
+        if (!areRelevantPrefixesPresent(argMultimap, RELEVANT_PREFIXES) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-            PREFIX_ADDRESS);
+        // check if required prefixes are present and not empty
+        if (!areRequiredPrefixesPresent(argMultimap, REQUIRED_PREFIXES)) {
+            throw new ParseException(
+                String.format(MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT, Arrays.toString(REQUIRED_PREFIXES)));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Prefix[] prefixesPresent = getPrefixesPresent(argMultimap);
 
         Patient patient = createPatientFromPrefixes(argMultimap, prefixesPresent);
@@ -116,4 +126,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(requiredPrefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Returns true if any of the relevant prefixes contains a value
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean areRelevantPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... requiredPrefixes) {
+        return Stream.of(requiredPrefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }
