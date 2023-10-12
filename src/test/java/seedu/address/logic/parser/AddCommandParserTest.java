@@ -45,7 +45,7 @@ import seedu.address.testutil.Assert;
 import seedu.address.testutil.PatientBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private final AddCommandParser parser = new AddCommandParser();
 
 
     @Test
@@ -103,7 +103,6 @@ public class AddCommandParserTest {
             assertEquals(expectedPrefixesList[i], actualPrefixesList[i]);
         }
     }
-
 
 
     @Test
