@@ -4,12 +4,12 @@ package seedu.address.model.patient;
  * Represents the departments in the hospital.
  */
 public enum Department {
-    DEFAULT ("-"),
-    EMERGENCY_DEPARTMENT ("Emergency Department"),
-    INTENSIVE_CARE_UNIT ("Intensive Care Unit"),
-    ANAESTHESIOLOGY ("Anaesthesiology"),
-    CARDIOLOGY ("Cardiology"),
-    DERMATOLOGY ("Dermatology"),
+    DEFAULT("-"),
+    EMERGENCY_DEPARTMENT("Emergency Department"),
+    INTENSIVE_CARE_UNIT("Intensive Care Unit"),
+    ANAESTHESIOLOGY("Anaesthesiology"),
+    CARDIOLOGY("Cardiology"),
+    DERMATOLOGY("Dermatology"),
     ENDOCRINOLOGY("Endocrinology"),
     GENERAL_SURGERY("General Surgery"),
     GERIATRIC_MEDICINE("Geriatric Medicine"),
@@ -19,7 +19,7 @@ public enum Department {
     INFECTIOUS_DISEASES("Infectious Diseases"),
     ONCOLOGY("Oncology"),
     OPHTHALMOLOGY("Ophthalmology"),
-    ORTHOPAEDICS ("Orthopaedics"),
+    ORTHOPAEDICS("Orthopaedics"),
     NEUROLOGY("Neurology"),
     NEUROSURGERY("Neurosurgery"),
     PATHOLOGY("Pathology"),
