@@ -4,6 +4,7 @@ package seedu.address.model.patient;
  * Represents the departments in the hospital.
  */
 public enum Department {
+    DEFAULT ("-"),
     EMERGENCY_DEPARTMENT ("Emergency Department"),
     INTENSIVE_CARE_UNIT ("Intensive Care Unit"),
     ANAESTHESIOLOGY ("Anaesthesiology"),
@@ -41,9 +42,13 @@ public enum Department {
      *
      * @param string The string representation of the Department.
      */
-    public static Department findDepartment (String string) {
+    public static Department findDepartment(String string) {
+        if (string == null) {
+            return null;
+        }
+
         for (Department d : Department.values()) {
-            if (string.equalsIgnoreCase(d.string)) {
+            if (d.string.equalsIgnoreCase(string)) {
                 return d;
             }
         }
@@ -54,9 +59,13 @@ public enum Department {
      * Returns true if the given string represents a valid Department.
      */
     public static boolean isValidDepartment(String string) {
+        if (string == null) {
+            return false;
+        }
+
         boolean isValid = false;
         for (Department d : Department.values()) {
-            if (string.equalsIgnoreCase(d.string)) {
+            if (d.string.equalsIgnoreCase(string)) {
                 isValid = true;
             }
         }

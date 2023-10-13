@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class AssignedDepartment {
 
     public static final String MESSAGE_CONSTRAINTS = "Departments can only take certain values, "
-            + "and it should not be blank.\n"
+            + "must adhere to British spelling conventions, "
+            + "and should not be blank.\n"
             + "Please view the user guide for the list of accepted departments.\n"
             + "Link: https://ay2324s1-cs2103t-t14-2.github.io/tp/UserGuide.html";
 
@@ -23,7 +24,14 @@ public class AssignedDepartment {
     public final Department assignedDepartment;
 
     /**
-     * Constructs an {@code AssignedDepartment}.
+     * Constructs a default {@code AssignedDepartment}.
+     */
+    public AssignedDepartment() {
+        assignedDepartment = Department.DEFAULT;
+    }
+
+    /**
+     * Constructs an {@code AssignedDepartment} with the given string.
      *
      * @param department A valid department.
      */
