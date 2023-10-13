@@ -75,7 +75,4 @@ public class Record {
                 .add("treatmentPlan", treatmentPlan)
                 .toString();
     }
-
-
 }
-
