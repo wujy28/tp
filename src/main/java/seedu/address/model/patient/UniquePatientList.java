@@ -17,8 +17,7 @@ import seedu.address.model.patient.exceptions.PatientNotFoundException;
  * updating of
  * patients uses Patient#isSamePatient(Patient) for equality so as to ensure that the patient being added or updated is
  * unique in terms of identity in the UniquePatientList. However, the removal of a patient uses Patient#equals
- * (Object) so
- * as to ensure that the patient with exactly the same fields will be removed.
+ * (Object) to ensure that the patient with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
