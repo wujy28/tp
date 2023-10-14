@@ -12,10 +12,10 @@ import seedu.address.model.patient.exceptions.DuplicatePatientException;
 import seedu.address.model.patient.exceptions.PatientNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of patients that enforces uniqueness between its elements and does not allow nulls.
  * A patient is considered unique by comparing using {@code Patient#isSamePatient(Patient)}. As such, adding and
  * updating of
- * persons uses Patient#isSamePatient(Patient) for equality to ensure that the patient being added or updated is
+ * patients uses Patient#isSamePatient(Patient) for equality so as to ensure that the patient being added or updated is
  * unique in terms of identity in the UniquePatientList. However, the removal of a patient uses Patient#equals
  * (Object) to ensure that the patient with exactly the same fields will be removed.
  * <p>
@@ -91,7 +91,7 @@ public class UniquePatientList implements Iterable<Patient> {
      */
     public void setPatients(List<Patient> patients) {
         requireAllNonNull(patients);
-        if (!personsAreUnique(patients)) {
+        if (!patientsAreUnique(patients)) {
             throw new DuplicatePatientException();
         }
 
@@ -138,7 +138,7 @@ public class UniquePatientList implements Iterable<Patient> {
     /**
      * Returns true if {@code patients} contains only unique patients.
      */
-    private boolean personsAreUnique(List<Patient> patients) {
+    private boolean patientsAreUnique(List<Patient> patients) {
         for (int i = 0; i < patients.size() - 1; i++) {
             for (int j = i + 1; j < patients.size(); j++) {
                 if (patients.get(i).isSamePatient(patients.get(j))) {
