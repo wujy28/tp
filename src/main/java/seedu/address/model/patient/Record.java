@@ -19,9 +19,6 @@ public class Record {
      * @param patient The patient associated with this record.
      */
     public Record(Patient patient) {
-        if (patient == null) {
-            throw new NullPointerException("Patient cannot be null");
-        }
         this.patient = patient;
     }
 
