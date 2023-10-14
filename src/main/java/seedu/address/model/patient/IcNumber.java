@@ -19,6 +19,7 @@ public class IcNumber {
      * @param IC A valid IC Number.
      */
     public IcNumber(String IC) {
+        IC = IC.toUpperCase();
         requireNonNull(IC);
         checkArgument(isValidIC(IC), MESSAGE_CONSTRAINTS);
         value = IC;
