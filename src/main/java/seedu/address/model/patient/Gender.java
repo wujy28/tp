@@ -54,7 +54,7 @@ public class Gender {
         }
         return false;
     }
-    
+
     @Override
     public String toString() {
         return value;
