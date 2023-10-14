@@ -42,7 +42,7 @@ public class IcNumberTest {
         IcNumber IC = new IcNumber("T1234567N");
 
         // same values -> returns true
-        assertTrue(IC.equals(new IcNumber("S1357911N")));
+        assertTrue(IC.equals(new IcNumber("t1234567n")));
 
         // same object -> returns true
         assertTrue(IC.equals(IC));
