@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Patient's Birthday in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
+ */
 public class Birthday {
     public static final String MESSAGE_CONSTRAINTS =
             "Birth dates should only contain numbers in valid dd/MM/yyyy format";
@@ -13,12 +17,20 @@ public class Birthday {
     public final LocalDate value;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    /**
+     * Constructs a {@code Birthday}.
+     *
+     * @param birthdate A valid Birthday.
+     */
     public Birthday(String birthdate) {
         requireNonNull(birthdate);
         checkArgument(isValidBirthdate(birthdate), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(birthdate, formatter);
     }
 
+    /**
+     * Returns true if a given string is a valid Birthdate.
+     */
     public static boolean isValidBirthdate(String test) {
         return test.matches(VALIDATION_REGEX);
     }
