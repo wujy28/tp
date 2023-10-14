@@ -6,16 +6,44 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.RecordBuilder;
 
 public class RecordTest {
 
+    // Example valid patient for testing
+    private final Patient validPatient = new PatientBuilder().build();
+
     @Test
-    public void addDepartment() {
-        Record record = new RecordBuilder().build();
-        String newDepartment = "Neurology";
-        record.addDepartment(newDepartment);
-        assertTrue(record.getDepartmentsVisited().contains(newDepartment));
+    public void isValidRecord() {
+        // This method should return true if the record is valid and false otherwise.
+
+        // Test valid record
+        Record validRecord = new Record(validPatient);
+        // Example valid and invalid strings for testing
+        String validObservation = "This is a valid observation";
+        validRecord.setInitialObservations(validObservation);
+        String validDiagnosis = "Diagnosis Example";
+        validRecord.setDiagnosis(validDiagnosis);
+        String validTreatmentPlan = "Treatment Example Plan";
+        validRecord.setTreatmentPlan(validTreatmentPlan);
+        assertTrue(isValidRecord(validRecord));
+
+        // Test invalid record
+        Record invalidRecord = new Record(validPatient);
+        // assuming empty string is invalid
+        String invalidObservation = "";
+        invalidRecord.setInitialObservations(invalidObservation);
+        invalidRecord.setDiagnosis(validDiagnosis);
+        invalidRecord.setTreatmentPlan(validTreatmentPlan);
+        assertFalse(isValidRecord(invalidRecord));
+    }
+
+    private boolean isValidRecord(Record record) {
+        return record.getPatient() != null
+                && !record.getInitialObservations().isEmpty()
+                && !record.getDiagnosis().isEmpty()
+                && !record.getTreatmentPlan().isEmpty();
     }
 
     @Test
@@ -89,7 +117,6 @@ public class RecordTest {
     public void testToString() {
         Record record = new RecordBuilder().build();
         String expected = Record.class.getCanonicalName() + "{patient=" + record.getPatient()
-                + ", departmentsVisited=" + record.getDepartmentsVisited()
                 + ", initialObservations=" + record.getInitialObservations()
                 + ", diagnosis=" + record.getDiagnosis()
                 + ", treatmentPlan=" + record.getTreatmentPlan() + "}";

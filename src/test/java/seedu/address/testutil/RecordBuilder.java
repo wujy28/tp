@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Record;
 
@@ -12,7 +9,6 @@ import seedu.address.model.patient.Record;
 public class RecordBuilder {
 
     private final Patient patient;
-    private List<String> departmentsVisited;
     private String initialObservations;
     private String diagnosis;
     private String treatmentPlan;
@@ -22,7 +18,6 @@ public class RecordBuilder {
      */
     public RecordBuilder() {
         this.patient = new PatientBuilder().build(); // default patient
-        this.departmentsVisited = new ArrayList<>();
         this.initialObservations = "";
         this.diagnosis = "";
         this.treatmentPlan = "";
@@ -33,7 +28,6 @@ public class RecordBuilder {
      */
     public RecordBuilder(Record recordToCopy) {
         this.patient = recordToCopy.getPatient();
-        this.departmentsVisited = new ArrayList<>(recordToCopy.getDepartmentsVisited());
         this.initialObservations = recordToCopy.getInitialObservations();
         this.diagnosis = recordToCopy.getDiagnosis();
         this.treatmentPlan = recordToCopy.getTreatmentPlan();
@@ -64,21 +58,10 @@ public class RecordBuilder {
     }
 
     /**
-     * Adds a {@code department} to the {@code Record} that we are building.
-     */
-    public RecordBuilder addDepartment(String department) {
-        this.departmentsVisited.add(department);
-        return this;
-    }
-
-    /**
      * Builds and returns the {@code Record} object.
      */
     public Record build() {
         Record record = new Record(patient);
-        for (String department : departmentsVisited) {
-            record.addDepartment(department);
-        }
         record.setInitialObservations(initialObservations);
         record.setDiagnosis(diagnosis);
         record.setTreatmentPlan(treatmentPlan);
