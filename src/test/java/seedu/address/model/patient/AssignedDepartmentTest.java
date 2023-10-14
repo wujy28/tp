@@ -45,11 +45,16 @@ class AssignedDepartmentTest {
         assertFalse(AssignedDepartment.isValidDepartment("Cardiol*gy")); // contains non-alphanumeric characters
         assertFalse(AssignedDepartment.isValidDepartment(" Orthopaedics")); // first character is a space
         assertFalse(AssignedDepartment.isValidDepartment("Orthopedics")); // wrong spelling (American)
+        assertFalse(AssignedDepartment.isValidDepartment("Orthopaedic")); // missing 's' suffix
+        assertFalse(AssignedDepartment.isValidDepartment("Emergency  Department")); // additional space
+        assertFalse(AssignedDepartment.isValidDepartment("Path ology")); // additional space
         assertFalse(AssignedDepartment.isValidDepartment("Operating Theatre")); // department does not exist
 
         // valid department
         assertTrue(AssignedDepartment.isValidDepartment("Geriatric Medicine")); // department exists
+        assertTrue(AssignedDepartment.isValidDepartment("general Surgery")); // lower case for first word
         assertTrue(AssignedDepartment.isValidDepartment("intensive care unit")); // lower case only
+        assertTrue(AssignedDepartment.isValidDepartment("NEUROSURGERY")); // all caps
         assertTrue(AssignedDepartment.isValidDepartment("oNcoLOGy")); // weird casing
     }
 
