@@ -17,10 +17,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_DEPARTMENT = new Prefix("d/");
 
     // Prefixes for Record
-    public static final Prefix PREFIX_OBSERVATION = new Prefix("o/");
+    public static final Prefix PREFIX_INITIAL_OBSERVATION = new Prefix("o/");
     public static final Prefix PREFIX_DIAGNOSIS = new Prefix("di/"); //d is taken
     public static final Prefix PREFIX_TREATMENT_PLAN = new Prefix("tp/"); //t is taken
-    public static final Prefix PREFIX_REMARKS = new Prefix("r/");
-    public static final Prefix PREFIX_ACTIVE = new Prefix("ac/"); //a is taken
 
 }

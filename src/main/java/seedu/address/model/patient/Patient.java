@@ -27,14 +27,14 @@ public class Patient {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Department department;
+    private final AssignedDepartment assignedDepartment;
     private final Record record;
 
     /**
      * Every field must be present and not null.
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
-                   Address address, Set<Tag> tags, Department department, Record record) {
+                   Address address, Set<Tag> tags, AssignedDepartment assignedDepartment, Record record) {
         requireAllNonNull(name, phone, email, icNumber, birthday, address, tags);
         this.name = name;
         this.phone = phone;
@@ -44,7 +44,7 @@ public class Patient {
         this.birthday = birthday;
         this.address = address;
         this.tags.addAll(tags);
-        this.department = department;
+        this.assignedDepartment = assignedDepartment;
         this.record = record;
     }
 
@@ -76,8 +76,8 @@ public class Patient {
         return birthday;
     }
 
-    public Department getDepartment() {
-        return department;
+    public AssignedDepartment getAssignedDepartment() {
+        return assignedDepartment;
     }
 
     public Record getRecord() {
@@ -129,14 +129,14 @@ public class Patient {
                 && birthday.equals(otherPatient.birthday)
                 && address.equals(otherPatient.address)
                 && tags.equals(otherPatient.tags)
-                && department.equals(otherPatient.department)
+                && assignedDepartment.equals(otherPatient.assignedDepartment)
                 && record.equals(otherPatient.record);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, gender, icNumber, birthday, address, tags, department, record);
+        return Objects.hash(name, phone, email, gender, icNumber, birthday, address, tags, assignedDepartment, record);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class Patient {
                 .add("birthday", birthday)
                 .add("address", address)
                 .add("tags", tags)
-                .add ("department", department)
+                .add ("assignedDepartment", assignedDepartment)
                 .add("record", record)
                 .toString();
     }
