@@ -28,8 +28,8 @@ public class IcNumberTest {
         assertFalse(IcNumber.isValidIC(" ")); // spaces only
         assertFalse(IcNumber.isValidIC("22")); // less than 7 numbers, no alphabets
         assertFalse(IcNumber.isValidIC("january")); // non-numeric
-        assertFalse(IcNumber.isValidIC("2307991")); // not in the format of AXXXXXXXXA
-                                                          // where A is for alphabet, X is for int
+        assertFalse(IcNumber.isValidIC("2307991")); /* not in the format of AXXXXXXXXA
+        where A is for alphabet, X is for int */
         assertFalse(IcNumber.isValidIC("T 0 1 2 3 56 9 J")); // spaces within digits and alphabets
 
         // valid ICs
@@ -39,21 +39,21 @@ public class IcNumberTest {
 
     @Test
     public void equals() {
-        IcNumber IC = new IcNumber("T1234567N");
+        IcNumber ic = new IcNumber("T1234567N");
 
         // same values -> returns true
-        assertTrue(IC.equals(new IcNumber("t1234567n")));
+        assertTrue(ic.equals(new IcNumber("t1234567n")));
 
         // same object -> returns true
-        assertTrue(IC.equals(IC));
+        assertTrue(ic.equals(ic));
 
         // null -> returns false
-        assertFalse(IC.equals(null));
+        assertFalse(ic.equals(null));
 
         // different types -> returns false
-        assertFalse(IC.equals(5.0f));
+        assertFalse(ic.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(IC.equals(new IcNumber("T0246810X")));
+        assertFalse(ic.equals(new IcNumber("T0246810X")));
     }
 }

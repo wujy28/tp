@@ -16,13 +16,13 @@ public class IcNumber {
     /**
      * Constructs a {@code IcNumber}.
      *
-     * @param IC A valid IC Number.
+     * @param ic A valid IC Number.
      */
-    public IcNumber(String IC) {
-        IC = IC.toUpperCase();
-        requireNonNull(IC);
-        checkArgument(isValidIC(IC), MESSAGE_CONSTRAINTS);
-        value = IC;
+    public IcNumber(String ic) {
+        ic = ic.toUpperCase();
+        requireNonNull(ic);
+        checkArgument(isValidIC(ic), MESSAGE_CONSTRAINTS);
+        value = ic;
     }
 
     /**
