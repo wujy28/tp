@@ -34,7 +34,7 @@ public class Patient {
      * Every field must be present and not null.
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
-                   Address address, Set<Tag> tags, AssignedDepartment assignedDepartment, Record record) {
+                   Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, icNumber, birthday, address, tags);
         this.name = name;
         this.phone = phone;
@@ -44,8 +44,8 @@ public class Patient {
         this.birthday = birthday;
         this.address = address;
         this.tags.addAll(tags);
-        this.assignedDepartment = assignedDepartment;
-        this.record = record;
+        this.assignedDepartment = new AssignedDepartment(); // default Department given
+        this.record = new Record(this); // creates new Reecord
     }
 
     public Name getName() {
