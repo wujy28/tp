@@ -45,7 +45,7 @@ public class Patient {
         this.address = address;
         this.tags.addAll(tags);
         this.assignedDepartment = new AssignedDepartment(); // default Department given
-        this.record = new Record(this); // creates new Reecord
+        this.record = new Record(this); // creates new Record
     }
 
     public Name getName() {

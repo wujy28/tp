@@ -3,11 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.patient.Address;
-import seedu.address.model.patient.Email;
-import seedu.address.model.patient.Name;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,13 +15,21 @@ public class PatientBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_GENDER = "female";
+    public static final String DEFAULT_IC_NUMBER = "t1234567j";
+    public static final String DEFAULT_BIRTHDAY = "21/01/1994";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Gender gender;
+    private IcNumber icNumber;
+    private Birthday birthday;
     private Address address;
     private Set<Tag> tags;
+    private AssignedDepartment assignedDepartment;
+    private Record record;
 
     /**
      * Creates a {@code PatientBuilder} with the default details.
@@ -34,8 +38,13 @@ public class PatientBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        gender = new Gender(DEFAULT_GENDER);
+        icNumber = new IcNumber(DEFAULT_IC_NUMBER);
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        assignedDepartment = new AssignedDepartment();
+        record =
     }
 
     /**
