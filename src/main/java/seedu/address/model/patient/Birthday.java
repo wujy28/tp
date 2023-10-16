@@ -15,6 +15,7 @@ public class Birthday {
             "Birth dates should only contain numbers in valid dd/MM/yyyy format";
     public static final String VALIDATION_REGEX = "\\d{1,2}\\/\\d{1,2}\\/\\d{2,4}";
     public final LocalDate value;
+    public final String strValue;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static String DEFAULT_BIRTHDAY = "20/2/2000";
     /**
@@ -25,6 +26,7 @@ public class Birthday {
     public Birthday(String birthdate) {
         requireNonNull(birthdate);
         checkArgument(isValidBirthdate(birthdate), MESSAGE_CONSTRAINTS);
+        strValue = birthdate;
         value = LocalDate.parse(birthdate, formatter);
     }
 
