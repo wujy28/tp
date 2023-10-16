@@ -16,7 +16,7 @@ public class Birthday {
     public static final String VALIDATION_REGEX = "\\d{1,2}\\/\\d{1,2}\\/\\d{2,4}";
     public final LocalDate value;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+    public static String DEFAULT_BIRTHDAY = "20/2/2000";
     /**
      * Constructs a {@code Birthday}.
      *
