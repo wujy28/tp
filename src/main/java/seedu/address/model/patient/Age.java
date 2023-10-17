@@ -11,6 +11,7 @@ public class Age {
     public static final String MESSAGE_CONSTRAINTS =
             "Age should only contain numbers, and it should not be negative";
     public static final String VALIDATION_REGEX = "\\d+";
+    public static String DEFAULT_AGE = "00";
     public final String value;
 
     /**
