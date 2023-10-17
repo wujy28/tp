@@ -27,7 +27,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 
-
 /**
  * Parses input arguments and creates a new EditCommand object
  */
@@ -36,13 +35,13 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_IC_NUMBER, PREFIX_DEPARTMENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_IC_NUMBER, PREFIX_DEPARTMENT);
 
         Index index;
 
@@ -78,8 +77,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setIcNumber(ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get()));
         }
         if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
-            editPatientDescriptor.setDepartment(ParserUtil.parseAssignedDepartment(
-                    argMultimap.getValue(PREFIX_DEPARTMENT).get()));
+            editPatientDescriptor.setDepartment(
+                ParserUtil.parseAssignedDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get()));
         }
         if (argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).isPresent()) {
             editPatientDescriptor.setInitialObservation(argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).get());

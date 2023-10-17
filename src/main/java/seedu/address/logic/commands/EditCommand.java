@@ -41,17 +41,12 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
-            + "by the index number used in the displayed patient list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+        + "by the index number used in the displayed patient list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE
+        + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_TAG
+        + "TAG]...\n" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL
+        + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -61,7 +56,7 @@ public class EditCommand extends Command {
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index of the patient in the filtered patient list to edit
+     * @param index                 of the patient in the filtered patient list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
     public EditCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
@@ -107,13 +102,13 @@ public class EditCommand extends Command {
         IcNumber updatedIcNumber = editPatientDescriptor.getIcNumber().orElse(patientToEdit.getIcNumber());
         Birthday updatedBirthday = editPatientDescriptor.getBirthday().orElse(patientToEdit.getBirthday());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        AssignedDepartment updatedDepartment = editPatientDescriptor.getDepartment().orElse(
-                patientToEdit.getAssignedDepartment());
+//        AssignedDepartment updatedDepartment = editPatientDescriptor.getDepartment()
+//            .orElse(patientToEdit.getAssignedDepartment());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
-        Record updatedRecord = editPatientDescriptor.getRecord().orElse(patientToEdit.getRecord());
+//        Record updatedRecord = editPatientDescriptor.getRecord().orElse(patientToEdit.getRecord());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedGender, updatedIcNumber,
-                updatedBirthday, updatedAddress, updatedTags, updatedDepartment, updatedRecord);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedGender, updatedIcNumber, updatedBirthday,
+            updatedAddress, updatedTags);
     }
 
 
@@ -129,16 +124,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPatientDescriptor.equals(otherEditCommand.editPatientDescriptor);
+        return index.equals(otherEditCommand.index) && editPatientDescriptor.equals(
+            otherEditCommand.editPatientDescriptor);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPatientDescriptor", editPatientDescriptor)
-                .toString();
+        return new ToStringBuilder(this).add("index", index).add("editPatientDescriptor", editPatientDescriptor)
+            .toString();
     }
 
     /**
@@ -149,15 +142,16 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Gender gender;
+        private IcNumber icNumber;
+        private Birthday birthday;
         private Address address;
         private Set<Tag> tags;
-        private Gender gender;
-        private Birthday birthday;
-        private IcNumber icNumber;
         private AssignedDepartment department;
         private Record record;
 
-        public EditPatientDescriptor() {}
+        public EditPatientDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -225,6 +219,7 @@ public class EditCommand extends Command {
         public void setDiagnosis(String diagnosis) {
             record.setDiagnosis(diagnosis);
         }
+
         public Optional<Record> getRecord() {
             return Optional.ofNullable(record);
         }
@@ -258,11 +253,10 @@ public class EditCommand extends Command {
             }
 
             EditPatientDescriptor otherEditPatientDescriptor = (EditPatientDescriptor) other;
-            return Objects.equals(name, otherEditPatientDescriptor.name)
-                    && Objects.equals(phone, otherEditPatientDescriptor.phone)
-                    && Objects.equals(email, otherEditPatientDescriptor.email)
-                    && Objects.equals(address, otherEditPatientDescriptor.address)
-                    && Objects.equals(tags, otherEditPatientDescriptor.tags);
+            return Objects.equals(name, otherEditPatientDescriptor.name) && Objects.equals(phone,
+                otherEditPatientDescriptor.phone) && Objects.equals(email, otherEditPatientDescriptor.email)
+                && Objects.equals(address, otherEditPatientDescriptor.address) && Objects.equals(tags,
+                otherEditPatientDescriptor.tags);
         }
 
         public void setGender(Gender gender) {
@@ -299,13 +293,8 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+            return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
+                .add("address", address).add("tags", tags).toString();
         }
     }
 }

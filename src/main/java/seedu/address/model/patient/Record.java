@@ -19,8 +19,6 @@ public class Record {
 
     /**
      * Initializes a Record with the associated patient and initialise the fields with default values
-     *
-     * @param patient The patient associated with this record.
      */
     public Record(Patient patient) {
         this.patient = patient;
@@ -28,6 +26,14 @@ public class Record {
         this.diagnosis = DEFAULT_DIAGNOSIS;
         this.treatmentPlan = DEFAULT_TREATMENT_PLAN;
     }
+
+    public Record() {
+        this.patient = null; // patient left null, would have to fix when building editing record command
+        this.initialObservations = DEFAULT_INITIAL_OBSERVATIONS;
+        this.diagnosis = DEFAULT_DIAGNOSIS;
+        this.treatmentPlan = DEFAULT_TREATMENT_PLAN;
+    }
+
 
     public Patient getPatient() {
         return patient;

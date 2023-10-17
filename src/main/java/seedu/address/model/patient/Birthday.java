@@ -17,7 +17,7 @@ public class Birthday {
     public final LocalDate value;
     public final String strValue;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public static String DEFAULT_BIRTHDAY = "00/00/0000";
+    public static String DEFAULT_BIRTHDAY = "01/01/2000";
     /**
      * Constructs a {@code Birthday}.
      *
