@@ -41,7 +41,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_IC_NUMBER, PREFIX_DEPARTMENT);
+            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_IC_NUMBER);
 
         Index index;
 
@@ -51,7 +51,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
+                PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS);
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
@@ -75,19 +76,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_IC_NUMBER).isPresent()) {
             editPatientDescriptor.setIcNumber(ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
-            editPatientDescriptor.setDepartment(
-                ParserUtil.parseAssignedDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get()));
-        }
-        if (argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).isPresent()) {
-            editPatientDescriptor.setInitialObservation(argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).get());
-        }
-        if (argMultimap.getValue(PREFIX_DIAGNOSIS).isPresent()) {
-            editPatientDescriptor.setDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
-        }
-        if (argMultimap.getValue(PREFIX_TREATMENT_PLAN).isPresent()) {
-            editPatientDescriptor.setTreatmentPlan(argMultimap.getValue(PREFIX_TREATMENT_PLAN).get());
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
