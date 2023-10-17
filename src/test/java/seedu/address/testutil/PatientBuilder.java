@@ -44,7 +44,7 @@ public class PatientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         assignedDepartment = new AssignedDepartment();
-        record = new RecordBuilder().build();
+        record = new RecordBuilder(this).build();
     }
 
     /**
