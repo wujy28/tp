@@ -104,11 +104,20 @@ public class AddCommandParser implements Parser<AddCommand> {
             case "e/":
                 email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
                 break;
-            case "g/":
+            case "a/":
                 address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
                 break;
             case "t/":
                 tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+                break;
+            case "g/":
+                gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+                break;
+            case "b/":
+                birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get());
+                break;
+            case "i/":
+                icNumber = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
                 break;
             default:
             }
