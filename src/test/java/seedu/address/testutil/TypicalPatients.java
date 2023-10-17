@@ -30,13 +30,7 @@ public class TypicalPatients {
             .withBirthday("12/03/2001")
             .withGender("FEMALE")
             .withIcNumber("T1234567N").build();
-    public static final Patient BENSON = new PatientBuilder().build();/*.withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25").withEmail("BensonMeier_1190@example.com")
-            .withPhone("98765432")
-            .withTags("owesMoney", "friends")
-            .withBirthday("12/01/1999")
-            .withGender("MALE")
-            .withIcNumber("S7654321A").build();*/
+    public static final Patient BENSON = new PatientBuilder().build();
     public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
