@@ -11,7 +11,7 @@ public class IcNumber {
     public static final String MESSAGE_CONSTRAINTS =
             "IC Number should start and end with an alphabet with non negative numbers in between";
     public static final String VALIDATION_REGEX = "^[A-Z]\\d{7}[A-Z]$";
-    public static String DEFAULT_IC_NUMBER = "t0000000a";
+    public static final String DEFAULT_IC_NUMBER = "t0000000a";
     public final String value;
 
     /**
