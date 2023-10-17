@@ -22,10 +22,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.AssignedDepartment;
+import seedu.address.model.patient.Birthday;
 import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Record;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,11 +103,19 @@ public class EditCommand extends Command {
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Gender updatedGender = editPatientDescriptor.getGender().orElse(patientToEdit.getGender());
+        IcNumber updatedIcNumber = editPatientDescriptor.getIcNumber().orElse(patientToEdit.getIcNumber());
+        Birthday updatedBirthday = editPatientDescriptor.getBirthday().orElse(patientToEdit.getBirthday());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        AssignedDepartment updatedDepartment = editPatientDescriptor.getDepartment().orElse(
+                patientToEdit.getAssignedDepartment());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
+        Record updatedRecord = editPatientDescriptor.getRecord().orElse(patientToEdit.getRecord());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedGender, updatedIcNumber,
+                updatedBirthday, updatedAddress, updatedTags, updatedDepartment, updatedRecord);
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -138,6 +151,11 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Gender gender;
+        private Birthday birthday;
+        private IcNumber icNumber;
+        private AssignedDepartment department;
+        private Record record;
 
         public EditPatientDescriptor() {}
 
@@ -192,6 +210,25 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setRecord(Record record) {
+            this.record = record;
+        }
+
+        public void setInitialObservation(String initialObservation) {
+            record.setInitialObservations(initialObservation);
+        }
+
+        public void setTreatmentPlan(String treatmentPlan) {
+            record.setTreatmentPlan(treatmentPlan);
+        }
+
+        public void setDiagnosis(String diagnosis) {
+            record.setDiagnosis(diagnosis);
+        }
+        public Optional<Record> getRecord() {
+            return Optional.ofNullable(record);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -226,6 +263,38 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPatientDescriptor.email)
                     && Objects.equals(address, otherEditPatientDescriptor.address)
                     && Objects.equals(tags, otherEditPatientDescriptor.tags);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
+        }
+
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
+        }
+
+        public void setIcNumber(IcNumber icNumber) {
+            this.icNumber = icNumber;
+        }
+
+        public Optional<IcNumber> getIcNumber() {
+            return Optional.ofNullable(icNumber);
+        }
+
+        public void setDepartment(AssignedDepartment department) {
+            this.department = department;
+        }
+
+        public Optional<AssignedDepartment> getDepartment() {
+            return Optional.ofNullable(department);
         }
 
         @Override
