@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
+
 import seedu.address.model.patient.AssignedDepartment;
+
 import seedu.address.model.patient.Birthday;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Gender;

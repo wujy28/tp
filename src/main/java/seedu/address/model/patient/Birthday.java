@@ -14,7 +14,9 @@ public class Birthday {
     public static final String MESSAGE_CONSTRAINTS =
             "Birth dates should only contain numbers in valid dd/MM/yyyy format";
     public static final String VALIDATION_REGEX = "\\d{1,2}\\/\\d{1,2}\\/\\d{2,4}";
+
     private static String defaultBirthday = "01/01/2000";
+
     public final LocalDate value;
     public final String strValue;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

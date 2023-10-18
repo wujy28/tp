@@ -24,6 +24,16 @@ public class RecordBuilder {
     }
 
     /**
+     * Creates a {@code RecordBuilder} with the specified {@code PatientBuilder} and the default details.
+     */
+    public RecordBuilder(PatientBuilder patient) {
+        this.patient = patient.build();
+        this.initialObservations = Record.DEFAULT_INITIAL_OBSERVATIONS;
+        this.diagnosis = Record.DEFAULT_DIAGNOSIS;
+        this.treatmentPlan = Record.DEFAULT_TREATMENT_PLAN;
+    }
+
+    /**
      * Initializes the RecordBuilder with the data of {@code recordToCopy}.
      */
     public RecordBuilder(Record recordToCopy) {

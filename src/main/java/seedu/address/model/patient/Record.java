@@ -12,6 +12,7 @@ public class Record {
     private static String defaultDiagnosis = "No diagnosis given";
     private static String defaultTreatmentPlan = "No treatment plan given";
 
+
     private final Patient patient;
     private String initialObservations;
     private String diagnosis;
