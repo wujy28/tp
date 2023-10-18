@@ -45,7 +45,7 @@ public class Patient {
         this.address = address;
         this.tags.addAll(tags);
         this.assignedDepartment = new AssignedDepartment(); // default Department given
-        this.record = new Record(); // creates new Record
+        this.record = new Record(this); // creates new Record
     }
 
     public Name getName() {
@@ -121,9 +121,9 @@ public class Patient {
 
         Patient otherPatient = (Patient) other;
         return name.equals(otherPatient.name) && phone.equals(otherPatient.phone) && email.equals(otherPatient.email)
-            && gender.equals(otherPatient.gender) && icNumber.equals(otherPatient.icNumber) && birthday.equals(
-            otherPatient.birthday) && address.equals(otherPatient.address) && tags.equals(otherPatient.tags)
-            && assignedDepartment.equals(otherPatient.assignedDepartment) && record.equals(otherPatient.record);
+                && gender.equals(otherPatient.gender) && icNumber.equals(otherPatient.icNumber) && birthday.equals(
+                otherPatient.birthday) && address.equals(otherPatient.address) && tags.equals(otherPatient.tags)
+                && assignedDepartment.equals(otherPatient.assignedDepartment) && record.equals(otherPatient.record);
     }
 
     @Override
@@ -135,8 +135,8 @@ public class Patient {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email).add("gender", gender)
-            .add("icNumber", icNumber).add("birthday", birthday).add("address", address).add("tags", tags)
-            .add("assignedDepartment", assignedDepartment).add("record", record).toString();
+                .add("icNumber", icNumber).add("birthday", birthday).add("address", address).add("tags", tags)
+                .add("assignedDepartment", assignedDepartment).add("record", record).toString();
     }
 
 }

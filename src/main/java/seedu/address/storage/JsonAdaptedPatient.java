@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.AssignedDepartment;
 import seedu.address.model.patient.Birthday;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Gender;
@@ -34,6 +35,7 @@ class JsonAdaptedPatient {
     private final String icNumber;
     private final String birthday;
     private final String address;
+    private final String assignedDepartment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -43,7 +45,7 @@ class JsonAdaptedPatient {
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("gender") String gender,
                               @JsonProperty("icNumber") String icNumber, @JsonProperty("birthday") String birthday,
-                              @JsonProperty("address") String address,
+                              @JsonProperty("address") String address, @JsonProperty("department") String department,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -52,6 +54,7 @@ class JsonAdaptedPatient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
+        this.assignedDepartment = new AssignedDepartment().toString();
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -68,6 +71,7 @@ class JsonAdaptedPatient {
         icNumber = source.getIcNumber().value;
         birthday = source.getBirthday().strValue;
         address = source.getAddress().value;
+        assignedDepartment = source.getAssignedDepartment().assignedDepartment.toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -117,7 +121,7 @@ class JsonAdaptedPatient {
 
         if (icNumber == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, IcNumber.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, IcNumber.class.getSimpleName()));
         }
         if (!IcNumber.isValidIC(icNumber)) {
             throw new IllegalValueException(IcNumber.MESSAGE_CONSTRAINTS);
@@ -127,7 +131,7 @@ class JsonAdaptedPatient {
 
         if (birthday == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName()));
         }
         if (!Birthday.isValidBirthdate(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
@@ -144,7 +148,7 @@ class JsonAdaptedPatient {
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
         return new Patient(modelName, modelPhone, modelEmail, modelGender, modelIcNumber, modelBirthday, modelAddress,
-            modelTags);
+                modelTags);
     }
 
 }

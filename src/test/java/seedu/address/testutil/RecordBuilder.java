@@ -18,9 +18,9 @@ public class RecordBuilder {
      */
     public RecordBuilder() {
         this.patient = new PatientBuilder().build(); // default patient
-        this.initialObservations = Record.DEFAULT_INITIAL_OBSERVATIONS;
-        this.diagnosis = Record.DEFAULT_DIAGNOSIS;
-        this.treatmentPlan = Record.DEFAULT_TREATMENT_PLAN;
+        this.initialObservations = Record.getDefaultInitialObservations();
+        this.diagnosis = Record.getDefaultDiagnosis();
+        this.treatmentPlan = Record.getDefaultTreatmentPlan();
     }
 
     /**
@@ -28,9 +28,9 @@ public class RecordBuilder {
      */
     public RecordBuilder(PatientBuilder patient) {
         this.patient = patient.build();
-        this.initialObservations = Record.DEFAULT_INITIAL_OBSERVATIONS;
-        this.diagnosis = Record.DEFAULT_DIAGNOSIS;
-        this.treatmentPlan = Record.DEFAULT_TREATMENT_PLAN;
+        this.initialObservations = Record.getDefaultInitialObservations();
+        this.diagnosis = Record.getDefaultDiagnosis();
+        this.treatmentPlan = Record.getDefaultTreatmentPlan();
     }
 
     /**
@@ -79,3 +79,4 @@ public class RecordBuilder {
     }
 
 }
+
