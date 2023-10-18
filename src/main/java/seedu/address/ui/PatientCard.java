@@ -45,6 +45,8 @@ public class PatientCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label assignedDepartment;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -61,6 +63,7 @@ public class PatientCard extends UiPart<Region> {
         phone.setText(patient.getPhone().value);
         address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
+        assignedDepartment.setText(patient.getAssignedDepartment().toString());
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

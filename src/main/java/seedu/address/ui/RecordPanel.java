@@ -5,8 +5,9 @@ import static java.util.Objects.requireNonNull;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -18,7 +19,7 @@ public class RecordPanel extends UiPart<Region> {
     private final PatientListPanel patientListPanel; // a reference to the patient list to listen for selection event
 
     @FXML
-    private VBox recordView;
+    private AnchorPane recordView;
 
     public RecordPanel(PatientListPanel patientList) {
         super(FXML);
@@ -39,6 +40,15 @@ public class RecordPanel extends UiPart<Region> {
     public void displayRecord(Patient patient) {
         requireNonNull(patient);
         recordView.getChildren().clear();
-        recordView.getChildren().add(new RecordCard(patient.getRecord()).getRoot());
+        Node record = new RecordCard(patient.getRecord()).getRoot();
+        recordView.getChildren().add(record);
+        setAnchorsFlush(record);
+    }
+
+    private void setAnchorsFlush(Node child) {
+        AnchorPane.setBottomAnchor(child, 0.0);
+        AnchorPane.setLeftAnchor(child, 0.0);
+        AnchorPane.setRightAnchor(child, 0.0);
+        AnchorPane.setTopAnchor(child, 0.0);
     }
 }
