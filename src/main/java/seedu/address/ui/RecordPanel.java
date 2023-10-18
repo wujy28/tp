@@ -55,4 +55,3 @@ public class RecordPanel extends UiPart<Region> {
         AnchorPane.setTopAnchor(child, 0.0);
     }
 }
-

@@ -79,6 +79,6 @@ public class Record {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("initialObservations", initialObservations)
-                .add("diagnosis", diagnosis).add("treatmentPlan", treatmentPlan).toString();
+            .add("diagnosis", diagnosis).add("treatmentPlan", treatmentPlan).toString();
     }
 }

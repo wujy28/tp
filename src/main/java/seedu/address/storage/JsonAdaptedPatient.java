@@ -121,7 +121,7 @@ class JsonAdaptedPatient {
 
         if (icNumber == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, IcNumber.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, IcNumber.class.getSimpleName()));
         }
         if (!IcNumber.isValidIC(icNumber)) {
             throw new IllegalValueException(IcNumber.MESSAGE_CONSTRAINTS);
@@ -131,7 +131,7 @@ class JsonAdaptedPatient {
 
         if (birthday == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName()));
         }
         if (!Birthday.isValidBirthdate(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
@@ -148,7 +148,7 @@ class JsonAdaptedPatient {
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
         return new Patient(modelName, modelPhone, modelEmail, modelGender, modelIcNumber, modelBirthday, modelAddress,
-                modelTags);
+            modelTags);
     }
 
 }

@@ -28,11 +28,11 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-        <AnchorPane HBox.hgrow="ALWAYS">
-          <children>
-            <Label fx:id="assignedDepartment" text="\$department" AnchorPane.rightAnchor="0.0" />
-          </children>
-        </AnchorPane>
+            <AnchorPane HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="assignedDepartment" text="\$department" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="icNumber" styleClass="cell_small_label" text="\$icNumber" />
@@ -42,8 +42,8 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
-    <rowConstraints>
-      <RowConstraints />
-    </rowConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
   </GridPane>
 </HBox>

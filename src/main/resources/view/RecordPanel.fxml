@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <AnchorPane fx:id="recordView" minWidth="200.0" VBox.vgrow="ALWAYS" />
-    </children>
+   <children>
+      <AnchorPane fx:id="recordView" minWidth="200.0" VBox.vgrow="ALWAYS" />
+   </children>
 </VBox>
