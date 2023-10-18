@@ -26,12 +26,8 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_BIRTHDAY_AMY = "03/01/2001";
-    public static final String VALID_BIRTHDAY_BOB = "05/06/2007";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_GENDER_AMY = "FEMALE";
-    public static final String VALID_GENDER_BOB = "MALE";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";

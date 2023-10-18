@@ -11,9 +11,7 @@ public class Age {
     public static final String MESSAGE_CONSTRAINTS =
             "Age should only contain numbers, and it should not be negative";
     public static final String VALIDATION_REGEX = "\\d+";
-
-    private static String defaultAge = "00";
-
+    public static final String DEFAULT_AGE = "00";
     public final String value;
 
     /**
@@ -34,9 +32,6 @@ public class Age {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public static String getDefaultAge() {
-        return defaultAge;
-    }
     @Override
     public String toString() {
         return value;

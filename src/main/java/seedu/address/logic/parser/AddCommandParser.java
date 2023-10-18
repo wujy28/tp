@@ -74,15 +74,15 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public static Patient createPatientFromPrefixes(ArgumentMultimap argMultimap, Prefix[] prefixes)
-                throws ParseException {
+            throws ParseException {
         // filling the fields with default values
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = new Phone(Phone.getDefaultPhone());
-        Email email = new Email(Email.getDefaultEmail());
-        Gender gender = new Gender(Gender.getDefaultGender());
-        IcNumber icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
-        Birthday birthday = new Birthday(Birthday.getDefaultBirthday());
-        Address address = new Address(Address.getDefaultAddress());
+        Phone phone = new Phone(Phone.DEFAULT_PHONE);
+        Email email = new Email(Email.DEFAULT_EMAIL);
+        Gender gender = new Gender(Gender.DEFAULT_GENDER);
+        IcNumber icNumber = new IcNumber(IcNumber.DEFAULT_IC_NUMBER);
+        Birthday birthday = new Birthday(Birthday.DEFAULT_BIRTHDAY);
+        Address address = new Address(Address.DEFAULT_ADDRESS);
         Set<Tag> tagList = new HashSet<>();
 
         // passing to helper function to replace fields with actual values if it exists

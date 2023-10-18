@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
-import seedu.address.model.patient.AssignedDepartment;
 import seedu.address.model.patient.Birthday;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Gender;
@@ -35,7 +34,6 @@ class JsonAdaptedPatient {
     private final String icNumber;
     private final String birthday;
     private final String address;
-    private final String assignedDepartment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -45,7 +43,7 @@ class JsonAdaptedPatient {
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("gender") String gender,
                               @JsonProperty("icNumber") String icNumber, @JsonProperty("birthday") String birthday,
-                              @JsonProperty("address") String address, @JsonProperty("department") String department,
+                              @JsonProperty("address") String address,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -54,7 +52,6 @@ class JsonAdaptedPatient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
-        this.assignedDepartment = new AssignedDepartment().toString();
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -71,7 +68,6 @@ class JsonAdaptedPatient {
         icNumber = source.getIcNumber().value;
         birthday = source.getBirthday().strValue;
         address = source.getAddress().value;
-        assignedDepartment = source.getAssignedDepartment().assignedDepartment.toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 

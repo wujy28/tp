@@ -8,10 +8,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Record {
 
-    private static String defaultInitialObservations = "No initial observations given";
-    private static String defaultDiagnosis = "No diagnosis given";
-    private static String defaultTreatmentPlan = "No treatment plan given";
-
+    public static final String DEFAULT_INITIAL_OBSERVATIONS = "No initial observations given";
+    public static final String DEFAULT_DIAGNOSIS = "No diagnosis given";
+    public static final String DEFAULT_TREATMENT_PLAN = "No treatment plan given";
 
     private final Patient patient;
     private String initialObservations;
@@ -23,19 +22,19 @@ public class Record {
      */
     public Record(Patient patient) {
         this.patient = patient;
-        this.initialObservations = defaultInitialObservations;
-        this.diagnosis = defaultDiagnosis;
-        this.treatmentPlan = defaultTreatmentPlan;
+        this.initialObservations = DEFAULT_INITIAL_OBSERVATIONS;
+        this.diagnosis = DEFAULT_DIAGNOSIS;
+        this.treatmentPlan = DEFAULT_TREATMENT_PLAN;
     }
 
     /**
-     * Initializes a default Record
+     * Initializes a Record with a null patient and initialise the fields with default values
      */
     public Record() {
         this.patient = null; // patient left null, would have to fix when building editing record command
-        this.initialObservations = defaultInitialObservations;
-        this.diagnosis = defaultDiagnosis;
-        this.treatmentPlan = defaultTreatmentPlan;
+        this.initialObservations = DEFAULT_INITIAL_OBSERVATIONS;
+        this.diagnosis = DEFAULT_DIAGNOSIS;
+        this.treatmentPlan = DEFAULT_TREATMENT_PLAN;
     }
 
 
@@ -59,15 +58,6 @@ public class Record {
         this.diagnosis = diagnosis;
     }
 
-    public static String getDefaultInitialObservations() {
-        return defaultInitialObservations;
-    }
-    public static String getDefaultDiagnosis() {
-        return defaultDiagnosis;
-    }
-    public static String getDefaultTreatmentPlan() {
-        return defaultTreatmentPlan;
-    }
     public String getTreatmentPlan() {
         return treatmentPlan;
     }
@@ -78,7 +68,7 @@ public class Record {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("initialObservations", initialObservations)
+        return new ToStringBuilder(this).add("patient", patient).add("initialObservations", initialObservations)
             .add("diagnosis", diagnosis).add("treatmentPlan", treatmentPlan).toString();
     }
 }

@@ -109,12 +109,7 @@ public class EditCommand extends Command {
         IcNumber updatedIcNumber = editPatientDescriptor.getIcNumber().orElse(patientToEdit.getIcNumber());
         Birthday updatedBirthday = editPatientDescriptor.getBirthday().orElse(patientToEdit.getBirthday());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-
-        //AssignedDepartment updatedDepartment = editPatientDescriptor.getDepartment()
-        //.orElse(patientToEdit.getAssignedDepartment());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
-        //Record updatedRecord = editPatientDescriptor.getRecord().orElse(patientToEdit.getRecord());
-
 
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedGender, updatedIcNumber, updatedBirthday,
                 updatedAddress, updatedTags);
