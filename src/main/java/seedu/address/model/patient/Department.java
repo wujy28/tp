@@ -4,7 +4,7 @@ package seedu.address.model.patient;
  * Represents the departments in the hospital.
  */
 public enum Department {
-    DEFAULT("Default"),
+    DEFAULT("-"),
     EMERGENCY_DEPARTMENT("Emergency Department"),
     INTENSIVE_CARE_UNIT("Intensive Care Unit"),
     ANAESTHESIOLOGY("Anaesthesiology"),

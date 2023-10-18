@@ -46,7 +46,4 @@ public class PatientListPanel extends UiPart<Region> {
         }
     }
 
-    public ListView<Patient> getPatientListView() {
-        return this.patientListView;
-    }
 }
