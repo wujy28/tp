@@ -11,7 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Birthday;
 import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
@@ -27,6 +30,9 @@ class JsonAdaptedPatient {
     private final String name;
     private final String phone;
     private final String email;
+    private final String gender;
+    private final String icNumber;
+    private final String birthday;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -35,11 +41,16 @@ class JsonAdaptedPatient {
      */
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("address") String address,
+                              @JsonProperty("email") String email, @JsonProperty("gender") String gender,
+                              @JsonProperty("icNumber") String icNumber, @JsonProperty("birthday") String birthday,
+                              @JsonProperty("address") String address,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.gender = gender;
+        this.icNumber = icNumber;
+        this.birthday = birthday;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -53,10 +64,11 @@ class JsonAdaptedPatient {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        gender = source.getGender().value;
+        icNumber = source.getIcNumber().value;
+        birthday = source.getBirthday().strValue;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
@@ -69,7 +81,6 @@ class JsonAdaptedPatient {
         for (JsonAdaptedTag tag : tags) {
             patientTags.add(tag.toModelType());
         }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -94,6 +105,35 @@ class JsonAdaptedPatient {
         }
         final Email modelEmail = new Email(email);
 
+
+        if (gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender = new Gender(gender);
+
+
+        if (icNumber == null) {
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, IcNumber.class.getSimpleName()));
+        }
+        if (!IcNumber.isValidIC(icNumber)) {
+            throw new IllegalValueException(IcNumber.MESSAGE_CONSTRAINTS);
+        }
+        final IcNumber modelIcNumber = new IcNumber(icNumber);
+
+
+        if (birthday == null) {
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName()));
+        }
+        if (!Birthday.isValidBirthdate(birthday)) {
+            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        final Birthday modelBirthday = new Birthday(birthday);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -103,7 +143,8 @@ class JsonAdaptedPatient {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Patient(modelName, modelPhone, modelEmail, modelGender, modelIcNumber, modelBirthday, modelAddress,
+            modelTags);
     }
 
 }

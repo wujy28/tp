@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -22,7 +25,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Birthday;
 import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
@@ -36,17 +42,18 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
-            + "by the index number used in the displayed patient list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+        + "by the index number used in the displayed patient list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_PHONE + "PHONE] "
+        + "[" + PREFIX_EMAIL + "EMAIL] "
+        + "[" + PREFIX_GENDER + "GENDER] "
+        + "[" + PREFIX_IC_NUMBER + "IC_NUMBER] "
+        + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+        + "[" + PREFIX_ADDRESS + "ADDRESS] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -56,7 +63,7 @@ public class EditCommand extends Command {
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index of the patient in the filtered patient list to edit
+     * @param index                 of the patient in the filtered patient list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
     public EditCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
@@ -98,11 +105,16 @@ public class EditCommand extends Command {
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Gender updatedGender = editPatientDescriptor.getGender().orElse(patientToEdit.getGender());
+        IcNumber updatedIcNumber = editPatientDescriptor.getIcNumber().orElse(patientToEdit.getIcNumber());
+        Birthday updatedBirthday = editPatientDescriptor.getBirthday().orElse(patientToEdit.getBirthday());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedGender, updatedIcNumber, updatedBirthday,
+                updatedAddress, updatedTags);
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -116,16 +128,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPatientDescriptor.equals(otherEditCommand.editPatientDescriptor);
+        return index.equals(otherEditCommand.index) && editPatientDescriptor.equals(
+            otherEditCommand.editPatientDescriptor);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPatientDescriptor", editPatientDescriptor)
-                .toString();
+        return new ToStringBuilder(this).add("index", index).add("editPatientDescriptor", editPatientDescriptor)
+            .toString();
     }
 
     /**
@@ -136,10 +146,14 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Gender gender;
+        private IcNumber icNumber;
+        private Birthday birthday;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPatientDescriptor() {}
+        public EditPatientDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -149,6 +163,9 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setGender(toCopy.gender);
+            setIcNumber(toCopy.icNumber);
+            setBirthday(toCopy.birthday);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -157,7 +174,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, gender, icNumber, birthday, address, tags);
         }
 
         public void setName(Name name) {
@@ -224,8 +241,35 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPatientDescriptor.name)
                     && Objects.equals(phone, otherEditPatientDescriptor.phone)
                     && Objects.equals(email, otherEditPatientDescriptor.email)
+                    && Objects.equals(gender, otherEditPatientDescriptor.gender)
+                    && Objects.equals(icNumber, otherEditPatientDescriptor.icNumber)
+                    && Objects.equals(birthday, otherEditPatientDescriptor.birthday)
                     && Objects.equals(address, otherEditPatientDescriptor.address)
                     && Objects.equals(tags, otherEditPatientDescriptor.tags);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
+        }
+
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
+        }
+
+        public void setIcNumber(IcNumber icNumber) {
+            this.icNumber = icNumber;
+        }
+
+        public Optional<IcNumber> getIcNumber() {
+            return Optional.ofNullable(icNumber);
         }
 
         @Override
@@ -234,9 +278,11 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("gender", gender)
+                    .add("icNumber", icNumber)
+                    .add("birthday", birthday)
                     .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+                    .add("tags", tags).toString();
         }
     }
 }

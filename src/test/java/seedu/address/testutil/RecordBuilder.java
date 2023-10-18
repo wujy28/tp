@@ -18,9 +18,19 @@ public class RecordBuilder {
      */
     public RecordBuilder() {
         this.patient = new PatientBuilder().build(); // default patient
-        this.initialObservations = "";
-        this.diagnosis = "";
-        this.treatmentPlan = "";
+        this.initialObservations = Record.DEFAULT_INITIAL_OBSERVATIONS;
+        this.diagnosis = Record.DEFAULT_DIAGNOSIS;
+        this.treatmentPlan = Record.DEFAULT_TREATMENT_PLAN;
+    }
+
+    /**
+     * Creates a {@code RecordBuilder} with the specified {@code PatientBuilder} and the default details.
+     */
+    public RecordBuilder(PatientBuilder patient) {
+        this.patient = patient.build();
+        this.initialObservations = Record.DEFAULT_INITIAL_OBSERVATIONS;
+        this.diagnosis = Record.DEFAULT_DIAGNOSIS;
+        this.treatmentPlan = Record.DEFAULT_TREATMENT_PLAN;
     }
 
     /**
