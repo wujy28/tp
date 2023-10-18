@@ -43,8 +43,16 @@ public class Messages {
                 .append(patient.getPhone())
                 .append("; Email: ")
                 .append(patient.getEmail())
+                .append("; Gender: ")
+                .append(patient.getGender())
+                .append("; IC Number: ")
+                .append(patient.getIcNumber())
+                .append("; Birthday: ")
+                .append(patient.getBirthday())
                 .append("; Address: ")
                 .append(patient.getAddress())
+                .append("; Department: ")
+                .append(patient.getAssignedDepartment())
                 .append("; Tags: ");
         patient.getTags().forEach(builder::append);
         return builder.toString();

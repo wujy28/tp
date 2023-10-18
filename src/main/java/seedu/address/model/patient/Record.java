@@ -8,9 +8,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Record {
 
-    public static String DEFAULT_INITIAL_OBSERVATIONS = "No initial observations given";
-    public static String DEFAULT_DIAGNOSIS = "No diagnosis given";
-    public static String DEFAULT_TREATMENT_PLAN = "No treatment plan given";
+    public static final String DEFAULT_INITIAL_OBSERVATIONS = "No initial observations given";
+    public static final String DEFAULT_DIAGNOSIS = "No diagnosis given";
+    public static final String DEFAULT_TREATMENT_PLAN = "No treatment plan given";
 
     private final Patient patient;
     private String initialObservations;
@@ -27,6 +27,9 @@ public class Record {
         this.treatmentPlan = DEFAULT_TREATMENT_PLAN;
     }
 
+    /**
+     * Initializes a Record with a null patient and initialise the fields with default values
+     */
     public Record() {
         this.patient = null; // patient left null, would have to fix when building editing record command
         this.initialObservations = DEFAULT_INITIAL_OBSERVATIONS;

@@ -3,7 +3,16 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.patient.*;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.AssignedDepartment;
+import seedu.address.model.patient.Birthday;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Record;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -44,7 +53,7 @@ public class PatientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         assignedDepartment = new AssignedDepartment();
-        record = new RecordBuilder().build();
+        record = new RecordBuilder(this).build();
     }
 
     /**
