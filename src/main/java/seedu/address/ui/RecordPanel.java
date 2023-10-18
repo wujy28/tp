@@ -11,7 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.patient.Patient;
 
 /**
- * A ui for the record panel that is displayed on the right of the application.
+ * A ui for the record panel that is displayed on the right side of the application.
  */
 public class RecordPanel extends UiPart<Region> {
 
@@ -21,6 +21,9 @@ public class RecordPanel extends UiPart<Region> {
     @FXML
     private AnchorPane recordView;
 
+    /**
+     * Creates a {@code RecordPanel} with the given {@code PatientListPanel}.
+     */
     public RecordPanel(PatientListPanel patientList) {
         super(FXML);
         this.patientListPanel = patientList;
@@ -37,7 +40,7 @@ public class RecordPanel extends UiPart<Region> {
         );
     }
 
-    public void displayRecord(Patient patient) {
+    private void displayRecord(Patient patient) {
         requireNonNull(patient);
         recordView.getChildren().clear();
         Node record = new RecordCard(patient.getRecord()).getRoot();
