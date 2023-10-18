@@ -13,7 +13,7 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public static String DEFAULT_PHONE = "00000000";
+    private static String defaultPhone = "00000000";
     public final String value;
 
     /**
@@ -34,6 +34,9 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public static String getDefaultPhone() {
+        return defaultPhone;
+    }
     @Override
     public String toString() {
         return value;

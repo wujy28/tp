@@ -12,7 +12,7 @@ public class Gender {
             "Gender should only be MALE, FEMALE or OTHER, and it should not be blank";
 
     public static final String VALIDATION_REGEX = "\\p{Alnum}*";
-    public static String DEFAULT_GENDER = "OTHER";
+    private static String defaultGender = "OTHER";
     public final String value;
 
     enum Genders {
@@ -38,6 +38,10 @@ public class Gender {
      */
     public static boolean isValidGender(String test) {
         return test.matches(VALIDATION_REGEX) && isInGendersEnum(test);
+    }
+
+    public static String getDefaultGender() {
+        return defaultGender;
     }
 
     /**

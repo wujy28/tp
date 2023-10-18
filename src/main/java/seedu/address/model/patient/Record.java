@@ -8,9 +8,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Record {
 
-    public static String DEFAULT_INITIAL_OBSERVATIONS = "No initial observations given";
-    public static String DEFAULT_DIAGNOSIS = "No diagnosis given";
-    public static String DEFAULT_TREATMENT_PLAN = "No treatment plan given";
+    private static String defaultInitialObservations = "No initial observations given";
+    private static String defaultDiagnosis = "No diagnosis given";
+    private static String defaultTreatmentPlan = "No treatment plan given";
 
     private final Patient patient;
     private String initialObservations;
@@ -22,16 +22,19 @@ public class Record {
      */
     public Record(Patient patient) {
         this.patient = patient;
-        this.initialObservations = DEFAULT_INITIAL_OBSERVATIONS;
-        this.diagnosis = DEFAULT_DIAGNOSIS;
-        this.treatmentPlan = DEFAULT_TREATMENT_PLAN;
+        this.initialObservations = defaultInitialObservations;
+        this.diagnosis = defaultDiagnosis;
+        this.treatmentPlan = defaultTreatmentPlan;
     }
 
+    /**
+     * Initializes a default Record
+     */
     public Record() {
         this.patient = null; // patient left null, would have to fix when building editing record command
-        this.initialObservations = DEFAULT_INITIAL_OBSERVATIONS;
-        this.diagnosis = DEFAULT_DIAGNOSIS;
-        this.treatmentPlan = DEFAULT_TREATMENT_PLAN;
+        this.initialObservations = defaultInitialObservations;
+        this.diagnosis = defaultDiagnosis;
+        this.treatmentPlan = defaultTreatmentPlan;
     }
 
 
@@ -55,6 +58,15 @@ public class Record {
         this.diagnosis = diagnosis;
     }
 
+    public static String getDefaultInitialObservations() {
+        return defaultInitialObservations;
+    }
+    public static String getDefaultDiagnosis() {
+        return defaultDiagnosis;
+    }
+    public static String getDefaultTreatmentPlan() {
+        return defaultTreatmentPlan;
+    }
     public String getTreatmentPlan() {
         return treatmentPlan;
     }
