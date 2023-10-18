@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import seedu.address.storage.JsonAdaptedPatient;
 
 /**
  * Represents a Patient in the address book.
@@ -32,7 +31,7 @@ public class Patient {
     private final Record record;
 
     /**
-     * Patient constructor used by AddCommand, omits assignedDepartment and Record parameters
+     * Patient constructor which omits assignedDepartment and Record parameters
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
                    Address address, Set<Tag> tags) {
