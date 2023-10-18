@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.JsonAdaptedPatient;
 
 /**
  * Represents a Patient in the address book.
@@ -31,7 +32,7 @@ public class Patient {
     private final Record record;
 
     /**
-     * Every field must be present and not null.
+     * Patient constructor used by AddCommand, omits assignedDepartment and Record parameters
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
                    Address address, Set<Tag> tags) {
@@ -45,6 +46,24 @@ public class Patient {
         this.address = address;
         this.tags.addAll(tags);
         this.assignedDepartment = new AssignedDepartment(); // default Department given
+        this.record = new Record(this); // creates new Record
+    }
+
+    /**
+     * Patient constructor with all fields as parameters
+     */
+    public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
+                   Address address, Set<Tag> tags, AssignedDepartment assignedDepartment) {
+        requireAllNonNull(name, phone, email, icNumber, birthday, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.icNumber = icNumber;
+        this.birthday = birthday;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.assignedDepartment = assignedDepartment; // default Department given
         this.record = new Record(this); // creates new Record
     }
 
