@@ -27,7 +27,7 @@ class JsonAdaptedPatient {
     private final String icNumber;
     private final String birthday;
     private final String address;
-    private final String department;
+    private final String assignedDepartment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -46,7 +46,7 @@ class JsonAdaptedPatient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
-        this.department = department;
+        this.assignedDepartment = new AssignedDepartment().toString();
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -63,7 +63,7 @@ class JsonAdaptedPatient {
         icNumber = source.getIcNumber().value;
         birthday = source.getBirthday().strValue;
         address = source.getAddress().value;
-        department = source.getAssignedDepartment().assignedDepartment.toString();
+        assignedDepartment = source.getAssignedDepartment().assignedDepartment.toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
