@@ -30,8 +30,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_GENDER_AMY = "FEMALE";
     public static final String VALID_GENDER_BOB = "MALE";
-    public static final String VALID_IC_NUMBER_AMY = "t1234567j";
-    public static final String VALID_IC_NUMBER_BOB = "s7654321j";
+    public static final String VALID_IC_NUMBER_AMY = "T1234567J";
+    public static final String VALID_IC_NUMBER_BOB = "S7654321J";
     public static final String VALID_BIRTHDAY_AMY = "03/01/2001";
     public static final String VALID_BIRTHDAY_BOB = "05/06/2007";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
@@ -55,6 +55,15 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String FULL_DESC_BOB =
+        NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
+            + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
+
+    public static final String FULL_DESC_AMY =
+        NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + GENDER_DESC_AMY + IC_NUMBER_DESC_AMY + BIRTHDAY_DESC_AMY
+            + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -80,6 +89,11 @@ public class CommandTestUtil {
             .withEmail(VALID_EMAIL_BOB).withGender(VALID_GENDER_BOB).withIcNumber(VALID_IC_NUMBER_BOB)
             .withBirthday(VALID_BIRTHDAY_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    }
+
+    public static String getUserInputForBob() {
+        return NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB
+            + BIRTHDAY_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
     }
 
     /**

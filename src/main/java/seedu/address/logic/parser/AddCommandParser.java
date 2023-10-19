@@ -85,7 +85,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Gender gender = new Gender(Gender.getDefaultGender());
         IcNumber icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
         Birthday birthday = new Birthday(Birthday.getDefaultBirthday());
-        Address address = new Address(Address.getDefaultAddress();
+        Address address = new Address(Address.getDefaultAddress());
         Set<Tag> tagList = new HashSet<>();
 
         // passing to helper function to replace fields with actual values if it exists
