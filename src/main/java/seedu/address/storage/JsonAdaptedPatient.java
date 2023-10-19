@@ -45,7 +45,8 @@ class JsonAdaptedPatient {
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("gender") String gender,
                               @JsonProperty("icNumber") String icNumber, @JsonProperty("birthday") String birthday,
-                              @JsonProperty("address") String address, @JsonProperty("department") String department,
+                              @JsonProperty("address") String address,
+                              @JsonProperty("assignedDepartment") String assignedDepartment,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -54,7 +55,7 @@ class JsonAdaptedPatient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
-        this.assignedDepartment = new AssignedDepartment().toString();
+        this.assignedDepartment = assignedDepartment;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -71,7 +72,7 @@ class JsonAdaptedPatient {
         icNumber = source.getIcNumber().value;
         birthday = source.getBirthday().strValue;
         address = source.getAddress().value;
-        assignedDepartment = source.getAssignedDepartment().assignedDepartment.toString();
+        assignedDepartment = source.getAssignedDepartment().toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -146,9 +147,20 @@ class JsonAdaptedPatient {
         }
         final Address modelAddress = new Address(address);
 
+
+        if (assignedDepartment == null) {
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, AssignedDepartment.class.getSimpleName()));
+        }
+        if (!AssignedDepartment.isValidDepartment(assignedDepartment)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final AssignedDepartment modelAssignedDepartment = new AssignedDepartment(assignedDepartment);
+
+
         final Set<Tag> modelTags = new HashSet<>(patientTags);
         return new Patient(modelName, modelPhone, modelEmail, modelGender, modelIcNumber, modelBirthday, modelAddress,
-            modelTags);
+            modelTags, modelAssignedDepartment);
     }
 
 }

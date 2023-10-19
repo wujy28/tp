@@ -8,9 +8,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Record {
 
-    private static String defaultInitialObservations = "No initial observations given";
-    private static String defaultDiagnosis = "No diagnosis given";
-    private static String defaultTreatmentPlan = "No treatment plan given";
+    private static final String defaultInitialObservations = "No initial observations given";
+    private static final String defaultDiagnosis = "No diagnosis given";
+    private static final String defaultTreatmentPlan = "No treatment plan given";
 
 
     private final Patient patient;
