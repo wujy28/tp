@@ -3,26 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.AddCommandParser.RELEVANT_PREFIXES;
 import static seedu.address.logic.parser.AddCommandParser.REQUIRED_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -114,7 +95,7 @@ public class AddCommandParserTest {
 
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, RELEVANT_PREFIXES);
 
-        Patient actualPatient = AddCommandParser.createPatientFromPrefixes(testArgMultimap, RELEVANT_PREFIXES);
+        Patient actualPatient = AddCommandParser.createPatient(testArgMultimap, RELEVANT_PREFIXES);
         assertEquals(expectedPatient, actualPatient);
     }
 
@@ -126,9 +107,22 @@ public class AddCommandParserTest {
 
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, RELEVANT_PREFIXES);
 
-        Patient actualPatient = AddCommandParser.createPatientFromPrefixes(testArgMultimap, new Prefix[]{PREFIX_NAME});
+        Patient actualPatient = AddCommandParser.createPatient(testArgMultimap, new Prefix[]{PREFIX_NAME});
         assertEquals(expectedPatient, actualPatient);
     }
+
+    @Test
+    public void createPatientFromPresentPrefixes_allFieldsPresent_correctPatientCreated() {
+        Patient expectedPatient = new PatientBuilder(BOB).build();
+
+        String userInput =
+            NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_GENDER_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+        ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(userInput, RELEVANT_PREFIXES);
+        Prefix[] prefixesPresent = RELEVANT_PREFIXES;
+    }
+
+
+
 
     @Test
     public void parse_allFieldsPresent_success() {

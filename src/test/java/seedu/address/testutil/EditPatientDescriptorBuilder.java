@@ -6,11 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
-import seedu.address.model.patient.Address;
-import seedu.address.model.patient.Email;
-import seedu.address.model.patient.Name;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +32,9 @@ public class EditPatientDescriptorBuilder {
         descriptor.setName(patient.getName());
         descriptor.setPhone(patient.getPhone());
         descriptor.setEmail(patient.getEmail());
+        descriptor.setGender(patient.getGender());
+        descriptor.setIcNumber(patient.getIcNumber());
+        descriptor.setBirthday(patient.getBirthday());
         descriptor.setAddress(patient.getAddress());
         descriptor.setTags(patient.getTags());
     }
@@ -65,12 +64,38 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Gender} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withGender(String gender) {
+        descriptor.setGender(new Gender(gender));
+        return this;
+    }
+
+    /**
+     * Sets the {@code IcNumber} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withIcNumber(String icNumber) {
+        descriptor.setIcNumber(new IcNumber(icNumber));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Birthday} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withBirthday(String birthday) {
+        descriptor.setBirthday(new Birthday(birthday));
+        return this;
+    }
+
+
+    /**
      * Sets the {@code Address} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
         return this;
     }
+
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPatientDescriptor}
