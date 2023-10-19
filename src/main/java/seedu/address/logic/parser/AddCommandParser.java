@@ -39,8 +39,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     public static final Prefix[] RELEVANT_PREFIXES = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
         PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
-    public static final Prefix[] RELEVANT_PREFIXES_WITHOUT_TAG = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL
-        , PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS};
+    public static final Prefix[] RELEVANT_PREFIXES_WITHOUT_TAG = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+        PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS};
     public static final Prefix[] REQUIRED_PREFIXES = new Prefix[]{PREFIX_NAME};
 
     public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[]{PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
@@ -76,8 +76,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @return Patient with the fields present in user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static Patient createPatient(ArgumentMultimap argMultimap, Prefix[] prefixes)
-        throws ParseException {
+    public static Patient createPatient(ArgumentMultimap argMultimap, Prefix[] prefixes) throws ParseException {
         // filling the fields with default values
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = new Phone(Phone.getDefaultPhone());

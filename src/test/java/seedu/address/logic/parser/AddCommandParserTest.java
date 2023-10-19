@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT;
+
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.AddCommandParser.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
