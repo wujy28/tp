@@ -82,7 +82,6 @@ class JsonAdaptedPatient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
-        System.out.println(this.assignedDepartment);
         final List<Tag> patientTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             patientTags.add(tag.toModelType());
