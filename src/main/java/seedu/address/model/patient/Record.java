@@ -62,12 +62,15 @@ public class Record {
     public static String getDefaultInitialObservations() {
         return defaultInitialObservations;
     }
+
     public static String getDefaultDiagnosis() {
         return defaultDiagnosis;
     }
+
     public static String getDefaultTreatmentPlan() {
         return defaultTreatmentPlan;
     }
+
     public String getTreatmentPlan() {
         return treatmentPlan;
     }
@@ -76,9 +79,28 @@ public class Record {
         this.treatmentPlan = treatmentPlan;
     }
 
+    /**
+     * Returns true if both records have same fields
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Record)) {
+            return false;
+        }
+
+        Record otherRecord = (Record) other;
+        return getInitialObservations().equals(otherRecord.getInitialObservations()) && getDiagnosis().equals(
+            otherRecord.getDiagnosis()) && getTreatmentPlan().equals(otherRecord.getTreatmentPlan());
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("initialObservations", initialObservations)
-            .add("diagnosis", diagnosis).add("treatmentPlan", treatmentPlan).toString();
+        return new ToStringBuilder(this).add("initialObservations", initialObservations).add("diagnosis", diagnosis)
+            .add("treatmentPlan", treatmentPlan).toString();
     }
 }

@@ -16,8 +16,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Address;
@@ -44,6 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[]{PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
         PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Gets prefixes in argMultimap and returns a Prefix array containing all present prefixes
@@ -73,8 +76,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @return Patient with the fields present in user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static Patient createPatientFromPrefixes(ArgumentMultimap argMultimap, Prefix[] prefixes)
-                throws ParseException {
+    public static Patient createPatient(ArgumentMultimap argMultimap, Prefix[] prefixes) throws ParseException {
         // filling the fields with default values
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = new Phone(Phone.getDefaultPhone());
@@ -159,8 +161,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES_WITHOUT_TAG);
         Prefix[] prefixesPresent = getPrefixesPresent(argMultimap);
+        assert prefixesPresent.length != 0;
 
-        Patient patient = createPatientFromPrefixes(argMultimap, prefixesPresent);
+        Patient patient = createPatient(argMultimap, prefixesPresent);
+        logger.info("Created Patient with IC Number : " + patient.getIcNumber());
         return new AddCommand(patient);
     }
 

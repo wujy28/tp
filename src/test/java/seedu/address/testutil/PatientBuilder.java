@@ -138,6 +138,17 @@ public class PatientBuilder {
         return this;
     }
 
+    public PatientBuilder withDefaultValues() {
+        phone = new Phone(Phone.getDefaultPhone());
+        email = new Email(Email.getDefaultEmail());
+        gender = new Gender(Gender.getDefaultGender());
+        icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
+        birthday = new Birthday(Birthday.getDefaultBirthday());
+        address = new Address(Address.getDefaultAddress());
+        tags = new HashSet<>();
+        return this;
+    }
+
     /**
      * Sets the {@code AssignedDepartment} of the {@code Patient} that we are building.
      */
