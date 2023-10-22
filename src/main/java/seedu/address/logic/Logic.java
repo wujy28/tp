@@ -21,6 +21,7 @@ public interface Logic {
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
+     * @throws PatientWithFieldNotFoundException If user enters a field not present in any existing patients
      */
     CommandResult execute(String commandText) throws CommandException, ParseException,
         PatientWithFieldNotFoundException;

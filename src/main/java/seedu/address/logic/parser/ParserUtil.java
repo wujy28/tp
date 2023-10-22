@@ -124,6 +124,7 @@ public class ParserUtil {
      */
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
+        gender = gender.toUpperCase();
         String trimmedGender = gender.trim();
         if (!Gender.isValidGender(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
@@ -154,6 +155,7 @@ public class ParserUtil {
      */
     public static IcNumber parseIcNumber(String icNumber) throws ParseException {
         requireNonNull(icNumber);
+        icNumber = icNumber.toUpperCase();
         String trimmedIcNumber = icNumber.trim();
         if (!IcNumber.isValidIC(trimmedIcNumber)) {
             throw new ParseException(IcNumber.MESSAGE_CONSTRAINTS);
