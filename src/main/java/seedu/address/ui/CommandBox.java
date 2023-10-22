@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -44,7 +45,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | PatientWithFieldNotFoundException e) {
             setStyleToIndicateCommandFailure();
         }
     }
@@ -79,7 +80,8 @@ public class CommandBox extends UiPart<Region> {
          *
          * @see seedu.address.logic.Logic#execute(String)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        CommandResult execute(String commandText)
+            throws CommandException, ParseException, PatientWithFieldNotFoundException;
     }
 
 }

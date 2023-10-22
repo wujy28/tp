@@ -18,6 +18,8 @@ public class Messages {
     public static final String MESSAGE_PATIENTS_LISTED_OVERVIEW = "%1$d patients listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PATIENT_LISTED_SUCCESS = "Patient found!!";
+    public static final String MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD = "Unable to find any patient(s) with ";
     public static final String MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT = "Ensure you have the required prefix(s): "
         + "\n%s";
 
