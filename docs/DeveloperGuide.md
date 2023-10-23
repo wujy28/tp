@@ -377,7 +377,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Advanced&Efficient`application and the **Actor** is the `ED doctor`, 
+(For all use cases below, the **System** is the `Advanced&Efficient`application and the **Actor** is the `ED doctor`,
 unless specified otherwise)
 
 **Use case: UC01 - Add a patient**

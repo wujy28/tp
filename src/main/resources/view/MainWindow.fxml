@@ -39,7 +39,6 @@
                      <children>
                         <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                  
                                       <VBox fx:id="patientList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                             <padding>
                               <Insets bottom="10" left="10" right="10" top="10" />
