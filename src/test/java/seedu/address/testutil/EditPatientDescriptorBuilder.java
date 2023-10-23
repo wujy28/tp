@@ -6,7 +6,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
-import seedu.address.model.patient.*;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Birthday;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPatientDescriptorBuilder {
 
-    private EditCommand.EditPatientDescriptor descriptor;
+    private final EditCommand.EditPatientDescriptor descriptor;
 
     public EditPatientDescriptorBuilder() {
         descriptor = new EditPatientDescriptor();

@@ -1,10 +1,13 @@
 package seedu.address.model.patient;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PatientBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPatients.AMY;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PatientBuilder;
 
 public class PatientWithIcNumberPredicateTest {
     @Test

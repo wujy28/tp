@@ -23,11 +23,24 @@ public class ViewCommand extends Command {
     private final PatientWithIcNumberPredicate predicate;
     private final IcNumber icNumberToFind;
 
+    /**
+     * Creates a ViewCommand object to be executed
+     *
+     * @param predicate      The predicate used to filter Patients
+     * @param icNumberToFind The icNumber entered by user input to be find
+     */
     public ViewCommand(PatientWithIcNumberPredicate predicate, IcNumber icNumberToFind) {
         this.predicate = predicate;
         this.icNumberToFind = icNumberToFind;
     }
 
+    /**
+     * Executes the {@Code executes ViewCommand} using the current model and reutrn {@Code CommandResult}
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult object
+     * @throws PatientWithFieldNotFoundException If user enters a field not present in any existing patients
+     */
     @Override
     public CommandResult execute(Model model) throws PatientWithFieldNotFoundException {
         requireNonNull(model);

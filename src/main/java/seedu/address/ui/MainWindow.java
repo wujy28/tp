@@ -181,7 +181,7 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText)
-        throws CommandException, ParseException, PatientWithFieldNotFoundException {
+            throws CommandException, ParseException, PatientWithFieldNotFoundException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -200,8 +200,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("User-specified field not found in any patients");
             resultDisplay.setFeedbackToUser(e.getMessage());;
             throw e;
-        }
-        catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

@@ -1,8 +1,10 @@
 package seedu.address.model.patient;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 
-import java.util.function.Predicate;
+
 
 /**
  * Tests that a {@code Patient}'s {@code IcNumber} matches the given desired IcNumber

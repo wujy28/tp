@@ -45,7 +45,7 @@ public class LogicManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText)
-        throws CommandException, ParseException, PatientWithFieldNotFoundException {
+            throws CommandException, ParseException, PatientWithFieldNotFoundException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;

@@ -81,7 +81,7 @@ public class CommandBox extends UiPart<Region> {
          * @see seedu.address.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText)
-            throws CommandException, ParseException, PatientWithFieldNotFoundException;
+                throws CommandException, ParseException, PatientWithFieldNotFoundException;
     }
 
 }

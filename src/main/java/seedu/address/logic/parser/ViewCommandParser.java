@@ -1,18 +1,20 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
+
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.PatientWithIcNumberPredicate;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
+
 
 /**
  * Parses input arguments and creates a new ViewCommand object
  */
-public class ViewCommandParser {
+public class ViewCommandParser implements Parser<ViewCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
      * and returns a ViewCommand object for execution.
@@ -37,7 +39,7 @@ public class ViewCommandParser {
      * Returns true if IcNumber field present and value is non empty
      * {@code ArgumentMultimap}.
      */
-    private static boolean checkIcNumberPrefixPresent(ArgumentMultimap argumentMultimap) {
+    public static boolean checkIcNumberPrefixPresent(ArgumentMultimap argumentMultimap) {
         return argumentMultimap.getValue(PREFIX_IC_NUMBER).isPresent();
     }
 }

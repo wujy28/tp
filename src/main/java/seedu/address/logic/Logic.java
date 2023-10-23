@@ -24,7 +24,7 @@ public interface Logic {
      * @throws PatientWithFieldNotFoundException If user enters a field not present in any existing patients
      */
     CommandResult execute(String commandText) throws CommandException, ParseException,
-        PatientWithFieldNotFoundException;
+            PatientWithFieldNotFoundException;
 
     /**
      * Returns the AddressBook.
