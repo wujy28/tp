@@ -34,7 +34,7 @@ public class PatientTest {
 
         // same name, all other attributes different -> returns true
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+            .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -92,8 +92,11 @@ public class PatientTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected =
+            Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone() + ", email="
+                + ALICE.getEmail() + ", gender=" + ALICE.getGender() + ", icNumber=" + ALICE.getIcNumber()
+                + ", birthday=" + ALICE.getBirthday() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", assignedDepartment=" + ALICE.getAssignedDepartment() + ", record=" + ALICE.getRecord() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
