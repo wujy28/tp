@@ -59,18 +59,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
 
-    private final Index index;
+    private final IcNumber icNumber;
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index                 of the patient in the filtered patient list to edit
+     * @param icNumber of the patient in the filtered patient list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
-    public EditCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
-        requireNonNull(index);
+    public EditCommand(IcNumber icNumber, EditPatientDescriptor editPatientDescriptor) {
+        requireNonNull(icNumber);
         requireNonNull(editPatientDescriptor);
 
-        this.index = index;
+        this.icNumber = icNumber;
         this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
     }
 
@@ -79,11 +79,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
-        }
-
-        Patient patientToEdit = lastShownList.get(index.getZeroBased());
+        Patient patientToEdit = model.getPatient(icNumber, lastShownList);
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
@@ -133,13 +129,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index) && editPatientDescriptor.equals(
+        return icNumber.equals(otherEditCommand.icNumber) && editPatientDescriptor.equals(
             otherEditCommand.editPatientDescriptor);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("index", index).add("editPatientDescriptor", editPatientDescriptor)
+        return new ToStringBuilder(this).add("icNumber", icNumber)
+                .add("editPatientDescriptor", editPatientDescriptor)
             .toString();
     }
 

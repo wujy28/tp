@@ -26,14 +26,10 @@ import java.util.List;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-
-    DeleteCommand deleteCommand;
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validICUnfilteredList_success() {
-        /*Patient patientToDelete = model.getFilteredPatientList()
-                .get(INDEX_FIRST_PATIENT.getZeroBased());*/
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
         DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());

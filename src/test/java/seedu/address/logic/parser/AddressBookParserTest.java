@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.AMY;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +37,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Patient patient = new PatientBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PatientUtil.getAddCommand(patient));
-        assertEquals(new AddCommand(patient), command);
+        AddCommand command = (AddCommand) parser.parseCommand(PatientUtil.getAddCommand(AMY));
+        assertEquals(new AddCommand(AMY), command);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class AddressBookParserTest {
         Patient patient = new PatientBuilder().build();
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PATIENT.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PATIENT, descriptor), command);
+                + patient.getIcNumber().toString() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(patient.getIcNumber(), descriptor), command);
     }
 
     @Test

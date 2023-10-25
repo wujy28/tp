@@ -16,10 +16,10 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.tag.Tag;
 
 
@@ -39,10 +39,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
             PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_IC_NUMBER);
 
-        Index index;
+        IcNumber icNumber;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            icNumber = ParserUtil.parseIcNumber(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -79,8 +79,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index, editPatientDescriptor);
+        return new EditCommand(icNumber, editPatientDescriptor);
     }
 
     /**

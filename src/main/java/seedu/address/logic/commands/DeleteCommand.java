@@ -24,12 +24,6 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
-
-    /*private final Index targetIndex;
-
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
-    }*/
     private final IcNumber icNumber;
 
     public DeleteCommand(IcNumber icNumber) {
@@ -40,10 +34,6 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
-
-        /*if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
-        }*/
 
         Patient patientToDelete = model.getPatient(icNumber, lastShownList);
         model.deletePatient(patientToDelete);
