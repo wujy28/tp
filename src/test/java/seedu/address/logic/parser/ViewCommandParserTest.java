@@ -19,6 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.PatientWithIcNumberPredicate;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 public class ViewCommandParserTest {
 
@@ -36,7 +37,7 @@ public class ViewCommandParserTest {
     }
 
     @Test
-    public void parse_icNumberValuePresent_returnsViewCommand() {
+    public void parse_icNumberValuePresent_returnsViewCommand() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber = new IcNumber(VALID_IC_NUMBER_AMY);
 
         ViewCommand expectedViewCommand = new ViewCommand(new PatientWithIcNumberPredicate(testIcNumber), testIcNumber);

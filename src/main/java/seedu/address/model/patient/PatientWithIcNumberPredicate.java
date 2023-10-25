@@ -3,7 +3,7 @@ package seedu.address.model.patient;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 
 /**
@@ -12,7 +12,10 @@ import seedu.address.commons.util.ToStringBuilder;
 public class PatientWithIcNumberPredicate implements Predicate<Patient> {
     private final IcNumber icNumber;
 
-    public PatientWithIcNumberPredicate(IcNumber icNumber) {
+    public PatientWithIcNumberPredicate(IcNumber icNumber) throws PatientWithFieldNotFoundException {
+        if (icNumber == null) {
+            throw new PatientWithFieldNotFoundException("Multiplicity violated. Each patient has 1 non-null IcNumber.");
+        }
         this.icNumber = icNumber;
     }
 

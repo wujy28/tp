@@ -7,11 +7,12 @@ import static seedu.address.testutil.TypicalPatients.AMY;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.PatientBuilder;
 
 public class PatientWithIcNumberPredicateTest {
     @Test
-    public void equals() {
+    public void equals() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber1 = new IcNumber("t1234567a");
         IcNumber testIcNumber2 = new IcNumber("s7654321a");
 
@@ -37,7 +38,7 @@ public class PatientWithIcNumberPredicateTest {
 
 
     @Test
-    public void test_patientIcNumberSame_returnsTrue() {
+    public void test_patientIcNumberSame_returnsTrue() throws PatientWithFieldNotFoundException {
         // One keyword
         IcNumber testIcNumber = new IcNumber("t1234567a");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber);
@@ -46,7 +47,7 @@ public class PatientWithIcNumberPredicateTest {
     }
 
     @Test
-    public void test_patientIcNumberDifferent_returnsFalse() {
+    public void test_patientIcNumberDifferent_returnsFalse() throws PatientWithFieldNotFoundException {
         // One keyword
         IcNumber testIcNumber = new IcNumber("t1234567a");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber);
@@ -55,7 +56,7 @@ public class PatientWithIcNumberPredicateTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void toStringMethod() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber = new IcNumber("t1234567a");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber);
 

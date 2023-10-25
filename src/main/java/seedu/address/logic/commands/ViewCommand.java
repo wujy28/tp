@@ -3,11 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_PATIENT_LISTED_SUCCESS;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
+
+import java.util.logging.Logger;
 
 /**
  * Views the Patient with a certain {@Code IcNumber}
@@ -18,10 +21,11 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": View the Patient with IcNumber\n" + "Parameters: IC_NUMBER\n" + "Example: " + COMMAND_WORD
-            + " t1234567j";
+            + " i/t1234567j";
 
     private final PatientWithIcNumberPredicate predicate;
     private final IcNumber icNumberToFind;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Creates a ViewCommand object to be executed
@@ -29,13 +33,17 @@ public class ViewCommand extends Command {
      * @param predicate      The predicate used to filter Patients
      * @param icNumberToFind The icNumber entered by user input to be find
      */
-    public ViewCommand(PatientWithIcNumberPredicate predicate, IcNumber icNumberToFind) {
+    public ViewCommand(PatientWithIcNumberPredicate predicate, IcNumber icNumberToFind)
+        throws PatientWithFieldNotFoundException {
+        if (icNumberToFind == null) {
+            throw new PatientWithFieldNotFoundException("Multiplicity violated. Each patient has 1 non-null IcNumber.");
+        }
         this.predicate = predicate;
         this.icNumberToFind = icNumberToFind;
     }
 
     /**
-     * Executes the {@Code executes ViewCommand} using the current model and reutrn {@Code CommandResult}
+     * Executes the {@Code executes ViewCommand} using the current model and return {@Code CommandResult}
      *
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult object
@@ -48,6 +56,7 @@ public class ViewCommand extends Command {
         if (model.getFilteredPatientList().size() == 0) { // no patient with that IC
             throw new PatientWithFieldNotFoundException("Ic Number : " + icNumberToFind.value);
         }
+        logger.info("ViewCommand : " + this + "\nsuccessfully executed");
         return new CommandResult(MESSAGE_PATIENT_LISTED_SUCCESS);
     }
 

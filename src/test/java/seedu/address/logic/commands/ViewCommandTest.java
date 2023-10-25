@@ -27,7 +27,7 @@ public class ViewCommandTest {
 
 
     @Test
-    public void equals() {
+    public void equals() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber1 = new IcNumber("t1234567a");
         IcNumber testIcNumber2 = new IcNumber("s7654321a");
 
@@ -55,7 +55,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void execute_icNumberOfExistingPatient_patientFound() {
+    public void execute_icNumberOfExistingPatient_patientFound() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber1 = new IcNumber("T0032415E");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber1);
         ViewCommand command = new ViewCommand(predicate, testIcNumber1);
@@ -64,7 +64,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void execute_icNumberOfNonExistingPatient_exceptionThrown() {
+    public void execute_icNumberOfNonExistingPatient_exceptionThrown() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber1 = new IcNumber("T1234567j");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber1);
         ViewCommand command = new ViewCommand(predicate, testIcNumber1);
@@ -81,7 +81,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void toStringMethod() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber1 = new IcNumber("T1234567j");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber1);
         ViewCommand viewCommand = new ViewCommand(predicate, testIcNumber1);
