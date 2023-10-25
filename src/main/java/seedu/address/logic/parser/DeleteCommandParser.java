@@ -25,6 +25,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, REQUIRED_PREFIXES);
         try {
             IcNumber icNumber = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
+            //IcNumber icNumber = ParserUtil.parseIcNumber(args);
             return new DeleteCommand(icNumber);
         } catch (ParseException pe) {
             throw new ParseException(
