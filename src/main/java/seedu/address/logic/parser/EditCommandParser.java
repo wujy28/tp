@@ -42,7 +42,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         IcNumber icNumber;
 
         try {
-            icNumber = ParserUtil.parseIcNumber(argMultimap.getPreamble());
+            icNumber = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
