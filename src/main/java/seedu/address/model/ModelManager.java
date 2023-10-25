@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -96,6 +98,15 @@ public class ModelManager implements Model {
     @Override
     public void deletePatient(Patient target) {
         addressBook.removePatient(target);
+    }
+
+    @Override
+    public Patient getPatient(IcNumber icNumber, List<Patient> patientList){
+        for (int i = 0; i < patientList.size(); i++) {
+            if(patientList.get(i).getIcNumber().equals(icNumber))
+                return patientList.get(i);
+        }
+        return null;
     }
 
     @Override

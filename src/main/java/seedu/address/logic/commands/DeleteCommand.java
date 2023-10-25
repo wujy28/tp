@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -25,10 +25,15 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
 
-    private final Index targetIndex;
+    /*private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+    }*/
+    private final IcNumber icNumber;
+
+    public DeleteCommand(IcNumber icNumber) {
+        this.icNumber = icNumber;
     }
 
     @Override
@@ -36,11 +41,11 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        /*if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
-        }
+        }*/
 
-        Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Patient patientToDelete = model.getPatient(icNumber, lastShownList);
         model.deletePatient(patientToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
     }
@@ -57,13 +62,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return icNumber.equals(otherDeleteCommand.icNumber);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("icNumber", icNumber)
                 .toString();
     }
 }
