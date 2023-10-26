@@ -15,11 +15,11 @@ over other modes of inputs.
 - [Quick-start](#quick-start)
 - [Features](#features)
     - [Viewing help : `help`](#viewing-help--help)
-    - [Listing all patients: `list`](#listing-all-patients--list)
-    - [Adding a patient: `add`](#adding-a-patient--add)
-    - [Deleting a patient: `delete`](#deleting-a-patient--delete)
-    - [Viewing a patient record : `view`](#viewing-a-patient-record--view)
-    - [Editing a patient record : `record`](#editing-a-patient-record--record)
+    - [Listing all patients: `list`](#listing-all-patients-list)
+    - [Adding a patient: `add`](#adding-a-patient-add)
+    - [Deleting a patient: `delete`](#deleting-a-patient-delete)
+    - [Viewing a patient record : `view`](#viewing-a-patient-record-view)
+    - [Editing a patient record : `record`](#editing-a-patient-record-record)
     - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department--assign)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
 - [FAQ](#faq)
@@ -74,12 +74,49 @@ Format: `list`
 
 ### Adding a patient: `add`
 
-Adds the specified patient into the system.
+Adds a patient
 
-Format: `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+Format: `add n/NAME i/IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+
++ Only `NAME` and `IC_NUMBER` fields are **compulsory**.
++ **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
++ The order of the input fields does not matter.
+
+Examples:
++ To add a Patient with `NAME` = John Doe, `IC_Number` = T0123456A, `GENDER` = Male, `BIRTHDAY` = 01/01/1990,
+
+`add n/John Doe i/T0123456A g/Male b/01/01/1990 `
+
+
+* To add a Patient with Name = Betsy Crowe, IC_Number = S0123456B, PHONE = 90909090, EMAIL = bc@gmail.com
+
+`add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com`
+
+
+### Viewing a patient : `view`
+
+Displays a specific patient’s information and medical record.
+
+Format: `view i/IC_NUMBER`
+
+* `IC_NUMBER` field is **compulsory**.
+* `IC_NUMBER` field is **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
+
+Examples:
+
++ To view patient with IC_Number = T0123456A
+
+`view i/T0201234A`
+
+
+### Editing a patient: `edit`
+
+Edits the attributes of a patient
+
+Format: `edit i/IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 + Only the `IC_NUMBER` field is compulsory.
-+ Input fields are case-insensitive e.g. `john doe` is the same as `JOHN DOE`.
++ **All** input fields are **case-insensitive** e.g. `john doe` is the same as `JOHN DOE`.
 + The order of the input fields does not matter.
 
 Examples:
@@ -87,13 +124,16 @@ Examples:
 * `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe p/87386298 a/20 g/Female b/02-02-2003 e/betsycrowe@example.com a/Brighton Town i/T6543210F`
 
+
+
+
 ### Deleting a patient: `delete`
 
 Deletes the patient with the specified IC number from the system.
 
 Format: `delete i/IC_NUMBER`
 
-+ Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
++ **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 + The order of the input fields does not matter.
 
 Examples:
@@ -101,17 +141,7 @@ Examples:
 + `delete i/T1234567A`
 + `delete i/T2468012a`
 
-### Viewing a patient record: `view`
 
-Shows the medical record of the patient with the specified IC number.
-
-Format: `view i/IC_NUMBER`
-
-* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
-
-Examples:
-
-* `view i/T0201234A`
 
 ### Editing a patient record: `record`
 
@@ -120,7 +150,7 @@ Edits the medical record of the patient with the specified IC number.
 Format: `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`
 
 * Only the `IC_NUMBER` field is compulsory.
-* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
+* **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 * The order of the input fields does not matter.
 
 Examples:
@@ -134,7 +164,7 @@ Assigns the patient to relevant doctor.
 Format: `assign i/IC_NUMBER d/DEPARTMENT`
 
 * All input fields are compulsory.
-* Inputs are case-insensitive e.g. `T1234567A` is the same as `t1234567a`.
+* **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 * `DEPARTMENT` must adhere to British spelling conventions.
 
 Examples:

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -16,8 +17,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Address;
@@ -37,13 +40,13 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     public static final Prefix[] RELEVANT_PREFIXES = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
         PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
-    public static final Prefix[] RELEVANT_PREFIXES_WITHOUT_TAG = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-        PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS};
-    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[]{PREFIX_NAME};
-
+    public static final Prefix[] RELEVANT_PREFIXES_WITHOUT_TAG = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL
+        , PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS};
+    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[]{PREFIX_NAME, PREFIX_IC_NUMBER};
     public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[]{PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
-        PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
+        PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Gets prefixes in argMultimap and returns a Prefix array containing all present prefixes
@@ -53,8 +56,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public static Prefix[] getPrefixesPresent(ArgumentMultimap argMultimap) {
         ArrayList<Prefix> prefixesPresent;
-        prefixesPresent = new ArrayList<>(List.copyOf(Arrays.asList(REQUIRED_PREFIXES))); // add required
-        // prefixes to prefixes present.
+        prefixesPresent = new ArrayList<>(List.copyOf(Arrays.asList(REQUIRED_PREFIXES)));
+        assert prefixesPresent.size() > 1;
 
         // go through other optional prefixes, check which contains value, add to list
         for (Prefix p : OPTIONAL_PREFIXES) {
@@ -73,14 +76,17 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @return Patient with the fields present in user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static Patient createPatientFromPrefixes(ArgumentMultimap argMultimap, Prefix[] prefixes)
-                throws ParseException {
+    public static Patient createPatient(ArgumentMultimap argMultimap, Prefix[] prefixes) throws ParseException {
+        assert prefixes.length > 1;
         // filling the fields with default values
+        for (Prefix r : REQUIRED_PREFIXES) {
+            assert argMultimap.getValue(r).isPresent();
+        }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = new Phone(Phone.getDefaultPhone());
         Email email = new Email(Email.getDefaultEmail());
         Gender gender = new Gender(Gender.getDefaultGender());
-        IcNumber icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
+        IcNumber icNumber = new IcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
         Birthday birthday = new Birthday(Birthday.getDefaultBirthday());
         Address address = new Address(Address.getDefaultAddress());
         Set<Tag> tagList = new HashSet<>();
@@ -93,50 +99,49 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Replaces Patient fields with actual value if it is present in argMultimap
      *
-     * @param name        Name of patient
-     * @param phone       Phone number of patient
-     * @param email       Email of patient
-     * @param gender      Gender of Patient
-     * @param icNumber    IcNumber of Patient
-     * @param birthday    Birthday of Patient
-     * @param address     Address of Patient
-     * @param tags        Tags of Patient
+     * @param n           Name of patient
+     * @param p           Phone number of patient
+     * @param e           Email of patient
+     * @param g           Gender of Patient
+     * @param i           IcNumber of Patient
+     * @param b           Birthday of Patient
+     * @param a           Address of Patient
+     * @param t           Tags of Patient
      * @param argMultimap Contains mapping of key which is prefix and value which is argument value
      * @param prefixes    List of prefixes present in argument
      * @return Patient with the fields present in user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static Patient createPatientFromPresentPrefixes(Name name, Phone phone, Email email, Gender gender,
-                                                           IcNumber icNumber, Birthday birthday, Address address,
-                                                           Set<Tag> tags, ArgumentMultimap argMultimap,
+    public static Patient createPatientFromPresentPrefixes(Name n, Phone p, Email e, Gender g, IcNumber i, Birthday b,
+                                                           Address a, Set<Tag> t, ArgumentMultimap argMultimap,
                                                            Prefix[] prefixes) throws ParseException {
-        for (Prefix p : prefixes) {
-            switch (p.getPrefix()) {
+        for (Prefix pf : prefixes) {
+            switch (pf.getPrefix()) {
             case "p/":
-                phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+                p = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
                 break;
             case "e/":
-                email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+                e = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
                 break;
             case "a/":
-                address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+                a = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
                 break;
             case "t/":
-                tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+                t = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
                 break;
             case "g/":
-                gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+                g = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
                 break;
             case "b/":
-                birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get());
+                b = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get());
                 break;
             case "i/":
-                icNumber = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
+                i = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
                 break;
             default:
             }
         }
-        return new Patient(name, phone, email, gender, icNumber, birthday, address, tags);
+        return new Patient(n, p, e, g, i, b, a, t);
     }
 
     /**
@@ -146,6 +151,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, RELEVANT_PREFIXES);
 
         // check if any prefixes present
@@ -158,9 +164,14 @@ public class AddCommandParser implements Parser<AddCommand> {
                 String.format(MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT, Arrays.toString(REQUIRED_PREFIXES)));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES_WITHOUT_TAG);
+        for (Prefix r : REQUIRED_PREFIXES) {
+            assert argMultimap.getValue(r).isPresent();
+        }
         Prefix[] prefixesPresent = getPrefixesPresent(argMultimap);
+        assert prefixesPresent.length > 1;
 
-        Patient patient = createPatientFromPrefixes(argMultimap, prefixesPresent);
+        Patient patient = createPatient(argMultimap, prefixesPresent);
+        logger.info("AddCommand object with Patient : " + patient + "\ncreated.");
         return new AddCommand(patient);
     }
 

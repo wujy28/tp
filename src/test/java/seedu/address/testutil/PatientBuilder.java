@@ -139,6 +139,22 @@ public class PatientBuilder {
     }
 
     /**
+     * Takes a PatientBuilder and initialize all fields with the default value
+     *
+     * @return PatientBuilder with default fields
+     */
+    public PatientBuilder withDefaultValues() {
+        phone = new Phone(Phone.getDefaultPhone());
+        email = new Email(Email.getDefaultEmail());
+        gender = new Gender(Gender.getDefaultGender());
+        icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
+        birthday = new Birthday(Birthday.getDefaultBirthday());
+        address = new Address(Address.getDefaultAddress());
+        tags = new HashSet<>();
+        return this;
+    }
+
+    /**
      * Sets the {@code AssignedDepartment} of the {@code Patient} that we are building.
      */
     public PatientBuilder withAssignedDepartment(String department) {

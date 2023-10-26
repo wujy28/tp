@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPatients.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.PatientBuilder;
 
@@ -115,6 +117,11 @@ public class AddCommandTest {
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Patient getPatient(IcNumber icNumber, List<Patient> patientList) {
             throw new AssertionError("This method should not be called.");
         }
 

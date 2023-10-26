@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -23,6 +25,15 @@ public interface Model {
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    Patient getPatient(IcNumber icNumber, List<Patient> patientList);
+    /*public Patient getPatient(IcNumber icNumber, List<Patient> patientList){
+        for (int i = 0; i < patientList.size(); i++) {
+            if(patientList.get(i).getIcNumber().equals(icNumber))
+                return patientList.get(i);
+        }
+        return null;
+    }*/
 
     /**
      * Returns the user prefs' GUI settings.

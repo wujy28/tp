@@ -187,6 +187,8 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -196,6 +198,57 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### View patient feature
+
+#### Implementation
+
+The view patient operation is facilitated by `ViewCommandParser`. `ViewCommandParser` parses the user input string
+and creates the `ViewCommand` to be executed by the `LogicManager`. `ViewCommand` extends `Command` and implements the
+`Command#execute` method.
+
+Given below is an example usage scenario and how the view patient operation is handled in A&E.
+
+Step 1. Assuming the application has been launched, the user enters `view i/t1234567j`, which is to find
+the specific patient with `IcNumber = t1234567j`. This invokes `LogicManager#execute` to execute the logic of the
+command.
+
+Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
+command word `view` and the argument `i/t1234567j`. After splitting, `AddressBookParser#parseCommand` would identify
+that the command is `View` and instantiate `ViewCommandParser` and call its `ViewCommandParser#parse` to parse the
+argument
+accordingly.
+
+Step 3. `ViewCommandParser#parse` would first map the `IcNumber` prefix to its argument, `t1234567j`
+using `ArgumentMultimap`.
+The `ArgumentMultimap` would then be passed to `checkIcNumberPrefixPresent` to check that the `IcNumber` prefix
+is present. If `checkIcNumberPrefixPresent` returns `false`, `ParseException` is thrown.
+
+Step 4. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
+then passed as an argument along with `IcNumber` to instantiate the `ViewCommand`, which is then returned by
+`ViewCommandParser#parse`
+
+Step 5. `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
+`PatientWithIcNumberPredicate` as an argument. It then returns a `CommandResult` stating the patient
+has been listed. `PatientWithFieldNotFoundException` is thrown if no patient found.
+
+#### Design considerations:
+
+**Aspect: How to display the specified patient:**
+
+* **Alternative 1 (current choice):** Utilize current filteredPatientList display to
+  display the patient.
+    * Pros: Easy to implement.
+    * Cons: Similar way in displaying of patient(s) may lead to confusion between commands.
+
+
+* **Alternative 2:** Create a new set of JavaFx controls to display that patient differently
+  from the current filteredPatientList display.
+    * Pros: New display can be customisable for users' needs.
+      Cons: New display have to be implemented correctly to integrate with
+      existing displays.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -377,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Advanced&Efficient`application and the **Actor** is the `ED doctor`, 
+(For all use cases below, the **System** is the `Advanced&Efficient`application and the **Actor** is the `ED doctor`,
 unless specified otherwise)
 
 **Use case: UC01 - Add a patient**
