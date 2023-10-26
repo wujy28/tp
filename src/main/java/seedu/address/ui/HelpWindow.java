@@ -2,12 +2,16 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -27,6 +31,12 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private HBox customTitleBar; // New addition for the custom title bar
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -34,7 +44,22 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        root.initStyle(StageStyle.UNDECORATED);
         helpMessage.setText(HELP_MESSAGE);
+
+        // New additions for dragging functionality:
+        customTitleBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        customTitleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) customTitleBar.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+
+
     }
 
     /**
@@ -68,30 +93,18 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().centerOnScreen();
     }
 
-    /**
-     * Returns true if the help window is currently being shown.
-     */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
-    /**
-     * Hides the help window.
-     */
     public void hide() {
         getRoot().hide();
     }
 
-    /**
-     * Focuses on the help window.
-     */
     public void focus() {
         getRoot().requestFocus();
     }
 
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
     @FXML
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
@@ -99,4 +112,25 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
+
+    @FXML
+    private void closeWindow(ActionEvent event) {
+        // Get the source of the click event (the button) and its current stage
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+
+        // Close the stage
+        stage.close();
+    }
+
+    @FXML
+    private void minimizeWindow(ActionEvent event) {
+        // Get the source of the click event (the button) and its current stage
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+
+        // Minimize the stage
+        stage.setIconified(true);
+    }
+
 }
