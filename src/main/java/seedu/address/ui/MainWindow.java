@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -179,7 +180,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText)
+            throws CommandException, ParseException, PatientWithFieldNotFoundException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -194,6 +196,10 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
+        } catch (PatientWithFieldNotFoundException e) {
+            logger.info("User-specified field not found in any patients");
+            resultDisplay.setFeedbackToUser(e.getMessage());;
+            throw e;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());

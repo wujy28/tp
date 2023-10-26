@@ -138,6 +138,11 @@ public class PatientBuilder {
         return this;
     }
 
+    /**
+     * Takes a PatientBuilder and initialize all fields with the default value
+     *
+     * @return PatientBuilder with default fields
+     */
     public PatientBuilder withDefaultValues() {
         phone = new Phone(Phone.getDefaultPhone());
         email = new Email(Email.getDefaultEmail());
