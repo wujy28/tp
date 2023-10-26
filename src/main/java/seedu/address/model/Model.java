@@ -27,13 +27,9 @@ public interface Model {
     ReadOnlyUserPrefs getUserPrefs();
 
     Patient getPatient(IcNumber icNumber, List<Patient> patientList);
-    /*public Patient getPatient(IcNumber icNumber, List<Patient> patientList){
-        for (int i = 0; i < patientList.size(); i++) {
-            if(patientList.get(i).getIcNumber().equals(icNumber))
-                return patientList.get(i);
-        }
-        return null;
-    }*/
+
+
+    ObservableList<Patient> getCurrentPatientList();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -101,13 +101,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Patient getPatient(IcNumber icNumber, List<Patient> patientList){
+    public Patient getPatient(IcNumber icNumber, List<Patient> patientList) {
         for (int i = 0; i < patientList.size(); i++) {
-            if(patientList.get(i).getIcNumber().equals(icNumber))
+            if (patientList.get(i).getIcNumber().equals(icNumber)) {
                 return patientList.get(i);
+            }
         }
         return null;
     }
+
 
     @Override
     public void addPatient(Patient patient) {
@@ -121,6 +123,16 @@ public class ModelManager implements Model {
 
         addressBook.setPatient(target, editedPatient);
     }
+
+    /**
+     * Returns the current list of {@code Patient} in the address book
+     *
+     * @return Current list of {@code Patient} in the address book
+     */
+    public ObservableList<Patient> getCurrentPatientList() {
+        return addressBook.getCurrentPatientList();
+    }
+
 
     //=========== Filtered Patient List Accessors =============================================================
 
@@ -151,9 +163,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPatients.equals(otherModelManager.filteredPatients);
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 
 }
