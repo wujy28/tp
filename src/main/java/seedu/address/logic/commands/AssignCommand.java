@@ -27,7 +27,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Assigns a patient to a hospital department
  */
-public class AssignCommand extends Command{
+public class AssignCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 

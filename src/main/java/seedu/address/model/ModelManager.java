@@ -101,10 +101,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Patient getPatient(IcNumber icNumber, List<Patient> patientList){
+    public Patient getPatient(IcNumber icNumber, List<Patient> patientList) {
         for (int i = 0; i < patientList.size(); i++) {
-            if(patientList.get(i).getIcNumber().equals(icNumber))
+            if (patientList.get(i).getIcNumber().equals(icNumber)) {
                 return patientList.get(i);
+            }
         }
         return null;
     }

@@ -16,7 +16,7 @@ import seedu.address.model.patient.IcNumber;
 /**
  * Parses input arguments and creates a new AssignCommand object
  */
-public class AssignCommandParser implements Parser<AssignCommand>{
+public class AssignCommandParser implements Parser<AssignCommand> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
