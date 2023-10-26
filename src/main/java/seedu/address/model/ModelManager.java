@@ -15,6 +15,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 
+import javax.swing.*;
+
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -102,9 +104,9 @@ public class ModelManager implements Model {
 
     @Override
     public Patient getPatient(IcNumber icNumber, List<Patient> patientList) {
-        for (int i = 0; i < patientList.size(); i++) {
-            if (patientList.get(i).getIcNumber().equals(icNumber)) {
-                return patientList.get(i);
+        for (Patient patient : patientList) {
+            if (patient.getIcNumber().equals(icNumber)) {
+                return patient;
             }
         }
         return null;
@@ -123,6 +125,24 @@ public class ModelManager implements Model {
 
         addressBook.setPatient(target, editedPatient);
     }
+
+    /**
+     * Returns true if a {@Code Patient} with that {@Code IcNumber} is present
+     *
+     * @param icNumber IcNumber to be checked
+     * @return true Patient with that IcNumber is present
+     */
+    @Override
+    public boolean isPatientWithIcNumberPresent(IcNumber icNumber) {
+        List<Patient> currentPatientList = getCurrentPatientList();
+        for (Patient patient : currentPatientList) {
+            if (patient.getIcNumber().equals(icNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Returns the current list of {@code Patient} in the address book

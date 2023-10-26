@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -86,6 +87,13 @@ public class ModelManagerTest {
     public void hasPatient_patientInAddressBook_returnsTrue() {
         modelManager.addPatient(ALICE);
         assertTrue(modelManager.hasPatient(ALICE));
+    }
+
+    @Test
+    public void isPatientWithIcNumberPresent_patientWithIcNumberPresent_returnsTrue() {
+        modelManager.addPatient(ALICE);
+        IcNumber testIcNumber = new IcNumber("T0032415E");
+        assertTrue(modelManager.isPatientWithIcNumberPresent(testIcNumber));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_REQUIRED_COMMAND_NOT_FOUND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -14,9 +15,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 /**
@@ -37,6 +40,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";
+    public static final String MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST =
+        "The patient with that IC Number " + "already exists in the address book";
 
     private final Patient toAdd;
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -56,7 +61,9 @@ public class AddCommand extends Command {
         if (model.hasPatient(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
-
+        if (model.isPatientWithIcNumberPresent(toAdd.getIcNumber())) {
+            throw new CommandException(MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST);
+        }
         model.addPatient(toAdd);
         logger.info("AddCommand : " + this + "\nsuccessfully executed");
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
