@@ -3,34 +3,36 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
+import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIC;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.BENSON;
 import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
+
+import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PATIENT);
+    public void execute_validICUnfilteredList_success() {
+        List<Patient> lastShownList = model.getFilteredPatientList();
+        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
+        DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
                 Messages.format(patientToDelete));
@@ -42,19 +44,19 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        public void execute_invalidICList_throwsIllegalArgumentException() {
+        showPatientAtIC(model, ALICE.getIcNumber());
+        String invalidIC = "";
+        assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
+        //Hence DeleteCommand cannot be executed because of illegal argument exception in IC
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
-
-        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PATIENT);
+    public void execute_validICFilteredList_success() {
+        showPatientAtIC(model, new IcNumber("T0032415E"));
+        List<Patient> lastShownList = model.getFilteredPatientList();
+        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
+        DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
                 Messages.format(patientToDelete));
@@ -67,28 +69,15 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
-
-        Index outOfBoundIndex = INDEX_SECOND_PATIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPatientList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
-    }
-
-    @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PATIENT);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PATIENT);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(ALICE.getIcNumber());
+        DeleteCommand deleteSecondCommand = new DeleteCommand(BENSON.getIcNumber());
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PATIENT);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(new IcNumber("T0032415E"));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -103,9 +92,9 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        IcNumber targetIc = new IcNumber("T0032415E");
+        DeleteCommand deleteCommand = new DeleteCommand(targetIc);
+        String expected = DeleteCommand.class.getCanonicalName() + "{icNumber=" + targetIc + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 

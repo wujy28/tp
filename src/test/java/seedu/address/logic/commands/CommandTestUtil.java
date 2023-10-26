@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPatients.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
@@ -158,6 +160,14 @@ public class CommandTestUtil {
         final String[] splitName = patient.getName().fullName.split("\\s+");
         model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
+        assertEquals(1, model.getFilteredPatientList().size());
+    }
+
+    public static void showPatientAtIC(Model model, IcNumber icNumber) {
+        List<Patient> lastShownList = model.getFilteredPatientList();
+        Patient patient = model.getPatient(icNumber, lastShownList);
+        final String[] splitName = patient.getName().fullName.split("\\s+");
+        model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
         assertEquals(1, model.getFilteredPatientList().size());
     }
 

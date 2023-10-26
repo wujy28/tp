@@ -63,6 +63,9 @@ public class EditPatientDescriptorTest {
         String expected = EditCommand.EditPatientDescriptor.class.getCanonicalName() + "{name="
                 + editPatientDescriptor.getName().orElse(null) + ", phone="
                 + editPatientDescriptor.getPhone().orElse(null) + ", email="
+                + editPatientDescriptor.getGender().orElse(null) + ", gender="
+                + editPatientDescriptor.getIcNumber().orElse(null) + ", icNumber="
+                + editPatientDescriptor.getBirthday().orElse(null) + ", birthday="
                 + editPatientDescriptor.getEmail().orElse(null) + ", address="
                 + editPatientDescriptor.getAddress().orElse(null) + ", tags="
                 + editPatientDescriptor.getTags().orElse(null) + "}";
