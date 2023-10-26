@@ -189,4 +189,34 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String initialObservations}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseInitialObservations(String initialObservations) {
+        requireNonNull(initialObservations);
+        String trimmedInitialObservations = initialObservations.trim();
+        return trimmedInitialObservations;
+    }
+
+    /**
+     * Parses a {@code String diagnosis}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDiagnosis(String diagnosis) {
+        requireNonNull(diagnosis);
+        String trimmedDiagnosis = diagnosis.trim();
+        return trimmedDiagnosis;
+    }
+
+    /**
+     * Parses a {@code String treatmentPlan}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseTreatmentPlan(String treatmentPlan) {
+        requireNonNull(treatmentPlan);
+        String trimmedTreatmentPlan = treatmentPlan.trim();
+        return trimmedTreatmentPlan;
+    }
 }

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Record;
 
 /**
  * Container for user visible messages.
@@ -59,6 +60,21 @@ public class Messages {
                 .append(patient.getAssignedDepartment())
                 .append("; Tags: ");
         patient.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code record} for display to the user.
+     */
+    public static String formatRecord(Patient patient, Record record) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(patient.getIcNumber())
+                .append("; Initial Observations: ")
+                .append(record.getInitialObservations())
+                .append("; Diagnosis: ")
+                .append(record.getDiagnosis())
+                .append("; Treatment Plan: ")
+                .append(record.getTreatmentPlan());
         return builder.toString();
     }
 
