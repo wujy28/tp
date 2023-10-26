@@ -250,6 +250,44 @@ has been listed. `PatientWithFieldNotFoundException` is thrown if no patient fou
       Cons: New display have to be implemented correctly to integrate with
       existing displays.
 
+### Assign department feature
+
+#### AssignedDepartment attribute
+
+The `AssignedDepartment` attribute of a patient in A&E is represented by a stored `Department` value. `Department` is
+an enumeration that encapsulates all the predefined hospital department values stored by the system and available 
+to the user. The list of valid departments can be found in the appendix of the User Guide.
+
+#### Design considerations:
+
+**Aspect: How to represent a department in the system:**
+
+* **Alternative 1 (current choice):** Use Java Enumerations.
+    * Pros: Ensures type safety. Discrete constants allow for usage in switch-cases, and thus can potentially be used 
+  to easily categorize patients in future features. 
+    * Cons: Does not support user-defined categories or departments.
+
+* **Alternative 2:** Using an abstract Department class and inheritance.
+    * Pros: Can be made to support user-defined departments. Can specify different behavior for different
+  types of departments.
+    * Cons: Implementation is more complicated when it comes to storing and keeping track of all the different 
+  subclasses or valid department values.
+
+* **Alternative 3:** Using Strings.
+    * Pros: Very easy to implement.
+    * Cons: Values are not exhaustive. Does not support unique behavior for each type of department.
+
+#### Implementation of `assign`
+
+The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar 
+to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform 
+its intended behavior, invoked by the `LogicManager` class. `AssignCommandParser` is responsible for parsing the
+string of arguments inputted by the user, to create an `AssignCommand` object.
+
+The following sequence diagram summarizes what happens when `AssignCommand#execute` is invoked.
+
+_{Sequence diagram to be added}_
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
