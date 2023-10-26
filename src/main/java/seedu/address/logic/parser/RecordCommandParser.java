@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INITIAL_OBSERVATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TREATMENT_PLAN;
+
 import seedu.address.logic.commands.RecordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.IcNumber;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INITIAL_OBSERVATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TREATMENT_PLAN;
 
 /**
  * Parses input arguments and creates a new RecordCommand object

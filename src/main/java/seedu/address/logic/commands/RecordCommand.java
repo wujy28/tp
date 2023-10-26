@@ -1,28 +1,30 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.IcNumber;
-import seedu.address.model.patient.Record;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INITIAL_OBSERVATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TREATMENT_PLAN;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INITIAL_OBSERVATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TREATMENT_PLAN;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Record;
 
-
+/**
+ * Edits the Patient Record with a certain {@Code IcNumber}
+ */
 public class RecordCommand extends Command {
     public static final String COMMAND_WORD = "record";
 
@@ -78,7 +80,8 @@ public class RecordCommand extends Command {
      * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
      * edited with {@code editPatientDescriptor}.
      */
-    private static void createEditedRecord(Record recordToEdit, RecordCommand.EditRecordDescriptor editRecordDescriptor) {
+    private static void createEditedRecord(Record recordToEdit, RecordCommand.EditRecordDescriptor
+            editRecordDescriptor) {
         assert recordToEdit != null;
 
         String updatedInitialObservations = editRecordDescriptor.getInitialObservations().orElse(
