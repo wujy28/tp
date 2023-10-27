@@ -174,7 +174,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatientFromPresentPrefixes_onlyRequiredFieldsPresent_correctPatientCreated()
-        throws ParseException {
+            throws ParseException {
         // expectedPatient only have Name field, others default value
         Patient expectedPatient = new PatientBuilder(AMY).withDefaultValues().withName(VALID_NAME_AMY)
             .withIcNumber(VALID_IC_NUMBER_AMY).build();
@@ -194,7 +194,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatientFromPresentPrefixes_someOptionalFieldsPresent_correctPatientCreated()
-        throws ParseException {
+            throws ParseException {
         // expectedPatient only have Name field and Phone fields
         Patient expectedPatient = new PatientBuilder(AMY).withDefaultValues().withName(VALID_NAME_AMY)
             .withIcNumber(VALID_IC_NUMBER_AMY).withPhone(VALID_PHONE_AMY).build();

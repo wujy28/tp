@@ -12,6 +12,9 @@ import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 public class PatientWithIcNumberPredicate implements Predicate<Patient> {
     private final IcNumber icNumber;
 
+    /**
+     * Constructs a {@code PatientWithIcNumberPredicate}.
+     */
     public PatientWithIcNumberPredicate(IcNumber icNumber) throws PatientWithFieldNotFoundException {
         if (icNumber == null) {
             throw new PatientWithFieldNotFoundException("Multiplicity violated. Each patient has 1 non-null IcNumber.");
