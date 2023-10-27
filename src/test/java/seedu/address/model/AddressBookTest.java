@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Record;
 import seedu.address.model.patient.exceptions.DuplicatePatientException;
 import seedu.address.testutil.PatientBuilder;
 
@@ -49,7 +50,8 @@ public class AddressBookTest {
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPatients);
+        List<Record> newRecords = Arrays.asList(new Record());
+        AddressBookStub newData = new AddressBookStub(newPatients, newRecords);
 
         assertThrows(DuplicatePatientException.class, () -> addressBook.resetData(newData));
     }
@@ -94,14 +96,21 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
+        private final ObservableList<Record> records = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Patient> patients) {
+        AddressBookStub(Collection<Patient> patients, Collection<Record> records) {
             this.patients.setAll(patients);
+            this.records.setAll(records);
         }
 
         @Override
         public ObservableList<Patient> getPatientList() {
             return patients;
+        }
+
+        @Override
+        public ObservableList<Record> getRecordList() {
+            return records;
         }
     }
 
