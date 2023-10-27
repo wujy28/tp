@@ -1,0 +1,43 @@
+/*!* MainWindow.css *!*/
+
+/*#minimizeButton, #maximizeButton, #closeButton {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-text-fill: #B9CCFF;*/
+/*    -fx-border-color: transparent;*/
+/*    -fx-padding: 5px;*/
+/*}*/
+
+/*#minimizeButton:hover, #maximizeButton:hover, #closeButton:hover {*/
+/*    -fx-background-color: #888888;*/
+/*}*/
+
+#menuBar {
+    -fx-background-color: #3C4EEF;
+    -fx-text-fill: #B9CCFF
+;
+}
+
+#minimizeButton, #maximizeButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+/*#maximizeButton, #minimizeButton:hover {*/
+/*    -fx-background-color: rgba(128, 128, 128, 0.34);*/
+/*}*/
+
+#closeButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+#closeButton:hover {
+    -fx-background-color: #FF5555; /* Red when hovered */
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
