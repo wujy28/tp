@@ -17,7 +17,8 @@ over other modes of inputs.
     - [Viewing help : `help`](#viewing-help--help)
     - [Listing all patients: `list`](#listing-all-patients-list)
     - [Adding a patient: `add`](#adding-a-patient-add)
-    - [Deleting a patient: `delete`](#deleting-a-patient-delete)
+    - [Deleting a patient: `delete`](#deleting-a-patient-edit)
+    - [Editing a patient: `edit`](#editing-a-patient-delete)
     - [Viewing a patient record : `view`](#viewing-a-patient-record-view)
     - [Editing a patient record : `record`](#editing-a-patient-record-record)
     - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department--assign)
@@ -113,7 +114,7 @@ Examples:
 
 Edits the attributes of a patient
 
-Format: `edit i/IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+Format: `edit IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 + Only the `IC_NUMBER` field is compulsory.
 + **All** input fields are **case-insensitive** e.g. `john doe` is the same as `JOHN DOE`.
@@ -121,8 +122,8 @@ Format: `edit i/IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 Examples:
 
-* `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe p/87386298 a/20 g/Female b/02-02-2003 e/betsycrowe@example.com a/Brighton Town i/T6543210F`
+* `edit T0123456A n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `edit T6543210F n/Betsy Crowe p/87386298 a/20 g/Female b/02-02-2003 e/betsycrowe@example.com a/Brighton Town i/T6543210F`
 
 
 
@@ -214,13 +215,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`               |
-| **Delete** | `delete i/IC_NUMBER`<br> e.g., `delete i/T2468012A`                                                                                                                                                                             |
-| **View**   | `view i/IC_NUMBER`<br> e.g., `view i/T0201234A`                                                                                                                                                                                 |
-| **Record** | `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`<br> e.g.,`record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes` |
-| **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                   |
-| **List**   | `list`                                                                                                                                                                                                                          |
-| **Help**   | `help`                                                                                                                                                                                                                          |
-| **Exit**   | `exit`                                                                                                                                                                                                                          |
+| Action      | Format, Examples                                                                                                                                                                                                                |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`               |
+| **Delete**  | `delete i/IC_NUMBER`<br> e.g., `delete i/T2468012A`                                                                                                                                                                             |
+| **Edit**    | `edit IC_NUMBER`<br> e.g., `edit T2468012A n/John Doe a/34`                                                                                                                                                                     |
+| **View**    | `view i/IC_NUMBER`<br> e.g., `view i/T0201234A`                                                                                                                                                                                 |
+| **Record**  | `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`<br> e.g.,`record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes` |
+| **Assign**  | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                   |
+| **List**    | `list`                                                                                                                                                                                                                          |
+| **Help**    | `help`                                                                                                                                                                                                                          |
+| **Exit**    | `exit`                                                                                                                                                                                                                          |

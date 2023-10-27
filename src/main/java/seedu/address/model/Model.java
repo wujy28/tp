@@ -26,14 +26,21 @@ public interface Model {
      */
     ReadOnlyUserPrefs getUserPrefs();
 
+    /**
+     * Returns the patient with the IcNumber from patientList
+     */
     Patient getPatient(IcNumber icNumber, List<Patient> patientList);
-    /*public Patient getPatient(IcNumber icNumber, List<Patient> patientList){
-        for (int i = 0; i < patientList.size(); i++) {
-            if(patientList.get(i).getIcNumber().equals(icNumber))
-                return patientList.get(i);
-        }
-        return null;
-    }*/
+
+    /**
+     * Returns the currentPatientList
+     */
+    ObservableList<Patient> getCurrentPatientList();
+
+    /**
+     * Returns true if a patient with that IcNumber is present
+     */
+
+    boolean isPatientWithIcNumberPresent(IcNumber icNumber);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -73,6 +80,7 @@ public interface Model {
      * The patient must exist in the address book.
      */
     void deletePatient(Patient target);
+
 
     /**
      * Adds the given patient.

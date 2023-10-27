@@ -25,6 +25,7 @@ import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
+import seedu.address.testutil.EditRecordDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -90,6 +91,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPatientDescriptor DESC_AMY;
     public static final EditCommand.EditPatientDescriptor DESC_BOB;
 
+    public static final RecordCommand.EditRecordDescriptor REC_AMY;
+    public static final RecordCommand.EditRecordDescriptor REC_BOB;
+
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withGender(VALID_GENDER_AMY).withIcNumber(VALID_IC_NUMBER_AMY)
@@ -98,6 +102,10 @@ public class CommandTestUtil {
             .withEmail(VALID_EMAIL_BOB).withGender(VALID_GENDER_BOB).withIcNumber(VALID_IC_NUMBER_BOB)
             .withBirthday(VALID_BIRTHDAY_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        REC_AMY = new EditRecordDescriptorBuilder().withInitialObservations("Broken Arm")
+                .withDiagnosis("Hairline fracture").withTreatmentPlan("Cast for 2 days").build();
+        REC_BOB = new EditRecordDescriptorBuilder().withInitialObservations("Shortness of breath and chest tightness")
+                .withDiagnosis("Asthma").withTreatmentPlan("Rest").build();
     }
 
     public static String getUserInputForBob() {

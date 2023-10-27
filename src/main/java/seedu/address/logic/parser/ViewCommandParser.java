@@ -13,7 +13,6 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
-
 /**
  * Parses input arguments and creates a new ViewCommand object
  */
