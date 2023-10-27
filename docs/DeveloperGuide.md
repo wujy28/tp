@@ -271,7 +271,7 @@ to the user. The list of valid departments can be found in the appendix of the U
     * Pros: Can be made to support user-defined departments. Can specify different behavior for different
   types of departments.
     * Cons: Implementation is more complicated when it comes to storing and keeping track of all the different 
-  subclasses or valid department values.
+  subclasses or limiting valid department values.
 
 * **Alternative 3:** Using Strings.
     * Pros: Very easy to implement.
@@ -282,11 +282,11 @@ to the user. The list of valid departments can be found in the appendix of the U
 The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar 
 to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform 
 its intended behavior, invoked by the `LogicManager` class. `AssignCommandParser` is responsible for parsing the
-string of arguments inputted by the user, to create an `AssignCommand` object.
+string of arguments containing an IC number and department inputted by the user, to create an `AssignCommand` object.
 
 The following sequence diagram summarizes what happens when `AssignCommand#execute` is invoked.
 
-_{Sequence diagram to be added}_
+<puml src="diagrams/AssignSequenceDiagram.puml" alt="AssignSequenceDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 
