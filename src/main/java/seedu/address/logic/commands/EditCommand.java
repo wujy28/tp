@@ -77,9 +77,9 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Patient> currentPatientList = model.getCurrentPatientList();
 
-        Patient patientToEdit = model.getPatient(icNumber, lastShownList);
+        Patient patientToEdit = model.getPatient(icNumber, currentPatientList);
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {

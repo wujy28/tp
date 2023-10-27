@@ -23,8 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         patients = new UniquePatientList();
     }
 
@@ -107,6 +106,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Patient> getPatientList() {
         return patients.asUnmodifiableObservableList();
     }
+
+    public ObservableList<Patient> getCurrentPatientList() {
+        return patients.getCurrentPatientList();
+    }
+
 
     @Override
     public boolean equals(Object other) {
