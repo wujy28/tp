@@ -250,6 +250,43 @@ has been listed. `PatientWithFieldNotFoundException` is thrown if no patient fou
       Cons: New display have to be implemented correctly to integrate with
       existing displays.
 
+### Edit Record feature
+
+#### Implementation
+
+The edit record operation is facilitated by `RecordCommandParser`. `RecordCommandParser` parses the user input string
+and creates the `RecordCommand` to be executed by the `LogicManager`. `RecordCommand` extends `Command` and implements the
+`Command#execute` method.
+
+Given below is an example usage scenario and how the edit record operation is handled in A&E.
+
+Step 1. Assuming the application has been launched, the user enters `record i/T0201234A o/Broken Arm di/Hairline fracture 
+tp/Cast for 2 days`, which is to edit the record of the specific patient with `IcNumber = T0201234A` such that `Initial 
+Observation = Broken Arm`, `Diagnosis = Hairline fracture`, and `Treatment Plan = Cast for 2 days`. This invokes 
+`LogicManager#execute` to execute the logic of the command.
+
+Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the command word 
+`record` and the arguments `i/T0201234A`, `o/Broken Arm`, `di/Hairline fracture`, and `tp/Cast for 2 days`. After 
+splitting, `AddressBookParser#parseCommand` would identify that the command is `Record` and instantiate 
+`RecordCommandParser` and call its `RecordCommandParser#parse` to parse the arguments accordingly.
+
+Step 3. `RecordCommandParser#parse` would first map the `IcNumber` prefix to its argument, `T0201234A`, the 
+`initialObservations` prefix to its argument `Broken Arm`, the `diagnosis` prefix to its argument `Hairline fracture`,
+and the `treatmentPlan` prefix to its argument `Cast for 2 days` using `ArgumentMultimap`.
+The `ArgumentMultimap` would then be used to identify the `IcNumber` and a `ParseException` is thrown if command inputs 
+are invalid. The `ArgumentMultimap` also invokes `ArgumentMultimap#isPresent` to check if the other prefixes for `Initial
+Observation`, `Diagnosis` and `Treatment Plan` are present. If `true` is returned, the arguments will be parsed into a
+`EditRecordDescriptor` object.
+
+Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the fields 
+of Record has been edited, and throws a `ParseException` if returned `false`. It is then passed as an argument along with 
+`IcNumber` to instantiate the `RecordCommand`, which is then returned by `RecordCommandParser#parse`
+
+Step 5. `LogicManager#execute` now invokes `RecordCommand#execute` which gets the specified Patient according to the IcNumber.
+Then, `RecordCommand#createEditedRecord` is called with the specified Patient's `Record` and the `EditRecordDescriptor` object
+which contains the fields to be edited. It then returns a `RecordResult` stating the patient IcNumber and edited Record. 
+`PatientWithFieldNotFoundException` is thrown if no patient found.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
