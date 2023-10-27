@@ -83,7 +83,7 @@ in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
+e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `RecordPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
 
@@ -98,7 +98,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` or `Record` object residing in the `Model`.
 
 ### Logic component
 
@@ -286,6 +286,44 @@ Step 5. `LogicManager#execute` now invokes `RecordCommand#execute` which gets th
 Then, `RecordCommand#createEditedRecord` is called with the specified Patient's `Record` and the `EditRecordDescriptor` object
 which contains the fields to be edited. It then returns a `RecordResult` stating the patient IcNumber and edited Record. 
 `PatientWithFieldNotFoundException` is thrown if no patient found.
+
+### Assign department feature
+
+#### AssignedDepartment attribute
+
+The `AssignedDepartment` attribute of a patient in A&E is represented by a stored `Department` value. `Department` is
+an enumeration that encapsulates all the predefined hospital department values stored by the system and available 
+to the user. The list of valid departments can be found in the appendix of the User Guide.
+
+#### Design considerations:
+
+**Aspect: How to represent a department in the system:**
+
+* **Alternative 1 (current choice):** Use Java Enumerations.
+    * Pros: Ensures type safety. Discrete constants allow for usage in switch-cases, and thus can potentially be used 
+  to easily categorize patients in future features. 
+    * Cons: Does not support user-defined categories or departments.
+
+* **Alternative 2:** Using an abstract Department class and inheritance.
+    * Pros: Can be made to support user-defined departments. Can specify different behavior for different
+  types of departments.
+    * Cons: Implementation is more complicated when it comes to storing and keeping track of all the different 
+  subclasses or limiting valid department values.
+
+* **Alternative 3:** Using Strings.
+    * Pros: Very easy to implement.
+    * Cons: Values are not exhaustive. Does not support unique behavior for each type of department.
+
+#### Implementation of `assign`
+
+The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar 
+to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform 
+its intended behavior, invoked by the `LogicManager` class. `AssignCommandParser` is responsible for parsing the
+string of arguments containing an IC number and department inputted by the user, to create an `AssignCommand` object.
+
+The following sequence diagram summarizes what happens when `AssignCommand#execute` is invoked.
+
+<puml src="diagrams/AssignSequenceDiagram.puml" alt="AssignSequenceDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 
