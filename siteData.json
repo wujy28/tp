@@ -52,6 +52,8 @@
         "common-classes": "Common classes",
         "implementation": "Implementation",
         "view-patient-feature": "View patient feature",
+        "edit-record-feature": "Edit Record feature",
+        "assign-department-feature": "Assign department feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
@@ -64,7 +66,12 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-patient": "Deleting a patient",
-        "saving-data": "Saving data"
+        "editing-a-patient": "Editing a patient",
+        "class-birthday-and-testing": "Class Birthday and Testing",
+        "explanation": "Explanation:",
+        "saving-data": "Saving data",
+        "explanation-2": "Explanation:",
+        "class-record-json-storage-format": "Class Record JSON Storage Format"
       },
       "headingKeywords": {}
     },
