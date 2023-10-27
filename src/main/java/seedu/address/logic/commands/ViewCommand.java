@@ -12,7 +12,6 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
-
 /**
  * Views the Patient with a certain {@Code IcNumber}
  */
