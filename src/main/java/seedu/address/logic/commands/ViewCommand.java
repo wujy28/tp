@@ -54,6 +54,8 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws PatientWithFieldNotFoundException {
         requireNonNull(model);
         model.updateFilteredPatientList(predicate);
+        System.out.println(model.getCurrentPatientList());
+        System.out.println(model.getFilteredPatientList());
         if (model.getFilteredPatientList().size() == 0) { // no patient with that IC
             throw new PatientWithFieldNotFoundException("Ic Number : " + icNumberToFind.value);
         }
