@@ -98,6 +98,9 @@ public class UniquePatientList implements Iterable<Patient> {
         internalList.setAll(patients);
     }
 
+    public ObservableList<Patient> getCurrentPatientList() {
+        return internalList;
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

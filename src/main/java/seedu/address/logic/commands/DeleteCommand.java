@@ -18,10 +18,9 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the patient identified by the index number used in the displayed patient list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Deletes the patient identified by the index number used in the displayed patient list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
     private final IcNumber icNumber;
@@ -33,9 +32,9 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Patient> currentPatientList = model.getCurrentPatientList();
 
-        Patient patientToDelete = model.getPatient(icNumber, lastShownList);
+        Patient patientToDelete = model.getPatient(icNumber, currentPatientList);
         model.deletePatient(patientToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
     }
@@ -57,8 +56,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("icNumber", icNumber)
-                .toString();
+        return new ToStringBuilder(this).add("icNumber", icNumber).toString();
     }
 }

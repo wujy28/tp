@@ -250,6 +250,43 @@ has been listed. `PatientWithFieldNotFoundException` is thrown if no patient fou
       Cons: New display have to be implemented correctly to integrate with
       existing displays.
 
+### Edit Record feature
+
+#### Implementation
+
+The edit record operation is facilitated by `RecordCommandParser`. `RecordCommandParser` parses the user input string
+and creates the `RecordCommand` to be executed by the `LogicManager`. `RecordCommand` extends `Command` and implements the
+`Command#execute` method.
+
+Given below is an example usage scenario and how the edit record operation is handled in A&E.
+
+Step 1. Assuming the application has been launched, the user enters `record i/T0201234A o/Broken Arm di/Hairline fracture 
+tp/Cast for 2 days`, which is to edit the record of the specific patient with `IcNumber = T0201234A` such that `Initial 
+Observation = Broken Arm`, `Diagnosis = Hairline fracture`, and `Treatment Plan = Cast for 2 days`. This invokes 
+`LogicManager#execute` to execute the logic of the command.
+
+Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the command word 
+`record` and the arguments `i/T0201234A`, `o/Broken Arm`, `di/Hairline fracture`, and `tp/Cast for 2 days`. After 
+splitting, `AddressBookParser#parseCommand` would identify that the command is `Record` and instantiate 
+`RecordCommandParser` and call its `RecordCommandParser#parse` to parse the arguments accordingly.
+
+Step 3. `RecordCommandParser#parse` would first map the `IcNumber` prefix to its argument, `T0201234A`, the 
+`initialObservations` prefix to its argument `Broken Arm`, the `diagnosis` prefix to its argument `Hairline fracture`,
+and the `treatmentPlan` prefix to its argument `Cast for 2 days` using `ArgumentMultimap`.
+The `ArgumentMultimap` would then be used to identify the `IcNumber` and a `ParseException` is thrown if command inputs 
+are invalid. The `ArgumentMultimap` also invokes `ArgumentMultimap#isPresent` to check if the other prefixes for `Initial
+Observation`, `Diagnosis` and `Treatment Plan` are present. If `true` is returned, the arguments will be parsed into a
+`EditRecordDescriptor` object.
+
+Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the fields 
+of Record has been edited, and throws a `ParseException` if returned `false`. It is then passed as an argument along with 
+`IcNumber` to instantiate the `RecordCommand`, which is then returned by `RecordCommandParser#parse`
+
+Step 5. `LogicManager#execute` now invokes `RecordCommand#execute` which gets the specified Patient according to the IcNumber.
+Then, `RecordCommand#createEditedRecord` is called with the specified Patient's `Record` and the `EditRecordDescriptor` object
+which contains the fields to be edited. It then returns a `RecordResult` stating the patient IcNumber and edited Record. 
+`PatientWithFieldNotFoundException` is thrown if no patient found.
+
 ### Assign department feature
 
 #### AssignedDepartment attribute
@@ -658,24 +695,66 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a patient while all patients are being shown
 
-    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
-
-    1. Test case: `delete 0`<br>
-       Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. 
+    2. Test case: `delete i/T0000000A`<br>
+       Expected: Will iterate through the list to search for Patient with matching IC Number and delete that patient
+       Timestamp in the status bar is updated. 
+    3. Test case: `delete I/T0000000B`<br>
+       Expected: If patient is not found or does not exist, no patient is deleted. 
+       Error details shown in the status message. Status bar remains the same. 
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+### Editing a patient
+1. Editing a patient's attributes that are specified based on the prefixes in the user inputs
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
+   2. Test case: `edit i/T0000000A n/John Doe`<br>
+      Expected: Will iterate through the list to search for Patient with matching IC Number and edit that patient
+      Timestamp in the status bar is updated.
+   3. Test case: `edit i/T0000000A`
+      Expected: Will throw an exception if the fields to be edited are left empty.
+      Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect edit commands to try: `edit`, `delete x`, `...`
+      Expected: Similar to previous.
 1. _{ more test cases …​ }_
+
+### Class `Birthday` and Testing
+1. Patient requires to have a birthday as a compulsory characteristic to be considered
+**Format:** A `Birthday` object can be initialized as follows:
+
+{
+
+    Birthday birthday = new Birthday("01/01/1991")
+
+}
+### Explanation:
+
+**string input** : User Input must be in the dd/MM/yyyy format to be parsed 
+correctly using LocalDateTime as implemented in the Birthday Class
+
+**incorrect inputs** : Inputs are checked for null and validity based on regex before initializing the Birthday object
+User Inputs which do not follow the correct format will receive an error message accordingly
+
+**tests** : Array of tests to account for various inputs that can be given by the user
+and checks on validity of the arguments given to prevent invocation errors
+
+**LocalDateTime** : LocalDateTime used instead of String as Age is a non-constant attribute of the Patient
+A patient's age constantly changes. Hence LocalDateTime offers flexibility to auto calculate a patient's age
+based on Birthday without requiring manual interferance as a potential extension.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Saving Assigned Department to Storage
+### Explanation:
+**Storage**: Storage classes are to save the details of the patients upon exiting the app. While the basic attributes of the patients like IC Number, 
+Gender and all were being saved, complicated attributes like Assigned Department were not.
+
+**Assigned Department**: The patient will be assigned to a department when being admitted.
+
+**Enhancement**: Made changes to the storage and RecordBuilder classes and the tests
+to ensure the department assigned is saved as well.
 
 1. _{ more test cases …​ }_
