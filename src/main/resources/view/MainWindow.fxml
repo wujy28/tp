@@ -3,11 +3,12 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -38,7 +39,7 @@
 <!--        </MenuBar>-->
           <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #3C4EEF;">
               <!-- MenuBar on the left -->
-              <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
+              <MenuBar fx:id="menuBar" minHeight="30.0" prefHeight="30.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
                   <Menu mnemonicParsing="false" style="-fx-text-fill: white;" text="File">
                       <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                   </Menu>
@@ -46,9 +47,11 @@
                       <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                   </Menu>
               </MenuBar>
-
-              <!-- Title and control buttons on the right -->
-              <Label style="-fx-text-fill: #B9CCFF;" text="Advanced&amp;Efficient" />
+               <ImageView fitHeight="26.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/Advanced&amp;Efficient.png" />
+                  </image>
+               </ImageView>
               <Region minWidth="10" />
 <!--              <Button fx:id="minimizeButton" text="-" onAction="#minimizeWindow" />-->
 <!--              <Button fx:id="maximizeButton" text="🗖" onAction="#maximizeWindow" />-->
@@ -74,7 +77,7 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #B9CCFF">
                       <children>
-                          <StackPane fx:id="recordPanelPlaceholder" alignment="BOTTOM_LEFT" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          <StackPane fx:id="recordPanelPlaceholder" alignment="BOTTOM_LEFT" styleClass="pane-with-border" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
                       </children>
                   </AnchorPane>
               </items>
@@ -104,13 +107,13 @@
 <!--                </AnchorPane>-->
 <!--              </items>-->
 <!--        </SplitPane>-->
-        <StackPane fx:id="resultDisplayPlaceholder" alignment="BOTTOM_LEFT" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" alignment="BOTTOM_LEFT" maxHeight="100" minHeight="100" prefHeight="100" style="-fx-background-color: #B9CCFF;" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="commandBoxPlaceholder" style="-fx-background-color: #B9CCFF;" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
