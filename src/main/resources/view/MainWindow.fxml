@@ -3,21 +3,19 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.Region?>
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Advanced&amp;Efficient" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Advanced&amp;Efficient" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
 <!--  <icons>-->
 <!--    <Image url="@/images/address_book_32.png" />-->
 <!--  </icons>-->
@@ -41,17 +39,17 @@
           <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #3C4EEF;">
               <!-- MenuBar on the left -->
               <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
-                  <Menu mnemonicParsing="false" text="File" style="-fx-text-fill: white;">
-                      <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+                  <Menu mnemonicParsing="false" style="-fx-text-fill: white;" text="File">
+                      <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Help" style="-fx-text-fill: white;">
+                  <Menu mnemonicParsing="false" style="-fx-text-fill: white;" text="Help">
                       <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                   </Menu>
               </MenuBar>
 
               <!-- Title and control buttons on the right -->
-              <Label text="Advanced&amp;Efficient" style="-fx-text-fill: #B9CCFF;" />
-              <Region minWidth="10"></Region>
+              <Label style="-fx-text-fill: #B9CCFF;" text="Advanced&amp;Efficient" />
+              <Region minWidth="10" />
 <!--              <Button fx:id="minimizeButton" text="-" onAction="#minimizeWindow" />-->
 <!--              <Button fx:id="maximizeButton" text="🗖" onAction="#maximizeWindow" />-->
 <!--              <Button fx:id="closeButton" text="X" onAction="#handleExit" />-->

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Record;
 
 /**
  * A ui for the record panel that is displayed on the right side of the application.
@@ -17,6 +18,7 @@ public class RecordPanel extends UiPart<Region> {
 
     private static final String FXML = "RecordPanel.fxml";
     private final PatientListPanel patientListPanel; // a reference to the patient list to listen for selection event
+    private Patient currentPatientDisplayed;
 
     @FXML
     private AnchorPane recordView;
@@ -32,7 +34,12 @@ public class RecordPanel extends UiPart<Region> {
                     @Override
                     public void changed(ObservableValue<? extends Patient> observable,
                                         Patient oldValue, Patient newValue) {
-                        if (newValue != null) {
+                        if (newValue == null) {
+                            recordView.getChildren().clear();
+                            return;
+                        }
+                        if (newValue != currentPatientDisplayed) {
+                            currentPatientDisplayed = newValue;
                             displayRecord(newValue);
                         }
                     }
