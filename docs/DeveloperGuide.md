@@ -260,31 +260,31 @@ and creates the `RecordCommand` to be executed by the `LogicManager`. `RecordCom
 
 Given below is an example usage scenario and how the edit record operation is handled in A&E.
 
-Step 1. Assuming the application has been launched, the user enters `record i/T0201234A o/Broken Arm di/Hairline fracture 
-tp/Cast for 2 days`, which is to edit the record of the specific patient with `IcNumber = T0201234A` such that `Initial 
-Observation = Broken Arm`, `Diagnosis = Hairline fracture`, and `Treatment Plan = Cast for 2 days`. This invokes 
+Step 1. Assuming the application has been launched, the user enters `record i/T0201234A o/Broken Arm di/Hairline fracture
+tp/Cast for 2 days`, which is to edit the record of the specific patient with `IcNumber = T0201234A` such that `Initial
+Observation = Broken Arm`, `Diagnosis = Hairline fracture`, and `Treatment Plan = Cast for 2 days`. This invokes
 `LogicManager#execute` to execute the logic of the command.
 
-Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the command word 
-`record` and the arguments `i/T0201234A`, `o/Broken Arm`, `di/Hairline fracture`, and `tp/Cast for 2 days`. After 
-splitting, `AddressBookParser#parseCommand` would identify that the command is `Record` and instantiate 
+Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the command word
+`record` and the arguments `i/T0201234A`, `o/Broken Arm`, `di/Hairline fracture`, and `tp/Cast for 2 days`. After
+splitting, `AddressBookParser#parseCommand` would identify that the command is `Record` and instantiate
 `RecordCommandParser` and call its `RecordCommandParser#parse` to parse the arguments accordingly.
 
-Step 3. `RecordCommandParser#parse` would first map the `IcNumber` prefix to its argument, `T0201234A`, the 
+Step 3. `RecordCommandParser#parse` would first map the `IcNumber` prefix to its argument, `T0201234A`, the
 `initialObservations` prefix to its argument `Broken Arm`, the `diagnosis` prefix to its argument `Hairline fracture`,
 and the `treatmentPlan` prefix to its argument `Cast for 2 days` using `ArgumentMultimap`.
-The `ArgumentMultimap` would then be used to identify the `IcNumber` and a `ParseException` is thrown if command inputs 
+The `ArgumentMultimap` would then be used to identify the `IcNumber` and a `ParseException` is thrown if command inputs
 are invalid. The `ArgumentMultimap` also invokes `ArgumentMultimap#isPresent` to check if the other prefixes for `Initial
 Observation`, `Diagnosis` and `Treatment Plan` are present. If `true` is returned, the arguments will be parsed into a
 `EditRecordDescriptor` object.
 
-Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the fields 
-of Record has been edited, and throws a `ParseException` if returned `false`. It is then passed as an argument along with 
+Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the fields
+of Record has been edited, and throws a `ParseException` if returned `false`. It is then passed as an argument along with
 `IcNumber` to instantiate the `RecordCommand`, which is then returned by `RecordCommandParser#parse`
 
 Step 5. `LogicManager#execute` now invokes `RecordCommand#execute` which gets the specified Patient according to the IcNumber.
 Then, `RecordCommand#createEditedRecord` is called with the specified Patient's `Record` and the `EditRecordDescriptor` object
-which contains the fields to be edited. It then returns a `RecordResult` stating the patient IcNumber and edited Record. 
+which contains the fields to be edited. It then returns a `RecordResult` stating the patient IcNumber and edited Record.
 `PatientWithFieldNotFoundException` is thrown if no patient found.
 
 ### Assign department feature
@@ -292,7 +292,7 @@ which contains the fields to be edited. It then returns a `RecordResult` stating
 #### AssignedDepartment attribute
 
 The `AssignedDepartment` attribute of a patient in A&E is represented by a stored `Department` value. `Department` is
-an enumeration that encapsulates all the predefined hospital department values stored by the system and available 
+an enumeration that encapsulates all the predefined hospital department values stored by the system and available
 to the user. The list of valid departments can be found in the appendix of the User Guide.
 
 #### Design considerations:
@@ -300,14 +300,14 @@ to the user. The list of valid departments can be found in the appendix of the U
 **Aspect: How to represent a department in the system:**
 
 * **Alternative 1 (current choice):** Use Java Enumerations.
-    * Pros: Ensures type safety. Discrete constants allow for usage in switch-cases, and thus can potentially be used 
-  to easily categorize patients in future features. 
+    * Pros: Ensures type safety. Discrete constants allow for usage in switch-cases, and thus can potentially be used
+  to easily categorize patients in future features.
     * Cons: Does not support user-defined categories or departments.
 
 * **Alternative 2:** Using an abstract Department class and inheritance.
     * Pros: Can be made to support user-defined departments. Can specify different behavior for different
   types of departments.
-    * Cons: Implementation is more complicated when it comes to storing and keeping track of all the different 
+    * Cons: Implementation is more complicated when it comes to storing and keeping track of all the different
   subclasses or limiting valid department values.
 
 * **Alternative 3:** Using Strings.
@@ -316,8 +316,8 @@ to the user. The list of valid departments can be found in the appendix of the U
 
 #### Implementation of `assign`
 
-The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar 
-to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform 
+The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar
+to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform
 its intended behavior, invoked by the `LogicManager` class. `AssignCommandParser` is responsible for parsing the
 string of arguments containing an IC number and department inputted by the user, to create an `AssignCommand` object.
 
@@ -695,13 +695,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a patient while all patients are being shown
 
-    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. 
+    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
     2. Test case: `delete i/T0000000A`<br>
        Expected: Will iterate through the list to search for Patient with matching IC Number and delete that patient
-       Timestamp in the status bar is updated. 
+       Timestamp in the status bar is updated.
     3. Test case: `delete I/T0000000B`<br>
-       Expected: If patient is not found or does not exist, no patient is deleted. 
-       Error details shown in the status message. Status bar remains the same. 
+       Expected: If patient is not found or does not exist, no patient is deleted.
+       Error details shown in the status message. Status bar remains the same.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -729,7 +729,7 @@ testers are expected to do more *exploratory* testing.
 }
 ### Explanation:
 
-**string input** : User Input must be in the dd/MM/yyyy format to be parsed 
+**string input** : User Input must be in the dd/MM/yyyy format to be parsed
 correctly using LocalDateTime as implemented in the Birthday Class
 
 **incorrect inputs** : Inputs are checked for null and validity based on regex before initializing the Birthday object
@@ -749,7 +749,7 @@ based on Birthday without requiring manual interferance as a potential extension
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 2. Saving Assigned Department to Storage
 ### Explanation:
-**Storage**: Storage classes are to save the details of the patients upon exiting the app. While the basic attributes of the patients like IC Number, 
+**Storage**: Storage classes are to save the details of the patients upon exiting the app. While the basic attributes of the patients like IC Number,
 Gender and all were being saved, complicated attributes like Assigned Department were not.
 
 **Assigned Department**: The patient will be assigned to a department when being admitted.
