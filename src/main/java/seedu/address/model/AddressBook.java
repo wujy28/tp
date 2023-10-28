@@ -20,13 +20,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePatientList patients;
     private final UniqueRecordList records;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */ {
+        /*
+         * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+        * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+        *
+         * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+        *   among constructors.
+        */ {
         patients = new UniquePatientList();
         records = new UniqueRecordList();
     }
