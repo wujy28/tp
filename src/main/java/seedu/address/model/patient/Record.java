@@ -80,6 +80,16 @@ public class Record {
     }
 
     /**
+     * Copies the information of the given Record into this instance of Record.
+     * @param recordToCopy the Record with information to copy.
+     */
+    public void copyRecordInfo(Record recordToCopy) {
+        this.initialObservations = recordToCopy.getDiagnosis();
+        this.diagnosis = recordToCopy.getDiagnosis();
+        this.treatmentPlan = recordToCopy.getTreatmentPlan();
+    }
+
+    /**
      * Returns true if both records have same fields
      */
     @Override

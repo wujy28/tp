@@ -81,7 +81,8 @@ public class Patient {
         this.address = address;
         this.tags.addAll(tags);
         this.assignedDepartment = assignedDepartment;
-        this.record = record;
+        this.record = new Record(this);
+        this.record.copyRecordInfo(record);
     }
 
     public Name getName() {
