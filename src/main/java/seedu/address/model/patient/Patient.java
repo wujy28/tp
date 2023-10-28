@@ -49,7 +49,7 @@ public class Patient {
     }
 
     /**
-     * Patient constructor with all fields as parameters
+     * Patient constructor which omits Record parameter
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
                    Address address, Set<Tag> tags, AssignedDepartment assignedDepartment) {
@@ -62,8 +62,26 @@ public class Patient {
         this.birthday = birthday;
         this.address = address;
         this.tags.addAll(tags);
-        this.assignedDepartment = assignedDepartment; // default Department given
+        this.assignedDepartment = assignedDepartment;
         this.record = new Record(this); // creates new Record
+    }
+
+    /**
+     * Patient constructor with all fields as parameters
+     */
+    public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
+                   Address address, Set<Tag> tags, AssignedDepartment assignedDepartment, Record record) {
+        requireAllNonNull(name, phone, email, icNumber, birthday, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.icNumber = icNumber;
+        this.birthday = birthday;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.assignedDepartment = assignedDepartment;
+        this.record = record;
     }
 
     public Name getName() {
