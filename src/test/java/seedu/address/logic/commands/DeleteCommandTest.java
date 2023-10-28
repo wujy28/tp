@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIC;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -15,11 +16,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.PatientWithIcNumberPredicate;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -66,6 +70,22 @@ public class DeleteCommandTest {
         showNoPatient(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_icNumberOfNonExistingPatient_exceptionThrown() throws PatientWithFieldNotFoundException {
+        IcNumber testIcNumber1 = new IcNumber("T1234567j");
+        DeleteCommand command = new DeleteCommand(testIcNumber1);
+
+        boolean exceptionThrown = false;
+        try {
+            command.execute(model);
+        } catch (PatientWithFieldNotFoundException e) {
+            exceptionThrown = true;
+            assertEquals(e.getMessage(),
+                MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
+        }
+        assertTrue(exceptionThrown);
     }
 
     @Test
