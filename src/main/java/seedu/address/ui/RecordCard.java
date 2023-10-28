@@ -79,15 +79,12 @@ public class RecordCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         // Format and bind the TextFlow to Record fields
-        this.initialObservations.textProperty().bindBidirectional(record.initialObservationsProperty());
         this.initialObservations.setWrapText(true);
         this.initialObservations.setText(record.getInitialObservations());
 
-        this.diagnosis.textProperty().bindBidirectional(record.diagnosisProperty());
         this.diagnosis.setWrapText(true);
         this.diagnosis.setText(record.getDiagnosis());
 
-        this.treatmentPlan.textProperty().bindBidirectional(record.treatmentPlanProperty());
         this.treatmentPlan.setWrapText(true);
         this.treatmentPlan.setText(record.getTreatmentPlan());
     }

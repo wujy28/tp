@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.patient.Patient;
@@ -17,9 +20,9 @@ import seedu.address.model.patient.Record;
 public class RecordPanel extends UiPart<Region> {
 
     private static final String FXML = "RecordPanel.fxml";
-    private final PatientListPanel patientListPanel; // a reference to the patient list to listen for selection event
-    private Patient currentPatientDisplayed;
 
+    private PatientListPanel patientListPanel;
+    private int lastSelectedIndex;
     @FXML
     private AnchorPane recordView;
 
@@ -28,26 +31,29 @@ public class RecordPanel extends UiPart<Region> {
      */
     public RecordPanel(PatientListPanel patientList) {
         super(FXML);
-        this.patientListPanel = patientList;
+        patientListPanel = patientList;
         patientListPanel.getPatientListView().getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Patient>() {
                     @Override
                     public void changed(ObservableValue<? extends Patient> observable,
                                         Patient oldValue, Patient newValue) {
                         if (newValue == null) {
-                            recordView.getChildren().clear();
+                            clearRecordPanel();
                             return;
                         }
-                        if (newValue != currentPatientDisplayed) {
-                            currentPatientDisplayed = newValue;
-                            displayRecordOfPatient(newValue);
+                        if (!newValue.equals(oldValue)) {
+                            displayRecord(newValue);
                         }
                     }
                 }
         );
     }
 
-    private void displayRecordOfPatient(Patient patient) {
+    public void clearRecordPanel() {
+        recordView.getChildren().clear();
+    }
+
+    public void displayRecord(Patient patient) {
         requireNonNull(patient);
         recordView.getChildren().clear();
         Node record = new RecordCard(patient.getRecord()).getRoot();
