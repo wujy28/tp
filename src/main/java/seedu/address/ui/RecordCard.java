@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -51,13 +52,11 @@ public class RecordCard extends UiPart<Region> {
     @FXML
     private Label assignedDepartment;
     @FXML
-    private TextFlow initialObservations;
+    private TextArea initialObservations;
     @FXML
-    private TextFlow diagnosis;
+    private TextArea diagnosis;
     @FXML
-    private TextFlow treatmentPlan;
-    @FXML
-    private TextFlow remarks;
+    private TextArea treatmentPlan;
 
     /**
      * Creates a {@code RecordCard} with the given {@code Record}.
@@ -79,17 +78,17 @@ public class RecordCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        Text initialObservations = new Text(record.getInitialObservations());
-        initialObservations.setFill(Paint.valueOf("white"));
-        this.initialObservations.getChildren().add(initialObservations);
-        Text diagnosis = new Text(record.getDiagnosis());
-        diagnosis.setFill(Paint.valueOf("white"));
-        this.diagnosis.getChildren().add(diagnosis);
-        Text treatmentPlan = new Text(record.getTreatmentPlan());
-        treatmentPlan.setFill(Paint.valueOf("white"));
-        this.treatmentPlan.getChildren().add(treatmentPlan);
-        Text remarks = new Text("-"); // Since we do not store remarks in record yet
-        remarks.setFill(Paint.valueOf("white"));
-        this.remarks.getChildren().add(remarks);
+        // Format and bind the TextFlow to Record fields
+        this.initialObservations.textProperty().bindBidirectional(record.initialObservationsProperty());
+        this.initialObservations.setWrapText(true);
+        this.initialObservations.setText(record.getInitialObservations());
+
+        this.diagnosis.textProperty().bindBidirectional(record.diagnosisProperty());
+        this.diagnosis.setWrapText(true);
+        this.diagnosis.setText(record.getDiagnosis());
+
+        this.treatmentPlan.textProperty().bindBidirectional(record.treatmentPlanProperty());
+        this.treatmentPlan.setWrapText(true);
+        this.treatmentPlan.setText(record.getTreatmentPlan());
     }
 }

@@ -40,14 +40,14 @@ public class RecordPanel extends UiPart<Region> {
                         }
                         if (newValue != currentPatientDisplayed) {
                             currentPatientDisplayed = newValue;
-                            displayRecord(newValue);
+                            displayRecordOfPatient(newValue);
                         }
                     }
                 }
         );
     }
 
-    private void displayRecord(Patient patient) {
+    private void displayRecordOfPatient(Patient patient) {
         requireNonNull(patient);
         recordView.getChildren().clear();
         Node record = new RecordCard(patient.getRecord()).getRoot();

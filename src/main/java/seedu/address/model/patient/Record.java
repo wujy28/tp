@@ -1,5 +1,6 @@
 package seedu.address.model.patient;
 
+import javafx.beans.property.SimpleStringProperty;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -14,18 +15,18 @@ public class Record {
 
 
     private final Patient patient;
-    private String initialObservations;
-    private String diagnosis;
-    private String treatmentPlan;
+    private SimpleStringProperty initialObservations = new SimpleStringProperty();
+    private SimpleStringProperty diagnosis = new SimpleStringProperty();
+    private SimpleStringProperty treatmentPlan = new SimpleStringProperty();
 
     /**
      * Initializes a Record with the associated patient and initialise the fields with default values
      */
     public Record(Patient patient) {
         this.patient = patient;
-        this.initialObservations = defaultInitialObservations;
-        this.diagnosis = defaultDiagnosis;
-        this.treatmentPlan = defaultTreatmentPlan;
+        this.initialObservations.set(defaultInitialObservations);
+        this.diagnosis.set(defaultDiagnosis);
+        this.treatmentPlan.set(defaultTreatmentPlan);
     }
 
     /**
@@ -33,9 +34,9 @@ public class Record {
      */
     public Record() {
         this.patient = null; // patient left null, would have to fix when building editing record command
-        this.initialObservations = defaultInitialObservations;
-        this.diagnosis = defaultDiagnosis;
-        this.treatmentPlan = defaultTreatmentPlan;
+        this.initialObservations.set(defaultInitialObservations);
+        this.diagnosis.set(defaultDiagnosis);
+        this.treatmentPlan.set(defaultTreatmentPlan);
     }
 
 
@@ -44,19 +45,27 @@ public class Record {
     }
 
     public String getInitialObservations() {
-        return initialObservations;
+        return initialObservations.get();
     }
 
     public void setInitialObservations(String initialObservations) {
-        this.initialObservations = initialObservations;
+        this.initialObservations.set(initialObservations);
+    }
+
+    public SimpleStringProperty initialObservationsProperty() {
+        return this.initialObservations;
     }
 
     public String getDiagnosis() {
-        return diagnosis;
+        return diagnosis.get();
     }
 
     public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
+        this.diagnosis.set(diagnosis);
+    }
+
+    public SimpleStringProperty diagnosisProperty() {
+        return this.diagnosis;
     }
 
     public static String getDefaultInitialObservations() {
@@ -72,11 +81,15 @@ public class Record {
     }
 
     public String getTreatmentPlan() {
-        return treatmentPlan;
+        return treatmentPlan.get();
     }
 
     public void setTreatmentPlan(String treatmentPlan) {
-        this.treatmentPlan = treatmentPlan;
+        this.treatmentPlan.set(treatmentPlan);
+    }
+
+    public SimpleStringProperty treatmentPlanProperty() {
+        return this.treatmentPlan;
     }
 
     /**
@@ -84,9 +97,9 @@ public class Record {
      * @param recordToCopy the Record with information to copy.
      */
     public void copyRecordInfo(Record recordToCopy) {
-        this.initialObservations = recordToCopy.getDiagnosis();
-        this.diagnosis = recordToCopy.getDiagnosis();
-        this.treatmentPlan = recordToCopy.getTreatmentPlan();
+        this.initialObservations.set(recordToCopy.getDiagnosis());
+        this.diagnosis.set(recordToCopy.getDiagnosis());
+        this.treatmentPlan.set(recordToCopy.getTreatmentPlan());
     }
 
     /**
