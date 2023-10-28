@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -127,9 +128,16 @@ public class EditCommandTest {
         Patient patientInList = model.getPatient(ALICE.getIcNumber(), lastShownList);
         EditCommand editCommand = new EditCommand(ALICE.getIcNumber(),
             new EditPatientDescriptorBuilder(patientInList).build());
-
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
     }
+    /*@Test
+    public void execute_duplicatePatient_throwsCommandException() {
+        Patient validPatient = new PatientBuilder().build();
+        AddCommand addCommand = new AddCommand(validPatient);
+        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStubWithPatient(validPatient);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PATIENT, () -> addCommand.execute(modelStub));
+    }*/
 
     @Test
     public void execute_invalidPatientICList_failure() {

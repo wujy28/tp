@@ -50,7 +50,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + "T0032415E");
+                DeleteCommand.COMMAND_WORD + " " + "i/T0032415E");
         assertEquals(new DeleteCommand(ALICE.getIcNumber()), command);
     }
 
@@ -58,7 +58,7 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Patient patient = new PatientBuilder().build();
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " i/"
                 + patient.getIcNumber().toString() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
         assertEquals(new EditCommand(patient.getIcNumber(), descriptor), command);
     }
