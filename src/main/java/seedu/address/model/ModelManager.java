@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+//import javax.swing.*;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,8 +15,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
-
-import javax.swing.*;
 
 /**
  * Represents the in-memory model of the address book data.

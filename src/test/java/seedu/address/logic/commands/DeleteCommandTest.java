@@ -29,7 +29,7 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validICUnfilteredList_success() {
+    public void execute_validIcUnfilteredList_success() {
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
         DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());
@@ -44,7 +44,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-        public void execute_invalidICList_throwsIllegalArgumentException() {
+        public void execute_invalidIcList_throwsIllegalArgumentException() {
         showPatientAtIC(model, ALICE.getIcNumber());
         String invalidIC = "";
         assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
@@ -52,7 +52,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validICFilteredList_success() {
+    public void execute_validIcFilteredList_success() {
         showPatientAtIC(model, new IcNumber("T0032415E"));
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);

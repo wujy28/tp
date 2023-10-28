@@ -132,7 +132,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidPatientICList_failure() {
+    public void execute_invalidPatientIcList_failure() {
         String invalidIC = "";
         assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
         //Hence EditCommand cannot be executed because of illegal argument exception in IC

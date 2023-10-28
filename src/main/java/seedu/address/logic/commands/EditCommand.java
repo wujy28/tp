@@ -108,7 +108,8 @@ public class EditCommand extends Command {
         Birthday updatedBirthday = editPatientDescriptor.getBirthday().orElse(patientToEdit.getBirthday());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
-        AssignedDepartment updatedDepartment = patientToEdit.getAssignedDepartment(); // edit command does not allow editing assigned department
+        // edit command does not allow editing assigned department
+        AssignedDepartment updatedDepartment = patientToEdit.getAssignedDepartment();
         Record updatedRecord = patientToEdit.getRecord(); // edit command does not allow editing record
 
 

@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PatientBuilder.DEFAULT_IC_NUMBER;
 import static seedu.address.testutil.TypicalPatients.ALICE;
-import static seedu.address.testutil.TypicalPatients.AMY;
 import static seedu.address.testutil.TypicalPatients.BOB;
 
 import java.nio.file.Path;
@@ -66,8 +64,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(newPatient);
         ModelStub modelStub = new ModelStubWithPatientAndUniqueIcNumberCheck(existingPatient);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST,
-            () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
