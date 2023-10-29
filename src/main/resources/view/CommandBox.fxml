@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane style="-fx-background-color: #3C4EEF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="stack-pane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane style="-fx-background-color: #3C4EEF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <stylesheets>
     <URL value="@CommandBox.css" />
   </stylesheets>

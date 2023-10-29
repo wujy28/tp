@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="cardPane" fx:id="cardPane" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="name" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="name" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@RecordCard.css" />
    </stylesheets>
@@ -88,6 +88,9 @@
                         </padding>
                      </HBox>
                   </children>
+                  <VBox.margin>
+                     <Insets bottom="3.0" top="3.0" />
+                  </VBox.margin>
                </GridPane>
                <HBox alignment="BASELINE_LEFT">
                   <children>
