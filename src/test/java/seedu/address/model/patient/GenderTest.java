@@ -29,17 +29,17 @@ public class GenderTest {
         assertFalse(Gender.isValidGender("^")); // only non-alphanumeric characters
         assertFalse(Gender.isValidGender("male*")); // contains non-alphanumeric characters
         assertFalse(Gender.isValidGender("non-binary")); // not in Genders enum
-        assertFalse(Gender.isValidGender("male")); // lowercase only
-        assertFalse(Gender.isValidGender("female"));
-        assertFalse(Gender.isValidGender("other"));
-        assertFalse(Gender.isValidGender("MaLe")); // mix of lower and uppercase
-        assertFalse(Gender.isValidGender("fEmAlE"));
-        assertFalse(Gender.isValidGender("OtHeR"));
 
         // valid gender
+        assertTrue(Gender.isValidGender("male")); // lowercase only
+        assertTrue(Gender.isValidGender("female"));
+        assertTrue(Gender.isValidGender("other"));
         assertTrue(Gender.isValidGender("MALE")); // uppercase only
         assertTrue(Gender.isValidGender("FEMALE"));
         assertTrue(Gender.isValidGender("OTHER"));
+        assertTrue(Gender.isValidGender("MaLe")); // mix of lower and uppercase
+        assertTrue(Gender.isValidGender("fEmAlE"));
+        assertTrue(Gender.isValidGender("OtHeR"));
     }
 
     @Test

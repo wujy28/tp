@@ -148,9 +148,9 @@ Examples:
 
 Edits the medical record of the patient with the specified IC number.
 
-Format: `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`
+Format: `record i/IC_NUMBER [o/OBSERVATION] [d/DIAGNOSIS] [t/TREATMENT_PLAN]`
 
-* Only the `IC_NUMBER` field is compulsory.
+* At least one of the optional fields indicated within square brackets must be provided
 * **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 * The order of the input fields does not matter.
 
