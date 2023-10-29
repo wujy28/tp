@@ -1,6 +1,5 @@
 package seedu.address.model.patient;
 
-import javafx.beans.property.SimpleStringProperty;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**

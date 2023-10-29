@@ -8,9 +8,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Record;
 
