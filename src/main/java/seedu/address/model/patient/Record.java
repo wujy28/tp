@@ -84,7 +84,7 @@ public class Record {
      * @param recordToCopy the Record with information to copy.
      */
     public void copyRecordInfo(Record recordToCopy) {
-        this.initialObservations = recordToCopy.getDiagnosis();
+        this.initialObservations = recordToCopy.getInitialObservations();
         this.diagnosis = recordToCopy.getDiagnosis();
         this.treatmentPlan = recordToCopy.getTreatmentPlan();
     }
