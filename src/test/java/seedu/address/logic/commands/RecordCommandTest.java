@@ -34,7 +34,7 @@ public class RecordCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         RecordCommand recordCommand = new RecordCommand(ALICE.getIcNumber(), new RecordCommand.EditRecordDescriptor());
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Patient> lastShownList = model.getCurrentPatientList();
         Patient editedPatient = model.getPatient(ALICE.getIcNumber(), lastShownList);
 
         String expectedMessage = String.format(RecordCommand.MESSAGE_EDIT_RECORD_SUCCESS,
