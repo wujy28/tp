@@ -23,7 +23,6 @@ import seedu.address.model.patient.IcNumber;
  * Parses input arguments and creates a new RecordCommand object
  */
 public class RecordCommandParser implements Parser<RecordCommand> {
-    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[]{PREFIX_IC_NUMBER};
     public static final Prefix[] RELEVANT_PREFIXES = new Prefix[]{PREFIX_IC_NUMBER, PREFIX_INITIAL_OBSERVATION,
         PREFIX_DIAGNOSIS, PREFIX_TREATMENT_PLAN};
 
@@ -41,11 +40,9 @@ public class RecordCommandParser implements Parser<RecordCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordCommand.MESSAGE_USAGE));
         }
         icNumber = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INITIAL_OBSERVATION, PREFIX_DIAGNOSIS, PREFIX_TREATMENT_PLAN);
+        argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES);
 
         RecordCommand.EditRecordDescriptor editRecordDescriptor = new RecordCommand.EditRecordDescriptor();
-        argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES);
         if (argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).isPresent()) {
             editRecordDescriptor.setInitialObservations(
                 ParserUtil.parseInitialObservations(argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).get()));
