@@ -34,8 +34,8 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIcUnfilteredList_success() {
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
+        List<Patient> currentPatientList = model.getCurrentPatientList();
+        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), currentPatientList);
         DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
