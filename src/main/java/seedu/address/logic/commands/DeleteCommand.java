@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": Deletes the patient identified by their IC Number.\n"
             + "Parameters: " + PREFIX_IC_NUMBER + "IC_NUMBER\n" + "Example: " + COMMAND_WORD + " "
@@ -34,9 +35,9 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> currentPatientList = model.getCurrentPatientList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
-        Patient patientToDelete = model.getPatient(icNumber, currentPatientList);
+        Patient patientToDelete = model.getPatient(icNumber, lastShownList);
         model.deletePatient(patientToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
     }
@@ -58,6 +59,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("icNumber", icNumber).toString();
+        return new ToStringBuilder(this)
+                .add("icNumber", icNumber)
+                .toString();
     }
 }
