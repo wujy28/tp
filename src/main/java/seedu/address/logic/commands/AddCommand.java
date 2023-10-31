@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.logging.Logger;
@@ -29,7 +30,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": Adds a patient to the address book. " + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_PHONE
             + "PHONE " + PREFIX_EMAIL + "EMAIL " + PREFIX_GENDER + "GENDER " + PREFIX_IC_NUMBER + "IC_NUMBER "
-            + PREFIX_BIRTHDAY + "BIRTHDAY " + PREFIX_ADDRESS + "ADDRESS " + "[" + PREFIX_TAG + "TAG]...\n" + "Example: "
+            + PREFIX_BIRTHDAY + "BIRTHDAY " + PREFIX_ADDRESS + "ADDRESS " + PREFIX_PRIORITY + "PRIORITY "
+            + "[" + PREFIX_TAG + "TAG]...\n" + "Example: "
             + COMMAND_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL
             + "johnd@example.com " + PREFIX_GENDER + "MALE " + PREFIX_IC_NUMBER + "S2840182A " + PREFIX_BIRTHDAY
             + "02/01/1998 " + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_TAG + "friends " + PREFIX_TAG

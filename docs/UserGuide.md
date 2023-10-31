@@ -148,15 +148,18 @@ Examples:
 
 Edits the medical record of the patient with the specified IC number.
 
-Format: `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`
+Format: `record i/IC_NUMBER [o/OBSERVATION] [d/DIAGNOSIS] [t/TREATMENT_PLAN]`
 
-* Only the `IC_NUMBER` field is compulsory.
+* At least one of the optional fields indicated within square brackets must be provided
 * **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 * The order of the input fields does not matter.
 
 Examples:
 
-* `record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes`
+* To edit the medical record of a patient with `IC_NUMBER = T0201234A`<br>
+  `record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes`
+* To edit the medical record of a patient with `IC_NUMBER = S2374912B`<br>
+  `record i/S2374912B di/Asthma o/Shortness of breath and chest tightness`
 
 ### Assigning a patient to a department : `assign`
 
@@ -203,26 +206,29 @@ _Details coming soon ..._
 
 ## FAQ
 
-### [coming soon]
+Q: How do I transfer my data to another Computer?
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous A&E home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-### [coming soon]
+When using multiple screens, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action      | Format, Examples                                                                                                                                                                                                                |
-|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME i/IC_NUMBER a/AGE g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`               |
-| **Delete**  | `delete i/IC_NUMBER`<br> e.g., `delete i/T2468012A`                                                                                                                                                                             |
-| **Edit**    | `edit IC_NUMBER`<br> e.g., `edit T2468012A n/John Doe a/34`                                                                                                                                                                     |
-| **View**    | `view i/IC_NUMBER`<br> e.g., `view i/T0201234A`                                                                                                                                                                                 |
-| **Record**  | `record i/IC_NUMBER o/OBSERVATION d/DIAGNOSIS t/TREATMENT_PLAN r/REMARKS a/ISACTIVE`<br> e.g.,`record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes` |
-| **Assign**  | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                   |
-| **List**    | `list`                                                                                                                                                                                                                          |
-| **Help**    | `help`                                                                                                                                                                                                                          |
-| **Exit**    | `exit`                                                                                                                                                                                                                          |
+| Action     | Format, Examples                                                                                                                                                                                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**   | `help`                                                                                                                                                                                                                                  |
+| **List**   | `list`                                                                                                                                                                                                                                  |
+| **Add**    | `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...` <br> e.g., `add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com a/Old Town Road 4 pr/LOW t/Allergic to Medicine`   |
+| **View**   | `view i/IC_NUMBER`<br> e.g., `view i/T0201234A`                                                                                                                                                                                         |
+| **Edit**   | `edit i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`<br> e.g., `edit i/T0201234A g/MALE b/08/08/1999 p/93827836 e/example@email.com a/Old Time Road Block 3 pr/MEDIUM t/Allergic to Fur` |
+| **Delete** | `delete i/IC_NUMBER`<br> e.g., `delete i/T2468012A`                                                                                                                                                                                     |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find Mary Jane`                                                                                                                                                                                |
+| **Record** | `record i/IC_NUMBER [o/OBSERVATION] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`<br> e.g.,`record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`                                                                              |
+| **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                           |
+| **Clear**  | `clear`                                                                                                                                                                                                                                 |
+| **Exit**   | `exit`                                                                                                                                                                                                                                  |

@@ -17,6 +17,7 @@ import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -161,6 +162,22 @@ public class ParserUtil {
             throw new ParseException(IcNumber.MESSAGE_CONSTRAINTS);
         }
         return new IcNumber(trimmedIcNumber);
+    }
+
+    /**
+     * Parses a {@code String priority} into a {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static Priority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        priority = priority.toUpperCase();
+        String trimmedPriority = priority.trim();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new Priority(trimmedPriority);
     }
 
     /**

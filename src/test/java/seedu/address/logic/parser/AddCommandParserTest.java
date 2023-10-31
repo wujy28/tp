@@ -39,6 +39,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.AddCommandParser.RELEVANT_PREFIXES;
@@ -74,6 +75,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PatientBuilder;
 
@@ -168,7 +170,8 @@ public class AddCommandParserTest {
         tags.add(new Tag(VALID_TAG_FRIEND));
         Patient actualPatient = createPatientFromPresentPrefixes(new Name(VALID_NAME_BOB), new Phone(VALID_PHONE_BOB),
             new Email(VALID_EMAIL_BOB), new Gender(VALID_GENDER_BOB), new IcNumber(VALID_IC_NUMBER_BOB),
-            new Birthday(VALID_BIRTHDAY_BOB), new Address(VALID_ADDRESS_BOB), tags, testArgMultimap, RELEVANT_PREFIXES);
+            new Birthday(VALID_BIRTHDAY_BOB), new Address(VALID_ADDRESS_BOB), new Priority(VALID_PRIORITY_BOB), tags,
+            testArgMultimap, RELEVANT_PREFIXES);
         assertEquals(expectedPatient, actualPatient);
     }
 
@@ -186,8 +189,8 @@ public class AddCommandParserTest {
         Patient actualPatient = createPatientFromPresentPrefixes(new Name(VALID_NAME_AMY),
             new Phone(Phone.getDefaultPhone()), new Email(Email.getDefaultEmail()),
             new Gender(Gender.getDefaultGender()), new IcNumber(VALID_IC_NUMBER_AMY),
-            new Birthday(Birthday.getDefaultBirthday()), new Address(Address.getDefaultAddress()), new HashSet<>(),
-            testArgMultimap, REQUIRED_PREFIXES);
+            new Birthday(Birthday.getDefaultBirthday()), new Address(Address.getDefaultAddress()),
+            new Priority(Priority.getDefaultPriority()), new HashSet<>(), testArgMultimap, REQUIRED_PREFIXES);
         assertEquals(expectedPatient, actualPatient);
     }
 
@@ -208,8 +211,8 @@ public class AddCommandParserTest {
         Patient actualPatient = createPatientFromPresentPrefixes(new Name(VALID_NAME_AMY),
             new Phone(Phone.getDefaultPhone()), new Email(Email.getDefaultEmail()),
             new Gender(Gender.getDefaultGender()), new IcNumber(VALID_IC_NUMBER_AMY),
-            new Birthday(Birthday.getDefaultBirthday()), new Address(Address.getDefaultAddress()), new HashSet<>(),
-            testArgMultimap, prefixesPresent);
+            new Birthday(Birthday.getDefaultBirthday()), new Address(Address.getDefaultAddress()),
+            new Priority(Priority.getDefaultPriority()), new HashSet<>(), testArgMultimap, prefixesPresent);
         assertEquals(expectedPatient, actualPatient);
     }
 

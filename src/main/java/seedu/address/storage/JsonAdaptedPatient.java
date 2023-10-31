@@ -19,6 +19,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +36,7 @@ class JsonAdaptedPatient {
     private final String icNumber;
     private final String birthday;
     private final String address;
+    private final String priority;
     private final String assignedDepartment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -46,6 +48,7 @@ class JsonAdaptedPatient {
                               @JsonProperty("email") String email, @JsonProperty("gender") String gender,
                               @JsonProperty("icNumber") String icNumber, @JsonProperty("birthday") String birthday,
                               @JsonProperty("address") String address,
+                              @JsonProperty("priority") String priority,
                               @JsonProperty("assignedDepartment") String assignedDepartment,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -55,6 +58,7 @@ class JsonAdaptedPatient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
+        this.priority = priority;
         this.assignedDepartment = assignedDepartment;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -72,6 +76,7 @@ class JsonAdaptedPatient {
         icNumber = source.getIcNumber().value;
         birthday = source.getBirthday().strValue;
         address = source.getAddress().value;
+        priority = source.getPriority().value;
         assignedDepartment = source.getAssignedDepartment().toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
@@ -110,7 +115,6 @@ class JsonAdaptedPatient {
         }
         final Email modelEmail = new Email(email);
 
-
         if (gender == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
@@ -118,7 +122,6 @@ class JsonAdaptedPatient {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
         final Gender modelGender = new Gender(gender);
-
 
         if (icNumber == null) {
             throw new IllegalValueException(
@@ -128,7 +131,6 @@ class JsonAdaptedPatient {
             throw new IllegalValueException(IcNumber.MESSAGE_CONSTRAINTS);
         }
         final IcNumber modelIcNumber = new IcNumber(icNumber);
-
 
         if (birthday == null) {
             throw new IllegalValueException(
@@ -147,6 +149,14 @@ class JsonAdaptedPatient {
         }
         final Address modelAddress = new Address(address);
 
+        if (priority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Priority.class.getSimpleName()));
+        }
+        if (!Priority.isValidPriority(priority)) {
+            throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        final Priority modelPriority = new Priority(priority);
 
         if (assignedDepartment == null) {
             throw new IllegalValueException(
@@ -160,7 +170,7 @@ class JsonAdaptedPatient {
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
         return new Patient(modelName, modelPhone, modelEmail, modelGender, modelIcNumber, modelBirthday, modelAddress,
-            modelTags, modelAssignedDepartment);
+            modelPriority, modelTags, modelAssignedDepartment);
     }
 
 }

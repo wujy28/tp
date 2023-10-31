@@ -14,6 +14,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,6 +44,7 @@ public class EditPatientDescriptorBuilder {
         descriptor.setIcNumber(patient.getIcNumber());
         descriptor.setBirthday(patient.getBirthday());
         descriptor.setAddress(patient.getAddress());
+        descriptor.setPriority(patient.getPriority());
         descriptor.setTags(patient.getTags());
     }
 
@@ -103,6 +105,13 @@ public class EditPatientDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Priority} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withPriority(String priority) {
+        descriptor.setPriority(new Priority(priority));
+        return this;
+    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPatientDescriptor}

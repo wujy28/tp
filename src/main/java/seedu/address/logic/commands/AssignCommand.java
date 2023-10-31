@@ -22,6 +22,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.patient.Record;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -98,11 +99,12 @@ public class AssignCommand extends Command {
         IcNumber icNumber = patientToAssign.getIcNumber();
         Birthday birthday = patientToAssign.getBirthday();
         Address address = patientToAssign.getAddress();
+        Priority priority = patientToAssign.getPriority();
         Set<Tag> tags = patientToAssign.getTags();
         Record record = patientToAssign.getRecord();
 
-        return new Patient(name, phone, email, gender, icNumber, birthday, address, tags, newlyAssignedDepartment,
-            record);
+        return new Patient(name, phone, email, gender, icNumber, birthday,
+                address, priority, tags, newlyAssignedDepartment, record);
     }
 
     @Override
