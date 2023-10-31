@@ -170,6 +170,10 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPatientList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the patient with the given {@code icNumber} in the
+     * {@code model}'s address book.
+     */
     public static void showPatientAtIC(Model model, IcNumber icNumber) {
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patient = model.getPatient(icNumber, lastShownList);

@@ -64,8 +64,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(newPatient);
         ModelStub modelStub = new ModelStubWithPatientAndUniqueIcNumberCheck(existingPatient);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST,
-            () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test

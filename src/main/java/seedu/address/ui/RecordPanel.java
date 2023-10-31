@@ -16,8 +16,9 @@ import seedu.address.model.patient.Patient;
 public class RecordPanel extends UiPart<Region> {
 
     private static final String FXML = "RecordPanel.fxml";
-    private final PatientListPanel patientListPanel; // a reference to the patient list to listen for selection event
 
+    private PatientListPanel patientListPanel;
+    private int lastSelectedIndex;
     @FXML
     private AnchorPane recordView;
 
@@ -26,18 +27,26 @@ public class RecordPanel extends UiPart<Region> {
      */
     public RecordPanel(PatientListPanel patientList) {
         super(FXML);
-        this.patientListPanel = patientList;
+        patientListPanel = patientList;
         patientListPanel.getPatientListView().getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Patient>() {
                     @Override
                     public void changed(ObservableValue<? extends Patient> observable,
                                         Patient oldValue, Patient newValue) {
-                        if (newValue != null) {
+                        if (newValue == null) {
+                            clearRecordPanel();
+                            return;
+                        }
+                        if (!newValue.equals(oldValue)) {
                             displayRecord(newValue);
                         }
                     }
                 }
         );
+    }
+
+    private void clearRecordPanel() {
+        recordView.getChildren().clear();
     }
 
     private void displayRecord(Patient patient) {
