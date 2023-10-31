@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_IC_NUMBER);
+            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_IC_NUMBER, PREFIX_PRIORITY);
 
         IcNumber icNumber;
 
@@ -48,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
-                PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS);
+                PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY);
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
@@ -72,6 +73,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_IC_NUMBER).isPresent()) {
             editPatientDescriptor.setIcNumber(ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
+            editPatientDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);

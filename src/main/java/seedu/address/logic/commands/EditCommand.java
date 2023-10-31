@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
@@ -32,6 +33,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.patient.Record;
 import seedu.address.model.tag.Tag;
 
@@ -53,6 +55,7 @@ public class EditCommand extends Command {
         + "[" + PREFIX_IC_NUMBER + "IC_NUMBER] "
         + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
         + "[" + PREFIX_ADDRESS + "ADDRESS] "
+        + "[" + PREFIX_PRIORITY + "PRIORITY] "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T08374678A " + PREFIX_PHONE + "91234567 "
         + PREFIX_EMAIL + "johndoe@example.com";
@@ -107,6 +110,7 @@ public class EditCommand extends Command {
         IcNumber updatedIcNumber = editPatientDescriptor.getIcNumber().orElse(patientToEdit.getIcNumber());
         Birthday updatedBirthday = editPatientDescriptor.getBirthday().orElse(patientToEdit.getBirthday());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Priority updatedPriority = editPatientDescriptor.getPriority().orElse(patientToEdit.getPriority());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         // edit command does not allow editing assigned department
         AssignedDepartment updatedDepartment = patientToEdit.getAssignedDepartment();
@@ -114,7 +118,7 @@ public class EditCommand extends Command {
 
 
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedGender, updatedIcNumber, updatedBirthday,
-                updatedAddress, updatedTags, updatedDepartment, updatedRecord);
+                updatedAddress, updatedPriority, updatedTags, updatedDepartment, updatedRecord);
     }
 
 
@@ -153,6 +157,7 @@ public class EditCommand extends Command {
         private IcNumber icNumber;
         private Birthday birthday;
         private Address address;
+        private Priority priority;
         private Set<Tag> tags;
 
         public EditPatientDescriptor() {
@@ -170,6 +175,7 @@ public class EditCommand extends Command {
             setIcNumber(toCopy.icNumber);
             setBirthday(toCopy.birthday);
             setAddress(toCopy.address);
+            setPriority(toCopy.priority);
             setTags(toCopy.tags);
         }
 
@@ -212,6 +218,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -248,6 +262,7 @@ public class EditCommand extends Command {
                     && Objects.equals(icNumber, otherEditPatientDescriptor.icNumber)
                     && Objects.equals(birthday, otherEditPatientDescriptor.birthday)
                     && Objects.equals(address, otherEditPatientDescriptor.address)
+                    && Objects.equals(priority, otherEditPatientDescriptor.priority)
                     && Objects.equals(tags, otherEditPatientDescriptor.tags);
         }
 
@@ -285,6 +300,7 @@ public class EditCommand extends Command {
                     .add("icNumber", icNumber)
                     .add("birthday", birthday)
                     .add("address", address)
+                    .add("priority", priority)
                     .add("tags", tags).toString();
         }
     }

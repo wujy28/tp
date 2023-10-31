@@ -26,6 +26,7 @@ public class Patient {
 
     // Data fields
     private final Address address;
+    private final Priority priority;
     private final Set<Tag> tags = new HashSet<>();
     private final AssignedDepartment assignedDepartment;
     private final Record record;
@@ -34,7 +35,7 @@ public class Patient {
      * Patient constructor which omits assignedDepartment and Record parameters
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
-                   Address address, Set<Tag> tags) {
+                   Address address, Priority priority, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, icNumber, birthday, address, tags);
         this.name = name;
         this.phone = phone;
@@ -43,6 +44,7 @@ public class Patient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
+        this.priority = priority;
         this.tags.addAll(tags);
         this.assignedDepartment = new AssignedDepartment(); // default Department given
         this.record = new Record(this); // creates new Record
@@ -52,7 +54,7 @@ public class Patient {
      * Patient constructor which omits Record parameter
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
-                   Address address, Set<Tag> tags, AssignedDepartment assignedDepartment) {
+                   Address address, Priority priority, Set<Tag> tags, AssignedDepartment assignedDepartment) {
         requireAllNonNull(name, phone, email, icNumber, birthday, address, tags);
         this.name = name;
         this.phone = phone;
@@ -61,6 +63,7 @@ public class Patient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
+        this.priority = priority;
         this.tags.addAll(tags);
         this.assignedDepartment = assignedDepartment;
         this.record = new Record(this); // creates new Record
@@ -70,7 +73,8 @@ public class Patient {
      * Patient constructor with all fields as parameters
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
-                   Address address, Set<Tag> tags, AssignedDepartment assignedDepartment, Record record) {
+                   Address address, Priority priority, Set<Tag> tags, AssignedDepartment assignedDepartment,
+                   Record record) {
         requireAllNonNull(name, phone, email, icNumber, birthday, address, tags);
         this.name = name;
         this.phone = phone;
@@ -79,6 +83,7 @@ public class Patient {
         this.icNumber = icNumber;
         this.birthday = birthday;
         this.address = address;
+        this.priority = priority;
         this.tags.addAll(tags);
         this.assignedDepartment = assignedDepartment;
         this.record = new Record(this);
@@ -111,6 +116,10 @@ public class Patient {
 
     public Birthday getBirthday() {
         return birthday;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     public AssignedDepartment getAssignedDepartment() {
@@ -159,8 +168,9 @@ public class Patient {
         Patient otherPatient = (Patient) other;
         return name.equals(otherPatient.name) && phone.equals(otherPatient.phone) && email.equals(otherPatient.email)
             && gender.equals(otherPatient.gender) && icNumber.equals(otherPatient.icNumber) && birthday.equals(
-            otherPatient.birthday) && address.equals(otherPatient.address) && tags.equals(otherPatient.tags)
-            && assignedDepartment.equals(otherPatient.assignedDepartment) && record.equals(otherPatient.record);
+            otherPatient.birthday) && address.equals(otherPatient.address) && priority.equals(otherPatient.priority)
+            && tags.equals(otherPatient.tags) && assignedDepartment.equals(otherPatient.assignedDepartment)
+            && record.equals(otherPatient.record);
     }
 
     @Override
@@ -172,8 +182,9 @@ public class Patient {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email).add("gender", gender)
-            .add("icNumber", icNumber).add("birthday", birthday).add("address", address).add("tags", tags)
-            .add("assignedDepartment", assignedDepartment).add("record", record).toString();
+            .add("icNumber", icNumber).add("birthday", birthday).add("address", address)
+            .add("priority", priority).add("tags", tags).add("assignedDepartment", assignedDepartment)
+            .add("record", record).toString();
     }
 
 }

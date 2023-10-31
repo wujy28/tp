@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,12 +41,12 @@ import seedu.address.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
 
     public static final Prefix[] RELEVANT_PREFIXES = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-        PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
+        PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY, PREFIX_TAG};
     public static final Prefix[] RELEVANT_PREFIXES_WITHOUT_TAG = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-        PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS};
+        PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY};
     public static final Prefix[] REQUIRED_PREFIXES = new Prefix[]{PREFIX_NAME, PREFIX_IC_NUMBER};
     public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[]{PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
-        PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
+        PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY, PREFIX_TAG};
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -89,11 +91,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         IcNumber icNumber = new IcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
         Birthday birthday = new Birthday(Birthday.getDefaultBirthday());
         Address address = new Address(Address.getDefaultAddress());
+        Priority priority = new Priority(Priority.getDefaultPriority());
         Set<Tag> tagList = new HashSet<>();
 
         // passing to helper function to replace fields with actual values if it exists
-        return createPatientFromPresentPrefixes(name, phone, email, gender, icNumber, birthday, address, tagList,
-            argMultimap, prefixes);
+        return createPatientFromPresentPrefixes(name, phone, email, gender, icNumber, birthday, address, priority,
+            tagList, argMultimap, prefixes);
     }
 
     /**
@@ -106,6 +109,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @param i           IcNumber of Patient
      * @param b           Birthday of Patient
      * @param a           Address of Patient
+     * @param pr          Priority of Patient
      * @param t           Tags of Patient
      * @param argMultimap Contains mapping of key which is prefix and value which is argument value
      * @param prefixes    List of prefixes present in argument
@@ -113,7 +117,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public static Patient createPatientFromPresentPrefixes(Name n, Phone p, Email e, Gender g, IcNumber i, Birthday b,
-                                                           Address a, Set<Tag> t, ArgumentMultimap argMultimap,
+                                                           Address a, Priority pr, Set<Tag> t,
+                                                           ArgumentMultimap argMultimap,
                                                            Prefix[] prefixes) throws ParseException {
         for (Prefix pf : prefixes) {
             switch (pf.getPrefix()) {
@@ -138,10 +143,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             case "i/":
                 i = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
                 break;
+            case "pr/":
+                pr = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
+                break;
             default:
             }
         }
-        return new Patient(n, p, e, g, i, b, a, t);
+        return new Patient(n, p, e, g, i, b, a, pr, t);
     }
 
     /**
