@@ -4,18 +4,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +26,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.patient.Patient;
-
+import seedu.address.model.patient.Record;
 
 
 /**
@@ -33,7 +36,8 @@ public class TypicalPatients {
 
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com").withGender("female")
-        .withBirthday("23/09/2000").withIcNumber("T0032415E").withPhone("94351253").withTags("friends").build();
+        .withBirthday("23/09/2000").withIcNumber("T0032415E").withPhone("94351253").withTags("friends")
+        .withRecord("Swollen left ankle", "Sprained left ankle", "Ice area for a week").build();
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
         .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withGender("male")
         .withBirthday("17/03/1987").withIcNumber("S2091742P").withPhone("98765432").withTags("owesMoney", "friends")
@@ -73,6 +77,14 @@ public class TypicalPatients {
 
     private TypicalPatients() {
     } // prevents instantiation
+
+    public static Patient getTypicalPatientWithDefaultRecord(Patient patient) {
+        Record record = patient.getRecord();
+        record.setInitialObservations(VALID_INITIAL_OBSERVATION);
+        record.setDiagnosis(VALID_DIAGNOSIS);
+        record.setTreatmentPlan(VALID_TREATMENT_PLAN);
+        return patient;
+    }
 
     /**
      * Returns an {@code AddressBook} with all the typical patients.

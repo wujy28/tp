@@ -201,6 +201,65 @@ This section describes some noteworthy details on how certain features are imple
 
 --------------------------------------------------------------------------------------------------------------------
 
+
+### Add patient feature
+
+#### Implementation
+
+The add patient operation is facilitated by `AddCommandParser`. `AddCommandParser` parses the user input string
+and creates the `AddCommand` to be executed by the `LogicManager`. `AddCommand` extends `Command` and implements the
+`Command#execute` method.
+
+Given below is an example usage scenario and how the add patient operation is handled in A&E.
+
+Step 1. Assuming the application has been launched, the user enters the required fields followed by any optional fields.
+
+For adding only required fields, the user enters `add n/John Tan i/t7654321j`, which is to add
+a patient with `Name = John Tan` and `IcNumber = t1234567j`,
+
+For adding additional optional fields, the user enters `add n/John Tan i/t7654321j p/90909090`, which is to add the
+optional field `Phone = 90909090`.
+
+The `AddCommandParser#createPatient` method creates the patient with the relevant fields and fills all optional fields
+with default values otherwise.
+
+
+Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
+command word `view` and the argument `i/t1234567j`. After splitting, `AddressBookParser#parseCommand` would identify
+that the command is `View` and instantiate `ViewCommandParser` and call its `ViewCommandParser#parse` to parse the
+argument
+accordingly.
+
+Step 3. `ViewCommandParser#parse` would first map the `IcNumber` prefix to its argument, `t1234567j`
+using `ArgumentMultimap`.
+The `ArgumentMultimap` would then be passed to `checkIcNumberPrefixPresent` to check that the `IcNumber` prefix
+is present. If `checkIcNumberPrefixPresent` returns `false`, `ParseException` is thrown.
+
+Step 4. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
+then passed as an argument along with `IcNumber` to instantiate the `ViewCommand`, which is then returned by
+`ViewCommandParser#parse`
+
+Step 5. `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
+`PatientWithIcNumberPredicate` as an argument. It then returns a `CommandResult` stating the patient
+has been listed. `PatientWithFieldNotFoundException` is thrown if no patient found.
+
+#### Design considerations:
+
+**Aspect: How to display the specified patient:**
+
+* **Alternative 1 (current choice):** Utilize current filteredPatientList display to
+  display the patient.
+    * Pros: Easy to implement.
+    * Cons: Similar way in displaying of patient(s) may lead to confusion between commands.
+
+
+* **Alternative 2:** Create a new set of JavaFx controls to display that patient differently
+  from the current filteredPatientList display.
+    * Pros: New display can be customisable for users' needs.
+      Cons: New display have to be implemented correctly to integrate with
+      existing displays.
+
+
 ### View patient feature
 
 #### Implementation

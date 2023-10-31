@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INITIAL_OBSERVATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TREATMENT_PLAN;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -48,6 +51,9 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_INITIAL_OBSERVATION = "Broken left arm";
+    public static final String VALID_DIAGNOSIS = "Hairline fracture on left arm";
+    public static final String VALID_TREATMENT_PLAN = "Carbon cast for 2 weeks";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -65,6 +71,9 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String INITIAL_OBSERVATION_DESC = " " + PREFIX_INITIAL_OBSERVATION + VALID_INITIAL_OBSERVATION;
+    public static final String DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS;
+    public static final String TREATMENT_PLAN_DESC = " " + PREFIX_TREATMENT_PLAN + VALID_TREATMENT_PLAN;
 
     public static final String FULL_DESC_BOB =
         NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
@@ -103,14 +112,9 @@ public class CommandTestUtil {
             .withBirthday(VALID_BIRTHDAY_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         REC_AMY = new EditRecordDescriptorBuilder().withInitialObservations("Broken Arm")
-                .withDiagnosis("Hairline fracture").withTreatmentPlan("Cast for 2 days").build();
+            .withDiagnosis("Hairline fracture").withTreatmentPlan("Cast for 2 days").build();
         REC_BOB = new EditRecordDescriptorBuilder().withInitialObservations("Shortness of breath and chest tightness")
-                .withDiagnosis("Asthma").withTreatmentPlan("Rest").build();
-    }
-
-    public static String getUserInputForBob() {
-        return NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB
-            + BIRTHDAY_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
+            .withDiagnosis("Asthma").withTreatmentPlan("Rest").build();
     }
 
     /**
