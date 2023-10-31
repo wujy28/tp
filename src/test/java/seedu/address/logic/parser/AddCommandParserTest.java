@@ -27,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -52,6 +53,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -114,7 +116,7 @@ public class AddCommandParserTest {
     @Test
     public void getPrefixesPresent_allPrefixesPresent_returnedCorrectPrefixList() {
         Prefix[] expectedPrefixesList = new Prefix[]{PREFIX_NAME, PREFIX_IC_NUMBER, PREFIX_PHONE, PREFIX_EMAIL,
-            PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_TAG};
+            PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY, PREFIX_TAG};
 
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(FULL_DESC_BOB, RELEVANT_PREFIXES);
         Prefix[] actualPrefixesList = AddCommandParser.getPrefixesPresent(testArgMultimap);
@@ -285,14 +287,14 @@ public class AddCommandParserTest {
 
         assertParseSuccess(parser,
             NAME_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
+                + PRIORITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
 
         // optional field Email missing (ie default email used)
         expectedPatient = new PatientBuilder(BOB).withEmail(Email.getDefaultEmail()).build();
 
         assertParseSuccess(parser,
             NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
+                + PRIORITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
 
 
         // optional field address missing (ie default gender used)
@@ -300,7 +302,7 @@ public class AddCommandParserTest {
 
         assertParseSuccess(parser,
             NAME_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
+                + PRIORITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
 
 
         // optional field address missing (ie default birthday used)
@@ -308,14 +310,22 @@ public class AddCommandParserTest {
 
         assertParseSuccess(parser,
             NAME_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
+                + PRIORITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
 
         // optional field address missing (ie default address used)
         expectedPatient = new PatientBuilder(BOB).withAddress(Address.getDefaultAddress()).build();
 
         assertParseSuccess(parser,
             NAME_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
+                + PRIORITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
+
+        // optional field priority missing (ie default priority used)
+        expectedPatient = new PatientBuilder(BOB).withPriority(Priority.getDefaultPriority()).build();
+
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB
+                        + BIRTHDAY_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                new AddCommand(expectedPatient));
     }
 
 

@@ -44,7 +44,7 @@ public class Birthday {
     }
     @Override
     public String toString() {
-        return value.toString();
+        return strValue;
     }
 
     @Override

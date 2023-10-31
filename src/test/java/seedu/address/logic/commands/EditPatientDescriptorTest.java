@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,10 @@ public class EditPatientDescriptorTest {
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        //different priority -> returns false
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withPriority(VALID_PRIORITY_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -67,7 +72,8 @@ public class EditPatientDescriptorTest {
                 + editPatientDescriptor.getIcNumber().orElse(null) + ", icNumber="
                 + editPatientDescriptor.getBirthday().orElse(null) + ", birthday="
                 + editPatientDescriptor.getEmail().orElse(null) + ", address="
-                + editPatientDescriptor.getAddress().orElse(null) + ", tags="
+                + editPatientDescriptor.getAddress().orElse(null) + ", priority="
+                + editPatientDescriptor.getPriority().orElse(null) + ", tags="
                 + editPatientDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPatientDescriptor.toString());
     }

@@ -1,20 +1,48 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPatients.*;
+import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.AMY;
+import static seedu.address.testutil.TypicalPatients.CARL;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
-import seedu.address.model.patient.*;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 
@@ -60,7 +88,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, " i/T1234567J" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, " i/T1234567J" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, " i/T1234567J" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, " i/T1234567J" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, " i/T1234567J" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
+        // invalid address
         assertParseFailure(parser, " i/T1234567J" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -68,12 +97,16 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Patient} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, " i/T1234567J" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " i/T1234567J" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " i/T1234567J" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " i/T1234567J" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
+                Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " i/T1234567J" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " i/T1234567J" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, " i/T1234567J" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, " i/T1234567J" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
+                        + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -116,25 +149,29 @@ public class EditCommandParserTest {
 
         // phone
         userInput = " i/" + targetIc.toString() + PHONE_DESC_AMY;
-        descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_AMY).withIcNumber(targetIc.toString()).build();
+        descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_AMY)
+                .withIcNumber(targetIc.toString()).build();
         expectedCommand = new EditCommand(targetIc, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = " i/" + targetIc.toString() + EMAIL_DESC_AMY;
-        descriptor = new EditPatientDescriptorBuilder().withEmail(VALID_EMAIL_AMY).withIcNumber(targetIc.toString()).build();
+        descriptor = new EditPatientDescriptorBuilder().withEmail(VALID_EMAIL_AMY)
+                .withIcNumber(targetIc.toString()).build();
         expectedCommand = new EditCommand(targetIc, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = " i/" + targetIc.toString() + ADDRESS_DESC_AMY;
-        descriptor = new EditPatientDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).withIcNumber(targetIc.toString()).build();
+        descriptor = new EditPatientDescriptorBuilder().withAddress(VALID_ADDRESS_AMY)
+                .withIcNumber(targetIc.toString()).build();
         expectedCommand = new EditCommand(targetIc, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = " i/" + targetIc.toString() + TAG_DESC_FRIEND;
-        descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).withIcNumber(targetIc.toString()).build();
+        descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND)
+                .withIcNumber(targetIc.toString()).build();
         expectedCommand = new EditCommand(targetIc, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -157,8 +194,8 @@ public class EditCommandParserTest {
 
         // multiple valid fields repeated
         userInput = " i/" + targetIc.toString() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+                + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB
+                + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
@@ -176,8 +213,8 @@ public class EditCommandParserTest {
         IcNumber targetIc = CARL.getIcNumber();
         String userInput = " i/" + targetIc.toString() + TAG_EMPTY;
 
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().
-                withTags().withIcNumber(targetIc.toString()).build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withTags().withIcNumber(targetIc.toString()).build();
         EditCommand expectedCommand = new EditCommand(targetIc, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

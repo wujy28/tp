@@ -20,17 +20,17 @@ public class PriorityTest {
 
     @Test
     public void isValidPriority() {
-        // null gender
+        // null priority
         assertThrows(NullPointerException.class, () -> Priority.isValidPriority(null));
 
-        // invalid gender
+        // invalid priority
         assertFalse(Priority.isValidPriority("")); // empty string
         assertFalse(Priority.isValidPriority(" ")); // spaces only
         assertFalse(Priority.isValidPriority("^")); // only non-alphanumeric characters
         assertFalse(Priority.isValidPriority("low*")); // contains non-alphanumeric characters
         assertFalse(Priority.isValidPriority("mid")); // not in Priorities enum
 
-        // valid gender
+        // valid priority
         assertTrue(Priority.isValidPriority("nil")); // lowercase only
         assertTrue(Priority.isValidPriority("low"));
         assertTrue(Priority.isValidPriority("medium"));

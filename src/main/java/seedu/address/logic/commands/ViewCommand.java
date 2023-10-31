@@ -34,7 +34,7 @@ public class ViewCommand extends Command {
      * @param icNumberToFind The icNumber entered by user input to be find
      */
     public ViewCommand(PatientWithIcNumberPredicate predicate, IcNumber icNumberToFind)
-        throws PatientWithFieldNotFoundException {
+            throws PatientWithFieldNotFoundException {
         if (icNumberToFind == null) {
             throw new PatientWithFieldNotFoundException("Multiplicity violated. Each patient has 1 non-null IcNumber.");
         }
