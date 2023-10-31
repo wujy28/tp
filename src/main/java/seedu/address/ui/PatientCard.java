@@ -30,8 +30,8 @@ public class PatientCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
+    // @FXML
+    // private Label id;
     @FXML
     private Label icNumber;
     @FXML
@@ -40,8 +40,8 @@ public class PatientCard extends UiPart<Region> {
     private Label birthday;
     @FXML
     private Label phone;
-    @FXML
-    private Label address;
+    // @FXML
+    // /private Label address;
     @FXML
     private Label email;
     @FXML
@@ -55,13 +55,13 @@ public class PatientCard extends UiPart<Region> {
     public PatientCard(Patient patient, int displayedIndex) {
         super(FXML);
         this.patient = patient;
-        id.setText(displayedIndex + ". ");
+        // id.setText(displayedIndex + ". ");
         name.setText(patient.getName().fullName);
         icNumber.setText(patient.getIcNumber().value);
         gender.setText(patient.getGender().value);
         birthday.setText(patient.getBirthday().toString());
         phone.setText(patient.getPhone().value);
-        address.setText(patient.getAddress().value);
+        // address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
         assignedDepartment.setText(patient.getAssignedDepartment().toString());
         patient.getTags().stream()

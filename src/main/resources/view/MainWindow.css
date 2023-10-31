@@ -11,10 +11,26 @@
 /*    -fx-background-color: #888888;*/
 /*}*/
 
+@font-face {
+    -fx-font-family: 'Inter Medium';
+    src: url('../fonts/Inter/static/Inter-Medium.ttf');
+}
+
 #menuBar {
     -fx-background-color: #3C4EEF;
-    -fx-text-fill: #B9CCFF
-;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #B9CCFF;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 15px;
+    -fx-opacity: 1;
+}
+.menu-item .label {
+    -fx-text-fill: #3C4EEF;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 15px;
+    -fx-opacity: 1;
 }
 
 #minimizeButton, #maximizeButton {
@@ -40,4 +56,8 @@
     -fx-text-fill: white;
     -fx-border-color: transparent;
     -fx-padding: 5px;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: #B9CCFF;
 }
