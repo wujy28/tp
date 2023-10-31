@@ -3,9 +3,17 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_PATIENT_LISTED_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.REC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.RecordCommand.MESSAGE_EDIT_RECORD_SUCCESS;
+import static seedu.address.logic.commands.RecordCommand.createEditedRecord;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.AMY;
@@ -17,12 +25,16 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.PatientWithIcNumberPredicate;
+import seedu.address.model.patient.Record;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RecordCommand.
@@ -30,15 +42,16 @@ import seedu.address.model.patient.Patient;
 public class RecordCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         RecordCommand recordCommand = new RecordCommand(ALICE.getIcNumber(), new RecordCommand.EditRecordDescriptor());
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Patient> lastShownList = model.getCurrentPatientList();
         Patient editedPatient = model.getPatient(ALICE.getIcNumber(), lastShownList);
 
-        String expectedMessage = String.format(RecordCommand.MESSAGE_EDIT_RECORD_SUCCESS,
-                Messages.formatRecord(editedPatient, editedPatient.getRecord()));
+        String expectedMessage = String.format(MESSAGE_EDIT_RECORD_SUCCESS,
+            Messages.formatRecord(editedPatient, editedPatient.getRecord()));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -46,10 +59,41 @@ public class RecordCommandTest {
     }
 
     @Test
-    public void execute_invalidPatientIcList_failure() {
-        String invalidIC = "";
-        assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
-        //Hence RecordCommand cannot be executed because of illegal argument exception in IC
+    public void execute_icNumberOfExistingPatient_patientFound() throws PatientWithFieldNotFoundException {
+        IcNumber testIcNumber1 = new IcNumber("T0032415E"); // ALICE's ic number
+        RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
+        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION);
+        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS);
+        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN);
+
+        RecordCommand command = new RecordCommand(testIcNumber1, testEditRecordDescriptor);
+
+        expectedModel.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+
+        Record expectedRecord = ALICE.getRecord();
+        expectedRecord.setInitialObservations(VALID_INITIAL_OBSERVATION);
+        expectedRecord.setDiagnosis(VALID_DIAGNOSIS);
+        expectedRecord.setTreatmentPlan(VALID_TREATMENT_PLAN);
+
+        assertCommandSuccess(command, model,
+            String.format(MESSAGE_EDIT_RECORD_SUCCESS, Messages.formatRecord(ALICE, expectedRecord)), expectedModel);
+    }
+
+    @Test
+    public void execute_icNumberOfNonExistingPatient_exceptionThrown() throws PatientWithFieldNotFoundException {
+        IcNumber testIcNumber1 = new IcNumber("T1234567j");
+        RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
+        RecordCommand command = new RecordCommand(testIcNumber1, testEditRecordDescriptor);
+
+        boolean exceptionThrown = false;
+        try {
+            command.execute(model);
+        } catch (PatientWithFieldNotFoundException | CommandException e) {
+            exceptionThrown = true;
+            assertEquals(e.getMessage(),
+                MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
+        }
+        assertTrue(exceptionThrown);
     }
 
     @Test
@@ -83,7 +127,7 @@ public class RecordCommandTest {
         RecordCommand.EditRecordDescriptor editRecordDescriptor = new RecordCommand.EditRecordDescriptor();
         RecordCommand recordCommand = new RecordCommand(targetIc, editRecordDescriptor);
         String expected = RecordCommand.class.getCanonicalName() + "{icNumber=" + targetIc + ", editRecordDescriptor="
-                + editRecordDescriptor + "}";
+            + editRecordDescriptor + "}";
         assertEquals(expected, recordCommand.toString());
     }
 
