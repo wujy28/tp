@@ -41,7 +41,7 @@ public class PatientBuilder {
     private Priority priority;
     private Set<Tag> tags;
     private AssignedDepartment assignedDepartment;
-    private final Record record;
+    private Record record;
 
     /**
      * Creates a {@code PatientBuilder} with the default details.
@@ -149,6 +149,27 @@ public class PatientBuilder {
         return this;
     }
 
+
+    /**
+     * Sets the {@code AssignedDepartment} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAssignedDepartment(String department) {
+        this.assignedDepartment = new AssignedDepartment(department);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Record} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withRecord(String initialObservation, String diagnosis, String treatmentPlan) {
+        Record record = new Record();
+        record.setInitialObservations(initialObservation);
+        record.setDiagnosis(diagnosis);
+        record.setTreatmentPlan(treatmentPlan);
+        this.record = record;
+        return this;
+    }
+
     /**
      * Takes a PatientBuilder and initialize all fields with the default value
      *
@@ -163,14 +184,6 @@ public class PatientBuilder {
         address = new Address(Address.getDefaultAddress());
         priority = new Priority(Priority.getDefaultPriority());
         tags = new HashSet<>();
-        return this;
-    }
-
-    /**
-     * Sets the {@code AssignedDepartment} of the {@code Patient} that we are building.
-     */
-    public PatientBuilder withAssignedDepartment(String department) {
-        this.assignedDepartment = new AssignedDepartment(department);
         return this;
     }
 

@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AssignCommand;
+import seedu.address.logic.commands.RecordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.AssignedDepartment;
 import seedu.address.model.patient.IcNumber;
@@ -17,6 +18,7 @@ import seedu.address.model.patient.IcNumber;
  * Parses input arguments and creates a new AssignCommand object
  */
 public class AssignCommandParser implements Parser<AssignCommand> {
+    public static final Prefix[] RELEVANT_PREFIXES = new Prefix[]{PREFIX_IC_NUMBER, PREFIX_DEPARTMENT};
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
@@ -27,24 +29,30 @@ public class AssignCommandParser implements Parser<AssignCommand> {
      */
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_IC_NUMBER, PREFIX_DEPARTMENT);
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IC_NUMBER, PREFIX_DEPARTMENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, RELEVANT_PREFIXES);
+        if (!checkIcNumberPrefixPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES);
 
         IcNumber icNumber;
-        try {
-            icNumber = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
-        }
+        icNumber = ParserUtil.parseIcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
         assert icNumber != null;
 
         AssignedDepartment department;
         department = ParserUtil.parseAssignedDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
         assert department != null;
 
-        logger.info(String.format("AssignCommand object with IC Number: %s and Department: %s created",
-                icNumber, department));
+        logger.info(
+            String.format("AssignCommand object with IC Number: %s and Department: %s created", icNumber, department));
         return new AssignCommand(icNumber, department);
+    }
+
+    /**
+     * Returns true if IcNumber field present and value is non empty
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean checkIcNumberPrefixPresent(ArgumentMultimap argumentMultimap) {
+        return argumentMultimap.getValue(PREFIX_IC_NUMBER).isPresent();
     }
 }

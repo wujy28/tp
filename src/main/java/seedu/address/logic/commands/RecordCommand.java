@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Record;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * Edits the Patient Record with a certain {@Code IcNumber}
@@ -28,15 +29,13 @@ import seedu.address.model.patient.Record;
 public class RecordCommand extends Command {
     public static final String COMMAND_WORD = "record";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the record of the patient identified "
-            + "by their IC Number. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: i/IC_NUMBER "
-            + "[" + PREFIX_INITIAL_OBSERVATION + "INITIAL_OBSERVATIONS] "
-            + "[" + PREFIX_DIAGNOSIS + "DIAGNOSIS] "
-            + "[" + PREFIX_TREATMENT_PLAN + "TREATMENT_PLAN] "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T0472687A " + PREFIX_INITIAL_OBSERVATION
-            + "Sneezing " + PREFIX_DIAGNOSIS + "Flu " + PREFIX_TREATMENT_PLAN + "Take medicine";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Edits the record of the patient identified " + "by their IC Number. "
+            + "Existing values will be overwritten by the input values.\n" + "Parameters: i/IC_NUMBER " + "["
+            + PREFIX_INITIAL_OBSERVATION + "INITIAL_OBSERVATIONS] " + "[" + PREFIX_DIAGNOSIS + "DIAGNOSIS] " + "["
+            + PREFIX_TREATMENT_PLAN + "TREATMENT_PLAN] " + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER
+            + "T0472687A " + PREFIX_INITIAL_OBSERVATION + "Sneezing " + PREFIX_DIAGNOSIS + "Flu "
+            + PREFIX_TREATMENT_PLAN + "Take medicine";
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Patient Record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -57,14 +56,13 @@ public class RecordCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Patient> currentPatientList = model.getCurrentPatientList();
+        Patient patientToEdit = model.getPatient(icNumber, currentPatientList);
 
-        Patient patientToEdit = model.getPatient(icNumber, lastShownList);
-
-        if (!model.hasPatient(patientToEdit)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_IC);
+        if (patientToEdit == null) {
+            throw new PatientWithFieldNotFoundException("Ic Number : " + icNumber.value);
         }
 
         Record recordToEdit = patientToEdit.getRecord();
@@ -72,20 +70,20 @@ public class RecordCommand extends Command {
 
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         logger.info("RecordCommand : " + this + "\nsuccessfully executed");
-        return new CommandResult(String.format(MESSAGE_EDIT_RECORD_SUCCESS, Messages.formatRecord(patientToEdit,
-                recordToEdit)));
+        return new CommandResult(
+            String.format(MESSAGE_EDIT_RECORD_SUCCESS, Messages.formatRecord(patientToEdit, recordToEdit)));
     }
 
     /**
-     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
-     * edited with {@code editPatientDescriptor}.
+     * Creates and edits a {@code Record} with the details of {@code recordToEdit}
+     * edited with {@code editRecordDescriptor}.
      */
-    private static void createEditedRecord(Record recordToEdit, RecordCommand.EditRecordDescriptor
-            editRecordDescriptor) {
+    public static void createEditedRecord(Record recordToEdit,
+                                           RecordCommand.EditRecordDescriptor editRecordDescriptor) {
         assert recordToEdit != null;
 
-        String updatedInitialObservations = editRecordDescriptor.getInitialObservations().orElse(
-                recordToEdit.getInitialObservations());
+        String updatedInitialObservations = editRecordDescriptor.getInitialObservations()
+            .orElse(recordToEdit.getInitialObservations());
         String updatedDiagnosis = editRecordDescriptor.getDiagnosis().orElse(recordToEdit.getDiagnosis());
         String updatedTreatmentPlan = editRecordDescriptor.getTreatmentPlan().orElse(recordToEdit.getTreatmentPlan());
 
@@ -107,14 +105,13 @@ public class RecordCommand extends Command {
 
         RecordCommand otherRecordCommand = (RecordCommand) other;
         return icNumber.equals(otherRecordCommand.icNumber) && editRecordDescriptor.equals(
-                otherRecordCommand.editRecordDescriptor);
+            otherRecordCommand.editRecordDescriptor);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("icNumber", icNumber)
-                .add("editRecordDescriptor", editRecordDescriptor)
-                .toString();
+        return new ToStringBuilder(this).add("icNumber", icNumber).add("editRecordDescriptor", editRecordDescriptor)
+            .toString();
     }
 
     /**
@@ -182,17 +179,15 @@ public class RecordCommand extends Command {
             }
 
             RecordCommand.EditRecordDescriptor otherEditRecordDescriptor = (RecordCommand.EditRecordDescriptor) other;
-            return Objects.equals(initialObservations, otherEditRecordDescriptor.initialObservations)
-                    && Objects.equals(diagnosis, otherEditRecordDescriptor.diagnosis)
-                    && Objects.equals(treatmentPlan, otherEditRecordDescriptor.treatmentPlan);
+            return Objects.equals(initialObservations, otherEditRecordDescriptor.initialObservations) && Objects.equals(
+                diagnosis, otherEditRecordDescriptor.diagnosis) && Objects.equals(treatmentPlan,
+                otherEditRecordDescriptor.treatmentPlan);
         }
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("initialObservations", initialObservations)
-                    .add("diagnosis", diagnosis)
-                    .add("treatmentPlan", treatmentPlan).toString();
+            return new ToStringBuilder(this).add("initialObservations", initialObservations).add("diagnosis", diagnosis)
+                .add("treatmentPlan", treatmentPlan).toString();
         }
     }
 }
