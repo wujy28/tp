@@ -39,6 +39,9 @@ class JsonAdaptedPatient {
     private final String priority;
     private final String assignedDepartment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private String initialObservations;
+    private String diagnosis;
+    private String treatmentPlan;
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -50,7 +53,11 @@ class JsonAdaptedPatient {
                               @JsonProperty("address") String address,
                               @JsonProperty("priority") String priority,
                               @JsonProperty("assignedDepartment") String assignedDepartment,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags
+//                              @JsonProperty("initialObservations") String initialObservations,
+//                              @JsonProperty("diagnosis") String diagnosis,
+//                              @JsonProperty("treatmentPlan") String treatmentPlan
+    ) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -63,6 +70,10 @@ class JsonAdaptedPatient {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+
+//        this.initialObservations = initialObservations;
+//        this.diagnosis = diagnosis;
+//        this.treatmentPlan = treatmentPlan;
     }
 
     /**
@@ -79,6 +90,9 @@ class JsonAdaptedPatient {
         priority = source.getPriority().value;
         assignedDepartment = source.getAssignedDepartment().toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+//        initialObservations = source.getRecord().getInitialObservations();
+//        diagnosis = source.getRecord().getDiagnosis();
+//        treatmentPlan = source.getRecord().getTreatmentPlan();
     }
 
     /**
