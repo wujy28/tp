@@ -85,15 +85,15 @@ public class RecordCommandTest {
         RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
         RecordCommand command = new RecordCommand(testIcNumber1, testEditRecordDescriptor);
 
-        boolean exceptionThrown = false;
+        boolean isExceptionThrown = false;
         try {
             command.execute(model);
         } catch (PatientWithFieldNotFoundException | CommandException e) {
-            exceptionThrown = true;
+            isExceptionThrown = true;
             assertEquals(e.getMessage(),
                 MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
         }
-        assertTrue(exceptionThrown);
+        assertTrue(isExceptionThrown);
     }
 
     @Test

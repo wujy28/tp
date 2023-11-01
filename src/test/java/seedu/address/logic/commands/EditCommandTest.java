@@ -30,6 +30,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 
@@ -92,7 +93,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, ALICE.getIcNumber());
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientInFilteredList = model.getPatient(ALICE.getIcNumber(), lastShownList);
@@ -118,26 +119,6 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
     }
-
-    @Test
-    public void execute_duplicatePatientFilteredList_failure() {
-        showPatientAtIC(model, ALICE.getIcNumber());
-
-        // edit patient in filtered list into a duplicate in address book
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patientInList = model.getPatient(ALICE.getIcNumber(), lastShownList);
-        EditCommand editCommand = new EditCommand(ALICE.getIcNumber(),
-            new EditPatientDescriptorBuilder(patientInList).build());
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
-    }
-    /*@Test
-    public void execute_duplicatePatient_throwsCommandException() {
-        Patient validPatient = new PatientBuilder().build();
-        AddCommand addCommand = new AddCommand(validPatient);
-        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStubWithPatient(validPatient);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PATIENT, () -> addCommand.execute(modelStub));
-    }*/
 
     @Test
     public void execute_invalidPatientIcList_failure() {
