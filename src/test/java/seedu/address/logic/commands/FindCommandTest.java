@@ -63,14 +63,14 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
 
-        boolean exceptionThrown = false;
+        boolean isExceptionThrown = false;
         try {
             command.execute(model);
         } catch (PatientWithFieldNotFoundException e) {
-            exceptionThrown = true;
+            isExceptionThrown = true;
             assertEquals(e.getMessage(), expectedMessage);
         }
-        assertTrue(exceptionThrown);
+        assertTrue(isExceptionThrown);
         assertEquals(Collections.emptyList(), model.getFilteredPatientList());
     }
 

@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.EditRecordDescriptorBuilder;
@@ -190,12 +191,8 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the patient with the given {@code icNumber} in the
      * {@code model}'s address book.
      */
-    public static void showPatientAtIC(Model model, IcNumber icNumber) {
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patient = model.getPatient(icNumber, lastShownList);
-        final String[] splitName = patient.getName().fullName.split("\\s+");
-        model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-        assertEquals(1, model.getFilteredPatientList().size());
+    public static void showPatientAtIC(Model model, IcNumber icNumber) throws PatientWithFieldNotFoundException {
+        model.updateFilteredPatientList(new PatientWithIcNumberPredicate(icNumber));
     }
 
 }
