@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Record;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -24,31 +23,15 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
-    //private final List<JsonAdaptedRecord> records = new ArrayList<>();
-
-    /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given patients.
-     */
-    @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
-        this.patients.addAll(patients);
-    }
+    private final List<JsonAdaptedRecord> records = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given patients and records.
      */
     @JsonCreator
-//    public JsonSerializableAddressBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients,
-//                                       @JsonProperty("records") List<JsonAdaptedRecord> records) {
-//        //this.patients.addAll(patients);
-//        //this.records.addAll(records);
-//        if (patients != null) {
-//            this.patients.addAll(patients);
-//        }
-//        if (records != null) {
-//            this.records.addAll(records);
-//        }
-//    }
+    public JsonSerializableAddressBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
+        this.patients.addAll(patients);
+    }
 
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
@@ -75,13 +58,6 @@ class JsonSerializableAddressBook {
             addressBook.addPatient(patient);
         }
 
-//        for (JsonAdaptedRecord jsonAdaptedRecord : records) {
-//            Record record = jsonAdaptedRecord.toModelType();
-//            if (addressBook.hasRecord(record)) {
-//                throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
-//            }
-//            addressBook.addRecord(record);
-//        }
 
         return addressBook;
     }
