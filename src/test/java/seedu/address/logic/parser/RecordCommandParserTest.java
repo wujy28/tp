@@ -1,10 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.RecordCommand;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DIAGNOSIS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.IC_NUMBER_DESC_AMY;
@@ -18,6 +13,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPatients.AMY;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.RecordCommand;
 
 public class RecordCommandParserTest {
 

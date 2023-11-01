@@ -207,6 +207,7 @@ public class EditCommandParserTest {
         userInput = IC_NUMBER_DESC_AMY + PRIORITY_DESC_AMY;
         descriptor = new EditPatientDescriptorBuilder().withPriority(VALID_PRIORITY_AMY)
             .withIcNumber(VALID_IC_NUMBER_AMY).build();
+
         expectedCommand = new EditCommand(targetIc, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -218,9 +219,11 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
+
         userInput = IC_NUMBER_DESC_AMY + TAG_DESC_FRIEND;
         descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).withIcNumber(targetIc.toString())
             .build();
+
         expectedCommand = new EditCommand(targetIc, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -242,6 +245,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple valid fields repeated
+
         userInput =
             IC_NUMBER_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY
                 + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
@@ -264,8 +268,10 @@ public class EditCommandParserTest {
         IcNumber targetIc = CARL.getIcNumber();
         String userInput = " i/" + targetIc.toString() + TAG_EMPTY;
 
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withTags()
-            .withIcNumber(targetIc.toString()).build();
+
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withTags().withIcNumber(targetIc.toString()).build();
+
         EditCommand expectedCommand = new EditCommand(targetIc, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

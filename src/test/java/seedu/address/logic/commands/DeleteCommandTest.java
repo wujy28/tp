@@ -16,13 +16,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**

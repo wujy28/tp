@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PATIENT_LISTED_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.REC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REC_BOB;
@@ -12,9 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVA
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.RecordCommand.MESSAGE_EDIT_RECORD_SUCCESS;
-import static seedu.address.logic.commands.RecordCommand.createEditedRecord;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.AMY;
 import static seedu.address.testutil.TypicalPatients.BENSON;
@@ -32,7 +29,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.Record;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
