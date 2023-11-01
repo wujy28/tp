@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+//import javax.swing.*;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -101,13 +102,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Patient getPatient(IcNumber icNumber, List<Patient> patientList){
-        for (int i = 0; i < patientList.size(); i++) {
-            if(patientList.get(i).getIcNumber().equals(icNumber))
-                return patientList.get(i);
+    public Patient getPatient(IcNumber icNumber, List<Patient> patientList) {
+        for (Patient patient : patientList) {
+            if (patient.getIcNumber().equals(icNumber)) {
+                return patient;
+            }
         }
         return null;
     }
+
 
     @Override
     public void addPatient(Patient patient) {
@@ -121,6 +124,34 @@ public class ModelManager implements Model {
 
         addressBook.setPatient(target, editedPatient);
     }
+
+    /**
+     * Returns true if a {@Code Patient} with that {@Code IcNumber} is present
+     *
+     * @param icNumber IcNumber to be checked
+     * @return true Patient with that IcNumber is present
+     */
+    @Override
+    public boolean isPatientWithIcNumberPresent(IcNumber icNumber) {
+        List<Patient> currentPatientList = getCurrentPatientList();
+        for (Patient patient : currentPatientList) {
+            if (patient.getIcNumber().equals(icNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Returns the current list of {@code Patient} in the address book
+     *
+     * @return Current list of {@code Patient} in the address book
+     */
+    public ObservableList<Patient> getCurrentPatientList() {
+        return addressBook.getCurrentPatientList();
+    }
+
 
     //=========== Filtered Patient List Accessors =============================================================
 
@@ -151,9 +182,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPatients.equals(otherModelManager.filteredPatients);
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 
 }

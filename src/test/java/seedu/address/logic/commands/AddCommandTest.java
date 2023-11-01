@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PatientBuilder.DEFAULT_IC_NUMBER;
 import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.BOB;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validPatient).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPatient), modelStub.patientsAdded);
     }
 
@@ -53,6 +55,17 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPatient(validPatient);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PATIENT, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_patientWithExistingIcNumber_throwsCommandException() {
+        Patient existingPatient = new PatientBuilder().build();
+        Patient newPatient = new PatientBuilder(BOB).withIcNumber(DEFAULT_IC_NUMBER).build();
+        AddCommand addCommand = new AddCommand(newPatient);
+        ModelStub modelStub = new ModelStubWithPatientAndUniqueIcNumberCheck(existingPatient);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -126,6 +139,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isPatientWithIcNumberPresent(IcNumber icNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Patient> getCurrentPatientList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
         public void addPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
@@ -184,6 +208,7 @@ public class AddCommandTest {
         }
     }
 
+
     /**
      * A Model stub that always accept the patient being added.
      */
@@ -203,9 +228,47 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isPatientWithIcNumberPresent(IcNumber icNumber) {
+            for (Patient patient : patientsAdded) {
+                if (patient.getIcNumber().equals(icNumber)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
 
+    /**
+     * A Model stub that accepts the patient being added if it passes isPatientWithIcNumberPresent check
+     */
+    private class ModelStubWithPatientAndUniqueIcNumberCheck extends ModelStub {
+        private final Patient patient;
+
+        ModelStubWithPatientAndUniqueIcNumberCheck(Patient patient) {
+            requireNonNull(patient);
+            this.patient = patient;
+        }
+
+        @Override
+        public boolean hasPatient(Patient patient) {
+            requireNonNull(patient);
+            return this.patient.isSamePatient(patient);
+        }
+
+        @Override
+        public boolean isPatientWithIcNumberPresent(IcNumber icNumber) {
+            List<Patient> currentPatientList = new ArrayList<>();
+            currentPatientList.add(patient);
+            for (Patient patient : currentPatientList) {
+                if (patient.getIcNumber().equals(icNumber)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }

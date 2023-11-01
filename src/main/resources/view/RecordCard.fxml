@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -9,10 +11,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
 
-<HBox id="cardPane" fx:id="cardPane" prefWidth="400.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
+<HBox id="cardPane" fx:id="cardPane" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="name" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@RecordCard.css" />
+   </stylesheets>
+   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
@@ -20,7 +24,7 @@
       <padding>
         <Insets bottom="5.0" left="15.0" right="5.0" top="10.0" />
       </padding>
-     <Label fx:id="name" styleClass="label-header" text="\$name">
+     <Label id="name" fx:id="name" styleClass="label-header" text="\$name">
             <font>
                <Font size="25.0" />
             </font>
@@ -31,14 +35,14 @@
          <VBox>
             <children>
             <FlowPane fx:id="tags" />
-               <HBox>
+               <HBox alignment="BASELINE_LEFT">
                   <children>
-                     <Label styleClass="label-bright" text="NRIC Number:">
+                     <Label styleClass="fieldLabel" text="NRIC Number">
                         <padding>
                            <Insets right="5.0" />
                         </padding>
                      </Label>
-                  <Label fx:id="icNumber" styleClass="label-bright" text="\$icNumber">
+                  <Label fx:id="icNumber" styleClass="fieldText" text="\$icNumber">
                         <font>
                            <Font name="System Bold" size="13.0" />
                         </font>
@@ -57,68 +61,71 @@
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
-                     <HBox>
+                     <HBox alignment="BASELINE_LEFT">
                         <children>
-                           <Label styleClass="label-bright" text="Gender:">
+                           <Label styleClass="fieldLabel" text="Gender">
                               <padding>
                                  <Insets right="5.0" />
                               </padding>
                            </Label>
-                        <Label fx:id="gender" styleClass="label-bright" text="\$gender" />
+                        <Label fx:id="gender" styleClass="fieldText" text="\$gender" />
                         </children>
                         <padding>
                            <Insets bottom="5.0" />
                         </padding>
                      </HBox>
-                     <HBox GridPane.columnIndex="1">
+                     <HBox alignment="BASELINE_LEFT" GridPane.columnIndex="1">
                         <children>
-                           <Label styleClass="label-bright" text="Birthday:">
+                           <Label styleClass="fieldLabel" text="Birthday">
                               <padding>
                                  <Insets right="5.0" />
                               </padding>
                            </Label>
-                        <Label fx:id="birthday" styleClass="label-bright" text="\$birthday" />
+                        <Label fx:id="birthday" styleClass="fieldText" text="\$birthday" />
                         </children>
                         <padding>
                            <Insets bottom="5.0" />
                         </padding>
                      </HBox>
                   </children>
+                  <VBox.margin>
+                     <Insets bottom="3.0" top="3.0" />
+                  </VBox.margin>
                </GridPane>
-               <HBox>
+               <HBox alignment="BASELINE_LEFT">
                   <children>
-                     <Label styleClass="label-bright" text="Phone Number:">
+                     <Label styleClass="fieldLabel" text="Phone Number">
                         <padding>
                            <Insets right="5.0" />
                         </padding>
                      </Label>
-                  <Label fx:id="phone" styleClass="label-bright" text="\$phone" />
+                  <Label fx:id="phone" styleClass="fieldText" text="\$phone" />
                   </children>
                   <padding>
                      <Insets bottom="5.0" />
                   </padding>
                </HBox>
-               <HBox>
+               <HBox alignment="BASELINE_LEFT">
                   <children>
-                     <Label styleClass="label-bright" text="Email Address:">
+                     <Label styleClass="fieldLabel" text="Email Address">
                         <padding>
                            <Insets right="5.0" />
                         </padding>
                      </Label>
-                  <Label fx:id="email" styleClass="label-bright" text="\$email" />
+                  <Label fx:id="email" styleClass="fieldText" text="\$email" />
                   </children>
                   <padding>
                      <Insets bottom="5.0" />
                   </padding>
                </HBox>
-               <HBox>
+               <HBox alignment="BASELINE_LEFT">
                   <children>
-                     <Label styleClass="label-bright" text="Address:">
+                     <Label styleClass="fieldLabel" text="Address">
                         <padding>
                            <Insets right="5.0" />
                         </padding>
                      </Label>
-                  <Label fx:id="address" styleClass="label-bright" text="\$address" />
+                  <Label fx:id="address" styleClass="fieldText" text="\$address" />
                   </children>
                   <padding>
                      <Insets bottom="5.0" />
@@ -131,14 +138,14 @@
          </VBox>
          <VBox>
             <children>
-               <HBox>
+               <HBox alignment="BASELINE_LEFT">
                   <children>
-                     <Label styleClass="label-bright" text="Department:">
+                     <Label styleClass="fieldLabel" text="Department">
                         <padding>
                            <Insets right="5.0" />
                         </padding>
                      </Label>
-                     <Label fx:id="assignedDepartment" styleClass="label-bright" text="\$department">
+                     <Label fx:id="assignedDepartment" styleClass="fieldText" text="\$department">
                         <font>
                            <Font name="System Bold" size="13.0" />
                         </font>
@@ -148,89 +155,46 @@
                      <Insets bottom="5.0" />
                   </padding>
                </HBox>
-               <GridPane>
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="186.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="248.0" minWidth="10.0" prefWidth="194.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
+               <VBox maxWidth="500.0" prefHeight="480.0" prefWidth="100.0">
                   <children>
-                     <VBox prefHeight="200.0" prefWidth="100.0">
+                     <VBox prefHeight="150.0" prefWidth="190.0" VBox.vgrow="ALWAYS">
                         <children>
-                           <Label styleClass="label-bright" text="Observation">
-                              <padding>
-                                 <Insets right="5.0" />
-                              </padding>
-                           </Label>
-                           <TextFlow fx:id="initialObservations" style="-fx-background-color: #3c3e3f;">
-                              <VBox.margin>
-                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                              </VBox.margin>
+                           <Label styleClass="fieldLabel" text="Observation">
                               <padding>
                                  <Insets bottom="5.0" />
                               </padding>
-                           </TextFlow>
+                           </Label>
+                           <TextArea fx:id="initialObservations" editable="false" prefHeight="200.0" prefWidth="380.0" VBox.vgrow="ALWAYS" />
                         </children>
                      </VBox>
-                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                     <VBox prefHeight="150.0" prefWidth="190.0" VBox.vgrow="ALWAYS">
                         <children>
-                           <Label styleClass="label-bright" text="Diagnosis">
-                              <padding>
-                                 <Insets right="5.0" />
-                              </padding>
-                           </Label>
-                           <TextFlow fx:id="diagnosis" style="-fx-background-color: #3c3e3f;" styleClass="stack-pane">
-                              <VBox.margin>
-                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                              </VBox.margin>
+                           <Label styleClass="fieldLabel" text="Diagnosis">
                               <padding>
                                  <Insets bottom="5.0" />
                               </padding>
-                           </TextFlow>
-                        </children>
-                     </VBox>
-                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-                        <children>
-                           <Label styleClass="label-bright" text="Treatment Plan">
-                              <padding>
-                                 <Insets right="5.0" top="5.0" />
-                              </padding>
                            </Label>
-                           <TextFlow fx:id="treatmentPlan" style="-fx-background-color: #3c3e3f;" styleClass="stack-pane">
-                              <VBox.margin>
-                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                              </VBox.margin>
-                           </TextFlow>
+                           <TextArea fx:id="diagnosis" editable="false" prefHeight="200.0" prefWidth="200.0" />
                         </children>
                         <padding>
                            <Insets top="10.0" />
                         </padding>
                      </VBox>
-                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <VBox prefHeight="150.0" prefWidth="190.0" VBox.vgrow="ALWAYS">
                         <children>
-                           <Label styleClass="label-bright" text="Remarks">
+                           <Label styleClass="fieldLabel" text="Treatment Plan">
                               <padding>
-                                 <Insets right="5.0" top="5.0" />
+                                 <Insets bottom="5.0" />
                               </padding>
                            </Label>
-                           <TextFlow fx:id="remarks" style="-fx-background-color: #3c3e3f;" styleClass="stack-pane">
-                              <VBox.margin>
-                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                              </VBox.margin>
-                           </TextFlow>
+                           <TextArea fx:id="treatmentPlan" editable="false" prefHeight="200.0" prefWidth="200.0" />
                         </children>
                         <padding>
                            <Insets top="10.0" />
                         </padding>
                      </VBox>
                   </children>
-                  <padding>
-                     <Insets top="5.0" />
-                  </padding>
-               </GridPane>
+               </VBox>
             </children>
          </VBox>
     </VBox>
@@ -238,4 +202,7 @@
          <RowConstraints />
       </rowConstraints>
   </GridPane>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </HBox>

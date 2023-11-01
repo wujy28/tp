@@ -12,6 +12,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.patient.Record;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -28,6 +29,7 @@ public class PatientBuilder {
     public static final String DEFAULT_IC_NUMBER = "t1234567j";
     public static final String DEFAULT_BIRTHDAY = "21/01/1994";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_PRIORITY = "Medium";
 
     private Name name;
     private Phone phone;
@@ -36,9 +38,10 @@ public class PatientBuilder {
     private IcNumber icNumber;
     private Birthday birthday;
     private Address address;
+    private Priority priority;
     private Set<Tag> tags;
     private AssignedDepartment assignedDepartment;
-    private final Record record;
+    private Record record;
 
     /**
      * Creates a {@code PatientBuilder} with the default details.
@@ -51,6 +54,7 @@ public class PatientBuilder {
         icNumber = new IcNumber(DEFAULT_IC_NUMBER);
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         address = new Address(DEFAULT_ADDRESS);
+        priority = new Priority(DEFAULT_PRIORITY);
         tags = new HashSet<>();
         assignedDepartment = new AssignedDepartment();
         record = new RecordBuilder(this).build();
@@ -67,6 +71,7 @@ public class PatientBuilder {
         gender = patientToCopy.getGender();
         icNumber = patientToCopy.getIcNumber();
         birthday = patientToCopy.getBirthday();
+        priority = patientToCopy.getPriority();
         tags = new HashSet<>(patientToCopy.getTags());
         assignedDepartment = patientToCopy.getAssignedDepartment();
         record = patientToCopy.getRecord();
@@ -120,7 +125,6 @@ public class PatientBuilder {
         return this;
     }
 
-
     /**
      * Sets the {@code Address} of the {@code Patient} that we are building.
      */
@@ -129,12 +133,40 @@ public class PatientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Priority} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withPriority(String priority) {
+        this.priority = new Priority(priority);
+        return this;
+    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Patient} that we are building.
      */
     public PatientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code AssignedDepartment} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAssignedDepartment(String department) {
+        this.assignedDepartment = new AssignedDepartment(department);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Record} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withRecord(String initialObservation, String diagnosis, String treatmentPlan) {
+        Record record = new Record();
+        record.setInitialObservations(initialObservation);
+        record.setDiagnosis(diagnosis);
+        record.setTreatmentPlan(treatmentPlan);
+        this.record = record;
         return this;
     }
 
@@ -150,20 +182,13 @@ public class PatientBuilder {
         icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
         birthday = new Birthday(Birthday.getDefaultBirthday());
         address = new Address(Address.getDefaultAddress());
+        priority = new Priority(Priority.getDefaultPriority());
         tags = new HashSet<>();
         return this;
     }
 
-    /**
-     * Sets the {@code AssignedDepartment} of the {@code Patient} that we are building.
-     */
-    public PatientBuilder withAssignedDepartment(String department) {
-        this.assignedDepartment = new AssignedDepartment(department);
-        return this;
-    }
-
     public Patient build() {
-        return new Patient(name, phone, email, gender, icNumber, birthday, address, tags);
+        return new Patient(name, phone, email, gender, icNumber, birthday, address, priority, tags);
     }
 
 }

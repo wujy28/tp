@@ -1,0 +1,33 @@
+@font-face {
+    -fx-font-family: 'Inter Medium';
+    src: url('../fonts/Inter/static/Inter-Medium.ttf');
+}
+
+.text-field {
+    -fx-background-insets: 0;
+    text-area-background: #FFFFFF;
+    -fx-border-width: 5px;
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 15px;
+    -fx-text-fill: #3C4EEF;
+    -fx-opacity: 1;
+}
+
+.text-area .content {
+    -fx-background-color: #FFFFFF;
+}
+
+.text-area:focused .content {
+    -fx-background-color: #FFFFFF;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-highlight-fill: #7ecfff;
+}

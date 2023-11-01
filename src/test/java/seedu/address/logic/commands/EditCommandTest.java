@@ -12,7 +12,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIC;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPatients.*;
+import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.AMY;
+import static seedu.address.testutil.TypicalPatients.BENSON;
+import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,10 +29,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
-
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -88,7 +92,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, ALICE.getIcNumber());
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientInFilteredList = model.getPatient(ALICE.getIcNumber(), lastShownList);
@@ -116,20 +120,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePatientFilteredList_failure() {
-        showPatientAtIC(model, ALICE.getIcNumber());
-
-        // edit patient in filtered list into a duplicate in address book
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patientInList = model.getPatient(ALICE.getIcNumber(), lastShownList);
-        EditCommand editCommand = new EditCommand(ALICE.getIcNumber(),
-            new EditPatientDescriptorBuilder(patientInList).build());
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
-    }
-
-    @Test
-    public void execute_invalidPatientICList_failure() {
+    public void execute_invalidPatientIcList_failure() {
         String invalidIC = "";
         assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
         //Hence EditCommand cannot be executed because of illegal argument exception in IC

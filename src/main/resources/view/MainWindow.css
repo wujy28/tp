@@ -1,0 +1,63 @@
+/*!* MainWindow.css *!*/
+
+/*#minimizeButton, #maximizeButton, #closeButton {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-text-fill: #B9CCFF;*/
+/*    -fx-border-color: transparent;*/
+/*    -fx-padding: 5px;*/
+/*}*/
+
+/*#minimizeButton:hover, #maximizeButton:hover, #closeButton:hover {*/
+/*    -fx-background-color: #888888;*/
+/*}*/
+
+@font-face {
+    -fx-font-family: 'Inter Medium';
+    src: url('../fonts/Inter/static/Inter-Medium.ttf');
+}
+
+#menuBar {
+    -fx-background-color: #3C4EEF;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #B9CCFF;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 15px;
+    -fx-opacity: 1;
+}
+.menu-item .label {
+    -fx-text-fill: #3C4EEF;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 15px;
+    -fx-opacity: 1;
+}
+
+#minimizeButton, #maximizeButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+/*#maximizeButton, #minimizeButton:hover {*/
+/*    -fx-background-color: rgba(128, 128, 128, 0.34);*/
+/*}*/
+
+#closeButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+#closeButton:hover {
+    -fx-background-color: #FF5555; /* Red when hovered */
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: #B9CCFF;
+}

@@ -3,14 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_PATIENT_LISTED_SUCCESS;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
-
-import java.util.logging.Logger;
 
 /**
  * Views the Patient with a certain {@Code IcNumber}
@@ -34,7 +34,7 @@ public class ViewCommand extends Command {
      * @param icNumberToFind The icNumber entered by user input to be find
      */
     public ViewCommand(PatientWithIcNumberPredicate predicate, IcNumber icNumberToFind)
-        throws PatientWithFieldNotFoundException {
+            throws PatientWithFieldNotFoundException {
         if (icNumberToFind == null) {
             throw new PatientWithFieldNotFoundException("Multiplicity violated. Each patient has 1 non-null IcNumber.");
         }

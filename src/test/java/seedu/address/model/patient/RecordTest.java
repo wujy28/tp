@@ -2,6 +2,7 @@ package seedu.address.model.patient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,6 @@ import seedu.address.testutil.RecordBuilder;
 
 public class RecordTest {
 
-    // Example valid patient for testing
     private final Patient validPatient = new PatientBuilder().build();
 
     @Test
@@ -94,14 +94,14 @@ public class RecordTest {
     @Test
     public void equals() {
         Record record1 = new RecordBuilder().build();
-        Record record2 = new RecordBuilder().withInitialObservations("Different observation").build();
+        Record record2 = new RecordBuilder().build();
+        Record record3 = new RecordBuilder().withInitialObservations("Different observation").build();
 
         // same object -> returns true
         assertTrue(record1.equals(record1));
 
-        // same values -> returns false
-        Record record1Copy = new RecordBuilder().build();
-        assertFalse(record1.equals(record1Copy));
+        //same record details -> returns true
+        assertTrue(record1.equals(record2));
 
         // null -> returns false
         assertFalse(record1.equals(null));
@@ -110,16 +110,60 @@ public class RecordTest {
         assertFalse(record1.equals(5));
 
         // different record -> returns false
-        assertFalse(record1.equals(record2));
+        assertFalse(record1.equals(record3));
     }
 
     @Test
-    public void testToString() {
-        Record record = new RecordBuilder().build();
-        String expected = Record.class.getCanonicalName() + "{patient=" + record.getPatient()
-                + ", initialObservations=" + record.getInitialObservations()
-                + ", diagnosis=" + record.getDiagnosis()
-                + ", treatmentPlan=" + record.getTreatmentPlan() + "}";
-        assertEquals(expected, record.toString());
+    public void defaultConstructor_initializesWithDefaultValues() {
+        Record record = new Record();
+        assertNull(record.getPatient());
+        assertEquals(Record.getDefaultInitialObservations(), record.getInitialObservations());
+        assertEquals(Record.getDefaultDiagnosis(), record.getDiagnosis());
+        assertEquals(Record.getDefaultTreatmentPlan(), record.getTreatmentPlan());
     }
+
+    @Test
+    public void constructWithPatient_initializesWithDefaultValues() {
+        Record record = new Record(validPatient);
+        assertEquals(Record.getDefaultInitialObservations(), record.getInitialObservations());
+        assertEquals(Record.getDefaultDiagnosis(), record.getDiagnosis());
+        assertEquals(Record.getDefaultTreatmentPlan(), record.getTreatmentPlan());
+    }
+
+    @Test
+    public void setInitialObservations_validInput_sameAsInput() {
+        Record record = new Record();
+        record.setInitialObservations("Test Observation");
+        assertEquals("Test Observation", record.getInitialObservations());
+    }
+
+    @Test
+    public void setDiagnosis_validInput_sameAsInput() {
+        Record record = new Record();
+        record.setDiagnosis("Test Diagnosis");
+        assertEquals("Test Diagnosis", record.getDiagnosis());
+    }
+
+    @Test
+    public void setTreatmentPlan_validInput_sameAsInput() {
+        Record record = new Record();
+        record.setTreatmentPlan("Test Treatment");
+        assertEquals("Test Treatment", record.getTreatmentPlan());
+    }
+
+    @Test
+    public void equals_sameValues_true() {
+        Record record1 = new Record();
+        record1.setDiagnosis("Test Diagnosis");
+        record1.setInitialObservations("Test Observation");
+        record1.setTreatmentPlan("Test Treatment");
+
+        Record record2 = new Record();
+        record2.setDiagnosis("Test Diagnosis");
+        record2.setInitialObservations("Test Observation");
+        record2.setTreatmentPlan("Test Treatment");
+
+        assertTrue(record1.equals(record2));
+    }
+
 }

@@ -1,0 +1,37 @@
+@font-face {
+    -fx-font-family: 'Doppio One';
+    src: url('../fonts/Doppio_One/DoppioOne-Regular.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Inter Medium';
+    src: url('../fonts/Inter/static/Inter-Medium.ttf');
+}
+
+#name {
+    -fx-font-family: "Doppio One";
+    -fx-font-size: 40px;
+    -fx-text-fill: #3C4EEF;
+    -fx-opacity: 1;
+}
+
+.fieldText {
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 17px;
+    -fx-text-fill: #808CFF;
+    -fx-opacity: 1;
+}
+
+.icNumber {
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 25px;
+    -fx-text-fill: #3C4EEF;
+    -fx-opacity: 1;
+}
+
+.departmentLabel {
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 1;
+}

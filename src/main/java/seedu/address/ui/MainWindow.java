@@ -3,12 +3,16 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -17,6 +21,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -55,11 +60,24 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane recordPanelPlaceholder;
 
+    @FXML
+    private Button minimizeButton;
+
+    @FXML
+    private Button maximizeButton;
+
+    @FXML
+    private Button closeButton;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
+        // primaryStage.initStyle(StageStyle.UNDECORATED);
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -71,6 +89,30 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        setUpWindowDragging();
+    }
+
+    /**
+     * Sets up the ability for the window to be dragged around.
+     */
+    private void setUpWindowDragging() {
+        VBox rootLayout = (VBox) getRoot().getScene().getRoot();
+        rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        rootLayout.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setX(event.getScreenX() - xOffset);
+                primaryStage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
     }
 
     public Stage getPrimaryStage() {
@@ -206,4 +248,19 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    @FXML
+    private void minimizeWindow() {
+        primaryStage.setIconified(true);
+    }
+
+    @FXML
+    private void maximizeWindow() {
+        if (primaryStage.isMaximized()) {
+            primaryStage.setMaximized(false);
+        } else {
+            primaryStage.setMaximized(true);
+        }
+    }
+
 }

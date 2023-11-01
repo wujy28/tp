@@ -3,12 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.BENSON;
 import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
-
-import java.util.List;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,9 +31,9 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validICUnfilteredList_success() {
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
+    public void execute_validIcUnfilteredList_success() {
+        List<Patient> currentPatientList = model.getCurrentPatientList();
+        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), currentPatientList);
         DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
@@ -44,7 +46,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-        public void execute_invalidICList_throwsIllegalArgumentException() {
+        public void execute_invalidIcList_throwsIllegalArgumentException() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, ALICE.getIcNumber());
         String invalidIC = "";
         assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
@@ -52,7 +54,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validICFilteredList_success() {
+    public void execute_validIcFilteredList_success() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, new IcNumber("T0032415E"));
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
@@ -66,6 +68,22 @@ public class DeleteCommandTest {
         showNoPatient(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_icNumberOfNonExistingPatient_exceptionThrown() throws PatientWithFieldNotFoundException {
+        IcNumber testIcNumber1 = new IcNumber("T1234567j");
+        DeleteCommand command = new DeleteCommand(testIcNumber1);
+
+        boolean isExceptionThrown = false;
+        try {
+            command.execute(model);
+        } catch (PatientWithFieldNotFoundException e) {
+            isExceptionThrown = true;
+            assertEquals(e.getMessage(),
+                MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
+        }
+        assertTrue(isExceptionThrown);
     }
 
     @Test

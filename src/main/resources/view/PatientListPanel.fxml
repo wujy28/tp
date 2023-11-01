@@ -3,6 +3,10 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="patientListView" VBox.vgrow="ALWAYS" />
+<?import java.net.URL?>
+<VBox style="-fx-background-color: #D8E3FF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <stylesheets>
+    <URL value="@PatientListPanel.css" />
+  </stylesheets>
+  <ListView fx:id="patientListView" style="-fx-background-color: #D8E3FF;" VBox.vgrow="ALWAYS" />
 </VBox>

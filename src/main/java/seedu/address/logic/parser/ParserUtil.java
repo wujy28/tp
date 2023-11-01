@@ -17,6 +17,7 @@ import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -164,6 +165,22 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String priority} into a {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static Priority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        priority = priority.toUpperCase();
+        String trimmedPriority = priority.trim();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new Priority(trimmedPriority);
+    }
+
+    /**
      * Parses a {@code String department} into a {@code Department}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -188,5 +205,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String initialObservations}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseInitialObservations(String initialObservations) {
+        requireNonNull(initialObservations);
+        String trimmedInitialObservations = initialObservations.trim();
+        return trimmedInitialObservations;
+    }
+
+    /**
+     * Parses a {@code String diagnosis}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDiagnosis(String diagnosis) {
+        requireNonNull(diagnosis);
+        String trimmedDiagnosis = diagnosis.trim();
+        return trimmedDiagnosis;
+    }
+
+    /**
+     * Parses a {@code String treatmentPlan}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseTreatmentPlan(String treatmentPlan) {
+        requireNonNull(treatmentPlan);
+        String trimmedTreatmentPlan = treatmentPlan.trim();
+        return trimmedTreatmentPlan;
     }
 }
