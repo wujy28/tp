@@ -76,7 +76,7 @@ class JsonAdaptedPatient {
         icNumber = source.getIcNumber().value;
         birthday = source.getBirthday().strValue;
         address = source.getAddress().value;
-        priority = source.getPriority().value;
+        priority = source.getPriority().toString();
         assignedDepartment = source.getAssignedDepartment().toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }

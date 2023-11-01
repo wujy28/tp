@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Patient's priority in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
-public class Priority {
+public class Priority implements Comparable<Priority> {
     public static final String MESSAGE_CONSTRAINTS =
             "Priority should only be NIL, LOW, MEDIUM or HIGH, and it should not be blank";
 
@@ -15,13 +15,22 @@ public class Priority {
 
     private static String defaultPriority = "NIL";
 
-    public final String value;
+    public final PriorityLevel value;
 
-    enum Priorities {
+    enum PriorityLevel {
         NIL,
         LOW,
         MEDIUM,
-        HIGH
+        HIGH;
+
+        public static PriorityLevel getPriority(String string) {
+            for (Priority.PriorityLevel p : Priority.PriorityLevel.values()) {
+                if (p.name().equalsIgnoreCase(string)) {
+                    return p;
+                }
+            }
+            return PriorityLevel.NIL;
+        }
     }
 
     /**
@@ -33,7 +42,7 @@ public class Priority {
         String temp = priority.toUpperCase();
         requireNonNull(temp);
         checkArgument(isValidPriority(temp), MESSAGE_CONSTRAINTS);
-        value = temp;
+        value = PriorityLevel.getPriority(temp);
     }
 
     /**
@@ -55,7 +64,7 @@ public class Priority {
      * @return boolean to indicate presence in Priorities enum.
      */
     private static boolean isInPrioritiesEnum(String test) {
-        for (Priority.Priorities p : Priority.Priorities.values()) {
+        for (Priority.PriorityLevel p : Priority.PriorityLevel.values()) {
             if (p.name().equals(test)) {
                 return true;
             }
@@ -65,7 +74,7 @@ public class Priority {
 
     @Override
     public String toString() {
-        return value;
+        return value.name();
     }
 
     @Override
@@ -86,5 +95,19 @@ public class Priority {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Priority o) {
+        PriorityLevel thisPriorityLevel = this.value;
+        PriorityLevel otherPriorityLevel = o.value;
+
+        if (thisPriorityLevel.compareTo(otherPriorityLevel) < 0) {
+            return -1;
+        } else if (thisPriorityLevel.compareTo(otherPriorityLevel) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

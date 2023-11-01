@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * Represents a Patient's age in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
-public class Age {
+public class Age implements Comparable<Age> {
     public static final String MESSAGE_CONSTRAINTS =
             "Age should only contain numbers, and it should not be negative";
     public static final String VALIDATION_REGEX = "\\d+";
@@ -90,5 +90,16 @@ public class Age {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Age o) {
+        if (this.value.compareTo(o.value) < 0) {
+            return -1;
+        } else if (this.value.compareTo(o.value) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
