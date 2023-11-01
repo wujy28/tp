@@ -11,11 +11,11 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
 public class Birthday {
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static final String MESSAGE_CONSTRAINTS =
             "Birth dates should only contain numbers in valid dd/MM/yyyy format, "
-            + " and should be " + LocalDate.now().format(formatter) + " or earlier.";
+            + " and should be the current date or earlier.";
     public static final String VALIDATION_REGEX = "\\d{1,2}\\/\\d{1,2}\\/\\d{2,4}";
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static String defaultBirthday = "01/01/0001";
 

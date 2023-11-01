@@ -177,14 +177,16 @@ public class Patient {
         return name.equals(otherPatient.name) && phone.equals(otherPatient.phone) && email.equals(otherPatient.email)
             && gender.equals(otherPatient.gender) && icNumber.equals(otherPatient.icNumber)
             && birthday.equals(otherPatient.birthday) && age.equals(otherPatient.age)
-            && address.equals(otherPatient.address) && priority.equals(otherPatient.priority) && tags.equals(otherPatient.tags)
-            && assignedDepartment.equals(otherPatient.assignedDepartment) && record.equals(otherPatient.record);
+            && address.equals(otherPatient.address) && priority.equals(otherPatient.priority)
+            && tags.equals(otherPatient.tags) && assignedDepartment.equals(otherPatient.assignedDepartment)
+            && record.equals(otherPatient.record);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, gender, icNumber, birthday, age, address, tags, assignedDepartment, record);
+        return Objects.hash(name, phone, email, gender, icNumber,
+                birthday, age, address, tags, assignedDepartment, record);
     }
 
     @Override
