@@ -3,12 +3,14 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.patient.Record;
 
 /**
@@ -54,6 +56,8 @@ public class RecordCard extends UiPart<Region> {
     private TextArea diagnosis;
     @FXML
     private TextArea treatmentPlan;
+    @FXML
+    private Label priorityLabel;
 
     /**
      * Creates a {@code RecordCard} with the given {@code Record}.
@@ -71,6 +75,7 @@ public class RecordCard extends UiPart<Region> {
         address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
         assignedDepartment.setText(patient.getAssignedDepartment().toString());
+        addPriorityLabel();
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -84,5 +89,29 @@ public class RecordCard extends UiPart<Region> {
 
         this.treatmentPlan.setWrapText(true);
         this.treatmentPlan.setText(record.getTreatmentPlan());
+    }
+
+    private void addPriorityLabel() {
+        Priority priority = record.getPatient().getPriority();
+        switch (priority.value) {
+        case HIGH:
+            priorityLabel.setText("!!!");
+            priorityLabel.getStyleClass().add("high");
+            break;
+        case MEDIUM:
+            priorityLabel.setText("!!");
+            priorityLabel.getStyleClass().add("medium");
+            break;
+        case LOW:
+            priorityLabel.setText("!");
+            priorityLabel.getStyleClass().add("low");
+            break;
+        case NIL:
+            Node parent = priorityLabel.getParent();
+            if (parent instanceof HBox) {
+                HBox container = (HBox) parent;
+                container.getChildren().remove(priorityLabel);
+            }
+        }
     }
 }

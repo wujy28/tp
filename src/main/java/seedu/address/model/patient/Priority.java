@@ -17,7 +17,7 @@ public class Priority implements Comparable<Priority> {
 
     public final PriorityLevel value;
 
-    enum PriorityLevel {
+    public enum PriorityLevel {
         NIL,
         LOW,
         MEDIUM,
