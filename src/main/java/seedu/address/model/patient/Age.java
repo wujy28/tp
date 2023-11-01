@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Represents a Patient's age in the address book.
@@ -44,10 +45,10 @@ public class Age implements Comparable<Age> {
             this.value = defaultAgeValue;
             this.strValue = defaultAgeString;
         } else {
-            int yearOfBirth = birthday.value.getYear();
-            int currentYear = LocalDate.now().getYear();
-            int age = currentYear - yearOfBirth;
-            this.value = age;
+            LocalDate birthdate = birthday.value;
+            LocalDate today = LocalDate.now();
+            Long age = ChronoUnit.YEARS.between(birthdate, today);
+            this.value = age.intValue();
             this.strValue = value.toString();
         }
     }

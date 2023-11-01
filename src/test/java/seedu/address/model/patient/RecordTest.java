@@ -94,10 +94,14 @@ public class RecordTest {
     @Test
     public void equals() {
         Record record1 = new RecordBuilder().build();
-        Record record2 = new RecordBuilder().withInitialObservations("Different observation").build();
+        Record record2 = new RecordBuilder().build();
+        Record record3 = new RecordBuilder().withInitialObservations("Different observation").build();
 
         // same object -> returns true
         assertTrue(record1.equals(record1));
+
+        //same record details -> returns true
+        assertTrue(record1.equals(record2));
 
         // null -> returns false
         assertFalse(record1.equals(null));
@@ -106,7 +110,7 @@ public class RecordTest {
         assertFalse(record1.equals(5));
 
         // different record -> returns false
-        assertFalse(record1.equals(record2));
+        assertFalse(record1.equals(record3));
     }
 
     @Test
