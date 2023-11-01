@@ -56,6 +56,8 @@ public class Messages {
                 .append(patient.getBirthday())
                 .append("; Address: ")
                 .append(patient.getAddress())
+                .append("; Priority: ")
+                .append(patient.getPriority())
                 .append("; Department: ")
                 .append(patient.getAssignedDepartment())
                 .append("; Tags: ");

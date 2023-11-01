@@ -34,8 +34,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n" + "Example: "
             + COMMAND_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL
             + "johnd@example.com " + PREFIX_GENDER + "MALE " + PREFIX_IC_NUMBER + "S2840182A " + PREFIX_BIRTHDAY
-            + "02/01/1998 " + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_TAG + "friends " + PREFIX_TAG
-            + "owesMoney";
+            + "02/01/1998 " + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_PRIORITY + "MEDIUM "
+            + PREFIX_TAG + "friends " + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";

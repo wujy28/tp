@@ -8,8 +8,6 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
-import java.util.List;
-
 /**
  * Finds and lists all patients in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.

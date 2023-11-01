@@ -95,8 +95,9 @@ public class PatientTest {
         String expected =
             Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone() + ", email="
                 + ALICE.getEmail() + ", gender=" + ALICE.getGender() + ", icNumber=" + ALICE.getIcNumber()
-                + ", birthday=" + ALICE.getBirthday() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", assignedDepartment=" + ALICE.getAssignedDepartment() + ", record=" + ALICE.getRecord() + "}";
+                + ", birthday=" + ALICE.getBirthday() + ", address=" + ALICE.getAddress() + ", priority="
+                + ALICE.getPriority() + ", tags=" + ALICE.getTags() + ", assignedDepartment="
+                + ALICE.getAssignedDepartment() + ", record=" + ALICE.getRecord() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

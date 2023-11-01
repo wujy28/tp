@@ -22,7 +22,7 @@ class DepartmentTest {
         assertEquals(null, Department.findDepartment("Intensive  Care Unit")); // additional space
 
         // input with valid department
-        assertEquals(Department.DEFAULT, Department.findDepartment("-")); // default
+        assertEquals(Department.DEFAULT, Department.findDepartment("Default")); // default
         assertEquals(Department.UROLOGY, Department.findDepartment("Urology")); // valid department
         assertEquals(Department.NEUROLOGY, Department.findDepartment("NEUROLOGY")); // all caps
         assertEquals(Department.ANAESTHESIOLOGY, Department.findDepartment("aNaesThesIolOgY")); // weird case
@@ -44,7 +44,7 @@ class DepartmentTest {
         assertFalse(Department.isValidDepartment("Burn Unit")); // department does not exist
 
         // valid department
-        assertTrue(Department.isValidDepartment("-")); // default department
+        assertTrue(Department.isValidDepartment("Default")); // default department
         assertTrue(Department.isValidDepartment("Palliative Medicine")); // department exists
         assertTrue(Department.isValidDepartment("emergency department")); // lower case only
         assertTrue(Department.isValidDepartment("INFECTIOUS DISEASES")); // all caps
