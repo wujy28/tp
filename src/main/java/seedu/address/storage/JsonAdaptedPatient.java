@@ -20,6 +20,7 @@ import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Priority;
+import seedu.address.model.patient.Record;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +40,9 @@ class JsonAdaptedPatient {
     private final String priority;
     private final String assignedDepartment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private String initialObservations;
+    private String diagnosis;
+    private String treatmentPlan;
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -50,7 +54,10 @@ class JsonAdaptedPatient {
                               @JsonProperty("address") String address,
                               @JsonProperty("priority") String priority,
                               @JsonProperty("assignedDepartment") String assignedDepartment,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("initialObservations") String initialObservations,
+                              @JsonProperty("diagnosis") String diagnosis,
+                              @JsonProperty("treatmentPlan") String treatmentPlan) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -63,6 +70,9 @@ class JsonAdaptedPatient {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.initialObservations = initialObservations;
+        this.diagnosis = diagnosis;
+        this.treatmentPlan = treatmentPlan;
     }
 
     /**
@@ -79,6 +89,9 @@ class JsonAdaptedPatient {
         priority = source.getPriority().value;
         assignedDepartment = source.getAssignedDepartment().toString();
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        initialObservations = source.getRecord().getInitialObservations();
+        diagnosis = source.getRecord().getDiagnosis();
+        treatmentPlan = source.getRecord().getTreatmentPlan();
     }
 
     /**
@@ -167,10 +180,15 @@ class JsonAdaptedPatient {
         }
         final AssignedDepartment modelAssignedDepartment = new AssignedDepartment(assignedDepartment);
 
-
         final Set<Tag> modelTags = new HashSet<>(patientTags);
+
+        if (initialObservations == null || diagnosis == null || treatmentPlan == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Record.class.getSimpleName()));
+        }
+        final Record record = new Record(initialObservations, diagnosis, treatmentPlan);
+
         return new Patient(modelName, modelPhone, modelEmail, modelGender, modelIcNumber, modelBirthday, modelAddress,
-            modelPriority, modelTags, modelAssignedDepartment);
+            modelPriority, modelTags, modelAssignedDepartment, record);
     }
 
 }
