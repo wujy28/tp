@@ -23,6 +23,7 @@ public class Patient {
     private final Gender gender;
     private final IcNumber icNumber;
     private final Birthday birthday;
+    private final Age age;
 
     // Data fields
     private final Address address;
@@ -43,6 +44,7 @@ public class Patient {
         this.gender = gender;
         this.icNumber = icNumber;
         this.birthday = birthday;
+        this.age = new Age(this.birthday);
         this.address = address;
         this.priority = priority;
         this.tags.addAll(tags);
@@ -62,6 +64,7 @@ public class Patient {
         this.gender = gender;
         this.icNumber = icNumber;
         this.birthday = birthday;
+        this.age = new Age(this.birthday);
         this.address = address;
         this.priority = priority;
         this.tags.addAll(tags);
@@ -82,6 +85,7 @@ public class Patient {
         this.gender = gender;
         this.icNumber = icNumber;
         this.birthday = birthday;
+        this.age = new Age(this.birthday);
         this.address = address;
         this.priority = priority;
         this.tags.addAll(tags);
@@ -116,6 +120,10 @@ public class Patient {
 
     public Birthday getBirthday() {
         return birthday;
+    }
+
+    public Age getAge() {
+        return age;
     }
 
     public Priority getPriority() {
@@ -168,23 +176,23 @@ public class Patient {
         Patient otherPatient = (Patient) other;
         return name.equals(otherPatient.name) && phone.equals(otherPatient.phone) && email.equals(otherPatient.email)
             && gender.equals(otherPatient.gender) && icNumber.equals(otherPatient.icNumber) && birthday.equals(
-            otherPatient.birthday) && address.equals(otherPatient.address) && priority.equals(otherPatient.priority)
-            && tags.equals(otherPatient.tags) && assignedDepartment.equals(otherPatient.assignedDepartment)
-            && record.equals(otherPatient.record);
+            otherPatient.birthday) && age.equals(otherPatient.age) && address.equals(otherPatient.address)
+            && priority.equals(otherPatient.priority) && tags.equals(otherPatient.tags)
+            && assignedDepartment.equals(otherPatient.assignedDepartment) && record.equals(otherPatient.record);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, gender, icNumber, birthday, address, tags, assignedDepartment, record);
+        return Objects.hash(name, phone, email, gender, icNumber, birthday, age, address, tags, assignedDepartment, record);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email).add("gender", gender)
-            .add("icNumber", icNumber).add("birthday", birthday).add("address", address)
-            .add("priority", priority).add("tags", tags).add("assignedDepartment", assignedDepartment)
-            .add("record", record).toString();
+            .add("icNumber", icNumber).add("birthday", birthday).add("age", age)
+            .add("address", address).add("priority", priority).add("tags", tags)
+            .add("assignedDepartment", assignedDepartment).add("record", record).toString();
     }
 
 }

@@ -11,15 +11,16 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
 public class Birthday {
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static final String MESSAGE_CONSTRAINTS =
-            "Birth dates should only contain numbers in valid dd/MM/yyyy format";
+            "Birth dates should only contain numbers in valid dd/MM/yyyy format, "
+            + " and should be " + LocalDate.now().format(formatter) + " or earlier.";
     public static final String VALIDATION_REGEX = "\\d{1,2}\\/\\d{1,2}\\/\\d{2,4}";
 
-    private static String defaultBirthday = "01/01/2000";
+    private static String defaultBirthday = "01/01/0001";
 
     public final LocalDate value;
     public final String strValue;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     /**
      * Constructs a {@code Birthday}.
      *
@@ -36,12 +37,26 @@ public class Birthday {
      * Returns true if a given string is a valid Birthdate.
      */
     public static boolean isValidBirthdate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test.matches(VALIDATION_REGEX)) {
+            try {
+                LocalDate testDate = LocalDate.parse(test, formatter);
+                return !testDate.isAfter(LocalDate.now());
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     public static String getDefaultBirthday() {
         return defaultBirthday;
     }
+
+    public static boolean isDefaultBirthday(Birthday birthday) {
+        return birthday.toString().equals(defaultBirthday);
+    }
+
     @Override
     public String toString() {
         return strValue;
