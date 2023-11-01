@@ -6,10 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.IC_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.IC_NUMBER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INITIAL_OBSERVATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TREATMENT_PLAN_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPatients.AMY;
@@ -35,19 +35,19 @@ public class RecordCommandParserTest {
     public void parse_validSingleArgs_returnsRecordCommand() {
         // only initial observation present
         RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
-        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION);
+        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION_BOB);
         assertParseSuccess(parser, IC_NUMBER_DESC_AMY + INITIAL_OBSERVATION_DESC,
             new RecordCommand(AMY.getIcNumber(), testEditRecordDescriptor));
 
         // only diagnosis present
         testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
-        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS);
+        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS_BOB);
         assertParseSuccess(parser, IC_NUMBER_DESC_AMY + DIAGNOSIS_DESC,
             new RecordCommand(AMY.getIcNumber(), testEditRecordDescriptor));
 
         // only treatment plan present
         testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
-        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN);
+        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN_BOB);
         assertParseSuccess(parser, IC_NUMBER_DESC_AMY + TREATMENT_PLAN_DESC,
             new RecordCommand(AMY.getIcNumber(), testEditRecordDescriptor));
     }
@@ -55,9 +55,9 @@ public class RecordCommandParserTest {
     @Test
     public void parse_validFullArgs_returnsRecordCommand() {
         RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
-        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION);
-        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS);
-        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN);
+        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION_BOB);
+        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS_BOB);
+        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN_BOB);
         assertParseSuccess(parser, IC_NUMBER_DESC_AMY + INITIAL_OBSERVATION_DESC + DIAGNOSIS_DESC + TREATMENT_PLAN_DESC,
             new RecordCommand(AMY.getIcNumber(), testEditRecordDescriptor));
     }

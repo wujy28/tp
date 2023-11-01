@@ -2,16 +2,16 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNED_DEPARTMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNED_DEPARTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -20,7 +20,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +27,6 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Record;
 
 
 /**
@@ -39,56 +37,52 @@ public class TypicalPatients {
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com").withGender("female")
         .withBirthday("23/09/2000").withIcNumber("T0032415E").withPhone("94351253").withTags("friends")
-        .withPriority("medium").withRecord("Swollen left ankle", "Sprained left ankle", "Ice area for a week").build();
+        .withPriority("medium").withAssignedDepartment("Cardiology")
+        .withRecord("Swollen left ankle", "Sprained left " + "ankle", "Ice area for a week").build();
 
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
         .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withGender("male")
         .withBirthday("17/03/1987").withIcNumber("S2091742P").withPhone("98765432").withTags("owesMoney", "friends")
-        .withPriority("high").build();
+        .withPriority("high").withAssignedDepartment("Dermatology").build();
     public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
         .withGender("male").withBirthday("08/06/1997").withIcNumber("S2780456R").withEmail("heinz@example.com")
-        .withAddress("wall street").withPriority("low").build();
+        .withAddress("wall street").withPriority("low").withAssignedDepartment("Endocrinology").build();
     public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
         .withGender("male").withBirthday("29/01/2001").withIcNumber("T0163826D").withEmail("cornelia@example.com")
-        .withAddress("10th street").withTags("friends").withPriority("low").build();
+        .withAddress("10th street").withAssignedDepartment("Gynaecology").withTags("friends").withPriority("low")
+        .build();
     public static final Patient ELLE = new PatientBuilder().withName("Elle Meyer").withPhone("9482224")
         .withGender("female").withBirthday("12/11/1995").withIcNumber("S1839267A").withEmail("werner@example.com")
-        .withAddress("michegan ave").withPriority("high").build();
+        .withAddress("michegan ave").withPriority("high").withAssignedDepartment("Haematology").build();
     public static final Patient FIONA = new PatientBuilder().withName("Fiona Kunz").withPhone("9482427")
         .withEmail("lydia@example.com").withGender("female").withBirthday("29/06/1982").withIcNumber("S3729462N")
-        .withAddress("little tokyo").withPriority("medium").build();
+        .withAddress("little tokyo").withPriority("medium").withAssignedDepartment("Immunology").build();
     public static final Patient GEORGE = new PatientBuilder().withName("George Best").withPhone("9482442")
         .withGender("male").withBirthday("03/07/1997").withIcNumber("S4839258F").withEmail("anna@example.com")
-        .withAddress("4th street").withPriority("medium").build();
+        .withAddress("4th street").withPriority("medium").withAssignedDepartment("Oncology").build();
 
     // Manually added
     public static final Patient HOON = new PatientBuilder().withName("Hoon Meier").withPhone("8482424")
         .withGender("male").withBirthday("07/04/2002").withIcNumber("T0247382S").withEmail("stefan@example.com")
-        .withAddress("little india").withPriority("nil").build();
+        .withAddress("little india").withPriority("nil").withAssignedDepartment("Ophthalmology").build();
     public static final Patient IDA = new PatientBuilder().withName("Ida Mueller").withPhone("8482131")
         .withGender("female").withBirthday("29/04/1984").withIcNumber("S5729346L").withEmail("hans@example.com")
-        .withAddress("chicago ave").withPriority("low").build();
+        .withAddress("chicago ave").withPriority("low").withAssignedDepartment("Neurosurgery").build();
 
     // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
         .withEmail(VALID_EMAIL_AMY).withGender(VALID_GENDER_AMY).withIcNumber(VALID_IC_NUMBER_AMY)
         .withBirthday(VALID_BIRTHDAY_AMY).withAddress(VALID_ADDRESS_AMY).withPriority(VALID_PRIORITY_AMY)
-        .withTags(VALID_TAG_FRIEND).build();
+        .withTags(VALID_TAG_FRIEND).withAssignedDepartment(VALID_ASSIGNED_DEPARTMENT_AMY).build();
     public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
         .withEmail(VALID_EMAIL_BOB).withGender(VALID_GENDER_BOB).withIcNumber(VALID_IC_NUMBER_BOB)
-        .withBirthday(VALID_BIRTHDAY_BOB).withAddress(VALID_ADDRESS_BOB).withPriority(VALID_PRIORITY_BOB)
+        .withBirthday(VALID_BIRTHDAY_BOB).withAddress(VALID_ADDRESS_BOB)
+        .withAssignedDepartment(VALID_ASSIGNED_DEPARTMENT_BOB).withPriority(VALID_PRIORITY_BOB)
         .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     private TypicalPatients() {
     } // prevents instantiation
 
-    public static Patient getTypicalPatientWithDefaultRecord(Patient patient) {
-        Record record = patient.getRecord();
-        record.setInitialObservations(VALID_INITIAL_OBSERVATION);
-        record.setDiagnosis(VALID_DIAGNOSIS);
-        record.setTreatmentPlan(VALID_TREATMENT_PLAN);
-        return patient;
-    }
 
     /**
      * Returns an {@code AddressBook} with all the typical patients.
