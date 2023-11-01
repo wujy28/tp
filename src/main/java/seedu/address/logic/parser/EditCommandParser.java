@@ -73,7 +73,8 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @return EditPatientDescriptor to be given to EditCommand
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static EditPatientDescriptor createEditPatientDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+    public static EditPatientDescriptor createEditPatientDescriptor(ArgumentMultimap argMultimap)
+            throws ParseException {
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPatientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
