@@ -32,7 +32,7 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthdate("january")); // non-numeric
         assertFalse(Birthday.isValidBirthdate("23071991")); // not in the format of dd/mm/yyyy
         assertFalse(Birthday.isValidBirthdate("22 /01 / 1997")); // spaces within digits
-        assertFalse(Birthday.isValidBirthdate("01 /01 / 3000")); // date in the future
+        assertFalse(Birthday.isValidBirthdate("01/01/3000")); // date in the future
 
 
         // valid birthdates

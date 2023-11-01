@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,10 +43,16 @@ public class AgeTest {
         assertTrue(age3.value == -1);
 
         // valid birthday
-        Birthday validBday = new Birthday("10/10/2003");
-        Age age4 = new Age(validBday);
-        int currentYear = LocalDate.now().getYear();
-        assertTrue(age4.value == currentYear - 2003);
+        Birthday validBday1 = new Birthday("03/01/2003");
+        Age age4 = new Age(validBday1);
+        int ageValueInt1 = findAge(validBday1);
+        assertTrue(age4.value == ageValueInt1);
+
+        // valid birthday
+        Birthday validBday2 = new Birthday("30/12/2000");
+        Age age5 = new Age(validBday2);
+        int ageValueInt2 = findAge(validBday2);
+        assertTrue(age5.value == ageValueInt2);
     }
 
     @Test
@@ -104,10 +111,15 @@ public class AgeTest {
         // valid birthday
         Birthday validBday = new Birthday("10/10/2003");
         Age age3 = new Age(validBday);
-        int currentYear = LocalDate.now().getYear();
-        Integer ageValue = currentYear - 2003;
+        Integer ageValue = findAge(validBday);
         String expected = ageValue.toString();
         String actual = age3.toString();
         assertEquals(expected, actual);
+    }
+
+    private Integer findAge(Birthday birthday) {
+        LocalDate today = LocalDate.now();
+        Long ageValueLong = ChronoUnit.YEARS.between(birthday.value, today);
+        return ageValueLong.intValue();
     }
 }
