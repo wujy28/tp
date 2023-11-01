@@ -1,8 +1,11 @@
 package seedu.address.model.patient;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +13,39 @@ public class AgeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Age((String) null));
+        assertThrows(NullPointerException.class, () -> new Age((Birthday) null));
     }
 
     @Test
     public void constructor_invalidAge_throwsIllegalArgumentException() {
         String invalidAge = "";
         assertThrows(IllegalArgumentException.class, () -> new Age(invalidAge));
+
+        String negativeAge = "-1";
+        assertThrows(IllegalArgumentException.class, () -> new Age(negativeAge));
+    }
+
+    @Test
+    public void constructor_validInputs_constructedCorrectly() {
+        // valid age
+        String validAge0 = "0";
+        Age age1 = new Age(validAge0);
+        assertTrue(age1.value == 0);
+
+        String validAge1 = "1";
+        Age age2 = new Age(validAge1);
+        assertTrue(age2.value == 1);
+
+        // default birthday
+        Birthday defaultBday = new Birthday(Birthday.getDefaultBirthday());
+        Age age3 = new Age(defaultBday);
+        assertTrue(age3.value == -1);
+
+        // valid birthday
+        Birthday validBday = new Birthday("10/10/2003");
+        Age age4 = new Age(validBday);
+        int currentYear = LocalDate.now().getYear();
+        assertTrue(age4.value == currentYear - 2003);
     }
 
     @Test
@@ -40,21 +70,44 @@ public class AgeTest {
 
     @Test
     public void equals() {
-        Age age = new Age("68");
+        Age age1 = new Age("68");
 
         // same values -> returns true
-        assertTrue(age.equals(new Age("68")));
+        assertTrue(age1.equals(new Age("68")));
 
         // same object -> returns true
-        assertTrue(age.equals(age));
+        assertTrue(age1.equals(age1));
 
         // null -> returns false
-        assertFalse(age.equals(null));
+        assertFalse(age1.equals(null));
 
         // different types -> returns false
-        assertFalse(age.equals(5.0f));
+        assertFalse(age1.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(age.equals(new Age("57")));
+        assertFalse(age1.equals(new Age("57")));
+    }
+
+    @Test
+    public void testToString() {
+        // string input
+        Age age1 = new Age("68");
+        String string1 = age1.toString();
+        assertEquals("68", string1);
+
+        // default Birthday
+        Birthday defaultBday = new Birthday(Birthday.getDefaultBirthday());
+        Age age2 = new Age(defaultBday);
+        String string2 = age2.toString();
+        assertEquals(Age.getDefaultAgeString(), string2);
+
+        // valid birthday
+        Birthday validBday = new Birthday("10/10/2003");
+        Age age3 = new Age(validBday);
+        int currentYear = LocalDate.now().getYear();
+        Integer ageValue = currentYear - 2003;
+        String expected = ageValue.toString();
+        String actual = age3.toString();
+        assertEquals(expected, actual);
     }
 }

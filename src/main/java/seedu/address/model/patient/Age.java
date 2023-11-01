@@ -14,6 +14,10 @@ public class Age {
             "Age should only contain numbers, and it should not be negative";
     public static final String VALIDATION_REGEX = "\\d+";
 
+    // String representation of default age only, not meant to be used as input into constructor.
+    private static String defaultAgeString = "-";
+    private static int defaultAgeValue = -1;
+
     public final Integer value;
     private final String strValue;
 
@@ -29,11 +33,16 @@ public class Age {
         strValue = age;
     }
 
+    /**
+     * Constructs a {@code Age} from a given {@code Birthday}.
+     *
+     * @param birthday A valid birthday.
+     */
     public Age(Birthday birthday) {
         requireNonNull(birthday);
         if (Birthday.isDefaultBirthday(birthday)) {
-            this.value = 0; // or -1
-            this.strValue = "-";
+            this.value = defaultAgeValue;
+            this.strValue = defaultAgeString;
         } else {
             int yearOfBirth = birthday.value.getYear();
             int currentYear = LocalDate.now().getYear();
@@ -48,6 +57,14 @@ public class Age {
      */
     public static boolean isValidAge(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static String getDefaultAgeString() {
+        return defaultAgeString;
+    }
+
+    public static int getDefaultAgeValue() {
+        return getDefaultAgeValue();
     }
 
     @Override

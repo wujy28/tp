@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 public class BirthdayTest {
@@ -30,10 +32,13 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthdate("january")); // non-numeric
         assertFalse(Birthday.isValidBirthdate("23071991")); // not in the format of dd/mm/yyyy
         assertFalse(Birthday.isValidBirthdate("22 /01 / 1997")); // spaces within digits
+        assertFalse(Birthday.isValidBirthdate("01 /01 / 3000")); // date in the future
+
 
         // valid birthdates
-        assertTrue(Birthday.isValidBirthdate("21/01/1994")); // dd/mm/yyyy format
-        assertTrue(Birthday.isValidBirthdate("20/01/1974")); // dd/mm/yyyy format
+        assertTrue(Birthday.isValidBirthdate("21/01/1994")); // dd/mm/yyyy format, a date in the past
+        assertTrue(Birthday.isValidBirthdate("20/01/1974")); // dd/mm/yyyy format, a date in the past
+        assertTrue(Birthday.isValidBirthdate(LocalDate.now().format(Birthday.getFormatter()))); // the current date
     }
 
     @Test

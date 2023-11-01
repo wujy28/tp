@@ -37,14 +37,14 @@ public class Birthday {
      * Returns true if a given string is a valid Birthdate.
      */
     public static boolean isValidBirthdate(String test) {
-        if (test.matches(VALIDATION_REGEX)) {
-            try {
-                LocalDate testDate = LocalDate.parse(test, formatter);
-                return !testDate.isAfter(LocalDate.now());
-            } catch (Exception e) {
-                return false;
-            }
-        } else {
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+
+        try {
+            LocalDate testDate = LocalDate.parse(test, formatter);
+            return !testDate.isAfter(LocalDate.now());
+        } catch (Exception e) {
             return false;
         }
     }
@@ -55,6 +55,10 @@ public class Birthday {
 
     public static boolean isDefaultBirthday(Birthday birthday) {
         return birthday.toString().equals(defaultBirthday);
+    }
+
+    public static DateTimeFormatter getFormatter() {
+        return formatter;
     }
 
     @Override
