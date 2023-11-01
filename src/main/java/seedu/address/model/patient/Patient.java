@@ -176,8 +176,8 @@ public class Patient {
         Patient otherPatient = (Patient) other;
         return name.equals(otherPatient.name) && phone.equals(otherPatient.phone) && email.equals(otherPatient.email)
             && gender.equals(otherPatient.gender) && icNumber.equals(otherPatient.icNumber)
-            && birthday.equals(otherPatient.birthday) && address.equals(otherPatient.address)
-            && priority.equals(otherPatient.priority) && tags.equals(otherPatient.tags)
+            && birthday.equals(otherPatient.birthday) && age.equals(otherPatient.age)
+            && address.equals(otherPatient.address) && priority.equals(otherPatient.priority) && tags.equals(otherPatient.tags)
             && assignedDepartment.equals(otherPatient.assignedDepartment) && record.equals(otherPatient.record);
     }
 
