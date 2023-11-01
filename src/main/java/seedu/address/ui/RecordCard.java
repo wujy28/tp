@@ -107,6 +107,8 @@ public class RecordCard extends UiPart<Region> {
             priorityLabel.getStyleClass().add("low");
             break;
         case NIL:
+            // Fallthrough
+        default:
             Node parent = priorityLabel.getParent();
             if (parent instanceof HBox) {
                 HBox container = (HBox) parent;

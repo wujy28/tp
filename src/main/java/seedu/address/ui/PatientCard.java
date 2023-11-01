@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Priority;
 
@@ -85,6 +84,8 @@ public class PatientCard extends UiPart<Region> {
             priorityLabel.getStyleClass().add("low");
             break;
         case NIL:
+            // Fallthrough
+        default:
             Node parent = priorityLabel.getParent();
             if (parent instanceof HBox) {
                 HBox container = (HBox) parent;

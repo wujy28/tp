@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AssignCommand;
-import seedu.address.logic.commands.RecordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.AssignedDepartment;
 import seedu.address.model.patient.IcNumber;

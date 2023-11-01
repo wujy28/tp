@@ -9,13 +9,13 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
 
 /**
- * Sorts the displayed list based on the given property.
+ * Sorts the patient list based on the given property.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the displayed list "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the patient list "
             + "based on the given property.\n"
             + "Parameters: PROPERTY\n"
             + "PROPERTY can only be one of the following: name, ic, department, age, priority"
@@ -24,6 +24,9 @@ public class SortCommand extends Command {
 
     private final SortOrder sortOrder;
 
+    /**
+     * @param sortOrder property to sort the list by
+     */
     public SortCommand(SortOrder sortOrder) {
         requireNonNull(sortOrder);
         this.sortOrder = sortOrder;
@@ -38,7 +41,7 @@ public class SortCommand extends Command {
 
     /**
      * Enumeration for sort orders.
-     * These are the available properties to sort the filtered list by.
+     * These are the available properties to sort the list by.
      */
     public enum SortOrder {
         NAME(Comparator.comparing(Patient::getName), "name"),

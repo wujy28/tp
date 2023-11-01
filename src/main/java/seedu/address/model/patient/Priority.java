@@ -17,6 +17,9 @@ public class Priority implements Comparable<Priority> {
 
     public final PriorityLevel value;
 
+    /**
+     * Encapsulates the different priority levels a patient can have
+     */
     public enum PriorityLevel {
         NIL,
         LOW,
