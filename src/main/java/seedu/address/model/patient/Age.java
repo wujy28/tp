@@ -3,6 +3,8 @@ package seedu.address.model.patient;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
+
 /**
  * Represents a Patient's age in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
@@ -12,9 +14,12 @@ public class Age {
             "Age should only contain numbers, and it should not be negative";
     public static final String VALIDATION_REGEX = "\\d+";
 
-    private static String defaultAge = "00";
+    // String representation of default age only, not meant to be used as input into constructor.
+    private static String defaultAgeString = "-";
+    private static int defaultAgeValue = -1;
 
-    public final String value;
+    public final Integer value;
+    private final String strValue;
 
     /**
      * Constructs a {@code Age}.
@@ -24,7 +29,27 @@ public class Age {
     public Age(String age) {
         requireNonNull(age);
         checkArgument(isValidAge(age), MESSAGE_CONSTRAINTS);
-        value = age;
+        value = Integer.parseInt(age);
+        strValue = age;
+    }
+
+    /**
+     * Constructs a {@code Age} from a given {@code Birthday}.
+     *
+     * @param birthday A valid birthday.
+     */
+    public Age(Birthday birthday) {
+        requireNonNull(birthday);
+        if (Birthday.isDefaultBirthday(birthday)) {
+            this.value = defaultAgeValue;
+            this.strValue = defaultAgeString;
+        } else {
+            int yearOfBirth = birthday.value.getYear();
+            int currentYear = LocalDate.now().getYear();
+            int age = currentYear - yearOfBirth;
+            this.value = age;
+            this.strValue = value.toString();
+        }
     }
 
     /**
@@ -34,12 +59,17 @@ public class Age {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public static String getDefaultAge() {
-        return defaultAge;
+    public static String getDefaultAgeString() {
+        return defaultAgeString;
     }
+
+    public static int getDefaultAgeValue() {
+        return getDefaultAgeValue();
+    }
+
     @Override
     public String toString() {
-        return value;
+        return strValue;
     }
 
     @Override
