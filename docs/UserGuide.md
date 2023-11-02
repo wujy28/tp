@@ -95,6 +95,7 @@ started!
         2. For Mac users, locate it by typing in “Terminal” in Spotlight.
     2. Type in java -version and press Enter.
     3. If you have Java installed, you should see your Java version as shown underlined in the picture below.
+       <img src='images/javaversion.png' width='500'>
     4. If you do not have Java or your Java version is below 11, install Java
        11 [here](https://www.oracle.com/java/technologies/downloads/#java11)
 
@@ -105,7 +106,7 @@ started!
 3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.trial)
     1. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
 
-    <img src='images/jar.png' width='500'>
+    <img src='images/jar.png' width='800'>
 
 
 4. After downloading the application, move it into the “A&E” folder created in step 2.
