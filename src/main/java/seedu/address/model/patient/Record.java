@@ -1,7 +1,6 @@
 package seedu.address.model.patient;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -134,7 +133,8 @@ public class Record {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("initialObservations", getInitialObservations()).add("diagnosis", getDiagnosis())
-            .add("treatmentPlan", getTreatmentPlan()).toString();
+        return new ToStringBuilder(this).add("initialObservations", getInitialObservations())
+                .add("diagnosis", getDiagnosis())
+                .add("treatmentPlan", getTreatmentPlan()).toString();
     }
 }

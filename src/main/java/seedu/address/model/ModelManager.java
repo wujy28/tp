@@ -174,15 +174,15 @@ public class ModelManager implements Model {
      * Check if there is a previous state/command to undo to.
      * Returns true if there is a state, and false otherwise.
      */
-    public boolean canUndoAddressBook(){
-      return versionedAddressBook.canUndo();
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
     }
 
     /**
      * Check if there is a newer state/command to redo to.
      * Returns true if there is a state, and false otherwise.
      */
-    public boolean canRedoAddressBook(){
+    public boolean canRedoAddressBook() {
         return versionedAddressBook.canRedo();
     }
 

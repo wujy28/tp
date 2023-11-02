@@ -178,7 +178,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
     public AddressBook copy() {
         AddressBook copy = new AddressBook();
-        for(Patient patient: patients) {
+        for (Patient patient: patients) {
             copy.addPatient(patient);
         }
         return copy;
