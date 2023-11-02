@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -83,12 +85,15 @@ public class RecordCard extends UiPart<Region> {
         // Format TextFlow
         this.initialObservations.setWrapText(true);
         this.initialObservations.setText(record.getInitialObservations());
+        record.initialObservationsProperty().addListener((observable, oldValue, newValue) -> initialObservations.setText(newValue));
 
         this.diagnosis.setWrapText(true);
         this.diagnosis.setText(record.getDiagnosis());
+        record.diagnosisProperty().addListener((observable, oldValue, newValue) -> diagnosis.setText(newValue));
 
         this.treatmentPlan.setWrapText(true);
         this.treatmentPlan.setText(record.getTreatmentPlan());
+        record.treatmentPlanProperty().addListener((observable, oldValue, newValue) -> treatmentPlan.setText(newValue));
     }
 
     private void addPriorityLabel() {
