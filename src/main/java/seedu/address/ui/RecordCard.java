@@ -80,7 +80,7 @@ public class RecordCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        // Format and bind the TextFlow to Record fields
+        // Format TextFlow
         this.initialObservations.setWrapText(true);
         this.initialObservations.setText(record.getInitialObservations());
 
