@@ -263,6 +263,55 @@ Examples:
 + `undo` restores this patient back into the patient list
 + `redo` once again deletes this patient from the patient list
 
+### Finding a patient by name: `find`
+
+Finds the patients whose names match any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
++ **All** input fields are **case-insensitive** e.g. `hans` is the same as `HANS`.
++ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
++ Only the name is searched.
++ Only full words will be matched e.g. `Han` will not match `Hans`
++ Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+
++ To find patients whose name matches ‘John’<br>
+  `find john`
++ To find patients whose name matches ‘Mary’ and ‘Jane’<br>
+  `find Mary Jane`
+
+### Sorting the patient list: `sort`
+
+Sorts the patient list based on the given property.
+
+Format: `sort PROPERTY`
+
++ The input field is **case-insensitive** e.g. `name` is the same as `NAME`.
++ `PROPERTY` can only be `name`, `ic`, `department`, `age`, or `priority`.
+
+Examples:
+
++ To sort the patient list according to name in lexicographical order<br>
+  `sort name`
++ To sort the patient list according to IC number in lexicographical order<br>
+  `sort ic`
++ To sort the patient list according to department<br>
+  `sort department`
++ To sort the patient list according to ascending age<br>
+  `sort age`
++ To sort the patient list according to descending priority<br>
+  `sort priority`
+
+<box type="info" seamless>
+
+**Note:**
+It sorts both the filtered and full patient list. For example, if you run `find John` followed by `sort age` on the
+list of search results, it will also sort the complete list of patients (displayed using the `list` command).
+
+</box>
+
 ### Editing a patient record: `record`
 
 Edits the medical record of the patient with the specified IC number.
@@ -282,17 +331,19 @@ Examples:
 
 ### Assigning a patient to a department : `assign`
 
-Assigns the patient to relevant doctor.
+Assigns a patient to a hospital department.
 
 Format: `assign i/IC_NUMBER d/DEPARTMENT`
 
 * All input fields are compulsory.
 * **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 * `DEPARTMENT` must adhere to British spelling conventions.
+* Refer to the [appendix](#appendix--departments) below for the list of valid departments and their accepted inputs.
 
 Examples:
 
-* `assign i/T0201234A d/cardiology`
+* To assign a patient with IC_NUMBER = T0201234A to the Cardiology department<br>
+  `assign i/T0201234A d/cardiology`
 
 ### Exiting the program : `exit`
 
@@ -356,7 +407,41 @@ application before running the application again.
 | **Undo**   | `undo`                                                                                                                                                                                                                                  |
 | **Redo**   | `redo`                                                                                                                                                                                                                                  |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find Mary Jane`                                                                                                                                                                                |
+| **Sort**   | `sort PROPERTY`<br> e.g., `sort priority`                                                                                                                                                                                               |
 | **Record** | `record i/IC_NUMBER [o/OBSERVATION] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`<br> e.g.,`record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`                                                                              |
 | **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                           |
 | **Clear**  | `clear`                                                                                                                                                                                                                                 |
 | **Exit**   | `exit`                                                                                                                                                                                                                                  |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Departments
+
+The table below shows all the hospital departments available in the system and their accepted inputs.
+
+| Department           | Acceptable Input(s)    |
+|----------------------|------------------------|
+| Default              | `Default`              |
+| Anaesthesiology      | `Anaesthesiology`      |
+| Cardiology           | `Cardiology`           |
+| Dermatology          | `Dermatology`          |
+| Emergency Department | `Emergency Department` |
+| Endocrinology        | `Endocrinology`        |
+| General Surgery      | `General Surgery`      |
+| Geriatric Medicine   | `Geriatric Medicine`   |
+| Gynaecology          | `Gynaecology`          |
+| Haematology          | `Haematology`          |
+| Immunology           | `Immunology`           |
+| Infectious Diseases  | `Infectious Diseases`  |
+| Intensive Care Unit  | `Intensive Care Unit`  |
+| Oncology             | `Oncology`             |
+| Ophthalmology        | `Ophthalmology`        |
+| Orthopaedics         | `Orthopaedics`         |
+| Neurology            | `Neurology`            |
+| Neurosurgery         | `Neurosurgery`         |
+| Pathology            | `Pathology`            |
+| Palliative Medicine  | `Palliative Medicine`  |
+| Plastic Surgery      | `Plastic Surgery`      |
+| Psychiatry           | `Psychiatry`           |
+| Radiology            | `Radiology`            |
+| Urology              | `Urology`              |
