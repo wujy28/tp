@@ -51,7 +51,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToEdit = model.getPatient(ALICE.getIcNumber(), lastShownList);
-        expectedModel.setPatient(patientToEdit, editedPatient);
+        expectedModel.setPatient(patientToEdit, editedPatient, "");
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -71,7 +71,7 @@ public class EditCommandTest {
             Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatient(patientToEdit, editedPatient);
+        expectedModel.setPatient(patientToEdit, editedPatient, "");
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -103,7 +103,7 @@ public class EditCommandTest {
             Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatient(patientInFilteredList, editedPatient);
+        expectedModel.setPatient(patientInFilteredList, editedPatient, "");
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -129,14 +129,6 @@ public class EditCommandTest {
             new EditPatientDescriptorBuilder(patientInList).build());
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
     }
-    /*@Test
-    public void execute_duplicatePatient_throwsCommandException() {
-        Patient validPatient = new PatientBuilder().build();
-        AddCommand addCommand = new AddCommand(validPatient);
-        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStubWithPatient(validPatient);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PATIENT, () -> addCommand.execute(modelStub));
-    }*/
 
     @Test
     public void execute_invalidPatientIcList_failure() {

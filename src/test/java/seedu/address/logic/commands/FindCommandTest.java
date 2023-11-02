@@ -65,7 +65,7 @@ public class FindCommandTest {
 
         boolean exceptionThrown = false;
         try {
-            command.execute(model);
+            command.execute(model, command.toString());
         } catch (PatientWithFieldNotFoundException e) {
             exceptionThrown = true;
             assertEquals(e.getMessage(), expectedMessage);

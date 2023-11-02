@@ -40,7 +40,7 @@ public class DeleteCommandTest {
                 Messages.format(patientToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePatient(patientToDelete);
+        expectedModel.deletePatient(patientToDelete, "");
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -64,7 +64,7 @@ public class DeleteCommandTest {
                 Messages.format(patientToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePatient(patientToDelete);
+        expectedModel.deletePatient(patientToDelete, "");
         showNoPatient(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class DeleteCommandTest {
 
         boolean exceptionThrown = false;
         try {
-            command.execute(model);
+            command.execute(model, command.toString());
         } catch (PatientWithFieldNotFoundException e) {
             exceptionThrown = true;
             assertEquals(e.getMessage(),

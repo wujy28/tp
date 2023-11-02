@@ -60,12 +60,12 @@ public class EditCommandParserTest {
         // no IC specified
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, " i/", expectedMessage);
-        //assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
         // no field specified
-        //assertParseFailure(parser, "edit i/T0000000A", EditCommand.MESSAGE_NOT_EDITED);
+        //assertParseFailure(parser, " i/T0000000A", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        //assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test

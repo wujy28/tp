@@ -54,7 +54,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, String command) throws CommandException {
         requireNonNull(model);
         if (model.hasPatient(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
@@ -63,7 +63,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST);
         }
         assert !model.isPatientWithIcNumberPresent(toAdd.getIcNumber()); // ic number should be non-existing
-        model.addPatient(toAdd);
+        model.addPatient(toAdd, command);
         logger.info("AddCommand : " + this + "\nsuccessfully executed");
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
