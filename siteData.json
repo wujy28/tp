@@ -129,6 +129,8 @@
         "viewing-a-patient-view": "Viewing a patient : view",
         "editing-a-patient-edit": "Editing a patient: edit",
         "deleting-a-patient-delete": "Deleting a patient: delete",
+        "undoing-a-command-undo": "Undoing a command: undo",
+        "redoing-a-command-redo": "Redoing a command: redo",
         "editing-a-patient-record-record": "Editing a patient record: record",
         "assigning-a-patient-to-a-department-assign": "Assigning a patient to a department : assign",
         "exiting-the-program-exit": "Exiting the program : exit",
