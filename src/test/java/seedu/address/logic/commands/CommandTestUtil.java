@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.PatientWithIcNumberPredicate;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.EditRecordDescriptorBuilder;
@@ -52,11 +53,17 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_PRIORITY_AMY = "HIGH";
     public static final String VALID_PRIORITY_BOB = "MEDIUM";
+    public static final String VALID_ASSIGNED_DEPARTMENT_BOB = "Psychiatry";
+    public static final String VALID_ASSIGNED_DEPARTMENT_AMY = "Radiology";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_INITIAL_OBSERVATION = "Broken left arm";
-    public static final String VALID_DIAGNOSIS = "Hairline fracture on left arm";
-    public static final String VALID_TREATMENT_PLAN = "Carbon cast for 2 weeks";
+    public static final String VALID_INITIAL_OBSERVATION_BOB = "Broken left arm";
+    public static final String VALID_INITIAL_OBSERVATION_AMY = "Twisted right ankle";
+    public static final String VALID_DIAGNOSIS_BOB = "Hairline fracture on left arm";
+    public static final String VALID_DIAGNOSIS_AMY = "Sprained right ankle";
+    public static final String VALID_TREATMENT_PLAN_BOB = "Carbon cast for 2 weeks";
+    public static final String VALID_TREATMENT_PLAN_AMY = "Ample rest";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -76,9 +83,10 @@ public class CommandTestUtil {
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String INITIAL_OBSERVATION_DESC = " " + PREFIX_INITIAL_OBSERVATION + VALID_INITIAL_OBSERVATION;
-    public static final String DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS;
-    public static final String TREATMENT_PLAN_DESC = " " + PREFIX_TREATMENT_PLAN + VALID_TREATMENT_PLAN;
+    public static final String INITIAL_OBSERVATION_DESC =
+        " " + PREFIX_INITIAL_OBSERVATION + VALID_INITIAL_OBSERVATION_BOB;
+    public static final String DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS_BOB;
+    public static final String TREATMENT_PLAN_DESC = " " + PREFIX_TREATMENT_PLAN + VALID_TREATMENT_PLAN_BOB;
 
     public static final String FULL_DESC_BOB =
         NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
@@ -121,7 +129,7 @@ public class CommandTestUtil {
         REC_AMY = new EditRecordDescriptorBuilder().withInitialObservations("Broken Arm")
             .withDiagnosis("Hairline fracture").withTreatmentPlan("Cast for 2 days").build();
         REC_BOB = new EditRecordDescriptorBuilder().withInitialObservations("Shortness of breath and chest tightness")
-                .withDiagnosis("Asthma").withTreatmentPlan("Rest").build();
+            .withDiagnosis("Asthma").withTreatmentPlan("Rest").build();
     }
 
     public static String getUserInputForBob() {
@@ -190,12 +198,8 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the patient with the given {@code icNumber} in the
      * {@code model}'s address book.
      */
-    public static void showPatientAtIC(Model model, IcNumber icNumber) {
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patient = model.getPatient(icNumber, lastShownList);
-        final String[] splitName = patient.getName().fullName.split("\\s+");
-        model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-        assertEquals(1, model.getFilteredPatientList().size());
+    public static void showPatientAtIC(Model model, IcNumber icNumber) throws PatientWithFieldNotFoundException {
+        model.updateFilteredPatientList(new PatientWithIcNumberPredicate(icNumber));
     }
 
 }

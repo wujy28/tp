@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -106,9 +107,9 @@ public class ModelManager implements Model {
 
     @Override
     public Patient getPatient(IcNumber icNumber, List<Patient> patientList) {
-        for (int i = 0; i < patientList.size(); i++) {
-            if (patientList.get(i).getIcNumber().equals(icNumber)) {
-                return patientList.get(i);
+        for (Patient patient : patientList) {
+            if (patient.getIcNumber().equals(icNumber)) {
+                return patient;
             }
         }
         return null;
@@ -192,6 +193,16 @@ public class ModelManager implements Model {
      */
     public ObservableList<Patient> getCurrentPatientList() {
         return addressBook.getCurrentPatientList();
+    }
+
+    /**
+     * Sorts the address book with the given {@code comparator}
+     *
+     * @param comparator used to order the entries in the address book
+     */
+    public void sortPatientList(Comparator<? super Patient> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortPatientList(comparator);
     }
 
 

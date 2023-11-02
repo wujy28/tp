@@ -69,15 +69,15 @@ public class ViewCommandTest {
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber1);
         ViewCommand command = new ViewCommand(predicate, testIcNumber1);
 
-        boolean exceptionThrown = false;
+        boolean isExceptionThrown = false;
         try {
             command.execute(model, command.toString());
         } catch (PatientWithFieldNotFoundException e) {
-            exceptionThrown = true;
+            isExceptionThrown = true;
             assertEquals(e.getMessage(),
                 MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
         }
-        assertTrue(exceptionThrown);
+        assertTrue(isExceptionThrown);
     }
 
     @Test

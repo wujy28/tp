@@ -29,6 +29,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 
@@ -91,7 +92,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, ALICE.getIcNumber());
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientInFilteredList = model.getPatient(ALICE.getIcNumber(), lastShownList);

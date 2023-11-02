@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -136,4 +137,9 @@ public interface Model {
      * */
     boolean canRedoAddressBook();
 
+     * Sorts the filtered patient list with the given {@code comparator}.
+     *
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortPatientList(Comparator<? super Patient> comparator);
 }

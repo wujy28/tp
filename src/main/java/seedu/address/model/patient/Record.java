@@ -38,6 +38,16 @@ public class Record {
         this.treatmentPlan = defaultTreatmentPlan;
     }
 
+    /**
+     * Initializes a record with defined details
+     */
+    public Record(String initialObservations, String diagnosis, String treatmentPlan) {
+        this.patient = null;
+        this.initialObservations = initialObservations;
+        this.diagnosis = diagnosis;
+        this.treatmentPlan = treatmentPlan;
+    }
+
 
     public Patient getPatient() {
         return patient;

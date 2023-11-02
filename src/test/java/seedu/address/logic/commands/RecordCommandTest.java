@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.REC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.RecordCommand.MESSAGE_EDIT_RECORD_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
@@ -58,18 +58,18 @@ public class RecordCommandTest {
     public void execute_icNumberOfExistingPatient_patientFound() throws PatientWithFieldNotFoundException {
         IcNumber testIcNumber1 = new IcNumber("T0032415E"); // ALICE's ic number
         RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
-        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION);
-        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS);
-        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN);
+        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION_BOB);
+        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS_BOB);
+        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN_BOB);
 
         RecordCommand command = new RecordCommand(testIcNumber1, testEditRecordDescriptor);
 
         expectedModel.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
         Record expectedRecord = ALICE.getRecord();
-        expectedRecord.setInitialObservations(VALID_INITIAL_OBSERVATION);
-        expectedRecord.setDiagnosis(VALID_DIAGNOSIS);
-        expectedRecord.setTreatmentPlan(VALID_TREATMENT_PLAN);
+        expectedRecord.setInitialObservations(VALID_INITIAL_OBSERVATION_BOB);
+        expectedRecord.setDiagnosis(VALID_DIAGNOSIS_BOB);
+        expectedRecord.setTreatmentPlan(VALID_TREATMENT_PLAN_BOB);
 
         assertCommandSuccess(command, model,
             String.format(MESSAGE_EDIT_RECORD_SUCCESS, Messages.formatRecord(ALICE, expectedRecord)), expectedModel);
@@ -81,15 +81,15 @@ public class RecordCommandTest {
         RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
         RecordCommand command = new RecordCommand(testIcNumber1, testEditRecordDescriptor);
 
-        boolean exceptionThrown = false;
+        boolean isExceptionThrown = false;
         try {
             command.execute(model);
         } catch (PatientWithFieldNotFoundException | CommandException e) {
-            exceptionThrown = true;
+            isExceptionThrown = true;
             assertEquals(e.getMessage(),
                 MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
         }
-        assertTrue(exceptionThrown);
+        assertTrue(isExceptionThrown);
     }
 
     @Test

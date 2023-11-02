@@ -35,6 +35,7 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Priority;
 import seedu.address.model.patient.Record;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,21 +45,14 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
-        + "by their IC Number. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: " + PREFIX_IC_NUMBER + "IC_NUMBER "
-        + "[" + PREFIX_NAME + "NAME] "
-        + "[" + PREFIX_PHONE + "PHONE] "
-        + "[" + PREFIX_EMAIL + "EMAIL] "
-        + "[" + PREFIX_GENDER + "GENDER] "
-        + "[" + PREFIX_IC_NUMBER + "IC_NUMBER] "
-        + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
-        + "[" + PREFIX_ADDRESS + "ADDRESS] "
-        + "[" + PREFIX_PRIORITY + "PRIORITY] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T08374678A " + PREFIX_PHONE + "91234567 "
-        + PREFIX_EMAIL + "johndoe@example.com";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Edits the details of the patient identified " + "by their IC Number. "
+            + "Existing values will be overwritten by the input values.\n" + "Parameters: " + PREFIX_IC_NUMBER
+            + "IC_NUMBER " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE + "PHONE] " + "[" + PREFIX_EMAIL
+            + "EMAIL] " + "[" + PREFIX_GENDER + "GENDER] " + "[" + PREFIX_IC_NUMBER + "IC_NUMBER] " + "["
+            + PREFIX_BIRTHDAY + "BIRTHDAY] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_PRIORITY + "PRIORITY] "
+            + "[" + PREFIX_TAG + "TAG]...\n" + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T08374678A "
+            + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -68,7 +62,7 @@ public class EditCommand extends Command {
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param icNumber of the patient in the filtered patient list to edit
+     * @param icNumber              of the patient in the filtered patient list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
     public EditCommand(IcNumber icNumber, EditPatientDescriptor editPatientDescriptor) {
@@ -80,11 +74,13 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, String command) throws CommandException {
+    public CommandResult execute(Model model, String command) throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
-
         Patient patientToEdit = model.getPatient(icNumber, currentPatientList);
+        if (patientToEdit == null) {
+            throw new PatientWithFieldNotFoundException("Ic Number : " + icNumber.value);
+        }
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
@@ -112,13 +108,13 @@ public class EditCommand extends Command {
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
         Priority updatedPriority = editPatientDescriptor.getPriority().orElse(patientToEdit.getPriority());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
-        // edit command does not allow editing assigned department
-        AssignedDepartment updatedDepartment = patientToEdit.getAssignedDepartment();
-        Record updatedRecord = patientToEdit.getRecord(); // edit command does not allow editing record
 
+        // Edit command does not update AssignedDepartment or Record
+        AssignedDepartment originalDepartment = patientToEdit.getAssignedDepartment();
+        Record originalRecord = patientToEdit.getRecord();
 
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedGender, updatedIcNumber, updatedBirthday,
-                updatedAddress, updatedPriority, updatedTags, updatedDepartment, updatedRecord);
+            updatedAddress, updatedPriority, updatedTags, originalDepartment, originalRecord);
     }
 
 
@@ -140,8 +136,7 @@ public class EditCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("icNumber", icNumber)
-                .add("editPatientDescriptor", editPatientDescriptor)
+        return new ToStringBuilder(this).add("icNumber", icNumber).add("editPatientDescriptor", editPatientDescriptor)
             .toString();
     }
 
@@ -180,10 +175,10 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one non-IcNumber field is edited.
          */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, gender, icNumber, birthday, address, tags);
+        public boolean isAnyFieldExceptIcNumberEdited() {
+            return CollectionUtil.isAnyNonNull(name, phone, email, gender, birthday, address, tags, priority);
         }
 
         public void setName(Name name) {
@@ -255,15 +250,12 @@ public class EditCommand extends Command {
             }
 
             EditPatientDescriptor otherEditPatientDescriptor = (EditPatientDescriptor) other;
-            return Objects.equals(name, otherEditPatientDescriptor.name)
-                    && Objects.equals(phone, otherEditPatientDescriptor.phone)
-                    && Objects.equals(email, otherEditPatientDescriptor.email)
-                    && Objects.equals(gender, otherEditPatientDescriptor.gender)
-                    && Objects.equals(icNumber, otherEditPatientDescriptor.icNumber)
-                    && Objects.equals(birthday, otherEditPatientDescriptor.birthday)
-                    && Objects.equals(address, otherEditPatientDescriptor.address)
-                    && Objects.equals(priority, otherEditPatientDescriptor.priority)
-                    && Objects.equals(tags, otherEditPatientDescriptor.tags);
+            return Objects.equals(name, otherEditPatientDescriptor.name) && Objects.equals(phone,
+                otherEditPatientDescriptor.phone) && Objects.equals(email, otherEditPatientDescriptor.email)
+                && Objects.equals(gender, otherEditPatientDescriptor.gender) && Objects.equals(icNumber,
+                otherEditPatientDescriptor.icNumber) && Objects.equals(birthday, otherEditPatientDescriptor.birthday)
+                && Objects.equals(address, otherEditPatientDescriptor.address) && Objects.equals(priority,
+                otherEditPatientDescriptor.priority) && Objects.equals(tags, otherEditPatientDescriptor.tags);
         }
 
         public void setGender(Gender gender) {
@@ -292,16 +284,9 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("gender", gender)
-                    .add("icNumber", icNumber)
-                    .add("birthday", birthday)
-                    .add("address", address)
-                    .add("priority", priority)
-                    .add("tags", tags).toString();
+            return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
+                .add("gender", gender).add("icNumber", icNumber).add("birthday", birthday).add("address", address)
+                .add("priority", priority).add("tags", tags).toString();
         }
     }
 }

@@ -46,7 +46,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-        public void execute_invalidIcList_throwsIllegalArgumentException() {
+        public void execute_invalidIcList_throwsIllegalArgumentException() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, ALICE.getIcNumber());
         String invalidIC = "";
         assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
@@ -54,7 +54,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIcFilteredList_success() {
+    public void execute_validIcFilteredList_success() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, new IcNumber("T0032415E"));
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
@@ -75,15 +75,15 @@ public class DeleteCommandTest {
         IcNumber testIcNumber1 = new IcNumber("T1234567j");
         DeleteCommand command = new DeleteCommand(testIcNumber1);
 
-        boolean exceptionThrown = false;
+        boolean isExceptionThrown = false;
         try {
             command.execute(model, command.toString());
         } catch (PatientWithFieldNotFoundException e) {
-            exceptionThrown = true;
+            isExceptionThrown = true;
             assertEquals(e.getMessage(),
                 MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
         }
-        assertTrue(exceptionThrown);
+        assertTrue(isExceptionThrown);
     }
 
     @Test

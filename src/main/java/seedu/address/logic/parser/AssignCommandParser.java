@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AssignCommand;
-import seedu.address.logic.commands.RecordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.AssignedDepartment;
 import seedu.address.model.patient.IcNumber;
@@ -31,7 +30,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, RELEVANT_PREFIXES);
         if (!checkIcNumberPrefixPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES);
 
