@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPatients.BOB;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -104,8 +105,31 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public String redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean canUndoAddressBook(){
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook(String command) {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override
@@ -150,12 +174,12 @@ public class AddCommandTest {
 
 
         @Override
-        public void addPatient(Patient patient) {
+        public void addPatient(Patient patient, String command) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyAddressBook newData, String command) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -170,12 +194,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePatient(Patient target) {
+        public void deletePatient(Patient target, String command) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPatient(Patient target, Patient editedPatient) {
+        public void setPatient(Patient target, Patient editedPatient, String command) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,6 +210,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPatientList(Predicate<Patient> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPatientList(Comparator<? super Patient> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -222,9 +251,10 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPatient(Patient patient) {
+        public void addPatient(Patient patient, String command) {
             requireNonNull(patient);
             patientsAdded.add(patient);
+            commitAddressBook(command);
         }
 
         @Override

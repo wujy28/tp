@@ -50,7 +50,7 @@ public class ViewCommand extends Command {
      * @throws PatientWithFieldNotFoundException If user enters a field not present in any existing patients
      */
     @Override
-    public CommandResult execute(Model model) throws PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command) throws PatientWithFieldNotFoundException {
         requireNonNull(model);
         model.updateFilteredPatientList(predicate);
         if (model.getFilteredPatientList().size() == 0) { // no patient with that IC

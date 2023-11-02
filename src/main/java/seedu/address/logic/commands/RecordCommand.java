@@ -56,7 +56,7 @@ public class RecordCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command) throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
         Patient patientToEdit = model.getPatient(icNumber, currentPatientList);

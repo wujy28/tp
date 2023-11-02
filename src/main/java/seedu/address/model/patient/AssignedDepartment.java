@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Patient's assigned department in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDepartment(String)}
  */
-public class AssignedDepartment {
+public class AssignedDepartment implements Comparable<AssignedDepartment> {
 
     public static final String MESSAGE_CONSTRAINTS = "Departments can only take certain values, "
             + "must adhere to British spelling conventions, "
@@ -71,5 +71,19 @@ public class AssignedDepartment {
     @Override
     public int hashCode() {
         return assignedDepartment.hashCode();
+    }
+
+    @Override
+    public int compareTo(AssignedDepartment o) {
+        Department thisDepartment = this.assignedDepartment;
+        Department otherDepartment = o.assignedDepartment;
+
+        if (thisDepartment.compareTo(otherDepartment) < 0) {
+            return -1;
+        } else if (thisDepartment.compareTo(otherDepartment) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

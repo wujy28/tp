@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command) throws PatientWithFieldNotFoundException {
         requireNonNull(model);
         model.updateFilteredPatientList(predicate);
         if (model.getFilteredPatientList().size() == 0) {

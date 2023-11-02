@@ -4,7 +4,6 @@ package seedu.address.model.patient;
  * Represents the departments in the hospital.
  */
 public enum Department {
-    DEFAULT("Default"),
     EMERGENCY_DEPARTMENT("Emergency Department"),
     INTENSIVE_CARE_UNIT("Intensive Care Unit"),
     ANAESTHESIOLOGY("Anaesthesiology"),
@@ -27,7 +26,8 @@ public enum Department {
     PLASTIC_SURGERY("Plastic Surgery"),
     PSYCHIATRY("Psychiatry"),
     RADIOLOGY("Radiology"),
-    UROLOGY("Urology");
+    UROLOGY("Urology"),
+    DEFAULT("Default");
 
     /** The string representation of the Department **/
     private final String string;

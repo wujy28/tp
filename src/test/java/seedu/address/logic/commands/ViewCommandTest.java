@@ -71,7 +71,7 @@ public class ViewCommandTest {
 
         boolean isExceptionThrown = false;
         try {
-            command.execute(model);
+            command.execute(model, command.toString());
         } catch (PatientWithFieldNotFoundException e) {
             isExceptionThrown = true;
             assertEquals(e.getMessage(),

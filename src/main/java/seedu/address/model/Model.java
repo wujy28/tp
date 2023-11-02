@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -65,7 +66,7 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyAddressBook addressBook, String command);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
@@ -79,14 +80,14 @@ public interface Model {
      * Deletes the given patient.
      * The patient must exist in the address book.
      */
-    void deletePatient(Patient target);
+    void deletePatient(Patient target, String command);
 
 
     /**
      * Adds the given patient.
      * {@code patient} must not already exist in the address book.
      */
-    void addPatient(Patient patient);
+    void addPatient(Patient patient, String command);
 
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
@@ -94,7 +95,7 @@ public interface Model {
      * The patient identity of {@code editedPatient} must not be the same as another existing patient in the address
      * book.
      */
-    void setPatient(Patient target, Patient editedPatient);
+    void setPatient(Patient target, Patient editedPatient, String command);
 
     /** Returns an unmodifiable view of the filtered patient list */
     ObservableList<Patient> getFilteredPatientList();
@@ -105,4 +106,40 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
+
+    /**
+     *  Save current state of the patient data
+     * @param command The most recent command
+     */
+    void commitAddressBook(String command);
+
+    /**
+     * Converts to the previous state of the patient data
+     * Returns most recent command
+     */
+    String undoAddressBook();
+
+    /**
+     * Converts to the previous state of the patient data
+     * Returns most recent command
+     */
+    String redoAddressBook();
+
+    /**
+     * Check if there is a previous state/command to undo to.
+     * Returns true if there is a state, and false otherwise.
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Check if there is a next state/command to redo to.
+     * Returns true if there is a state, and false otherwise.
+     * */
+    boolean canRedoAddressBook();
+
+     * Sorts the filtered patient list with the given {@code comparator}.
+     *
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortPatientList(Comparator<? super Patient> comparator);
 }

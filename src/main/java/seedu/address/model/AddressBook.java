@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -124,6 +125,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return patients.getCurrentPatientList();
     }
 
+    public void sortPatientList(Comparator<? super Patient> comparator) {
+        patients.sortPatients(comparator);
+    }
 
     @Override
     public ObservableList<Record> getRecordList() {
@@ -171,6 +175,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void removeRecord(Record key) {
         records.remove(key);
+    }
+    public AddressBook copy() {
+        AddressBook copy = new AddressBook();
+        for(Patient patient: patients) {
+            copy.addPatient(patient);
+        }
+        return copy;
     }
 
 
