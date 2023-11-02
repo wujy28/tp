@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-//import javax.swing.*;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -150,6 +150,16 @@ public class ModelManager implements Model {
      */
     public ObservableList<Patient> getCurrentPatientList() {
         return addressBook.getCurrentPatientList();
+    }
+
+    /**
+     * Sorts the address book with the given {@code comparator}
+     *
+     * @param comparator used to order the entries in the address book
+     */
+    public void sortPatientList(Comparator<? super Patient> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortPatientList(comparator);
     }
 
 
