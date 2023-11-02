@@ -16,7 +16,7 @@ public class ListCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, String command) {
         requireNonNull(model);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(MESSAGE_SUCCESS);

@@ -170,7 +170,7 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPatient(expectedPatient);
+        expectedModel.addPatient(expectedPatient, "");
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

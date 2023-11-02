@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command) throws PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
 
@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             throw new PatientWithFieldNotFoundException("Ic Number : " + icNumber.value);
         }
         logger.info("DeleteCommand : " + this + "\nsuccessfully executed");
-        model.deletePatient(patientToDelete);
+        model.deletePatient(patientToDelete, command);
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
     }
 

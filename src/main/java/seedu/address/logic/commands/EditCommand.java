@@ -74,7 +74,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command) throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
         Patient patientToEdit = model.getPatient(icNumber, currentPatientList);
@@ -87,7 +87,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        model.setPatient(patientToEdit, editedPatient);
+        model.setPatient(patientToEdit, editedPatient, command);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, Messages.format(editedPatient)));
     }

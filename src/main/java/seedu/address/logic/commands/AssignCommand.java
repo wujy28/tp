@@ -63,7 +63,7 @@ public class AssignCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command) throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
         Patient patientToAssign = model.getPatient(icNumber, currentPatientList);
@@ -77,7 +77,7 @@ public class AssignCommand extends Command {
                 String.format(MESSAGE_SAME_DEPARTMENT, patientToAssign.getName(), this.department));
         }
 
-        model.setPatient(patientToAssign, assignedPatient);
+        model.setPatient(patientToAssign, assignedPatient, command);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
         logger.info("AssignCommand : " + this + "\nsuccessfully executed");

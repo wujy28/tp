@@ -174,7 +174,40 @@ Examples:
 + `delete i/T1234567A`
 + `delete i/T2468012a`
 
+### Undoing a command: `undo`
 
+Undoes the most recent state of the following commands:
++ `delete`
++ `edit`
++ `clear`
++ `add`
+
+Format: `undo`
+
++ Input command is **case-sensitive** e.g. `undo` is accepted but not `UNDO`.
+
+Examples:
+
++ `delete i/T1234567A` deletes this patient from the patient list
++ `undo` restores this patient back into the patient list
+
+### Redoing a command: `redo`
+
+Redoes the most recent state of the following commands:
++ `delete`
++ `edit`
++ `clear`
++ `add`
+
+Format: `redo`
+
++ Input command is **case-sensitive** e.g. `redo` is accepted but not `REDO`.
+
+Examples:
+
++ `delete i/T1234567A` deletes this patient from the patient list
++ `undo` restores this patient back into the patient list
++ `redo` once again deletes this patient from the patient list
 
 ### Editing a patient record: `record`
 
@@ -246,6 +279,7 @@ A: Install the app in the other computer and overwrite the empty data file it cr
 ## Known issues
 
 When using multiple screens, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the application before running the application again.
+Regarding the undo functionality - the first change after the launching of the app cannot be undone. Thereafter, user required to type undo once to trigger the functionality
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -259,6 +293,8 @@ When using multiple screens, if you move the application to a secondary screen, 
 | **View**   | `view i/IC_NUMBER`<br> e.g., `view i/T0201234A`                                                                                                                                                                                         |
 | **Edit**   | `edit i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`<br> e.g., `edit i/T0201234A g/MALE b/08/08/1999 p/93827836 e/example@email.com a/Old Time Road Block 3 pr/MEDIUM t/Allergic to Fur` |
 | **Delete** | `delete i/IC_NUMBER`<br> e.g., `delete i/T2468012A`                                                                                                                                                                                     |
+| **Undo**   | `undo`                                                                                                                                                                                                                                  |
+| **Redo**   | `redo`                                                                                                                                                                                                                                  |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find Mary Jane`                                                                                                                                                                                |
 | **Record** | `record i/IC_NUMBER [o/OBSERVATION] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`<br> e.g.,`record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`                                                                              |
 | **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                           |
