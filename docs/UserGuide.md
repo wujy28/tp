@@ -282,17 +282,19 @@ Examples:
 
 ### Assigning a patient to a department : `assign`
 
-Assigns the patient to relevant doctor.
+Assigns a patient to a hospital department.
 
 Format: `assign i/IC_NUMBER d/DEPARTMENT`
 
 * All input fields are compulsory.
 * **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 * `DEPARTMENT` must adhere to British spelling conventions.
+* Refer to the [appendix](#appendix--departments) below for the list of valid departments and their accepted inputs.
 
 Examples:
 
-* `assign i/T0201234A d/cardiology`
+* To assign a patient with IC_NUMBER = T0201234A to the Cardiology department<br>
+  `assign i/T0201234A d/cardiology`
 
 ### Exiting the program : `exit`
 
@@ -360,3 +362,36 @@ application before running the application again.
 | **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                           |
 | **Clear**  | `clear`                                                                                                                                                                                                                                 |
 | **Exit**   | `exit`                                                                                                                                                                                                                                  |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Departments
+
+The table below shows all the hospital departments available in the system and their accepted inputs.
+
+| Department           | Acceptable Input(s)    |
+|----------------------|------------------------|
+| Default              | `Default`              |
+| Anaesthesiology      | `Anaesthesiology`      |
+| Cardiology           | `Cardiology`           |
+| Dermatology          | `Dermatology`          |
+| Emergency Department | `Emergency Department` |
+| Endocrinology        | `Endocrinology`        |
+| General Surgery      | `General Surgery`      |
+| Geriatric Medicine   | `Geriatric Medicine`   |
+| Gynaecology          | `Gynaecology`          |
+| Haematology          | `Haematology`          |
+| Immunology           | `Immunology`           |
+| Infectious Diseases  | `Infectious Diseases`  |
+| Intensive Care Unit  | `Intensive Care Unit`  |
+| Oncology             | `Oncology`             |
+| Ophthalmology        | `Ophthalmology`        |
+| Orthopaedics         | `Orthopaedics`         |
+| Neurology            | `Neurology`            |
+| Neurosurgery         | `Neurosurgery`         |
+| Pathology            | `Pathology`            |
+| Palliative Medicine  | `Palliative Medicine`  |
+| Plastic Surgery      | `Plastic Surgery`      |
+| Psychiatry           | `Psychiatry`           |
+| Radiology            | `Radiology`            |
+| Urology              | `Urology`              |
