@@ -131,6 +131,8 @@
         "deleting-a-patient-delete": "Deleting a patient: delete",
         "undoing-a-command-undo": "Undoing a command: undo",
         "redoing-a-command-redo": "Redoing a command: redo",
+        "finding-a-patient-by-name-find": "Finding a patient by name: find",
+        "sorting-the-patient-list-sort": "Sorting the patient list: sort",
         "editing-a-patient-record-record": "Editing a patient record: record",
         "assigning-a-patient-to-a-department-assign": "Assigning a patient to a department : assign",
         "exiting-the-program-exit": "Exiting the program : exit",
@@ -139,7 +141,8 @@
         "archiving-data-files-coming-in-v2-0": "Archiving data files [coming in v2.0]",
         "faq": "FAQ",
         "known-issues": "Known issues",
-        "command-summary": "Command summary"
+        "command-summary": "Command summary",
+        "appendix-departments": "Appendix: Departments"
       },
       "headingKeywords": {}
     },
@@ -147,7 +150,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "advanced-and-amp-efficient-a-and-amp-e": "Advanced&amp;Efficient (A&amp;E)"
       },
       "headingKeywords": {}
     },
