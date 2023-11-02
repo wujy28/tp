@@ -6,9 +6,14 @@ pageNav: 3
 
 # Advanced&Efficient (A&E) User Guide
 
-Welcome to **Advanced&Efficient (A&E)**! Are you an Emergency Department (ED) doctor overwhelmed by the sheer volume of patient records to manage? Do you wish for a faster, more efficient way to log patient reports and streamline your workflow? A&E is the tool you’ve been waiting for!
+Welcome to **Advanced&Efficient (A&E)**! Are you an Emergency Department (ED) doctor overwhelmed by the sheer volume of
+patient records to manage? Do you wish for a faster, more efficient way to log patient reports and streamline your
+workflow? A&E is the tool you’ve been waiting for!
 
-Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **ED doctors** who need to **create, update, and manage patient records** swiftly and effectively. This application, with its **Command-Line Interface (CLI)** design, caters to fast typists and professionals who prefer typing over mouse interactions, significantly speeding up the process of inputting and managing patient data.
+Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **ED doctors** who need to *
+*create, update, and manage patient records** swiftly and effectively. This application, with its **Command-Line
+Interface (CLI)** design, caters to fast typists and professionals who prefer typing over mouse interactions,
+significantly speeding up the process of inputting and managing patient data.
 
 Here’s a sneak peek into what A&E offers:
 
@@ -18,9 +23,13 @@ Here’s a sneak peek into what A&E offers:
 - An intuitive system for managing patient priority levels and medical tags
 - Easy-to-follow command summaries and guides for efficient navigation
 
-A&E combines the simplicity of a CLI with the visual cues of a Graphical User Interface (GUI), offering you the best of both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is tailored just for you.
+A&E combines the simplicity of a CLI with the visual cues of a Graphical User Interface (GUI), offering you the best of
+both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is
+tailored just for you.
 
-This User Guide is designed to help you, whether you're a newcomer or an experienced user, to harness the full potential of A&E. Here, you'll find everything you need to streamline your patient management tasks, making your role in the ED more manageable and effective.
+This User Guide is designed to help you, whether you're a newcomer or an experienced user, to harness the full potential
+of A&E. Here, you'll find everything you need to streamline your patient management tasks, making your role in the ED
+more manageable and effective.
 
 If you are a **new user**:
 
@@ -28,14 +37,18 @@ If you are a **new user**:
 - If you’re new to CLI or need a refresher, keep an eye out for our upcoming guide.
 
 If you are an **experienced user**:
+
 - Utilize the Table of contents to swiftly navigate to your desired section.
 - Dive into the Features to explore advanced functionalities and optimize your workflow.
 
-Embrace the efficiency of A&E and transform the way you manage patient records in your Emergency Department. Let’s get started!
+Embrace the efficiency of A&E and transform the way you manage patient records in your Emergency Department. Let’s get
+started!
 
 
 <!-- * Table of Contents -->
+
 ## Table of Contents
+
 - [Table-of-content](#table-of-contents)
 - [Navigate](#navigating-the-user-guide)
 - [Quick-start](#quick-start)
@@ -57,14 +70,58 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Navigating the user guide
 
 ### [coming soon]
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
 ### [coming soon]
+
+1. Ensure you have Java 11 or above installed in your Computer.
+
+   __How to check?__
+    1. Open up the Terminal on your computer.
+        1. For Windows users, locate it by typing in “Terminal” in the search bar.
+        2. For Mac users, locate it by typing in “Terminal” in Spotlight.
+    2. Type in java -version and press Enter.
+    3. If you have Java installed, you should see your Java version as shown underlined in the picture below.
+    4. If you do not have Java or your Java version is below 11, install Java
+       11 [here](https://www.oracle.com/java/technologies/downloads/#java11)
+
+
+2. Go to your Desktop and create a folder named “A&E”.
+
+
+3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.trial)
+    1. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
+
+    <img src='images/jar.png' width='500'>
+
+
+4. After downloading the application, move it into the “A&E” folder created in step 2.
+
+
+5. Open Terminal, type in cd Desktop\A&E to navigate to the folder you’ve created, and press Enter. Then, type in java
+   -jar AdvancedAndEfficient.jar and press Enter again to run the application.
+
+   A GUI similar to the picture below should appear in a few seconds. Note how the app contains some sample data.
+   <img src='images/UI.png' width='500'>
+
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the
+   help window.
+
+   Some example commands you can try:
+
+   list : Lists all patients.
+   add n/John Doe i/T0384762A p/98765432 e/johnd@example.com a/John street, block 123, #01-01 : Adds a patient named
+   John Doe into the system.
+   clear : Deletes all patients.
+   exit : Exits the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -104,27 +161,26 @@ Format: `list`
 
 <img src='images/ug/listPatients.png' width='300'>
 
-
 ### Adding a patient: `add`
 
 Adds a patient
 
-Format: `add n/NAME i/IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+Format: `add n/NAME i/IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRIORITY t/TAG`
 
 + Only `NAME` and `IC_NUMBER` fields are **compulsory**.
 + **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
 + The order of the input fields does not matter.
++ `PRIORITY` can take on values `NIL`,`LOW`,`MEDIUM` or `HIGH`.
 
 Examples:
+
 + To add a Patient with `NAME` = John Doe, `IC_Number` = T0123456A, `GENDER` = Male, `BIRTHDAY` = 01/01/1990,
 
 `add n/John Doe i/T0123456A g/Male b/01/01/1990 `
 
-
 * To add a Patient with Name = Betsy Crowe, IC_Number = S0123456B, PHONE = 90909090, EMAIL = bc@gmail.com
 
 `add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com`
-
 
 ### Viewing a patient : `view`
 
@@ -141,7 +197,6 @@ Examples:
 
 `view i/T0201234A`
 
-
 ### Editing a patient: `edit`
 
 Edits the attributes of a patient
@@ -151,14 +206,12 @@ Format: `edit IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 + Only the `IC_NUMBER` field is compulsory.
 + **All** input fields are **case-insensitive** e.g. `john doe` is the same as `JOHN DOE`.
 + The order of the input fields does not matter.
++ `PRIORITY` can take on values `NIL`,`LOW`,`MEDIUM` or `HIGH`.
 
 Examples:
 
 * `edit T0123456A n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `edit T6543210F n/Betsy Crowe p/87386298 a/20 g/Female b/02-02-2003 e/betsycrowe@example.com a/Brighton Town i/T6543210F`
-
-
-
 
 ### Deleting a patient: `delete`
 
@@ -173,8 +226,6 @@ Examples:
 
 + `delete i/T1234567A`
 + `delete i/T2468012a`
-
-
 
 ### Editing a patient record: `record`
 
@@ -215,18 +266,21 @@ Format: `exit`
 
 ### Saving the data
 
-Advanced&Efficient data are saved in the hard disk automatically after any command that changes the data. There is no need to
+Advanced&Efficient data are saved in the hard disk automatically after any command that changes the data. There is no
+need to
 save manually.
 
 ### Editing the data file
 
-Advanced&Efficient data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+Advanced&Efficient data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced
+users are
 welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Advanced&Efficient will discard all data and start with an empty
+If your changes to the data file makes its format invalid, Advanced&Efficient will discard all data and start with an
+empty
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
@@ -239,13 +293,16 @@ _Details coming soon ..._
 ## FAQ
 
 Q: How do I transfer my data to another Computer?
-A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous A&E home folder.
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
+data of your previous A&E home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-When using multiple screens, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the application before running the application again.
+When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
+primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
+application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
