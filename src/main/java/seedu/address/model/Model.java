@@ -137,6 +137,7 @@ public interface Model {
      * */
     boolean canRedoAddressBook();
 
+    /*
      * Sorts the filtered patient list with the given {@code comparator}.
      *
      * @throws NullPointerException if {@code comparator} is null.

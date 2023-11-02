@@ -120,7 +120,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePatientFilteredList_failure() {
+    public void execute_duplicatePatientFilteredList_failure() throws PatientWithFieldNotFoundException {
         showPatientAtIC(model, ALICE.getIcNumber());
 
         // edit patient in filtered list into a duplicate in address book

@@ -33,7 +33,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, String str) {
         requireNonNull(model);
         model.sortPatientList(sortOrder.getComparator());
         return new CommandResult(String.format(MESSAGE_SORT_LIST_SUCCESS, sortOrder));
