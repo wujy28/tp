@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Record;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -27,21 +26,11 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedRecord> records = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given patients.
+     * Constructs a {@code JsonSerializableAddressBook} with the given patients and records.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
         this.patients.addAll(patients);
-    }
-
-    /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given patients and records.
-     */
-    @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients,
-                                       @JsonProperty("records") List<JsonAdaptedRecord> records) {
-        this.patients.addAll(patients);
-        this.records.addAll(records);
     }
 
     /**
@@ -51,7 +40,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         patients.addAll(source.getPatientList().stream().map(JsonAdaptedPatient::new).collect(Collectors.toList()));
-        records.addAll(source.getRecordList().stream().map(JsonAdaptedRecord::new).collect(Collectors.toList()));
+        //records.addAll(source.getRecordList().stream().map(JsonAdaptedRecord::new).collect(Collectors.toList()));
     }
 
     /**
@@ -69,13 +58,6 @@ class JsonSerializableAddressBook {
             addressBook.addPatient(patient);
         }
 
-        for (JsonAdaptedRecord jsonAdaptedRecord : records) {
-            Record record = jsonAdaptedRecord.toModelType();
-            if (addressBook.hasRecord(record)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
-            }
-            addressBook.addRecord(record);
-        }
 
         return addressBook;
     }

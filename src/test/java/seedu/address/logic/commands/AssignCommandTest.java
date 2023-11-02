@@ -14,7 +14,6 @@ import seedu.address.model.patient.AssignedDepartment;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
-
 /**
  * Contains integration tests (interaction with the Model) for {@code AssignCommand}.
  */
