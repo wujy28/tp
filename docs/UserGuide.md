@@ -49,21 +49,29 @@ started!
 
 ## Table of Contents
 
-- [Table-of-content](#table-of-contents)
+- [Table-of-contents](#table-of-contents)
 - [Navigate](#navigating-the-user-guide)
 - [Quick-start](#quick-start)
 - [Features](#features)
     - [Viewing help : `help`](#viewing-help--help)
-    - [Listing all patients: `list`](#listing-all-patients-list)
-    - [Adding a patient: `add`](#adding-a-patient-add)
-    - [Deleting a patient: `delete`](#deleting-a-patient-edit)
-    - [Editing a patient: `edit`](#editing-a-patient-delete)
-    - [Viewing a patient record : `view`](#viewing-a-patient-record-view)
-    - [Editing a patient record : `record`](#editing-a-patient-record-record)
+    - [Listing all patients: `list`](#listing-all-patients--list)
+    - [Adding a patient: `add`](#adding-a-patient--add)
+    - [Viewing a patient : `view`](#viewing-a-patient--view)
+    - [Editing a patient: `edit`](#editing-a-patient--edit)
+    - [Deleting a patient: `delete`](#deleting-a-patient--delete)
+    - [Undoing a command : `undo`](#undoing-a-command--undo)
+    - [Redoing a command : `redo`](#redoing-a-command--redo)
+    - [Finding a patient by name : `find`](#finding-a-patient-by-name--find)
+    - [Sorting the patient list : `sort`](#sorting-the-patient-list--sort)
+    - [Editing a patient record : `record`](#editing-a-patient-record--record)
     - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department--assign)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
+- [Appendix : Departments](#appendix--departments)
 - [Command summary](#command-summary)
 
 <page-nav-print />
@@ -78,8 +86,6 @@ started!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
-
-### [coming soon]
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
@@ -105,23 +111,23 @@ started!
 4. After downloading the application, move it into the “A&E” folder created in step 2.
 
 
-5. Open Terminal, type in cd Desktop\A&E to navigate to the folder you’ve created, and press Enter. Then, type in java
-   -jar AdvancedAndEfficient.jar and press Enter again to run the application.
+5. Open Terminal, type in cd Desktop\A&E to navigate to the folder you’ve created, and press Enter. Then, type in `java
+   -jar AdvancedAndEfficient.jar` and press Enter again to run the application.
 
    A GUI similar to the picture below should appear in a few seconds. Note how the app contains some sample data.
    <img src='images/UI.png' width='500'>
 
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the
+6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the
    help window.
 
    Some example commands you can try:
 
-   list : Lists all patients.
-   add n/John Doe i/T0384762A p/98765432 e/johnd@example.com a/John street, block 123, #01-01 : Adds a patient named
+   `list` : Lists all patients.
+   `add n/John Doe i/T0384762A p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a patient named
    John Doe into the system.
-   clear : Deletes all patients.
-   exit : Exits the app.
+   `clear` : Deletes all patients.
+   `exit` : Exits the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -134,6 +140,12 @@ started!
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
+
+* Items with `...` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -145,7 +157,7 @@ started!
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -165,7 +177,7 @@ Format: `list`
 
 Adds a patient
 
-Format: `add n/NAME i/IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRIORITY t/TAG`
+Format: `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY]] [t/TAG]...`
 
 + Only `NAME` and `IC_NUMBER` fields are **compulsory**.
 + **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
@@ -182,7 +194,7 @@ Examples:
 
 `add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com`
 
-### Viewing a patient : `view`
+### Viewing a patient: `view`
 
 Displays a specific patient’s information and medical record.
 
@@ -201,9 +213,10 @@ Examples:
 
 Edits the attributes of a patient
 
-Format: `edit IC_NUMBER g/GENDER b/BIRTHDAY p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+Format: `edit i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 
-+ Only the `IC_NUMBER` field is compulsory.
++ Edits the patient with the specified `i/IC_NUMBER`
++ At least one of the optional fields indicated within square brackets must be provided.
 + **All** input fields are **case-insensitive** e.g. `john doe` is the same as `JOHN DOE`.
 + The order of the input fields does not matter.
 + `PRIORITY` can take on values `NIL`,`LOW`,`MEDIUM` or `HIGH`.
@@ -226,7 +239,6 @@ Examples:
 
 + `delete i/T1234567A`
 + `delete i/T2468012a`
-
 
 ### Undoing a command: `undo`
 
@@ -329,7 +341,7 @@ Examples:
 * To edit the medical record of a patient with `IC_NUMBER = S2374912B`<br>
   `record i/S2374912B di/Asthma o/Shortness of breath and chest tightness`
 
-### Assigning a patient to a department : `assign`
+### Assigning a patient to a department: `assign`
 
 Assigns a patient to a hospital department.
 
@@ -345,7 +357,13 @@ Examples:
 * To assign a patient with IC_NUMBER = T0201234A to the Cardiology department<br>
   `assign i/T0201234A d/cardiology`
 
-### Exiting the program : `exit`
+### Clearing all entries: `clear`
+
+Clears all entries from the system.
+
+Format: `clear`
+
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -371,10 +389,6 @@ empty
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -390,7 +404,9 @@ data of your previous A&E home folder.
 When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
 primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
 application before running the application again.
-
+<br>
+<br>
+Regarding the undo functionality - the first change after the launching of the app cannot be undone. Thereafter, user required to type undo once to trigger the functionality
 
 --------------------------------------------------------------------------------------------------------------------
 
