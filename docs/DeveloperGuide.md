@@ -277,21 +277,17 @@ command.
 Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
 command word `view` and the argument `i/t1234567j`. After splitting, `AddressBookParser#parseCommand` would identify
 that the command is `View` and instantiate `ViewCommandParser` and call its `ViewCommandParser#parse` to parse the
-argument
-accordingly.
+argument accordingly.
 
-Step 3. `ViewCommandParser#parse` would first map the `IcNumber` prefix to its argument, `t1234567j`
-using `ArgumentMultimap`.
-The `ArgumentMultimap` would then be passed to `checkIcNumberPrefixPresent` to check that the `IcNumber` prefix
-is present. If `checkIcNumberPrefixPresent` returns `false`, `ParseException` is thrown.
-
-Step 4. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
+Step 3. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
 then passed as an argument along with `IcNumber` to instantiate the `ViewCommand`, which is then returned by
 `ViewCommandParser#parse`
 
 Step 5. `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
 `PatientWithIcNumberPredicate` as an argument. It then returns a `CommandResult` stating the patient
-has been listed. `PatientWithFieldNotFoundException` is thrown if no patient found.
+has been listed.
+
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
 
 #### Design considerations:
 
