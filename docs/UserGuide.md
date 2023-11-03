@@ -103,7 +103,7 @@ started!
 2. Go to your Desktop and create a folder named “A&E”.
 
 
-3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.trial)
+3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.1)
     1. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
 
     <img src='images/jar.png' width='800'>
