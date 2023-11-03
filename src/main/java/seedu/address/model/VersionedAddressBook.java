@@ -1,7 +1,7 @@
 package seedu.address.model;
 import java.util.ArrayList;
 
-public class VersionedAddressBook extends AddressBook{
+public class VersionedAddressBook extends AddressBook {
     private ArrayList<AddressBook> addressBooksStateList;
     private ArrayList<String> commandHistory;
     private int currentStatePointer;
@@ -34,7 +34,7 @@ public class VersionedAddressBook extends AddressBook{
     }
 
     public boolean canUndo() {
-        return this.currentStatePointer!=0;
+        return this.currentStatePointer != 0;
     }
 
     public String getNextCommand() {
