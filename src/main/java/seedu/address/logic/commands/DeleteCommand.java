@@ -14,7 +14,7 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
- * Deletes a patient identified using it's displayed index from the address book.
+ * Deletes a patient identified using it's ic number from the patient record.
  */
 public class DeleteCommand extends Command {
 

@@ -254,7 +254,6 @@ public class AddCommandTest {
         public void addPatient(Patient patient, String command) {
             requireNonNull(patient);
             patientsAdded.add(patient);
-            commitAddressBook(command);
         }
 
         @Override
