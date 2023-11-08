@@ -15,7 +15,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PATIENT_IC = "IC Number should start and end with an alphabet with non negative numbers in between";
+    public static final String MESSAGE_INVALID_PATIENT_IC = "IC Number should start and end with "
+            + "an alphabet with non negative numbers in between";
     public static final String MESSAGE_PATIENTS_LISTED_OVERVIEW = "%1$d patients listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";

@@ -18,10 +18,9 @@ import seedu.address.model.patient.AssignedDepartment;
 import seedu.address.model.patient.IcNumber;
 
 public class AssignCommandParserTest {
-    private final AssignCommandParser parser = new AssignCommandParser();
-
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             AssignCommand.MESSAGE_USAGE);
+    private final AssignCommandParser parser = new AssignCommandParser();
 
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
@@ -66,13 +65,13 @@ public class AssignCommandParserTest {
         // duplicate IC Number
         Prefix[] duplicateIcNumberPrefixes = new Prefix[]{new Prefix("i/"), new Prefix("i/")};
         String expectedMessageIC = Messages.getErrorMessageForDuplicatePrefixes(duplicateIcNumberPrefixes);
-        assertParseFailure(parser,IC_NUMBER_DESC_BOB + IC_NUMBER_DESC_AMY + " d/cardiology",
+        assertParseFailure(parser, IC_NUMBER_DESC_BOB + IC_NUMBER_DESC_AMY + " d/cardiology",
                 expectedMessageIC);
 
         // duplicate department
         Prefix[] duplicateDepartmentPrefixes = new Prefix[]{new Prefix("d/"), new Prefix("d/")};
         String expectedMessageDepartment = Messages.getErrorMessageForDuplicatePrefixes(duplicateDepartmentPrefixes);
-        assertParseFailure(parser,IC_NUMBER_DESC_BOB + " d/cardiology" + " d/Endocrinology",
+        assertParseFailure(parser, IC_NUMBER_DESC_BOB + " d/cardiology" + " d/Endocrinology",
                 expectedMessageDepartment);
     }
 

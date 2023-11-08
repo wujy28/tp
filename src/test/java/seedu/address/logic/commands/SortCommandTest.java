@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
-import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.BENSON;
@@ -16,21 +14,13 @@ import static seedu.address.testutil.TypicalPatients.FIONA;
 import static seedu.address.testutil.TypicalPatients.GEORGE;
 import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.patient.AssignedDepartment;
-import seedu.address.model.patient.IcNumber;
-import seedu.address.model.patient.Name;
-import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.testutil.PatientBuilder;
 
 /**
