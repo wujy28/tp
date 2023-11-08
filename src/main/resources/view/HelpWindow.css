@@ -1,3 +1,8 @@
+@font-face {
+    -fx-font-family: 'Inter Medium';
+    src: url('../fonts/Inter/static/Inter-Medium.ttf');
+}
+
 #copyButton, #helpMessage {
     -fx-text-fill: white;
 }
@@ -34,7 +39,7 @@
 }
 
 #minimizeButton:hover {
-    -fx-background-color: rgba(128, 128, 128, 0.34);
+    -fx-background-color: derive(#5EBBFF, 0.5%);
     -fx-text-fill: white;
 }
 
@@ -47,4 +52,16 @@
 #closeButton:hover {
     -fx-background-color: #FF5555; /* Red when hovered */
     -fx-text-fill: white;
+}
+
+.label {
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 13px;
+    -fx-opacity: 1;
+}
+
+.button {
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 13px;
+    -fx-opacity: 1;
 }

@@ -85,13 +85,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPatient_patientInAddressBook_returnsTrue() {
-        modelManager.addPatient(ALICE);
+        modelManager.addPatient(ALICE, "");
         assertTrue(modelManager.hasPatient(ALICE));
     }
 
     @Test
     public void isPatientWithIcNumberPresent_patientWithIcNumberPresent_returnsTrue() {
-        modelManager.addPatient(ALICE);
+        modelManager.addPatient(ALICE, "");
         IcNumber testIcNumber = new IcNumber("T0032415E");
         assertTrue(modelManager.isPatientWithIcNumberPresent(testIcNumber));
     }

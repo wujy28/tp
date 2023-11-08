@@ -52,7 +52,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientToEdit = model.getPatient(ALICE.getIcNumber(), lastShownList);
-        expectedModel.setPatient(patientToEdit, editedPatient);
+        expectedModel.setPatient(patientToEdit, editedPatient, "");
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -72,7 +72,7 @@ public class EditCommandTest {
             Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatient(patientToEdit, editedPatient);
+        expectedModel.setPatient(patientToEdit, editedPatient, "");
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -104,7 +104,7 @@ public class EditCommandTest {
             Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatient(patientInFilteredList, editedPatient);
+        expectedModel.setPatient(patientInFilteredList, editedPatient, "");
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -116,6 +116,18 @@ public class EditCommandTest {
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(firstPatient).build();
         EditCommand editCommand = new EditCommand(BENSON.getIcNumber(), descriptor);
 
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
+    }
+
+    @Test
+    public void execute_duplicatePatientFilteredList_failure() throws PatientWithFieldNotFoundException {
+        showPatientAtIC(model, ALICE.getIcNumber());
+
+        // edit patient in filtered list into a duplicate in address book
+        List<Patient> lastShownList = model.getFilteredPatientList();
+        Patient patientInList = model.getPatient(ALICE.getIcNumber(), lastShownList);
+        EditCommand editCommand = new EditCommand(ALICE.getIcNumber(),
+            new EditPatientDescriptorBuilder(patientInList).build());
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 

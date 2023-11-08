@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
+    private final VersionedAddressBook versionedAddressBook;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
+        this.versionedAddressBook = new VersionedAddressBook(this.addressBook.copy());
     }
 
     public ModelManager() {
@@ -81,8 +83,9 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAddressBook(ReadOnlyAddressBook addressBook, String command) {
         this.addressBook.resetData(addressBook);
+        commitAddressBook(command);
     }
 
     @Override
@@ -97,8 +100,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePatient(Patient target) {
+    public void deletePatient(Patient target, String command) {
         addressBook.removePatient(target);
+        commitAddressBook(command);
     }
 
     @Override
@@ -113,16 +117,17 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void addPatient(Patient patient) {
+    public void addPatient(Patient patient, String command) {
         addressBook.addPatient(patient);
         updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        commitAddressBook(command);
     }
 
     @Override
-    public void setPatient(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient, String command) {
         requireAllNonNull(target, editedPatient);
-
         addressBook.setPatient(target, editedPatient);
+        commitAddressBook(command);
     }
 
     /**
@@ -141,7 +146,45 @@ public class ModelManager implements Model {
         }
         return false;
     }
+    @Override
+    public void commitAddressBook(String command) {
+        versionedAddressBook.commit(addressBook.copy(), command);
+    }
 
+    @Override
+    public String redoAddressBook() {
+        AddressBook newData = versionedAddressBook.redo();
+        addressBook.resetData(newData);
+        return versionedAddressBook.getNextCommand();
+    }
+
+
+    /**
+     * Converts to the previous state of the patient data
+     * Returns most recent command
+     */
+    @Override
+    public String undoAddressBook() {
+        AddressBook newData = versionedAddressBook.undo();
+        addressBook.resetData(newData);
+        return versionedAddressBook.getNextCommand();
+    }
+
+    /**
+     * Check if there is a previous state/command to undo to.
+     * Returns true if there is a state, and false otherwise.
+     */
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
+    }
+
+    /**
+     * Check if there is a newer state/command to redo to.
+     * Returns true if there is a state, and false otherwise.
+     */
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
+    }
 
     /**
      * Returns the current list of {@code Patient} in the address book

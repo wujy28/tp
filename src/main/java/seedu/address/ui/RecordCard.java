@@ -80,15 +80,19 @@ public class RecordCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        // Format and bind the TextFlow to Record fields
+        // Format TextFlow
         this.initialObservations.setWrapText(true);
         this.initialObservations.setText(record.getInitialObservations());
+        record.initialObservationsProperty()
+                .addListener((observable, oldValue, newValue) -> initialObservations.setText(newValue));
 
         this.diagnosis.setWrapText(true);
         this.diagnosis.setText(record.getDiagnosis());
+        record.diagnosisProperty().addListener((observable, oldValue, newValue) -> diagnosis.setText(newValue));
 
         this.treatmentPlan.setWrapText(true);
         this.treatmentPlan.setText(record.getTreatmentPlan());
+        record.treatmentPlanProperty().addListener((observable, oldValue, newValue) -> treatmentPlan.setText(newValue));
     }
 
     private void addPriorityLabel() {
