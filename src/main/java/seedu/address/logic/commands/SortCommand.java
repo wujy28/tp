@@ -69,6 +69,7 @@ public class SortCommand extends Command {
         }
 
         public static SortOrder getSortOrder(String string) {
+            requireNonNull(string);
             for (SortOrder sortOrder : SortOrder.values()) {
                 if (string.equalsIgnoreCase(sortOrder.string)) {
                     return sortOrder;
