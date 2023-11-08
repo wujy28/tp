@@ -15,7 +15,7 @@ public class UndoCommand extends Command {
             COMMAND_WORD + ": undoes the most recent command by the user" + "Parameters: None"
                     + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_UNDONE_SUCCESS = "Successfully undone the most recent command!";
+    public static final String MESSAGE_UNDONE_SUCCESS = "Successfully undone the most recent command";
     public static final String MESSAGE_NO_COMMANDS_UNDONE = "There are no recent commands to undo.";
     public UndoCommand() {}
     @Override
@@ -25,7 +25,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_COMMANDS_UNDONE);
         }
         String command = model.undoAddressBook();
-        return new CommandResult(String.format(MESSAGE_UNDONE_SUCCESS, command));
+        return new CommandResult(String.format(MESSAGE_UNDONE_SUCCESS));
 
     }
 }

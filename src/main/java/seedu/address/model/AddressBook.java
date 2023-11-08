@@ -176,6 +176,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeRecord(Record key) {
         records.remove(key);
     }
+
+    /**
+     * Creates a copy and returns a {@code AddressBook} with the details of
+     * {@code AddressBook}
+     * @return AddressBook
+     */
     public AddressBook copy() {
         AddressBook copy = new AddressBook();
         for (Patient patient: patients) {

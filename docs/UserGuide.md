@@ -407,8 +407,6 @@ primary screen, the GUI will open off-screen. The remedy is to delete the prefer
 application before running the application again.
 <br>
 <br>
-Regarding the undo functionality - the first change after the launching of the app cannot be undone. Thereafter, user required to type undo once to trigger the functionality
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
