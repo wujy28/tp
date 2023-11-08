@@ -153,9 +153,10 @@ public class ModelManager implements Model {
 
     @Override
     public String redoAddressBook() {
+        String nextCommand = versionedAddressBook.getNextCommand();
         AddressBook newData = versionedAddressBook.redo();
         addressBook.resetData(newData);
-        return versionedAddressBook.getNextCommand();
+        return nextCommand;
     }
 
 
