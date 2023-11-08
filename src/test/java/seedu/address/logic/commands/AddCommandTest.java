@@ -104,6 +104,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public boolean canRedoAddressBook() {
             throw new AssertionError("This method should not be called.");
@@ -129,7 +130,7 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook(String command) {
-            throw new AssertionError("This method should not be called");
+
         }
 
         @Override
