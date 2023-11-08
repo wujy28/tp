@@ -128,7 +128,7 @@ public class Record {
 
         Record otherRecord = (Record) other;
         return getInitialObservations().equals(otherRecord.getInitialObservations()) && getDiagnosis().equals(
-            otherRecord.getDiagnosis()) && getTreatmentPlan().equals(otherRecord.getTreatmentPlan());
+                otherRecord.getDiagnosis()) && getTreatmentPlan().equals(otherRecord.getTreatmentPlan());
     }
 
     @Override
@@ -138,3 +138,4 @@ public class Record {
                 .add("treatmentPlan", getTreatmentPlan()).toString();
     }
 }
+

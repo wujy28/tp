@@ -24,62 +24,68 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.PatientBuilder;
 
-public class UndoCommandTest {
+public class RedoCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
-    public void executeNoStateToUndoTo() {
-        UndoCommand undoCommand = new UndoCommand();
-        assertThrows(CommandException.class, UndoCommand.MESSAGE_NO_COMMANDS_UNDONE, () -> undoCommand.execute(model));
+    public void executeNoStateToRedoTo() {
+        RedoCommand redoCommand = new RedoCommand();
+        assertThrows(CommandException.class, RedoCommand.MESSAGE_NO_COMMANDS_REDONE, () -> redoCommand.execute(model));
     }
 
     @Test
-    public void executeUndoClearSuccess() throws CommandException {
+    public void executeRedoClearSuccess() throws CommandException {
         model.setAddressBook(new AddressBook(), "");
-        String expectedMessage = String.format(UndoCommand.MESSAGE_UNDONE_SUCCESS, "");
-        UndoCommand undoCommand = new UndoCommand();
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL,
-                        DANIEL, ELLE, FIONA, GEORGE),
-                model.getCurrentPatientList());
+        model.undoAddressBook();
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = String.format(RedoCommand.MESSAGE_REDONE_SUCCESS, "");
+        expectedModel.setAddressBook(new AddressBook(), "");
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(), model.getCurrentPatientList());
     }
 
     @Test
-    public void executeUndoAddSuccess() {
+    public void executeRedoAddSuccess() {
         PatientBuilder patientBuilder = new PatientBuilder();
         Patient patientToAdd = patientBuilder.build();
         model.addPatient(patientToAdd, "");
-        UndoCommand undoCommand = new UndoCommand();
-        String expectedMessage = String.format(UndoCommand.MESSAGE_UNDONE_SUCCESS, "");
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        model.undoAddressBook();
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = String.format(RedoCommand.MESSAGE_REDONE_SUCCESS, "");
+        expectedModel.addPatient(patientToAdd, "");
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL,
-                DANIEL, ELLE, FIONA, GEORGE),
+                        DANIEL, ELLE, FIONA, GEORGE, patientToAdd),
                 model.getCurrentPatientList());
     }
 
     @Test
-    public void executeUndoDeleteSuccess() {
+    public void executeRedoDeleteSuccess() {
         Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), model.getCurrentPatientList());
         model.deletePatient(patientToDelete, "");
-        UndoCommand undoCommand = new UndoCommand();
-        String expectedMessage = String.format(UndoCommand.MESSAGE_UNDONE_SUCCESS, "");
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL,
+        model.undoAddressBook();
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = String.format(RedoCommand.MESSAGE_REDONE_SUCCESS, "");
+        expectedModel.deletePatient(ALICE, "");
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, CARL,
                         DANIEL, ELLE, FIONA, GEORGE),
                 model.getCurrentPatientList());
     }
 
     @Test
-    public void executeUndoEditSuccess() {
+    public void executeRedoEditSuccess() {
         PatientBuilder patientBuilder = new PatientBuilder();
         Patient editedPatient = patientBuilder.build();
         model.setPatient(model.getPatient(ALICE.getIcNumber(), model.getCurrentPatientList()), editedPatient, "");
-        UndoCommand undoCommand = new UndoCommand();
-        String expectedMessage = String.format(UndoCommand.MESSAGE_UNDONE_SUCCESS, "");
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL,
+        model.undoAddressBook();
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = String.format(RedoCommand.MESSAGE_REDONE_SUCCESS, "");
+        expectedModel.setPatient(expectedModel.getPatient(ALICE.getIcNumber(),
+                expectedModel.getCurrentPatientList()), editedPatient, "");
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(editedPatient, BENSON, CARL,
                         DANIEL, ELLE, FIONA, GEORGE),
                 model.getCurrentPatientList());
     }
-
 }
