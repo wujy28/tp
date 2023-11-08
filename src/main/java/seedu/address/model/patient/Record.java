@@ -35,8 +35,8 @@ public class Record {
     public Record() {
         this.patient = null; // patient left null, would have to fix when building editing record command
         this.initialObservations = new SimpleStringProperty(defaultInitialObservations);
-        this.diagnosis = new SimpleStringProperty(defaultInitialObservations);
-        this.treatmentPlan = new SimpleStringProperty(defaultInitialObservations);
+        this.diagnosis = new SimpleStringProperty(defaultDiagnosis);
+        this.treatmentPlan = new SimpleStringProperty(defaultTreatmentPlan);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Record {
 
         Record otherRecord = (Record) other;
         return getInitialObservations().equals(otherRecord.getInitialObservations()) && getDiagnosis().equals(
-            otherRecord.getDiagnosis()) && getTreatmentPlan().equals(otherRecord.getTreatmentPlan());
+                otherRecord.getDiagnosis()) && getTreatmentPlan().equals(otherRecord.getTreatmentPlan());
     }
 
     @Override
@@ -138,3 +138,4 @@ public class Record {
                 .add("treatmentPlan", getTreatmentPlan()).toString();
     }
 }
+
