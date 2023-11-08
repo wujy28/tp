@@ -18,7 +18,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the patient list "
             + "based on the given property.\n"
             + "Parameters: PROPERTY\n"
-            + "PROPERTY can only be one of the following: name, ic, department, age, priority"
+            + "PROPERTY can only be one of the following: name, ic, department, age, priority\n"
             + "Example: " + COMMAND_WORD + " priority";
     public static final String MESSAGE_SORT_LIST_SUCCESS = "Sorted current list by %s";
 

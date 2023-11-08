@@ -66,9 +66,12 @@ public class Name implements Comparable<Name> {
 
     @Override
     public int compareTo(Name o) {
-        if (this.fullName.compareTo(o.fullName) < 0) {
+        String thisName = this.fullName.toUpperCase();
+        String otherName = o.fullName.toUpperCase();
+
+        if (thisName.compareTo(otherName) < 0) {
             return -1;
-        } else if (this.fullName.compareTo(o.fullName) > 0) {
+        } else if (thisName.compareTo(otherName) > 0) {
             return 1;
         } else {
             return 0;
