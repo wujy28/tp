@@ -184,11 +184,17 @@ public class PatientBuilder {
         address = new Address(Address.getDefaultAddress());
         priority = new Priority(Priority.getDefaultPriority());
         tags = new HashSet<>();
+        assignedDepartment = new AssignedDepartment();
+        record = new Record();
         return this;
     }
 
     public Patient build() {
         return new Patient(name, phone, email, gender, icNumber, birthday, address, priority, tags);
+    }
+
+    public Patient buildWithDepartment() {
+        return new Patient(name, phone, email, gender, icNumber, birthday, address, priority, tags, assignedDepartment);
     }
 
 }

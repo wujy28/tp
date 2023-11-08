@@ -35,8 +35,8 @@ public class Record {
     public Record() {
         this.patient = null; // patient left null, would have to fix when building editing record command
         this.initialObservations = new SimpleStringProperty(defaultInitialObservations);
-        this.diagnosis = new SimpleStringProperty(defaultInitialObservations);
-        this.treatmentPlan = new SimpleStringProperty(defaultInitialObservations);
+        this.diagnosis = new SimpleStringProperty(defaultDiagnosis);
+        this.treatmentPlan = new SimpleStringProperty(defaultTreatmentPlan);
     }
 
     /**
