@@ -27,17 +27,20 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+        // follow heuristic on at most one invalid input for each negative test case
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_icNumberValueAbsent_throwsParseException() {
+        // follow heuristic on at most one invalid input for each negative test case
         assertParseFailure(parser, GENDER_DESC_AMY,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_icNumberValuePresent_returnsViewCommand() throws PatientWithFieldNotFoundException {
+        // follow heuristic on at each valid input at least once in a positive test case
         IcNumber testIcNumber = new IcNumber(VALID_IC_NUMBER_AMY);
 
         ViewCommand expectedViewCommand = new ViewCommand(new PatientWithIcNumberPredicate(testIcNumber), testIcNumber);
@@ -46,6 +49,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_duplicateIcNumberValuePresent_throwsParseException() {
+        // follow heuristic on at most one invalid input for each negative test case
         assertParseFailure(parser, IC_NUMBER_DESC_AMY + IC_NUMBER_DESC_BOB,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_IC_NUMBER));
     }
@@ -53,12 +57,14 @@ public class ViewCommandParserTest {
 
     @Test
     public void checkIcNumberPrefixPresent_icNumberValuePresent_returnTrue() {
+        // follow heuristic on at each valid input at least once in a positive test case
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(IC_NUMBER_DESC_AMY, PREFIX_IC_NUMBER);
         assertTrue(checkIcNumberPrefixPresent(testArgMultimap));
     }
 
     @Test
     public void checkIcNumberPrefixPresent_icNumberValueAbsent_returnFalse() {
+        // follow heuristic on at most one invalid input for each negative test case
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(ADDRESS_DESC_AMY, PREFIX_IC_NUMBER);
         assertFalse(checkIcNumberPrefixPresent(testArgMultimap));
     }

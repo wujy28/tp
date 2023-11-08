@@ -39,7 +39,7 @@ public class PatientWithIcNumberPredicateTest {
 
     @Test
     public void test_patientIcNumberSame_returnsTrue() throws PatientWithFieldNotFoundException {
-        // One keyword
+        // follow heuristic on at each valid input at least once in a positive test case
         IcNumber testIcNumber = new IcNumber("t1234567a");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber);
         Patient testPatient = new PatientBuilder(AMY).withIcNumber("t1234567a").build();
@@ -48,7 +48,7 @@ public class PatientWithIcNumberPredicateTest {
 
     @Test
     public void test_patientIcNumberDifferent_returnsFalse() throws PatientWithFieldNotFoundException {
-        // One keyword
+        // follow heuristic on at most one invalid input for each negative test case
         IcNumber testIcNumber = new IcNumber("t1234567a");
         PatientWithIcNumberPredicate predicate = new PatientWithIcNumberPredicate(testIcNumber);
         Patient testPatient = new PatientBuilder(AMY).withIcNumber("s1234567b").build();
