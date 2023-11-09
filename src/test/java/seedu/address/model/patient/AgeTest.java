@@ -122,4 +122,18 @@ public class AgeTest {
         Long ageValueLong = ChronoUnit.YEARS.between(birthday.value, today);
         return ageValueLong.intValue();
     }
+
+    @Test
+    public void testCompareTo() {
+        Age age1 = new Age("22");
+
+        // less than -> returns -1
+        assertEquals(-1, age1.compareTo(new Age("68")));
+
+        // equal -> returns 0
+        assertEquals(0, age1.compareTo(new Age("22")));
+
+        // more than -> returns 1
+        assertEquals(1, age1.compareTo(new Age("17")));
+    }
 }
