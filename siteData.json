@@ -41,6 +41,7 @@
       "title": "Developer Guide",
       "headings": {
         "advanced-and-amp-efficient-a-and-amp-e-developer-guide": "Advanced&amp;Efficient (A&amp;E) Developer Guide",
+        "overview": "Overview",
         "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
@@ -72,7 +73,8 @@
         "explanation": "Explanation:",
         "saving-data": "Saving data",
         "explanation-2": "Explanation:",
-        "class-record-json-storage-format": "Class Record JSON Storage Format"
+        "class-record-json-storage-format": "Class Record JSON Storage Format",
+        "appendix-planned-enhancements": "Appendix: Planned Enhancements"
       },
       "headingKeywords": {}
     },
@@ -159,7 +161,16 @@
       "headings": {
         "aaronjt1-s-project-portfolio-page": "AaronJT1's Project Portfolio Page",
         "project-advanced-and-amp-efficient-a-and-amp-e": "Project: Advanced&amp;Efficient (A&amp;E)",
-        "contribution": "Contribution"
+        "contribution": "Contribution",
+        "features-implemented": "Features implemented",
+        "view-feature-119": "View Feature #119",
+        "enhancement-to-existing-features": "Enhancement to existing features:",
+        "enhanced-add-feature": "Enhanced Add Feature",
+        "enhanced-exception-error-messages-for-users": "Enhanced exception / error messages for users",
+        "enhanced-modelmanager-128": "Enhanced ModelManager #128",
+        "enhanced-testing-utilities": "Enhanced testing utilities",
+        "contributions-to-team-based-task": "Contributions to team-based task:",
+        "review-mentoring-contributions": "Review / mentoring contributions:"
       },
       "headingKeywords": {}
     },
