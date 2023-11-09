@@ -29,7 +29,8 @@ public class AssignCommandParser implements Parser<AssignCommand> {
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, RELEVANT_PREFIXES);
-        if (!checkIcNumberPrefixPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
+        if (!checkIcNumberPrefixPresent(argMultimap) || !checkDepartmentPrefixPresent(argMultimap)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES);
@@ -53,5 +54,13 @@ public class AssignCommandParser implements Parser<AssignCommand> {
      */
     public static boolean checkIcNumberPrefixPresent(ArgumentMultimap argumentMultimap) {
         return argumentMultimap.getValue(PREFIX_IC_NUMBER).isPresent();
+    }
+
+    /**
+     * Returns true if department field present and value is non empty
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean checkDepartmentPrefixPresent(ArgumentMultimap argumentMultimap) {
+        return argumentMultimap.getValue(PREFIX_DEPARTMENT).isPresent();
     }
 }
