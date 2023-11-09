@@ -11,10 +11,21 @@ pageNav: 3
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Overview**
+Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and connecting patients with
+relevant departments. It leverages on ED doctors fast typing skill by using the Command Line Interface (CLI).
+
+This developer guide aims to guide future developers / maintainers of **Advanced&Efficient** by providing the
+implementation philosophy of the software design and features.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+- Advanced&Efficient is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project by SE-EDU initiative.
+
+- Libraries used [JavaFx](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson), [PlantUML](https://plantuml.com/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,15 +41,15 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of Advanced&Efficient.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -78,7 +89,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -89,9 +100,9 @@ visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -103,7 +114,7 @@ The `UI` component,
 ### Logic component
 
 **API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -145,7 +156,7 @@ How the parsing works:
 ### Model component
 
 **API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -174,7 +185,7 @@ each `Person` needing their own `Tag` objects.<br>
 ### Storage component
 
 **API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -242,19 +253,20 @@ is then called to add the `Patient` into the address book. It then returns a `Co
 
 #### Design considerations:
 
-**Aspect: How to display the specified patient:**
+**Aspect: How to handle required / optional inputs from users:**
 
-* **Alternative 1 (current choice):** Utilize current filteredPatientList display to
-  display the patient.
+* **Alternative 1 (current choice):** Create `Patient` with the required fields and fill non-given
+optional inputs with default values.
     * Pros: Easy to implement.
-    * Cons: Similar way in displaying of patient(s) may lead to confusion between commands.
+    * Cons: Since default values have to be valid as well, default values may seem too similar to actual value.
+  Eg. Default value for `Gender` is `OTHER`, which is an actual value as well.
 
 
-* **Alternative 2:** Create a new set of JavaFx controls to display that patient differently
-  from the current filteredPatientList display.
-    * Pros: New display can be customisable for users' needs.
-      Cons: New display have to be implemented correctly to integrate with
-      existing displays.
+* **Alternative 2:** Use Java `Optional` class to handle fields.
+    * Pros: Implementation is neater and fields with no values can be represented by a warning message instead
+  of a default value.
+    * Cons: Implementation is difficult and `Optional` class have to be implemented correctly to ensure it works
+  with other components of the codebase.
 
 
 ### View patient feature
@@ -703,14 +715,17 @@ unless specified otherwise)
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
-3. A ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks
+3. An ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks
    faster using commands than using the mouse.
+4. Should not lose any data if the application is closed by any other means besides the `Exit` command.
+5. The response to any user action should be visible within 2 seconds.
 
-*{More to be added}*
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Department**: A sector of the hospital responsible for a type of healthcare treatment.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -842,3 +857,17 @@ to ensure the department assigned is saved as well.
 - **treatmentPlan**: The recommended treatment plan for the diagnosed ailment.
 
 It's worth noting that the default values for `initialObservations`, `diagnosis`, and `treatmentPlan` are set to represent that no data was provided. This allows for the record to be initialized even if not all fields are populated initially.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+1. Currently, when `View` command is executed, it only shows that `Patient` in the display panel instead of their
+details in the information tab. Users would have to click that `Patient` again to display its details. 
+Since `Ic Number` is unique for every `Patient`, we plan to show the `Patient` detail
+directly in the information tab.
+
+
+2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project 
+by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan
+to completely refactor all instances of `AddressBook` into `PatientRecordSystem`. For example,
+`AddressBookParser.java` would be renamed to `PatientRecordSystemParser.java`.

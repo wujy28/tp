@@ -42,8 +42,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     public static final Prefix[] RELEVANT_PREFIXES = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
         PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY, PREFIX_TAG};
-    public static final Prefix[] RELEVANT_PREFIXES_WITHOUT_TAG = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-        PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY};
+    public static final Prefix[] RELEVANT_PREFIXES_WITHOUT_TAG = new Prefix[]{PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL
+        , PREFIX_GENDER, PREFIX_IC_NUMBER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY};
     public static final Prefix[] REQUIRED_PREFIXES = new Prefix[]{PREFIX_NAME, PREFIX_IC_NUMBER};
     public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[]{PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
         PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY, PREFIX_TAG};
@@ -88,7 +88,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = new Phone(Phone.getDefaultPhone());
         Email email = new Email(Email.getDefaultEmail());
         Gender gender = new Gender(Gender.getDefaultGender());
-        IcNumber icNumber = new IcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
+        IcNumber icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
         Birthday birthday = new Birthday(Birthday.getDefaultBirthday());
         Address address = new Address(Address.getDefaultAddress());
         Priority priority = new Priority(Priority.getDefaultPriority());
@@ -118,8 +118,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public static Patient createPatientFromPresentPrefixes(Name n, Phone p, Email e, Gender g, IcNumber i, Birthday b,
                                                            Address a, Priority pr, Set<Tag> t,
-                                                           ArgumentMultimap argMultimap,
-                                                           Prefix[] prefixes) throws ParseException {
+                                                           ArgumentMultimap argMultimap, Prefix[] prefixes)
+        throws ParseException {
         for (Prefix pf : prefixes) {
             switch (pf.getPrefix()) {
             case "p/":
