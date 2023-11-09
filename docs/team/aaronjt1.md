@@ -80,14 +80,6 @@ Since Add command is enhanced to prevent patients with duplicate `Ic Number` fro
    - Helped create test cases for `AssignCommand` and `AssignCommandParser`
 ----------------------------------------------------------------------
 
-## Contributions to User Guide:
-
-* to be added soon
-
-## Contributions to Developer Guide:
-
-* to be added soon
-
 ## Contributions to team-based task:
 
 * tP Team organisation and Repo setup
