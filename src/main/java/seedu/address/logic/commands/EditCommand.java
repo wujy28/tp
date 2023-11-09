@@ -39,7 +39,7 @@ import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing patient in the patient record.
+ * Edits the details of an existing patient in the patient record system.
  */
 public class EditCommand extends Command {
 

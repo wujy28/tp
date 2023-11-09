@@ -253,19 +253,20 @@ is then called to add the `Patient` into the address book. It then returns a `Co
 
 #### Design considerations:
 
-**Aspect: How to display the specified patient:**
+**Aspect: How to handle required / optional inputs from users:**
 
-* **Alternative 1 (current choice):** Utilize current filteredPatientList display to
-  display the patient.
+* **Alternative 1 (current choice):** Create `Patient` with the required fields and fill non-given
+optional inputs with default values.
     * Pros: Easy to implement.
-    * Cons: Similar way in displaying of patient(s) may lead to confusion between commands.
+    * Cons: Since default values have to be valid as well, default values may seem too similar to actual value.
+  Eg. Default value for `Gender` is `OTHER`, which is an actual value as well.
 
 
-* **Alternative 2:** Create a new set of JavaFx controls to display that patient differently
-  from the current filteredPatientList display.
-    * Pros: New display can be customisable for users' needs.
-      Cons: New display have to be implemented correctly to integrate with
-      existing displays.
+* **Alternative 2:** Use Java `Optional` class to handle fields.
+    * Pros: Implementation is neater and fields with no values can be represented by a warning message instead
+  of a default value.
+    * Cons: Implementation is difficult and `Optional` class have to be implemented correctly to ensure it works
+  with other components of the codebase.
 
 
 ### View patient feature
@@ -714,14 +715,17 @@ unless specified otherwise)
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
-3. A ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks
+3. An ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks
    faster using commands than using the mouse.
+4. Should not lose any data if the application is closed by any other means besides the `Exit` command.
+5. The response to any user action should be visible within 2 seconds.
 
-*{More to be added}*
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Department**: A sector of the hospital responsible for a type of healthcare treatment.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -865,5 +869,5 @@ directly in the information tab.
 
 2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project 
 by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan
-to completely refactor all instances of `AddressBook` into `PatientRecord`. For example,
-`AddressBookParser.java` would be renamed to `PatientRecordParser.java`.
+to completely refactor all instances of `AddressBook` into `PatientRecordSystem`. For example,
+`AddressBookParser.java` would be renamed to `PatientRecordSystemParser.java`.

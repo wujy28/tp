@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.model.Model;
 
 /**
- * Terminates the program.
+ * Terminates the patient record system.
  */
 public class ExitCommand extends Command {
 
