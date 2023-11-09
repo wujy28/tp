@@ -188,7 +188,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatientFromPresentPrefixes_onlyRequiredFieldsPresent_correctPatientCreated()
-        throws ParseException {
+            throws ParseException {
         // follow heuristic on at each valid input at least once in a positive test case
 
         // expectedPatient only have Name field, others default value
@@ -210,7 +210,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatientFromPresentPrefixes_someOptionalFieldsPresent_correctPatientCreated()
-        throws ParseException {
+            throws ParseException {
         // follow heuristic on at each valid input at least once in a positive test case
 
         // expectedPatient only have Name field and Phone fields
