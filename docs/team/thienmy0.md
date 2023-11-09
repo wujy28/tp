@@ -7,23 +7,27 @@ Advanced&Efficient helps Emergency Department (ED) doctors in logging patient re
 Given below are my contributions to the project.
 
 * Code contributed
-  [View my RepoSense report!](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=thienmy0&breakdown=true)
+  [View my RepoSense report!](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=thienmy0&breakdown=true#/)
   * to be added soon
 
 * **New Feature**:
-  * to be added soon
+  * Record Command to edit patient's record
 
 * **Enhancement to existing features**:
-  * to be added soon
+  * Added Age Attribute
+  * Added and implemented gender and priority attribute
 
-* **Project management**:
-  * to be added soon
+* **Contributions to the UG**:
+  * Wrote Quick Start, Command Summary
+  * Commands: Record, Clear, Exit
 
-* **Documentation**:
-  * to be added soon
+* **Contributions to the DG**:
+  * Implementation of Record Command
+  * Appendix instructions for manual testing
 
-* **Community**:
-  * to be added soon
+* **Contributions to team-based tasks**:
+  * Maintaining the issue tracker
+  * Updating user/developer docs
 
-* **Tools**:
-  * to be added soon
+* **Review/mentoring contributions**:
+  * Reviewed and Merged various PRs from team members
