@@ -853,3 +853,17 @@ to ensure the department assigned is saved as well.
 - **treatmentPlan**: The recommended treatment plan for the diagnosed ailment.
 
 It's worth noting that the default values for `initialObservations`, `diagnosis`, and `treatmentPlan` are set to represent that no data was provided. This allows for the record to be initialized even if not all fields are populated initially.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+1. Currently, when `View` command is executed, it only shows that `Patient` in the display panel instead of their
+details in the information tab. Users would have to click that `Patient` again to display its details. 
+Since `Ic Number` is unique for every `Patient`, we plan to show the `Patient` detail
+directly in the information tab.
+
+
+2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project 
+by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan
+to completely refactor all instances of `AddressBook` into `PatientRecord`. For example,
+`AddressBookParser.java` would be renamed to `PatientRecordParser.java`.
