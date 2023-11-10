@@ -883,33 +883,54 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a patient
+1. Adding a patient with only required prefixes
+   1. Prerequisites: None of existing patients have either name `You Wen Ti` or IC number `t0374628z`. (else you may replace the name and/or ic number specified in the test cases)
+   2. Test case: `add n/You Wen Ti i/t0374628z`<br>
+      Expected: Patient with name `You Wen Ti` and IC number `t0374628z` is added. Details of the added patient is shown in the system message. UI is updated to display newly added patient.
+   3. Test case: `add n/You Wen Ti`<br>
+      Expected: No patient is added. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect add commands to try: `add`, `add Wo Meiyou t0365867z`<br>
+      Expected: Similar to previous.
+2. Adding a patient with both required and optional prefixes
+   1. Prerequisites: None of existing patients have either name `Ingot Gold` or IC number `t0482756`. (else you may replace the name and/or ic number specified in the test cases)
+   2. Test case: `add n/Ingot Gold i/t0482756j g/male b/20/05/2004 p/87654487 e/goldie@email.com a/Old Town Road 1 pr/medium t/alone`<br>
+      Expected: Patient with name `Ingot Gold`, IC number `t0482756j`, gender `male`, birthday `20/05/2004`, phone number `87654487`, email `goldie@email.com`
+      , address `Old Town Road 1`, priority `medium`, and tag `alone` is added. Details of the added patient is shown in the system message. UI is updated to display newly added patient.
+   3. Test case: `add n/Betty Crocker i/t0826789s a/Downtown East a/Lowcoast West`<br>
+      Expected: No patient is added. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect add commands to try: `add`, `add n/Beckham Low pr/high`<br>
+      Expected: Similar to previous.
+
+### Viewing a patient
+1. Viewing a patient
+   1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number `t7654321a`.
+   2. Test case: `view i/t7654321a`<br>
+      Expected: Patient with IC number `t7654321a` will be displayed. Details of success of command is shown in the system message. Patient list is updated in UI.
+   3. Test case: `view I/t7654321a`<br>
+      Expected: No patient is viewed. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect view commands to try: `view`, `view t8374829x`, `view 1`<br>
+      Expected: Similar to previous.
+
 ### Deleting a patient
-
-1. Deleting a patient while all patients are being shown
-
-    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-    2. Test case: `delete i/T0000000A`<br>
-       Expected: Will iterate through the list to search for Patient with matching IC_NUMBER and delete that patient
-       Timestamp in the status bar is updated.
-    3. Test case: `delete I/T0000000B`<br>
-       Expected: If patient is not found or does not exist, no patient is deleted.
-       Error details shown in the status message. Status bar remains the same.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+1. Deleting a patient
+    1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number `t7654321a`.
+    2. Test case: `delete i/T7654321A`<br>
+       Expected: Patient with IC number `t0374628z` is deleted. Details of the deleted patient is shown in the system message. Patient list is updated in UI.
+    3. Test case: `delete I/T7654321B`<br>
+       Expected: No patient is deleted. Error details shown in the system message. Patient list remains the same.
+    4. Other incorrect delete commands to try: `delete`, `delete i/t9384758d` (where a patient with ic number `t9384758d` does not exist)<br>
        Expected: Similar to previous.
 
 ### Editing a patient
-
-1. Editing a patient's attributes that are specified based on the prefixes in the user inputs
-    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-    2. Test case: `edit i/T0000000A n/John Doe`<br>
-       Expected: Will iterate through the list to search for Patient with matching IC_NUMBER and edit that patient
-       Timestamp in the status bar is updated.
-    3. Test case: `edit i/T0000000A`
-       Expected: Will throw an exception if the fields to be edited are left empty.
-       Error details shown in the status message. Status bar remains the same.
-    4. Other incorrect edit commands to try: `edit`, `delete x`, `...`
-       Expected: Similar to previous.
-1. _{ more test cases …​ }_
+1. Editing a patient's details
+   1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number t7654321a.
+   2. Test case: `edit i/T7654321A n/John Doe`<br>
+      Expected: Patient with IC number `T7654321A` will have their name edited to `John Doe`. Details of the edited patient is shown in the system message. UI is updated to display patient's new details.
+   3. Test case: `edit i/T7654321A`<br>
+      Expected: No patient is edited. Error details shown in the system message. Patient's details remains the same.
+   4. Other incorrect edit commands to try: `edit`, `edit i/t0264782a n/Mary Jane` (where a patient with ic number `t0264782a` does not exist)<br>
+      Expected: Similar to previous.
 
 ### Class `Birthday` and Testing
 
@@ -936,6 +957,108 @@ and checks on validity of the arguments given to prevent invocation errors
 **LocalDateTime** : LocalDateTime used instead of String as Age is a non-constant attribute of the Patient
 A patient's age constantly changes. Hence LocalDateTime offers flexibility to auto calculate a patient's age
 based on Birthday without requiring manual interferance as a potential extension.
+
+### Editing a patient record
+1. Editing a patient's record
+   1. Prerequisite: Have our sample patient list loaded OR add a patient with IC number t7654321a. 
+   2. Test case: `record i/t7654321a o/Broken Arm di/Hairline fracture tp/Cast for 2 days`<br>
+      Expected: Record of the patient with IC number `T1234567A` is edited to have `Broken Arm` as initial observation, `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan.
+      Details of the edited record is shown in the system message. Patient's record is updated in UI.
+   3. Test case: `record i/7654321a di/Asthma o/Shortness of breath and chest tightness`<br>
+      Expected: Record of the patient with IC number `T1234567A` is edited to have `Shortness of breath and chest tightness` as initial observation, `Asthma` as diagnosis.
+      Details of the edited record is shown in the system message. Patient's record is updated in UI.
+   4. Test case: `record i/t7654321a`<br>
+      Expected: No patient record is edited. Error details shown in the system message. Patient's record remains the same.  
+   5. Other incorrect delete commands to try: `record`, `record t0123456a`, `record i/t2736487a` (where patient with IC number `t2736487a` does not exist)<br>
+      Expected: Similar to previous.  
+
+### Sorting patients
+1. Sorting patients by name
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
+   2. Test case: `sort name`<br>
+      Expected: Patient list is sorted according to `name` in lexicographical order
+      , where uppercase letters have a greater priority over lowercase letters. Details of success of command is shown in the system message.
+      Order of patients in list is updated in UI.
+   3. Test case: `sort nm`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+2. Sorting patients by IC number
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
+   2. Test case: `sort ic`<br>
+      Expected: Patient list is sorted according to `IC number`, in lexicographical order. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort ic number`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+3. Sorting patients by assigned department
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different assigned departments among all patients in the list.
+   2. Test case: `sort department`<br>
+      Expected: Patient list is sorted according to `assigned department`. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort dpmt`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+4. Sorting patients by age
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different ages (i.e. birthday) among all patients in the list.
+   2. Test case: `sort age`<br>
+      Expected: Patient list is sorted according to `age`, where patients with default birthdays/ages are placed on top, followed by the remaining ages in increasing order. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort ages`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+5. Sorting patients by priority
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 priorities among all patients in the list.
+   2. Test case: `sort priority`<br>
+      Expected: Patient list is sorted according to `priority`, with `HIGH` on top, followed by `MEDIUM`, `LOW`, and `NIL`. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort pr`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+
+### Finding a patient by name
+1. Finding a patient with one keyword
+   1. Prerequisites: Have our sample patient list loaded OR add patients with name `David`.
+   2. Test case: `find david`<br>
+      Expected: All patients with name `david` are identified and listed. Details of success of command is shown in the system message. UI is updated to display found patients only.
+   3. Test case: `find +`<br>
+      Expected: No patients are found. Error details shown in the system message. Patient list in UI will display no patients.
+   4. Other incorrect find commands to try: `find`, `find 1`, `find kkura` (where there are no patients with the name `kkura`)<br>
+      Expected: Similar to previous.
+2. Finding a patient with more than one keyword
+   1. Prerequisites: Have our sample patient list loaded OR add patients with names `David`, `Ibrahim` or both.
+   2. Test case: `find david ibrahim`<br>
+      Expected: All patients with either names `david` and `ibrahim` are identified and listed. Details of success of command is shown in the system message. UI is updated to display found patients only.
+   3. Test case: `find l s`<br>
+      Expected: No patients are found. Error details shown in the system message. Patient list in UI will display no patients.
+   4. Other incorrect find commands to try: `find`, `find 1`, `find kkura zuha` (where there are no patients with the names `kkura` and `zuha`)<br>
+      Expected: Similar to previous.
+
+### Assigning a patient to a department
+1. Assigning a patient to a department
+   1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number t7654321a.
+   2. Test case: `assign i/t7654321a d/cardiology`<br>
+      Expected: Patient IC number `t7654321a` is assigned to department `cardiology`. Details of the assigned department is shown in the system message. Patient's assigned department is updated in UI.
+   3. Test case: `assign i/t7654321a`<br>
+      Expected: Patient is not assigned a department. Error details shown in the system message. Patient's assigned department remains the same.
+   4. Other incorrect assign commands to try: `assign`, `assign i/t7654321a cardio` (department is not spelt fully), `assign i/t7654321a anesthesiology` (department follows american spelling)<br>
+      Expected: Similar to previous.
+
+### Undoing a command
+1. Undoing add command
+2. Undoing edit command
+3. Undoing delete command
+4. Undoing clear command
+5. Undoing assign command
+6. Undoing record command
+
+### Redoing a command
+1. Redoing add command
+2. Redoing edit command
+3. Redoing delete command
+4. Redoing clear command
+5. Redoing assign command
+6. Redoing record command
 
 ### Saving data
 
@@ -1003,7 +1126,6 @@ initially.
    details in the information tab. Users would have to click that `Patient` again to display its details.
    Since `IC_NUMBER` is unique for every `Patient`, we plan to show the `Patient` detail
    directly in the information tab.
-
 
 2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project
    by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan

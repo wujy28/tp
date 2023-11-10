@@ -38,7 +38,7 @@ public class AssignCommand extends Command {
         COMMAND_WORD + ": Assigns a patient identified " + "by the IC number to a hospital department. "
             + "Attempting to assign the patient to the department they are"
             + " currently under will display an error message.\n" + "Parameters: " + PREFIX_IC_NUMBER + "IC_NUMBER "
-            + PREFIX_DEPARTMENT + "DEPARTMENT " + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T0372683C "
+            + PREFIX_DEPARTMENT + "DEPARTMENT " + "\nExample: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T0372683C "
             + PREFIX_DEPARTMENT + "cardiology";
 
     public static final String MESSAGE_ASSIGN_PATIENT_SUCCESS = "Assigned Patient: %s to %s";
