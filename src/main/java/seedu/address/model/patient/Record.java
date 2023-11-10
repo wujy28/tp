@@ -1,5 +1,6 @@
 package seedu.address.model.patient;
 
+import javafx.beans.property.SimpleStringProperty;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -14,18 +15,18 @@ public class Record {
 
 
     private final Patient patient;
-    private String initialObservations;
-    private String diagnosis;
-    private String treatmentPlan;
+    private SimpleStringProperty initialObservations;
+    private SimpleStringProperty diagnosis;
+    private SimpleStringProperty treatmentPlan;
 
     /**
      * Initializes a Record with the associated patient and initialise the fields with default values
      */
     public Record(Patient patient) {
         this.patient = patient;
-        this.initialObservations = defaultInitialObservations;
-        this.diagnosis = defaultDiagnosis;
-        this.treatmentPlan = defaultTreatmentPlan;
+        this.initialObservations = new SimpleStringProperty(defaultInitialObservations);
+        this.diagnosis = new SimpleStringProperty(defaultDiagnosis);
+        this.treatmentPlan = new SimpleStringProperty(defaultTreatmentPlan);
     }
 
     /**
@@ -33,9 +34,19 @@ public class Record {
      */
     public Record() {
         this.patient = null; // patient left null, would have to fix when building editing record command
-        this.initialObservations = defaultInitialObservations;
-        this.diagnosis = defaultDiagnosis;
-        this.treatmentPlan = defaultTreatmentPlan;
+        this.initialObservations = new SimpleStringProperty(defaultInitialObservations);
+        this.diagnosis = new SimpleStringProperty(defaultDiagnosis);
+        this.treatmentPlan = new SimpleStringProperty(defaultTreatmentPlan);
+    }
+
+    /**
+     * Initializes a record with defined details
+     */
+    public Record(String initialObservations, String diagnosis, String treatmentPlan) {
+        this.patient = null;
+        this.initialObservations = new SimpleStringProperty(initialObservations);
+        this.diagnosis = new SimpleStringProperty(diagnosis);
+        this.treatmentPlan = new SimpleStringProperty(treatmentPlan);
     }
 
 
@@ -44,19 +55,27 @@ public class Record {
     }
 
     public String getInitialObservations() {
-        return initialObservations;
+        return initialObservations.get();
     }
 
     public void setInitialObservations(String initialObservations) {
-        this.initialObservations = initialObservations;
+        this.initialObservations.set(initialObservations);
+    }
+
+    public SimpleStringProperty initialObservationsProperty() {
+        return initialObservations;
     }
 
     public String getDiagnosis() {
-        return diagnosis;
+        return diagnosis.get();
     }
 
     public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
+        this.diagnosis.set(diagnosis);
+    }
+
+    public SimpleStringProperty diagnosisProperty() {
+        return diagnosis;
     }
 
     public static String getDefaultInitialObservations() {
@@ -72,11 +91,15 @@ public class Record {
     }
 
     public String getTreatmentPlan() {
-        return treatmentPlan;
+        return treatmentPlan.get();
     }
 
     public void setTreatmentPlan(String treatmentPlan) {
-        this.treatmentPlan = treatmentPlan;
+        this.treatmentPlan.set(treatmentPlan);
+    }
+
+    public SimpleStringProperty treatmentPlanProperty() {
+        return treatmentPlan;
     }
 
     /**
@@ -84,9 +107,9 @@ public class Record {
      * @param recordToCopy the Record with information to copy.
      */
     public void copyRecordInfo(Record recordToCopy) {
-        this.initialObservations = recordToCopy.getInitialObservations();
-        this.diagnosis = recordToCopy.getDiagnosis();
-        this.treatmentPlan = recordToCopy.getTreatmentPlan();
+        this.initialObservations.set(recordToCopy.getInitialObservations());
+        this.diagnosis.set(recordToCopy.getDiagnosis());
+        this.treatmentPlan.set(recordToCopy.getTreatmentPlan());
     }
 
     /**
@@ -105,12 +128,14 @@ public class Record {
 
         Record otherRecord = (Record) other;
         return getInitialObservations().equals(otherRecord.getInitialObservations()) && getDiagnosis().equals(
-            otherRecord.getDiagnosis()) && getTreatmentPlan().equals(otherRecord.getTreatmentPlan());
+                otherRecord.getDiagnosis()) && getTreatmentPlan().equals(otherRecord.getTreatmentPlan());
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("initialObservations", initialObservations).add("diagnosis", diagnosis)
-            .add("treatmentPlan", treatmentPlan).toString();
+        return new ToStringBuilder(this).add("initialObservations", getInitialObservations())
+                .add("diagnosis", getDiagnosis())
+                .add("treatmentPlan", getTreatmentPlan()).toString();
     }
 }
+

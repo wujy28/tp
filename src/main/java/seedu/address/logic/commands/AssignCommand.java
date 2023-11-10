@@ -38,7 +38,7 @@ public class AssignCommand extends Command {
         COMMAND_WORD + ": Assigns a patient identified " + "by the IC number to a hospital department. "
             + "Attempting to assign the patient to the department they are"
             + " currently under will display an error message.\n" + "Parameters: " + PREFIX_IC_NUMBER + "IC_NUMBER "
-            + PREFIX_DEPARTMENT + "DEPARTMENT " + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T0372683C "
+            + PREFIX_DEPARTMENT + "DEPARTMENT " + "\nExample: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER + "T0372683C "
             + PREFIX_DEPARTMENT + "cardiology";
 
     public static final String MESSAGE_ASSIGN_PATIENT_SUCCESS = "Assigned Patient: %s to %s";
@@ -63,7 +63,8 @@ public class AssignCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command)
+            throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
         Patient patientToAssign = model.getPatient(icNumber, currentPatientList);
@@ -77,7 +78,7 @@ public class AssignCommand extends Command {
                 String.format(MESSAGE_SAME_DEPARTMENT, patientToAssign.getName(), this.department));
         }
 
-        model.setPatient(patientToAssign, assignedPatient);
+        model.setPatient(patientToAssign, assignedPatient, command);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
         logger.info("AssignCommand : " + this + "\nsuccessfully executed");

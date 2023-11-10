@@ -38,7 +38,7 @@ public class RecordCommand extends Command {
             + PREFIX_TREATMENT_PLAN + "Take medicine";
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Patient Record: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to record must be provided.";
 
     private final IcNumber icNumber;
     private final RecordCommand.EditRecordDescriptor editRecordDescriptor;
@@ -56,7 +56,8 @@ public class RecordCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command)
+            throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
         Patient patientToEdit = model.getPatient(icNumber, currentPatientList);

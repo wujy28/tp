@@ -31,7 +31,7 @@ public class AddCommandIntegrationTest {
         Patient validPatient = new PatientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPatient(validPatient);
+        expectedModel.addPatient(validPatient, "");
 
         assertCommandSuccess(new AddCommand(validPatient), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),

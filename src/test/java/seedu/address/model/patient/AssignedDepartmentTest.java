@@ -88,4 +88,18 @@ class AssignedDepartmentTest {
         AssignedDepartment radiology = new AssignedDepartment("raDiOlogY");
         assertEquals("Radiology", radiology.toString());
     }
+
+    @Test
+    public void testCompareTo() {
+        AssignedDepartment assignedDepartment = new AssignedDepartment("Oncology");
+
+        // less than -> returns -1
+        assertEquals(-1, assignedDepartment.compareTo(new AssignedDepartment("Default")));
+
+        // equal -> returns 0
+        assertEquals(0, assignedDepartment.compareTo(new AssignedDepartment("Oncology")));
+
+        // more than -> returns 1
+        assertEquals(1, assignedDepartment.compareTo(new AssignedDepartment("Intensive Care Unit")));
+    }
 }

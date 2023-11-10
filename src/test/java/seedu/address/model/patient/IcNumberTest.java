@@ -1,5 +1,6 @@
 package seedu.address.model.patient;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -55,5 +56,19 @@ public class IcNumberTest {
 
         // different values -> returns false
         assertFalse(ic.equals(new IcNumber("T0246810X")));
+    }
+
+    @Test
+    public void testCompareTo() {
+        IcNumber icNumber = new IcNumber("T0123456A");
+
+        // less than -> returns -1
+        assertEquals(-1, icNumber.compareTo(new IcNumber("t0424234S")));
+
+        // equal -> returns 0
+        assertEquals(0, icNumber.compareTo(new IcNumber("t0123456a")));
+
+        // more than -> returns 1
+        assertEquals(1, icNumber.compareTo(new IcNumber("s3274834f")));
     }
 }

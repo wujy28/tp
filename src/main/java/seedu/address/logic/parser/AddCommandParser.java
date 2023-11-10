@@ -88,7 +88,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = new Phone(Phone.getDefaultPhone());
         Email email = new Email(Email.getDefaultEmail());
         Gender gender = new Gender(Gender.getDefaultGender());
-        IcNumber icNumber = new IcNumber(argMultimap.getValue(PREFIX_IC_NUMBER).get());
+        IcNumber icNumber = new IcNumber(IcNumber.getDefaultIcNumber());
         Birthday birthday = new Birthday(Birthday.getDefaultBirthday());
         Address address = new Address(Address.getDefaultAddress());
         Priority priority = new Priority(Priority.getDefaultPriority());
@@ -118,8 +118,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public static Patient createPatientFromPresentPrefixes(Name n, Phone p, Email e, Gender g, IcNumber i, Birthday b,
                                                            Address a, Priority pr, Set<Tag> t,
-                                                           ArgumentMultimap argMultimap,
-                                                           Prefix[] prefixes) throws ParseException {
+                                                           ArgumentMultimap argMultimap, Prefix[] prefixes)
+            throws ParseException {
         for (Prefix pf : prefixes) {
             switch (pf.getPrefix()) {
             case "p/":

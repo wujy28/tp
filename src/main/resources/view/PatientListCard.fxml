@@ -37,25 +37,38 @@
                      </children>
                   </AnchorPane>
             </HBox>
-            <FlowPane fx:id="tags" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" GridPane.rowIndex="1" />
+               <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <children>
+                     <Label fx:id="priorityLabel" styleClass="priorityTag" stylesheets="@PatientCard.css" text="Priority">
+                        <HBox.margin>
+                           <Insets right="7.0" top="8.0" />
+                        </HBox.margin>
+                     </Label>
+                  <FlowPane fx:id="tags" nodeOrientation="RIGHT_TO_LEFT" styleClass="tags" stylesheets="@PatientCard.css">
+                        <padding>
+                           <Insets top="8.0" />
+                        </padding>
+                     </FlowPane>
+                  </children>
+               </HBox>
                <AnchorPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                   <children>
                      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
                            <GridPane alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
                              <columnConstraints>
-                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.64866638183594" minWidth="10.0" prefWidth="41.5" />
-                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.23779296875" minWidth="10.0" prefWidth="152.5" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.64866638183594" minWidth="10.0" prefWidth="66.5" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.23779296875" minWidth="10.0" prefWidth="127.5" />
                              </columnConstraints>
                              <rowConstraints>
                                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="22.5" vgrow="ALWAYS" />
                                <RowConstraints maxHeight="27.35866928100586" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
                              </rowConstraints>
                               <children>
-                              <Label fx:id="gender" prefWidth="150.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$gender" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                              <Label fx:id="birthday" prefWidth="150.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$birthday" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                              <Label fx:id="phone" prefWidth="293.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$phone" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                              <Label fx:id="email" prefWidth="263.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$email" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                              <Label fx:id="gender" prefWidth="150.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$gender" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                              <Label fx:id="birthday" prefWidth="150.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$birthday" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                              <Label fx:id="phone" prefWidth="293.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$phone" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                              <Label fx:id="age" prefWidth="263.0" styleClass="fieldText" stylesheets="@PatientCard.css" text="\$age" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                               </children>
                            </GridPane>
                            <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">

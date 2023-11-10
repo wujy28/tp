@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/aaronjt1)]
 [[portfolio](team/aaronjt1.md)]
 
-* Role: Developer
+* Role: Developer, Team Lead
 * Responsibilities: Scheduling and tracking, Git Expert
 
 ### Lee Thien My

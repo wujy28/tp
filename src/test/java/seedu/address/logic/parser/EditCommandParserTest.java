@@ -79,6 +79,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
+        // follow heuristic on at most one invalid input for each negative test case
         // have prefix, no IC value specified
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, "i/", expectedMessage);
@@ -95,6 +96,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_duplicatePrefixes_failure() {
+        // follow heuristic on at most one invalid input for each negative test case
         // duplicate phone prefixes
         Prefix[] duplicatePhonePrefixes = new Prefix[]{new Prefix("p/"), new Prefix("p/")};
         String expectedMessage = Messages.getErrorMessageForDuplicatePrefixes(duplicatePhonePrefixes);
@@ -151,6 +153,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // follow heuristic on at most one invalid input for each negative test case
         assertParseFailure(parser, " i/T1234567J" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, " i/T1234567J" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, " i/T1234567J" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
@@ -183,6 +186,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
+        // follow heuristic on at each valid input at least once in a positive test case
         IcNumber testIcNumber = new IcNumber(VALID_IC_NUMBER_AMY);
         String userInput =
             NAME_DESC_AMY + IC_NUMBER_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + GENDER_DESC_AMY + BIRTHDAY_DESC_AMY
@@ -199,6 +203,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
+        // follow heuristic on at each valid input at least once in a positive test case
         IcNumber targetIc = AMY.getIcNumber();
         String userInput = IC_NUMBER_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
 
@@ -211,6 +216,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
+        // follow heuristic on at each valid input at least once in a positive test case
         // name
         IcNumber targetIc = AMY.getIcNumber();
         String userInput = IC_NUMBER_DESC_AMY + NAME_DESC_AMY;
@@ -274,8 +280,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
-        // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+        // follow heuristic on at most one invalid input for each negative test case
 
         // valid followed by invalid
         IcNumber targetIc = ALICE.getIcNumber();
@@ -309,12 +314,13 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
+        // follow heuristic on at each valid input at least once in a positive test case
         IcNumber targetIc = CARL.getIcNumber();
         String userInput = " i/" + targetIc.toString() + TAG_EMPTY;
 
 
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
-                .withTags().withIcNumber(targetIc.toString()).build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withTags()
+            .withIcNumber(targetIc.toString()).build();
 
         EditCommand expectedCommand = new EditCommand(targetIc, descriptor);
 
@@ -323,6 +329,7 @@ public class EditCommandParserTest {
 
     @Test
     public void createEditPatientDescriptor_oneFieldSpecific_success() throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
         // phone number specified
         String userInput = IC_NUMBER_DESC_BOB + PHONE_DESC_BOB;
 
@@ -336,6 +343,7 @@ public class EditCommandParserTest {
 
     @Test
     public void createEditPatientDescriptor_someFieldsSpecific_success() throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
         // gender and email specified
         String userInput = IC_NUMBER_DESC_BOB + GENDER_DESC_AMY + EMAIL_DESC_AMY;
 
@@ -349,6 +357,7 @@ public class EditCommandParserTest {
 
     @Test
     public void createEditPatientDescriptor_allFieldSpecific_success() throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
         String userInput =
             NAME_DESC_AMY + IC_NUMBER_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + GENDER_DESC_AMY + BIRTHDAY_DESC_AMY
                 + ADDRESS_DESC_AMY + PRIORITY_DESC_AMY;
@@ -365,6 +374,7 @@ public class EditCommandParserTest {
 
     @Test
     public void createEditPatientDescriptor_noFieldSpecific_failure() throws ParseException {
+        // follow heuristic on at most one invalid input for each negative test case
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(IC_NUMBER_DESC_AMY, RELEVANT_PREFIXES);
         boolean isExceptionThrown = false;
         try {

@@ -88,10 +88,12 @@ public class AddCommandParserTest {
 
     @Test
     public void getPrefixesPresent_onlyRequiredPrefixesPresent_returnedCorrectPrefixList() {
+        // follow heuristic on at each valid input at least once in a positive test case
+
         Prefix[] expectedPrefixesList = REQUIRED_PREFIXES;
 
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(NAME_DESC_AMY + IC_NUMBER_DESC_AMY,
-            RELEVANT_PREFIXES);
+            RELEVANT_PREFIXES); // Part of equivalence partition of required inputs
         Prefix[] actualPrefixesList = AddCommandParser.getPrefixesPresent(testArgMultimap);
         assertEquals(expectedPrefixesList.length, actualPrefixesList.length);
         for (int i = 0; i < expectedPrefixesList.length; i++) {
@@ -101,7 +103,9 @@ public class AddCommandParserTest {
 
     @Test
     public void getPrefixesPresent_someOptionalPrefixesPresent_returnedCorrectPrefixList() {
-        // only optional field phone is present
+        // follow heuristic on at each valid input at least once in a positive test case
+
+        // only optional field phone is present (part of equivalence partition of required inputs + optional)
         String userInput = NAME_DESC_AMY + IC_NUMBER_DESC_AMY + PHONE_DESC_AMY;
         Prefix[] expectedPrefixesList = new Prefix[]{PREFIX_NAME, PREFIX_IC_NUMBER, PREFIX_PHONE};
 
@@ -115,6 +119,7 @@ public class AddCommandParserTest {
 
     @Test
     public void getPrefixesPresent_allPrefixesPresent_returnedCorrectPrefixList() {
+        // follow heuristic on at each valid input at least once in a positive test case
         Prefix[] expectedPrefixesList = new Prefix[]{PREFIX_NAME, PREFIX_IC_NUMBER, PREFIX_PHONE, PREFIX_EMAIL,
             PREFIX_GENDER, PREFIX_BIRTHDAY, PREFIX_ADDRESS, PREFIX_PRIORITY, PREFIX_TAG};
 
@@ -128,6 +133,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatient_allPrefixesPresent_correctPatientCreated() throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
         Patient expectedPatient = new PatientBuilder(BOB).build();
 
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(FULL_DESC_BOB, RELEVANT_PREFIXES);
@@ -138,6 +144,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatient_onlyRequiredPrefixesPresent_correctPatientCreated() throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
         Patient expectedPatient = new PatientBuilder(BOB).withDefaultValues().withName(VALID_NAME_BOB)
             .withIcNumber(VALID_IC_NUMBER_BOB).build();
 
@@ -150,6 +157,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatient_someOptionalPrefixesPresent_correctPatientCreated() throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
         Patient expectedPatient = new PatientBuilder(BOB).withDefaultValues().withName(VALID_NAME_BOB)
             .withIcNumber(VALID_IC_NUMBER_BOB).withEmail(VALID_EMAIL_BOB).build();
 
@@ -164,6 +172,7 @@ public class AddCommandParserTest {
 
     @Test
     public void createPatientFromPresentPrefixes_allPrefixesPresent_correctPatientCreated() throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
         Patient expectedPatient = new PatientBuilder(BOB).build();
 
         ArgumentMultimap testArgMultimap = ArgumentTokenizer.tokenize(FULL_DESC_BOB, RELEVANT_PREFIXES);
@@ -180,6 +189,8 @@ public class AddCommandParserTest {
     @Test
     public void createPatientFromPresentPrefixes_onlyRequiredFieldsPresent_correctPatientCreated()
             throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
+
         // expectedPatient only have Name field, others default value
         Patient expectedPatient = new PatientBuilder(AMY).withDefaultValues().withName(VALID_NAME_AMY)
             .withIcNumber(VALID_IC_NUMBER_AMY).build();
@@ -200,6 +211,8 @@ public class AddCommandParserTest {
     @Test
     public void createPatientFromPresentPrefixes_someOptionalFieldsPresent_correctPatientCreated()
             throws ParseException {
+        // follow heuristic on at each valid input at least once in a positive test case
+
         // expectedPatient only have Name field and Phone fields
         Patient expectedPatient = new PatientBuilder(AMY).withDefaultValues().withName(VALID_NAME_AMY)
             .withIcNumber(VALID_IC_NUMBER_AMY).withPhone(VALID_PHONE_AMY).build();
@@ -221,6 +234,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
+        // follow heuristic on at each valid input at least once in a positive test case
         Patient expectedPatient = new PatientBuilder(BOB).build();
 
         // whitespace only preamble
@@ -236,7 +250,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_requiredFieldPresent_success() {
-        // Required field Name present while optional fields missing
+        // Required field Name present while optional fields missing, follows heuristic on each valid input being in
+        // positive test case
         Patient expectedPatient = new PatientBuilder(AMY).withDefaultValues().withName(VALID_NAME_AMY)
             .withIcNumber(VALID_IC_NUMBER_AMY).build();
 
@@ -245,6 +260,9 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_emptyUserString_failure() {
+        // follow heuristic on at most one invalid input for each negative test case
+
+        // test empty
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, "", expectedMessage);
@@ -267,6 +285,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_requiredFieldPrefixMissing_failure() {
+        // follow heuristic on at most one invalid input for each negative test case
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing Name prefix
@@ -282,6 +301,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldMissing_success() {
+        // follow heuristic on at each valid input at least once in a positive test case
         // optional field Phone number missing (ie default phone number used)
         Patient expectedPatient = new PatientBuilder(BOB).withPhone(Phone.getDefaultPhone()).build();
 
@@ -323,14 +343,14 @@ public class AddCommandParserTest {
         expectedPatient = new PatientBuilder(BOB).withPriority(Priority.getDefaultPriority()).build();
 
         assertParseSuccess(parser,
-                NAME_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB
-                        + BIRTHDAY_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPatient));
+            NAME_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB + BIRTHDAY_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPatient));
     }
 
 
     @Test
     public void parse_duplicatePrefixes_failure() {
+        // follow heuristic on at most one invalid input for each negative test case
         // duplicate name prefixes
         Prefix[] duplicateNamePrefixes = new Prefix[]{new Prefix("n/"), new Prefix("n/")};
         String expectedMessage = Messages.getErrorMessageForDuplicatePrefixes(duplicateNamePrefixes);
@@ -384,6 +404,7 @@ public class AddCommandParserTest {
     @Test
 
     public void parse_invalidValue_failure() {
+        // follow heuristic on at most one invalid input for each negative test case
         // invalid name
         assertParseFailure(parser,
             INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB

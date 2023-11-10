@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Patient's IC Number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIC(String)}
  */
-public class IcNumber {
+public class IcNumber implements Comparable<IcNumber> {
     public static final String MESSAGE_CONSTRAINTS =
             "IC Number should start and end with an alphabet with non negative numbers in between";
     public static final String VALIDATION_REGEX = "^[A-Z]\\d{7}[A-Z]$";
@@ -57,5 +57,16 @@ public class IcNumber {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(IcNumber o) {
+        if (this.value.compareTo(o.value) < 0) {
+            return -1;
+        } else if (this.value.compareTo(o.value) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

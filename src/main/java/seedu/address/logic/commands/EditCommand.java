@@ -39,7 +39,7 @@ import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing patient in the address book.
+ * Edits the details of an existing patient in the patient record system.
  */
 public class EditCommand extends Command {
 
@@ -56,7 +56,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the patient record!";
 
     private final IcNumber icNumber;
     private final EditPatientDescriptor editPatientDescriptor;
@@ -74,7 +74,8 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, PatientWithFieldNotFoundException {
+    public CommandResult execute(Model model, String command)
+            throws CommandException, PatientWithFieldNotFoundException {
         requireNonNull(model);
         List<Patient> currentPatientList = model.getCurrentPatientList();
         Patient patientToEdit = model.getPatient(icNumber, currentPatientList);
@@ -87,7 +88,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        model.setPatient(patientToEdit, editedPatient);
+        model.setPatient(patientToEdit, editedPatient, command);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, Messages.format(editedPatient)));
     }

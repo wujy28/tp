@@ -1,5 +1,6 @@
 package seedu.address.model.patient;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -63,5 +64,19 @@ public class PriorityTest {
 
         // different values -> returns false
         assertFalse(priority.equals(new Priority("low")));
+    }
+
+    @Test
+    public void testCompareTo() {
+        Priority priority = new Priority("medium");
+
+        // less than -> returns -1
+        assertEquals(-1, priority.compareTo(new Priority("high")));
+
+        // equal -> returns 0
+        assertEquals(0, priority.compareTo(new Priority("medium")));
+
+        // more than -> returns 1
+        assertEquals(1, priority.compareTo(new Priority("low")));
     }
 }

@@ -11,10 +11,21 @@ pageNav: 3
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Overview**
+Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and connecting patients with
+relevant departments. It leverages on ED doctors fast typing skill by using the Command Line Interface (CLI).
+
+This developer guide aims to guide future developers / maintainers of **Advanced&Efficient** by providing the
+implementation philosophy of the software design and features.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+- Advanced&Efficient is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project by SE-EDU initiative.
+
+- Libraries used [JavaFx](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson), [PlantUML](https://plantuml.com/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,15 +41,15 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of Advanced&Efficient.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -78,7 +89,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -89,9 +100,9 @@ visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -103,7 +114,7 @@ The `UI` component,
 ### Logic component
 
 **API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -145,7 +156,7 @@ How the parsing works:
 ### Model component
 
 **API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -174,7 +185,7 @@ each `Person` needing their own `Tag` objects.<br>
 ### Storage component
 
 **API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -214,50 +225,48 @@ Given below is an example usage scenario and how the add patient operation is ha
 
 Step 1. Assuming the application has been launched, the user enters the required fields followed by any optional fields.
 
-For adding only required fields, the user enters `add n/John Tan i/t7654321j`, which is to add
+For adding **only** required fields, the user enters `add n/John Tan i/t7654321j`, which is to add
 a patient with `Name = John Tan` and `IcNumber = t1234567j`,
 
-For adding additional optional fields, the user enters `add n/John Tan i/t7654321j p/90909090`, which is to add the
+For adding **additional** optional fields, the user enters `add n/John Tan i/t7654321j p/90909090`, which is to add the
 optional field `Phone = 90909090`.
 
-The `AddCommandParser#createPatient` method creates the patient with the relevant fields and fills all optional fields
-with default values otherwise.
+<box type="info" seamless>
 
+**Note:** From Step 2 onwards, we will assume user enters `add n/John Tan i/t7654321j`.
+
+</box>
 
 Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
-command word `view` and the argument `i/t1234567j`. After splitting, `AddressBookParser#parseCommand` would identify
-that the command is `View` and instantiate `ViewCommandParser` and call its `ViewCommandParser#parse` to parse the
-argument
-accordingly.
+command word `add` and the argument `n/John Tan i/t7654321j`. After splitting, `AddressBookParser#parseCommand` would identify
+that the command is `Add` and instantiate `AddCommandParser` and call its `AddCommandParser#parse` to parse the
+argument accordingly.
 
-Step 3. `ViewCommandParser#parse` would first map the `IcNumber` prefix to its argument, `t1234567j`
-using `ArgumentMultimap`.
-The `ArgumentMultimap` would then be passed to `checkIcNumberPrefixPresent` to check that the `IcNumber` prefix
-is present. If `checkIcNumberPrefixPresent` returns `false`, `ParseException` is thrown.
+Step 3. `AddCommandParser#parse` will call `AddCommandParser#createPatient` method to create the patient with the relevant fields and fills all optional fields
+with default values otherwise. It is then passed as an argument to instantiate the `AddCommand`, which is then returned by
+`AddCommandParser#parse`
 
-Step 4. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
-then passed as an argument along with `IcNumber` to instantiate the `ViewCommand`, which is then returned by
-`ViewCommandParser#parse`
+Step 4. `LogicManager#execute` now invokes `AddCommand#execute` which checks for duplicate `Patient`. `model#addPatient`
+is then called to add the `Patient` into the address book. It then returns a `CommandResult` stating the patient has been listed.
 
-Step 5. `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
-`PatientWithIcNumberPredicate` as an argument. It then returns a `CommandResult` stating the patient
-has been listed. `PatientWithFieldNotFoundException` is thrown if no patient found.
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
 
 #### Design considerations:
 
-**Aspect: How to display the specified patient:**
+**Aspect: How to handle required / optional inputs from users:**
 
-* **Alternative 1 (current choice):** Utilize current filteredPatientList display to
-  display the patient.
+* **Alternative 1 (current choice):** Create `Patient` with the required fields and fill non-given
+optional inputs with default values.
     * Pros: Easy to implement.
-    * Cons: Similar way in displaying of patient(s) may lead to confusion between commands.
+    * Cons: Since default values have to be valid as well, default values may seem too similar to actual value.
+  Eg. Default value for `Gender` is `OTHER`, which is an actual value as well.
 
 
-* **Alternative 2:** Create a new set of JavaFx controls to display that patient differently
-  from the current filteredPatientList display.
-    * Pros: New display can be customisable for users' needs.
-      Cons: New display have to be implemented correctly to integrate with
-      existing displays.
+* **Alternative 2:** Use Java `Optional` class to handle fields.
+    * Pros: Implementation is neater and fields with no values can be represented by a warning message instead
+  of a default value.
+    * Cons: Implementation is difficult and `Optional` class have to be implemented correctly to ensure it works
+  with other components of the codebase.
 
 
 ### View patient feature
@@ -277,21 +286,17 @@ command.
 Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
 command word `view` and the argument `i/t1234567j`. After splitting, `AddressBookParser#parseCommand` would identify
 that the command is `View` and instantiate `ViewCommandParser` and call its `ViewCommandParser#parse` to parse the
-argument
-accordingly.
+argument accordingly.
 
-Step 3. `ViewCommandParser#parse` would first map the `IcNumber` prefix to its argument, `t1234567j`
-using `ArgumentMultimap`.
-The `ArgumentMultimap` would then be passed to `checkIcNumberPrefixPresent` to check that the `IcNumber` prefix
-is present. If `checkIcNumberPrefixPresent` returns `false`, `ParseException` is thrown.
-
-Step 4. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
+Step 3. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
 then passed as an argument along with `IcNumber` to instantiate the `ViewCommand`, which is then returned by
 `ViewCommandParser#parse`
 
 Step 5. `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
-`PatientWithIcNumberPredicate` as an argument. It then returns a `CommandResult` stating the patient
-has been listed. `PatientWithFieldNotFoundException` is thrown if no patient found.
+`PatientWithIcNumberPredicate` as an argument. This will update the displayed filter list to the predicate.
+It then returns a `CommandResult` stating the patient has been listed.
+
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
 
 #### Design considerations:
 
@@ -710,14 +715,17 @@ unless specified otherwise)
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
-3. A ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks
+3. An ED doctor with above average typing speed for regular English text should be able to accomplish most of the tasks
    faster using commands than using the mouse.
+4. Should not lose any data if the application is closed by any other means besides the `Exit` command.
+5. The response to any user action should be visible within 2 seconds.
 
-*{More to be added}*
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Department**: A sector of the hospital responsible for a type of healthcare treatment.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -750,32 +758,54 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a patient
+1. Adding a patient with only required prefixes
+   1. Prerequisites: None of existing patients have either name `You Wen Ti` or IC number `t0374628z`. (else you may replace the name and/or ic number specified in the test cases)
+   2. Test case: `add n/You Wen Ti i/t0374628z`<br>
+      Expected: Patient with name `You Wen Ti` and IC number `t0374628z` is added. Details of the added patient is shown in the system message. UI is updated to display newly added patient.
+   3. Test case: `add n/You Wen Ti`<br>
+      Expected: No patient is added. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect add commands to try: `add`, `add Wo Meiyou t0365867z`<br>
+      Expected: Similar to previous.
+2. Adding a patient with both required and optional prefixes
+   1. Prerequisites: None of existing patients have either name `Ingot Gold` or IC number `t0482756`. (else you may replace the name and/or ic number specified in the test cases)
+   2. Test case: `add n/Ingot Gold i/t0482756j g/male b/20/05/2004 p/87654487 e/goldie@email.com a/Old Town Road 1 pr/medium t/alone`<br>
+      Expected: Patient with name `Ingot Gold`, IC number `t0482756j`, gender `male`, birthday `20/05/2004`, phone number `87654487`, email `goldie@email.com`
+      , address `Old Town Road 1`, priority `medium`, and tag `alone` is added. Details of the added patient is shown in the system message. UI is updated to display newly added patient.
+   3. Test case: `add n/Betty Crocker i/t0826789s a/Downtown East a/Lowcoast West`<br>
+      Expected: No patient is added. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect add commands to try: `add`, `add n/Beckham Low pr/high`<br>
+      Expected: Similar to previous.
+
+### Viewing a patient
+1. Viewing a patient
+   1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number `t7654321a`.
+   2. Test case: `view i/t7654321a`<br>
+      Expected: Patient with IC number `t7654321a` will be displayed. Details of success of command is shown in the system message. Patient list is updated in UI.
+   3. Test case: `view I/t7654321a`<br>
+      Expected: No patient is viewed. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect view commands to try: `view`, `view t8374829x`, `view 1`<br>
+      Expected: Similar to previous.
+
 ### Deleting a patient
-
-1. Deleting a patient while all patients are being shown
-
-    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-    2. Test case: `delete i/T0000000A`<br>
-       Expected: Will iterate through the list to search for Patient with matching IC Number and delete that patient
-       Timestamp in the status bar is updated.
-    3. Test case: `delete I/T0000000B`<br>
-       Expected: If patient is not found or does not exist, no patient is deleted.
-       Error details shown in the status message. Status bar remains the same.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+1. Deleting a patient
+    1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number `t7654321a`.
+    2. Test case: `delete i/T7654321A`<br>
+       Expected: Patient with IC number `t0374628z` is deleted. Details of the deleted patient is shown in the system message. Patient list is updated in UI.
+    3. Test case: `delete I/T7654321B`<br>
+       Expected: No patient is deleted. Error details shown in the system message. Patient list remains the same.
+    4. Other incorrect delete commands to try: `delete`, `delete i/t9384758d` (where a patient with ic number `t9384758d` does not exist)<br>
        Expected: Similar to previous.
 
 ### Editing a patient
-1. Editing a patient's attributes that are specified based on the prefixes in the user inputs
-   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-   2. Test case: `edit i/T0000000A n/John Doe`<br>
-      Expected: Will iterate through the list to search for Patient with matching IC Number and edit that patient
-      Timestamp in the status bar is updated.
-   3. Test case: `edit i/T0000000A`
-      Expected: Will throw an exception if the fields to be edited are left empty.
-      Error details shown in the status message. Status bar remains the same.
-   4. Other incorrect edit commands to try: `edit`, `delete x`, `...`
+1. Editing a patient's details
+   1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number t7654321a.
+   2. Test case: `edit i/T7654321A n/John Doe`<br>
+      Expected: Patient with IC number `T7654321A` will have their name edited to `John Doe`. Details of the edited patient is shown in the system message. UI is updated to display patient's new details.
+   3. Test case: `edit i/T7654321A`<br>
+      Expected: No patient is edited. Error details shown in the system message. Patient's details remains the same.
+   4. Other incorrect edit commands to try: `edit`, `edit i/t0264782a n/Mary Jane` (where a patient with ic number `t0264782a` does not exist)<br>
       Expected: Similar to previous.
-1. _{ more test cases …​ }_
 
 ### Class `Birthday` and Testing
 1. Patient requires to have a birthday as a compulsory characteristic to be considered
@@ -800,6 +830,108 @@ and checks on validity of the arguments given to prevent invocation errors
 **LocalDateTime** : LocalDateTime used instead of String as Age is a non-constant attribute of the Patient
 A patient's age constantly changes. Hence LocalDateTime offers flexibility to auto calculate a patient's age
 based on Birthday without requiring manual interferance as a potential extension.
+
+### Editing a patient record
+1. Editing a patient's record
+   1. Prerequisite: Have our sample patient list loaded OR add a patient with IC number t7654321a. 
+   2. Test case: `record i/t7654321a o/Broken Arm di/Hairline fracture tp/Cast for 2 days`<br>
+      Expected: Record of the patient with IC number `T1234567A` is edited to have `Broken Arm` as initial observation, `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan.
+      Details of the edited record is shown in the system message. Patient's record is updated in UI.
+   3. Test case: `record i/7654321a di/Asthma o/Shortness of breath and chest tightness`<br>
+      Expected: Record of the patient with IC number `T1234567A` is edited to have `Shortness of breath and chest tightness` as initial observation, `Asthma` as diagnosis.
+      Details of the edited record is shown in the system message. Patient's record is updated in UI.
+   4. Test case: `record i/t7654321a`<br>
+      Expected: No patient record is edited. Error details shown in the system message. Patient's record remains the same.  
+   5. Other incorrect delete commands to try: `record`, `record t0123456a`, `record i/t2736487a` (where patient with IC number `t2736487a` does not exist)<br>
+      Expected: Similar to previous.  
+
+### Sorting patients
+1. Sorting patients by name
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
+   2. Test case: `sort name`<br>
+      Expected: Patient list is sorted according to `name` in lexicographical order
+      , where uppercase letters have a greater priority over lowercase letters. Details of success of command is shown in the system message.
+      Order of patients in list is updated in UI.
+   3. Test case: `sort nm`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+2. Sorting patients by IC number
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
+   2. Test case: `sort ic`<br>
+      Expected: Patient list is sorted according to `IC number`, in lexicographical order. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort ic number`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+3. Sorting patients by assigned department
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different assigned departments among all patients in the list.
+   2. Test case: `sort department`<br>
+      Expected: Patient list is sorted according to `assigned department`. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort dpmt`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+4. Sorting patients by age
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different ages (i.e. birthday) among all patients in the list.
+   2. Test case: `sort age`<br>
+      Expected: Patient list is sorted according to `age`, where patients with default birthdays/ages are placed on top, followed by the remaining ages in increasing order. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort ages`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+5. Sorting patients by priority
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 priorities among all patients in the list.
+   2. Test case: `sort priority`<br>
+      Expected: Patient list is sorted according to `priority`, with `HIGH` on top, followed by `MEDIUM`, `LOW`, and `NIL`. Details of success of command is shown in the system message. Order of patients in list is updated in UI.
+   3. Test case: `sort pr`<br>
+      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+   4. Other incorrect sort commands to try: `sort`, `sort email`, `sort 1`<br>
+      Expected: Similar to previous.
+
+### Finding a patient by name
+1. Finding a patient with one keyword
+   1. Prerequisites: Have our sample patient list loaded OR add patients with name `David`.
+   2. Test case: `find david`<br>
+      Expected: All patients with name `david` are identified and listed. Details of success of command is shown in the system message. UI is updated to display found patients only.
+   3. Test case: `find +`<br>
+      Expected: No patients are found. Error details shown in the system message. Patient list in UI will display no patients.
+   4. Other incorrect find commands to try: `find`, `find 1`, `find kkura` (where there are no patients with the name `kkura`)<br>
+      Expected: Similar to previous.
+2. Finding a patient with more than one keyword
+   1. Prerequisites: Have our sample patient list loaded OR add patients with names `David`, `Ibrahim` or both.
+   2. Test case: `find david ibrahim`<br>
+      Expected: All patients with either names `david` and `ibrahim` are identified and listed. Details of success of command is shown in the system message. UI is updated to display found patients only.
+   3. Test case: `find l s`<br>
+      Expected: No patients are found. Error details shown in the system message. Patient list in UI will display no patients.
+   4. Other incorrect find commands to try: `find`, `find 1`, `find kkura zuha` (where there are no patients with the names `kkura` and `zuha`)<br>
+      Expected: Similar to previous.
+
+### Assigning a patient to a department
+1. Assigning a patient to a department
+   1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number t7654321a.
+   2. Test case: `assign i/t7654321a d/cardiology`<br>
+      Expected: Patient IC number `t7654321a` is assigned to department `cardiology`. Details of the assigned department is shown in the system message. Patient's assigned department is updated in UI.
+   3. Test case: `assign i/t7654321a`<br>
+      Expected: Patient is not assigned a department. Error details shown in the system message. Patient's assigned department remains the same.
+   4. Other incorrect assign commands to try: `assign`, `assign i/t7654321a cardio` (department is not spelt fully), `assign i/t7654321a anesthesiology` (department follows american spelling)<br>
+      Expected: Similar to previous.
+
+### Undoing a command
+1. Undoing add command
+2. Undoing edit command
+3. Undoing delete command
+4. Undoing clear command
+5. Undoing assign command
+6. Undoing record command
+
+### Redoing a command
+1. Redoing add command
+2. Redoing edit command
+3. Redoing delete command
+4. Redoing clear command
+5. Redoing assign command
+6. Redoing record command
 
 ### Saving data
 
@@ -849,3 +981,17 @@ to ensure the department assigned is saved as well.
 - **treatmentPlan**: The recommended treatment plan for the diagnosed ailment.
 
 It's worth noting that the default values for `initialObservations`, `diagnosis`, and `treatmentPlan` are set to represent that no data was provided. This allows for the record to be initialized even if not all fields are populated initially.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+1. Currently, when `View` command is executed, it only shows that `Patient` in the display panel instead of their
+details in the information tab. Users would have to click that `Patient` again to display its details. 
+Since `Ic Number` is unique for every `Patient`, we plan to show the `Patient` detail
+directly in the information tab.
+
+
+2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project 
+by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan
+to completely refactor all instances of `AddressBook` into `PatientRecordSystem`. For example,
+`AddressBookParser.java` would be renamed to `PatientRecordSystemParser.java`.

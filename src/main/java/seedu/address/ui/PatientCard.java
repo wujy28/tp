@@ -3,11 +3,13 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Priority;
 
 /**
  * An UI component that displays information of a {@code Patient}.
@@ -30,8 +32,6 @@ public class PatientCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
-    // @FXML
-    // private Label id;
     @FXML
     private Label icNumber;
     @FXML
@@ -40,14 +40,14 @@ public class PatientCard extends UiPart<Region> {
     private Label birthday;
     @FXML
     private Label phone;
-    // @FXML
-    // /private Label address;
     @FXML
-    private Label email;
+    private Label age;
     @FXML
     private Label assignedDepartment;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label priorityLabel;
 
     /**
      * Creates a {@code PatientCode} with the given {@code Patient} and index to display.
@@ -55,17 +55,42 @@ public class PatientCard extends UiPart<Region> {
     public PatientCard(Patient patient, int displayedIndex) {
         super(FXML);
         this.patient = patient;
-        // id.setText(displayedIndex + ". ");
         name.setText(patient.getName().fullName);
         icNumber.setText(patient.getIcNumber().value);
         gender.setText(patient.getGender().value);
         birthday.setText(patient.getBirthday().toString());
         phone.setText(patient.getPhone().value);
-        // address.setText(patient.getAddress().value);
-        email.setText(patient.getEmail().value);
+        age.setText(patient.getAge().toString());
         assignedDepartment.setText(patient.getAssignedDepartment().toString());
+        addPriorityLabel();
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void addPriorityLabel() {
+        Priority priority = patient.getPriority();
+        switch (priority.value) {
+        case HIGH:
+            priorityLabel.setText("!!!");
+            priorityLabel.getStyleClass().add("high");
+            break;
+        case MEDIUM:
+            priorityLabel.setText("!!");
+            priorityLabel.getStyleClass().add("medium");
+            break;
+        case LOW:
+            priorityLabel.setText("!");
+            priorityLabel.getStyleClass().add("low");
+            break;
+        case NIL:
+            // Fallthrough
+        default:
+            Node parent = priorityLabel.getParent();
+            if (parent instanceof HBox) {
+                HBox container = (HBox) parent;
+                container.getChildren().remove(priorityLabel);
+            }
+        }
     }
 }
