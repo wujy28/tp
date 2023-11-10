@@ -11,19 +11,28 @@ Given below are my contributions to the project.
     * [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=riyamehta2211&breakdown=true)
 
 * **New Feature**:
-    * To be added soon
+    * Added Redo and Undo commands to convert to previous or the next state of the PatientRecordSystem
+    * Added Birthday and IcNumber attributes
+    * Added assignedDepartment to Storage
 
 * **Project management**:
     * To be added soon
 
 * **Enhancements to existing features**:
-    * To be added soon
+    * Enhanced Delete and Edit features to access patient list using IC Number instead of list index
+      * E.g. delete and edit can now be performed by specifying IC Number of patient using **i/IC**
 
-* **Documentation**:
-    * To be added soon
+* **Contributions to the UG**:
+  * Commands: Redo, Undo, Edit, Delete
 
-* **Community**:
-    * To be added soon
+* **Contributions to the DG**
+  * Added UML sequential diagram for Delete
+  * To be added soon: Implementation of Undo and Redo
 
-* **Tools**:
-    * To be added soon
+* **Contributions to team-based tasks**:
+    * Maintaining the issue tracker
+    * Updating user/developer docs
+  
+* **Review/mentoring contributions**:
+  * Reviewed and merged various PRs made by team members
+
