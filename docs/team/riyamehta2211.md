@@ -15,9 +15,6 @@ Given below are my contributions to the project.
     * Added Birthday and IcNumber attributes
     * Added assignedDepartment to Storage
 
-* **Project management**:
-    * To be added soon
-
 * **Enhancements to existing features**:
     * Enhanced Delete and Edit features to access patient list using IC Number instead of list index
       * E.g. delete and edit can now be performed by specifying IC Number of patient using **i/IC**
