@@ -423,7 +423,7 @@ its intended behavior, invoked by the `LogicManager` class. `SortCommandParser` 
 argument string containing a property inputted by the user, to create a `SortCommand` object.
 
 Currently, the sort operation sorts the entire patient list, even if the command is executed when the displayed list
-is filtered (e.g. using the `find` command). This choice will be further elaborated on in the "Design 
+is filtered (e.g. using the `find` command). This choice will be further elaborated on in the "Design
 considerations" section below. 
 
 #### Design considerations:
@@ -437,13 +437,13 @@ considerations" section below.
   affect the currently displayed list, which might be filtered.
 
 * **Alternative 2:** Only sort the currently displayed, or filtered, list.
-    * Pros: Allows the user to only alter the visible list, and keep the underlying patient list untouched. 
+    * Pros: Allows the user to only alter the visible list, and keep the underlying patient list untouched.
   Behavior is possibly more intuitive.
     * Cons: Implementation is more complicated as the `FilteredList` that stores the currently displayed list and is
   referenced by the UI to display its contents cannot be modified.
 
 #### Sort order
-`SortOrder` is an enumeration within `SortCommand` representing the properties by which the user can sort the list. 
+`SortOrder` is an enumeration within `SortCommand` representing the properties by which the user can sort the list.
 As of now, the only `SortOrder`s available are the following:
 1. Name (lexicographically ascending, case-insensitive)
 2. IC Number (lexicographically ascending, case-insensitive)
@@ -453,14 +453,14 @@ As of now, the only `SortOrder`s available are the following:
 
 Each `SortOrder` constant value stores a `Comparator<? super Patient>` that is used by Java `List`'s build-in `sort`
 method to compare two `Patient` objects during the execution of the `sort` command. These comparators make use of the
-overridden `compareTo` methods in the related patient attribute classes (i.e. `Name`, `IcNumber`, `AssignedDepartment`, 
-`Age` and `Priority`). Each `SortCommand` object stores a `SortOrder` value, extracted from the input string by the 
+overridden `compareTo` methods in the related patient attribute classes (i.e. `Name`, `IcNumber`, `AssignedDepartment`,
+`Age` and `Priority`). Each `SortCommand` object stores a `SortOrder` value, extracted from the input string by the
 `SortCommandParser` object that created it.
 
 #### Sequence diagram of `SortCommand#execute()`
 As the creation of the `SortCommand` object is very similar to that of `AssignCommand` as shown above, except that
 it parses the property and uses `SortOrder#getSortOrder(String string)` to retrieve the `SortOrder` value, the sequence
-diagram below will only show the execution of the `SortCommand#execute()` method to illustrate how the sort feature 
+diagram below will only show the execution of the `SortCommand#execute()` method to illustrate how the sort feature
 works.
 
 <puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
