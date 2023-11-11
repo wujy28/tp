@@ -12,6 +12,7 @@ pageNav: 3
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Overview**
+
 Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and connecting patients with
 relevant departments. It leverages on ED doctors fast typing skill by using the Command Line Interface (CLI).
 
@@ -23,9 +24,11 @@ implementation philosophy of the software design and features.
 
 ## **Acknowledgements**
 
-- Advanced&Efficient is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project by SE-EDU initiative.
+- Advanced&Efficient is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project by SE-EDU
+  initiative.
 
-- Libraries used [JavaFx](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson), [PlantUML](https://plantuml.com/)
+- Libraries
+  used [JavaFx](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson), [PlantUML](https://plantuml.com/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,7 +97,8 @@ in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `RecordPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
+e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `RecordPanel`, `StatusBarFooter` etc. All these, including
+the `MainWindow`,
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
 
@@ -212,7 +216,6 @@ This section describes some noteworthy details on how certain features are imple
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ### Add patient feature
 
 #### Implementation
@@ -226,7 +229,7 @@ Given below is an example usage scenario and how the add patient operation is ha
 Step 1. Assuming the application has been launched, the user enters the required fields followed by any optional fields.
 
 For adding **only** required fields, the user enters `add n/John Tan i/t7654321j`, which is to add
-a patient with `Name = John Tan` and `IcNumber = t1234567j`,
+a patient with `NAME = John Tan` and `IC_NUMBER = t1234567j`,
 
 For adding **additional** optional fields, the user enters `add n/John Tan i/t7654321j p/90909090`, which is to add the
 optional field `Phone = 90909090`.
@@ -238,16 +241,20 @@ optional field `Phone = 90909090`.
 </box>
 
 Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
-command word `add` and the argument `n/John Tan i/t7654321j`. After splitting, `AddressBookParser#parseCommand` would identify
+command word `add` and the argument `n/John Tan i/t7654321j`. After splitting, `AddressBookParser#parseCommand` would
+identify
 that the command is `Add` and instantiate `AddCommandParser` and call its `AddCommandParser#parse` to parse the
 argument accordingly.
 
-Step 3. `AddCommandParser#parse` will call `AddCommandParser#createPatient` method to create the patient with the relevant fields and fills all optional fields
-with default values otherwise. It is then passed as an argument to instantiate the `AddCommand`, which is then returned by
+Step 3. `AddCommandParser#parse` will call `AddCommandParser#createPatient` method to create the patient with the
+relevant fields and fills all optional fields
+with default values otherwise. It is then passed as an argument to instantiate the `AddCommand`, which is then returned
+by
 `AddCommandParser#parse`
 
 Step 4. `LogicManager#execute` now invokes `AddCommand#execute` which checks for duplicate `Patient`. `model#addPatient`
-is then called to add the `Patient` into the address book. It then returns a `CommandResult` stating the patient has been listed.
+is then called to add the `Patient` into the address book. It then returns a `CommandResult` stating the patient has
+been listed.
 
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
 
@@ -256,18 +263,17 @@ is then called to add the `Patient` into the address book. It then returns a `Co
 **Aspect: How to handle required / optional inputs from users:**
 
 * **Alternative 1 (current choice):** Create `Patient` with the required fields and fill non-given
-optional inputs with default values.
+  optional inputs with default values.
     * Pros: Easy to implement.
     * Cons: Since default values have to be valid as well, default values may seem too similar to actual value.
-  Eg. Default value for `Gender` is `OTHER`, which is an actual value as well.
+      Eg. Default value for `Gender` is `OTHER`, which is an actual value as well.
 
 
 * **Alternative 2:** Use Java `Optional` class to handle fields.
     * Pros: Implementation is neater and fields with no values can be represented by a warning message instead
-  of a default value.
+      of a default value.
     * Cons: Implementation is difficult and `Optional` class have to be implemented correctly to ensure it works
-  with other components of the codebase.
-
+      with other components of the codebase.
 
 ### View patient feature
 
@@ -280,7 +286,7 @@ and creates the `ViewCommand` to be executed by the `LogicManager`. `ViewCommand
 Given below is an example usage scenario and how the view patient operation is handled in A&E.
 
 Step 1. Assuming the application has been launched, the user enters `view i/t1234567j`, which is to find
-the specific patient with `IcNumber = t1234567j`. This invokes `LogicManager#execute` to execute the logic of the
+the specific patient with `IC_NUMBER = t1234567j`. This invokes `LogicManager#execute` to execute the logic of the
 command.
 
 Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
@@ -288,8 +294,8 @@ command word `view` and the argument `i/t1234567j`. After splitting, `AddressBoo
 that the command is `View` and instantiate `ViewCommandParser` and call its `ViewCommandParser#parse` to parse the
 argument accordingly.
 
-Step 3. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IcNumber` is created. It is
-then passed as an argument along with `IcNumber` to instantiate the `ViewCommand`, which is then returned by
+Step 3. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IC_NUMBER` is created. It is
+then passed as an argument along with `IC_NUMBER` to instantiate the `ViewCommand`, which is then returned by
 `ViewCommandParser#parse`
 
 Step 5. `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
@@ -319,13 +325,15 @@ It then returns a `CommandResult` stating the patient has been listed.
 #### Implementation
 
 The edit record operation is facilitated by `RecordCommandParser`. `RecordCommandParser` parses the user input string
-and creates the `RecordCommand` to be executed by the `LogicManager`. `RecordCommand` extends `Command` and implements the
+and creates the `RecordCommand` to be executed by the `LogicManager`. `RecordCommand` extends `Command` and implements
+the
 `Command#execute` method.
 
 Given below is an example usage scenario and how the edit record operation is handled in A&E.
 
-Step 1. Assuming the application has been launched, the user enters `record i/T0201234A o/Broken Arm di/Hairline fracture
-tp/Cast for 2 days`, which is to edit the record of the specific patient with `IcNumber = T0201234A` such that `Initial
+Step 1. Assuming the application has been launched, the user
+enters `record i/T0201234A o/Broken Arm di/Hairline fracture
+tp/Cast for 2 days`, which is to edit the record of the specific patient with `IC_NUMBER = T0201234A` such that `Initial
 Observation = Broken Arm`, `Diagnosis = Hairline fracture`, and `Treatment Plan = Cast for 2 days`. This invokes
 `LogicManager#execute` to execute the logic of the command.
 
@@ -334,21 +342,27 @@ Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseComman
 splitting, `AddressBookParser#parseCommand` would identify that the command is `Record` and instantiate
 `RecordCommandParser` and call its `RecordCommandParser#parse` to parse the arguments accordingly.
 
-Step 3. `RecordCommandParser#parse` would first map the `IcNumber` prefix to its argument, `T0201234A`, the
+Step 3. `RecordCommandParser#parse` would first map the `IC_NUMBER` prefix to its argument, `T0201234A`, the
 `initialObservations` prefix to its argument `Broken Arm`, the `diagnosis` prefix to its argument `Hairline fracture`,
 and the `treatmentPlan` prefix to its argument `Cast for 2 days` using `ArgumentMultimap`.
-The `ArgumentMultimap` would then be used to identify the `IcNumber` and a `ParseException` is thrown if command inputs
-are invalid. The `ArgumentMultimap` also invokes `ArgumentMultimap#isPresent` to check if the other prefixes for `Initial
+The `ArgumentMultimap` would then be used to identify the `IC_NUMBER` and a `ParseException` is thrown if command inputs
+are invalid. The `ArgumentMultimap` also invokes `ArgumentMultimap#isPresent` to check if the other prefixes
+for `Initial
 Observation`, `Diagnosis` and `Treatment Plan` are present. If `true` is returned, the arguments will be parsed into a
 `EditRecordDescriptor` object.
 
-Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the fields
-of Record has been edited, and throws a `ParseException` if returned `false`. It is then passed as an argument along with
-`IcNumber` to instantiate the `RecordCommand`, which is then returned by `RecordCommandParser#parse`
+Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the
+fields
+of Record has been edited, and throws a `ParseException` if returned `false`. It is then passed as an argument along
+with
+`IC_NUMBER` to instantiate the `RecordCommand`, which is then returned by `RecordCommandParser#parse`
 
-Step 5. `LogicManager#execute` now invokes `RecordCommand#execute` which gets the specified Patient according to the IcNumber.
-Then, `RecordCommand#createEditedRecord` is called with the specified Patient's `Record` and the `EditRecordDescriptor` object
-which contains the fields to be edited. It then returns a `RecordResult` stating the patient IcNumber and edited Record.
+Step 5. `LogicManager#execute` now invokes `RecordCommand#execute` which gets the specified Patient according to the
+IC_NUMBER.
+Then, `RecordCommand#createEditedRecord` is called with the specified Patient's `Record` and the `EditRecordDescriptor`
+object
+which contains the fields to be edited. It then returns a `RecordResult` stating the patient IC_NUMBER and edited
+Record.
 `PatientWithFieldNotFoundException` is thrown if no patient found.
 
 ### Assign department feature
@@ -365,14 +379,14 @@ to the user. The list of valid departments can be found in the appendix of the U
 
 * **Alternative 1 (current choice):** Use Java Enumerations.
     * Pros: Ensures type safety. Discrete constants allow for usage in switch-cases, and thus can potentially be used
-  to easily categorize patients in future features.
+      to easily categorize patients in future features.
     * Cons: Does not support user-defined categories or departments.
 
 * **Alternative 2:** Using an abstract Department class and inheritance.
     * Pros: Can be made to support user-defined departments. Can specify different behavior for different
-  types of departments.
+      types of departments.
     * Cons: Implementation is more complicated when it comes to storing and keeping track of all the different
-  subclasses or limiting valid department values.
+      subclasses or limiting valid department values.
 
 * **Alternative 3:** Using Strings.
     * Pros: Very easy to implement.
@@ -383,7 +397,7 @@ to the user. The list of valid departments can be found in the appendix of the U
 The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar
 to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform
 its intended behavior, invoked by the `LogicManager` class. `AssignCommandParser` is responsible for parsing the
-string of arguments containing an IC number and department inputted by the user, to create an `AssignCommand` object.
+string of arguments containing an IC_NUMBER and department inputted by the user, to create an `AssignCommand` object.
 
 The following sequence diagram summarizes what happens when `AssignCommand#execute` is invoked.
 
@@ -549,8 +563,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | ED Doctor | View the list of patients                                                                          | -                                                                                                                                                     |
 | `* *`    | ED Doctor | Undo my latest action                                                                              | Quickly revert a mistake I made                                                                                                                       |
 | `* *`    | ED Doctor | Tag patients                                                                                       | Better organize patients into categories so as to better keep track of them                                                                           |
-| `* *`    | ED Doctor | Assign the priority to the patient with respect to the severity of the case                        | So that I can keep track of the more critical cases                                                                                                   |
-| `* *`    | ED Doctor | Find patients from the list that match a given property (e.g. name, IC number, priority)           | Quickly narrow down the list to view the patients of my interest                                                                                      |
+| `* *`    | ED Doctor | Assign the priority to the patient with respect to the severity of the case                        | keep track of the more critical cases                                                                                                                 |
+| `* *`    | ED Doctor | Find patients from the list that match a given property (e.g. `NAME`, `IC_NUMBER`, `PRIORITY`)     | Quickly narrow down the list to view the patients of my interest                                                                                      |
 | `*`      | ED Doctor | Quickly view the availability status of a doctor                                                   | Assign them patients                                                                                                                                  |
 | `*`      | ED Doctor | Message and communicate with other healthcare staff                                                | Coordinate patient care effectively                                                                                                                   |
 | `*`      | ED Doctor | Sort my list of active patients by priority/severity                                               | Provide timely treatment to the patients in critical condition                                                                                        |
@@ -563,8 +577,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | ED Doctor | View real-time vitals of patients                                                                  | Monitor patient’s condition efficiently                                                                                                               |
 | `*`      | ED Doctor | Receive notifications for critical situations                                                      | Provide timely intervention and efficiently handle critical patient conditions                                                                        |
 | `*`      | ED Doctor | Save a draft of a message I am writing into the local repository                                   | Return to work on it after an emergency call                                                                                                          |
-| `*`      | ED Doctor | Filter a list of doctors according to their department                                             | I can easily identify doctors to assign to from a specific department                                                                                 |
-| `*`      | ED Doctor | View the list of doctors                                                                           | I know who I can refer my patients for further treatment to                                                                                           |
+| `*`      | ED Doctor | Filter a list of doctors according to their department                                             | easily identify doctors to assign to from a specific department                                                                                       |
+| `*`      | ED Doctor | View the list of doctors                                                                           | know who I can refer my patients for further treatment to                                                                                             |
 | `*`      | ED Doctor | View a list of commands                                                                            | Know the commands needed to carry out my action                                                                                                       |
 
 ### Use cases
@@ -572,144 +586,257 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `Advanced&Efficient`application and the **Actor** is the `ED doctor`,
 unless specified otherwise)
 
-**Use case: UC01 - Add a patient**
+\
+**Use case: UC01 - View list of patients**
 
 **MSS**
 
-1. ED doctor requests to add a new patient with given details.
-2. Advanced&Efficient adds the patient to the patient list.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Advanced&Efficient detects that the given details are invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given details are invalid.
-    * 1a2. Advanced&Efficient requests for correct details.
-    * 1a3. ED doctor enters the requested details.
-
-      Steps 1a1-1a3 are repeated until the details are valid.
-
-      Use case resumes from step 2.
-
-
-* 1b. Advanced&Efficient detects that not all required details are given.
-    * 1b1. Advanced&Efficient shows an error message saying that not all required details are given.
-    * 1b2. Advanced&Efficient requests for all the required details.
-    * 1b3. ED doctor enters the required details.
-
-      Steps 1b1-1b3 are repeated until all the required details are given.
-
-      Use case resumes from step 2.
-
-
-* 1c. Advanced&Efficient detects that the given patient is already on the patient list.
-    * 1c1. Advanced&Efficient shows an error message saying patient is already added.
-
-      Use case ends.
-
-**Use case: UC02 - Delete a patient**
-
-**MSS**
-
-1. ED doctor requests to delete a patient of the given IC number.
-2. Advanced&Efficient deletes the patient from the list.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Advanced&Efficient detects that the given IC number is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given IC number is invalid.
-    * 1a2. Advanced&Efficient requests for correct IC number.
-    * 1a3. ED doctor enters the IC number.
-
-      Steps 1a1-1a3 are repeated until the IC number is valid.
-
-      Use case resumes from step 2.
-
-
-* 1b. Advanced&Efficient detects that the specified patient does not exist.
-    * 1b1. Advanced&Efficient shows message saying patient does not exist.
-
-      Use case ends.
-
-**Use case: UC03 - View the list of patients**
-
-**MSS**
-
-1. ED doctor requests to view the list of all patients.
+1. ED doctor requests to view list of all patients.
 2. Advanced&Efficient shows a list of all patients.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the list is empty.
-    * 1a1. Advanced&Efficient shows a message saying that the list is empty.
+* 1a. Advanced&Efficient detects that list is empty.
+    * 1a1. Advanced&Efficient shows message saying list is empty.
 
-      Use case ends.
+      Use case resumes from step 2.
 
-**Use case: UC04 - View a patient record**
+\
+**Use case: UC02 - Add a patient**
+
+**Guarantees**
+
+- Patient added will not have same `NAME` or `IC_NUMBER` as any existing patients.
 
 **MSS**
 
-1. ED doctor requests to view a patient’s record.
-2. Advanced&Efficient shows the patient’s record.
+1. ED doctor requests to add a new patient with given details.
+2. Advanced&Efficient adds the patient to the system.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the specified patient does not exist.
-    * 1a1. Advanced&Efficient shows message saying the patient does not exist.
+* 1a. Advanced&Efficient detects that not all required details are given.
+    * 1a1. Advanced&Efficient shows an error message saying that not all required details are given.
+    * 1a2. Advanced&Efficient requests for all the required details.
+    * 1a3. ED doctor enters the required details.
 
-      Use case ends.
+      Steps 1a1-1a3 are repeated until all the required details are given.
 
-**Use case: UC05 - Edit a patient record**
-
-**MSS**
-
-1. ED doctor requests to edit a patient’s record.
-2. Advanced&Efficient edits the patient’s record as the ED doctor specifies.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Advanced&Efficient detects that the specified patient does not exist.
-    * 1a1. Advanced&Efficient shows message saying the patient does not exist.
-      Use case ends.
-
+      Use case resumes from step 2.
 
 * 1b. Advanced&Efficient detects that the given details are invalid.
     * 1b1. Advanced&Efficient shows an error message saying the given details are invalid.
-    * 1b2. Advanced&Efficient requests for the correct details.
+    * 1b2. Advanced&Efficient requests for valid details.
     * 1b3. ED doctor enters the requested details.
 
       Steps 1b1-1b3 are repeated until the details are valid.
 
       Use case resumes from step 2.
 
-**Use case: UC06 - Assign a patient to a department**
+* 1c. Advanced&Efficient detects that the given patient is already in the system.
+    * 1c1. Advanced&Efficient shows an error message saying patient already exist.
+
+      Use case ends.
+
+\
+**Use case: UC03 - View a patient's details**
 
 **MSS**
 
-1. ED doctor requests to assign a patient to a department.
-2. Advanced&Efficient assigns the patient to the department based on the input.
+1. ED doctor requests to view a patient’s details by `IC_NUMBER`.
+2. Advanced&Efficient shows the patient’s details.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the given department is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given department is invalid.
-    * 1a2. Advanced&Efficient requests for the correct department.
-    * 1a3. ED doctor enters the department.
+* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
+    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
+    * 1a3. ED doctor enters the `IC_NUMBER`.
 
-      Steps 1a1-1a3 are repeated until the department is valid.
+      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
 
       Use case resumes from step 2.
+
+* 1b. Advanced&Efficient detects that the specified patient does not exist.
+    * 1b1. Advanced&Efficient shows message saying the patient does not exist.
+
+      Use case ends.
+
+\
+**Use case: UC04 - Edit a patient's details**
+
+**MSS**
+
+1. ED doctor requests to edit a patient’s details by `IC_NUMBER`.
+2. Advanced&Efficient edits the patient’s details as ED doctor specifies.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
+    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
+    * 1a3. ED doctor enters the `IC_NUMBER`.
+
+      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+
+      Use case resumes from step 2.
+
+* 1b. Advanced&Efficient detects that the specified patient does not exist.
+    * 1b1. Advanced&Efficient shows message saying the patient does not exist.
+
+      Use case ends.
+
+* 1c. Advanced&Efficient detects that the given details are invalid.
+    * 1c1. Advanced&Efficient shows an error message saying the given details are invalid.
+    * 1c2. Advanced&Efficient requests for valid details.
+    * 1c3. ED doctor enters the requested details.
+
+      Steps 1c1-1c3 are repeated until the details are valid.
+
+      Use case resumes from step 2.
+
+\
+**Use case: UC05 - Delete a patient**
+
+**MSS**
+
+1. ED doctor requests to delete a patient by `IC_NUMBER`.
+2. Advanced&Efficient deletes the patient from the system.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
+    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
+    * 1a3. ED doctor enters the `IC_NUMBER`.
+
+      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+
+      Use case resumes from step 2.
+
+* 1b. Advanced&Efficient detects that the specified patient does not exist.
+    * 1b1. Advanced&Efficient shows message saying the patient does not exist.
+
+      Use case ends.
+
+\
+**Use case: UC06 - Find patient(s) by `NAME`**
+
+**MSS**
+
+1. ED doctor requests to find patient(s) by `NAME`.
+2. Advanced&Efficient shows the list of filtered patient(s).
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects no patient(s) with that `NAME`.
+    * 1a1. Advanced&Efficient shows an error message saying no patient(s) with that `NAME` exist.
+
+      Use case ends.
+
+\
+**Use case: UC07 - Sort a patient list**
+
+**MSS**
+
+1. ED doctor requests to sort a patient list by a property.
+2. Advanced&Efficient shows the list of sorted patients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the given property is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given property is invalid.
+    * 1a2. Advanced&Efficient requests for valid property.
+    * 1a3. ED doctor enters the property.
+
+      Steps 1a1-1a3 are repeated until the property is valid.
+
+      Use case resumes from step 2.
+
+\
+**Use case: UC08 - Edit a patient's record**
+
+**MSS**
+
+1. ED doctor requests to edit a patient’s `Record` by `IC_NUMBER`.
+2. Advanced&Efficient edits the patient’s `Record` as ED doctor specifies.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
+    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
+    * 1a3. ED doctor enters the `IC_NUMBER`.
+
+      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+
+      Use case resumes from step 2.
+
+* 1b. Advanced&Efficient detects that the specified patient does not exist.
+    * 1b1. Advanced&Efficient shows message saying the patient does not exist.
+
+      Use case ends.
+
+* 1c. Advanced&Efficient detects that the given `Record` details are invalid.
+    * 1c1. Advanced&Efficient shows an error message saying the given `Record` details are invalid.
+    * 1c2. Advanced&Efficient requests for valid `Record` details.
+    * 1c3. ED doctor enters the `Record` details.
+
+      Steps 1c1-1c3 are repeated until the `Record` details are valid.
+
+      Use case resumes from step 2.
+
+\
+**Use case: UC09 - Assign a patient to `Department`**
+
+**MSS**
+
+1. ED doctor requests to assign a patient to a `Department` by `IC_NUMBER`.
+2. Advanced&Efficient assigns the patient to the `Department`.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
+    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
+    * 1a3. ED doctor enters the `IC_NUMBER`.
+
+      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+
+      Use case resumes from step 2.
+
+* 1b. Advanced&Efficient detects that the specified patient does not exist.
+    * 1b1. Advanced&Efficient shows message saying the patient does not exist.
+
+      Use case ends.
+
+* 1c. Advanced&Efficient detects that the given `Department` is invalid.
+    * 1c1. Advanced&Efficient shows an error message saying the given `Department` is invalid.
+    * 1c2. Advanced&Efficient requests for valid `Department`.
+    * 1c3. ED doctor enters the `Department`.
+
+      Steps 1c1-1c3 are repeated until the `Department` is valid.
+
+      Use case resumes from step 2.
+*
 
 ### Non-Functional Requirements
 
@@ -719,8 +846,6 @@ unless specified otherwise)
    faster using commands than using the mouse.
 4. Should not lose any data if the application is closed by any other means besides the `Exit` command.
 5. The response to any user action should be visible within 2 seconds.
-
-
 
 ### Glossary
 
@@ -808,14 +933,16 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ### Class `Birthday` and Testing
+
 1. Patient requires to have a birthday as a compulsory characteristic to be considered
-**Format:** A `Birthday` object can be initialized as follows:
+   **Format:** A `Birthday` object can be initialized as follows:
 
 {
 
     Birthday birthday = new Birthday("01/01/1991")
 
 }
+
 ### Explanation:
 
 **string input** : User Input must be in the dd/MM/yyyy format to be parsed
@@ -939,8 +1066,11 @@ based on Birthday without requiring manual interferance as a potential extension
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 2. Saving Assigned Department to Storage
+
 ### Explanation:
-**Storage**: Storage classes are to save the details of the patients upon exiting the app. While the basic attributes of the patients like IC Number,
+
+**Storage**: Storage classes are to save the details of the patients upon exiting the app. While the basic attributes of
+the patients like IC_NUMBER,
 Gender and all were being saved, complicated attributes like Assigned Department were not.
 
 **Assigned Department**: The patient will be assigned to a department when being admitted.
@@ -950,48 +1080,54 @@ to ensure the department assigned is saved as well.
 
 1. _{ more test cases …​ }_
 
-
 ### Class `Record` JSON Storage Format
 
 **Format:** A `Record` object is represented in JSON as follows:
 
 ```json
 {
-    "patient": {
-        "name": "John Doe",
-        "phone": "98765432",
-        "email": "johnd@example.com",
-        "gender": "MALE",
-        "icNumber": "S2840182A",
-        "birthday": "02/01/1998",
-        "address": "311, Clementi Ave 2, #02-25",
-        "tags": ["friend", "owesMoney"]
-    },
-    "initialObservations": "Patient complains of a persistent cough for 2 weeks.",
-    "diagnosis": "Common cold, aggravated due to not taking enough rest.",
-    "treatmentPlan": "Rest, Hydration, and prescribed cough syrup."
+  "patient": {
+    "name": "John Doe",
+    "phone": "98765432",
+    "email": "johnd@example.com",
+    "gender": "MALE",
+    "icNumber": "S2840182A",
+    "birthday": "02/01/1998",
+    "address": "311, Clementi Ave 2, #02-25",
+    "tags": [
+      "friend",
+      "owesMoney"
+    ]
+  },
+  "initialObservations": "Patient complains of a persistent cough for 2 weeks.",
+  "diagnosis": "Common cold, aggravated due to not taking enough rest.",
+  "treatmentPlan": "Rest, Hydration, and prescribed cough syrup."
 }
 ```
 
 #### Explanation:
 
-- **patient**: This field contains the details of the patient associated with the record. The format for a patient is as described in the earlier sections of this guide.
-- **initialObservations**: A string that stores the initial observations made by the medical professional when the patient was examined.
+- **patient**: This field contains the details of the patient associated with the record. The format for a patient is as
+  described in the earlier sections of this guide.
+- **initialObservations**: A string that stores the initial observations made by the medical professional when the
+  patient was examined.
 - **diagnosis**: A string that details the medical diagnosis after thorough examination.
 - **treatmentPlan**: The recommended treatment plan for the diagnosed ailment.
 
-It's worth noting that the default values for `initialObservations`, `diagnosis`, and `treatmentPlan` are set to represent that no data was provided. This allows for the record to be initialized even if not all fields are populated initially.
+It's worth noting that the default values for `initialObservations`, `diagnosis`, and `treatmentPlan` are set to
+represent that no data was provided. This allows for the record to be initialized even if not all fields are populated
+initially.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
+
 1. Currently, when `View` command is executed, it only shows that `Patient` in the display panel instead of their
-details in the information tab. Users would have to click that `Patient` again to display its details. 
-Since `Ic Number` is unique for every `Patient`, we plan to show the `Patient` detail
-directly in the information tab.
+   details in the information tab. Users would have to click that `Patient` again to display its details.
+   Since `IC_NUMBER` is unique for every `Patient`, we plan to show the `Patient` detail
+   directly in the information tab.
 
-
-2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project 
-by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan
-to completely refactor all instances of `AddressBook` into `PatientRecordSystem`. For example,
-`AddressBookParser.java` would be renamed to `PatientRecordSystemParser.java`.
+2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project
+   by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan
+   to completely refactor all instances of `AddressBook` into `PatientRecordSystem`. For example,
+   `AddressBookParser.java` would be renamed to `PatientRecordSystemParser.java`.
