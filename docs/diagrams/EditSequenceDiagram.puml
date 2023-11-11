@@ -39,7 +39,7 @@ EditCommand --> EditCommandParser : e
 deactivate EditCommand
 
 EditCommandParser --> AddressBookParser : e
-deactivate DeleteCommandParser
+deactivate EditCommandParser
 'Hidden arrow to position the destroy-marker below the end of the activation bar.
 EditCommandParser -[hidden]-> AddressBookParser
 destroy EditCommandParser
