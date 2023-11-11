@@ -885,8 +885,8 @@ Testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+    2. Double-click the jar file.<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -984,7 +984,7 @@ Testers are expected to do more *exploratory* testing.
 
 1. Editing a patient's record
 
-   1. Prerequisite: Have our sample patient list loaded OR add a patient with IC number t7654321a. 
+   1. Prerequisite: Have our sample patient list loaded OR add a patient with IC number t7654321a.
    2. Test case: `record i/T7654321A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`<br>
       Expected: Record of the patient with IC number `T7654321A` is edited to have `Broken Arm` as initial observation
       , `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan. Details of the edited record is shown
@@ -996,7 +996,7 @@ Testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `record`, `record i/T7654321A o/Broken Pinky o/Dizziness`,
       `record i/T2736487A di/Asthma` (where patient with IC number `T2736487A` does not exist)<br>
-      Expected: Similar to previous.  
+      Expected: Similar to previous.
 
 ### Assigning a patient to a department
 
@@ -1041,7 +1041,7 @@ Testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different
       assigned departments among all patients in the list.
-   
+
    2. Test case: `sort department`<br>
       Expected: Patient list is sorted according to `assigned department`, where patients with default departments are
       placed at the bottom. Details of success of command is shown in the system message. Order of patients in list is
