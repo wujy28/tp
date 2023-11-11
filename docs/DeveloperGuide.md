@@ -424,7 +424,7 @@ argument string containing a property inputted by the user, to create a `SortCom
 
 Currently, the sort operation sorts the entire patient list, even if the command is executed when the displayed list
 is filtered (e.g. using the `find` command). This choice will be further elaborated on in the "Design
-considerations" section below. 
+considerations" section below.
 
 #### Design considerations:
 

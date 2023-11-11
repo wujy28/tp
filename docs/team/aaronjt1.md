@@ -57,7 +57,7 @@ Here are my contributions to the project.
 
 ### Enhanced `ModelManager` [#128](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/128)
 
-1. `isPatientWithIcNumberPresent` method to check if a patient with the `Ic Number` is present 
+1. `isPatientWithIcNumberPresent` method to check if a patient with the `Ic Number` is present
     - Useful for commands which uses `Ic Number` to find a patient like Find, View, etc.
 2. `getCurrentPatientList` method to get current patients in the patient record rather than filtered list
     - Useful for commands which aims to perform commands on patients outside of the displayed list.
