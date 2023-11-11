@@ -35,6 +35,7 @@ public class RecordCommandParser implements Parser<RecordCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(RELEVANT_PREFIXES);
 
         RecordCommand.EditRecordDescriptor editRecordDescriptor = new RecordCommand.EditRecordDescriptor();
+
         if (argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).isPresent()) {
             editRecordDescriptor.setInitialObservations(
                 ParserUtil.parseInitialObservations(argMultimap.getValue(PREFIX_INITIAL_OBSERVATION).get()));
