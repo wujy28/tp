@@ -92,11 +92,13 @@ public class AddressBookParser {
 
         case RecordCommand.COMMAND_WORD:
             return new RecordCommandParser().parse(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 

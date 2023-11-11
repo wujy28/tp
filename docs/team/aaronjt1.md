@@ -19,15 +19,12 @@ Here are my contributions to the project.
 ## Features implemented
 
 ### View Feature [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
-#### What it does
-Allows users to view the information of a specific patient with `Ic Number`
+**What it does** - Allows users to view the information of a specific patient with `Ic Number`
 
-#### Justification
-Currently there is a find command which allows users to find patients by keywords in names. However if a user wants to search for a specific patient with Ic Number, there is no option for that. Since find returns a list of patients with names matching the keyword, the user would have to manually go through the list to find that specific patient.
+**Justification** - Currently there is a find command which allows users to find patients by keywords in names. However if a user wants to search for a specific patient with Ic Number, there is no option for that. Since find returns a list of patients with names matching the keyword, the user would have to manually go through the list to find that specific patient.
 
 
-#### Highlights 
-Since Add command is enhanced to prevent patients with duplicate `Ic Number` from being added, users can be assured that the displayed user is the one they desired.
+**Highlights** - Since Add command is enhanced to prevent patients with duplicate `Ic Number` from being added, users can be assured that the displayed user is the one they desired.
 
 
 ----------------------------------------------------------------------
@@ -72,12 +69,8 @@ Since Add command is enhanced to prevent patients with duplicate `Ic Number` fro
 
 1. Account for new Patient attributes [#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102), [#116](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/116)
    - Refactored testing facilities which utilized patients like `CommandTestUtil`, `TypicalPatients` and `PatientBuilder`
-2. Improved AddCommandParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78)
-   - Significantly improved test cases for `AddCommand` and `AddCommandParser`
-3. Improved EditCommandParser [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
-   - Significantly improved test cases for `EditCommand` and `EditCommandParser`
-5. Added testing for AssignCommand feature [#163](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/163)
-   - Helped create test cases for `AssignCommand` and `AssignCommandParser`
+2. Significantly improved coverage for AddCommandParser & EditCommandParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78), [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
+3. Added testing for AssignCommand feature [#163](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/163)
 ----------------------------------------------------------------------
 
 ## Contributions to team-based task:
@@ -91,15 +84,11 @@ Since Add command is enhanced to prevent patients with duplicate `Ic Number` fro
 * Refactor Person instances to Patient in codebase [#68](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/68)
 
 ## Review / mentoring contributions:
-
-* Reviewed pull requests by other group members and
-  provided insightful comments
+* Reviewed pull requests by other group members and provided insightful comments
     * Some non-trivial PRs i have
       reviewed [#77](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/77)
       [#89](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/89) [#96](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/96) [#107](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/107) [#120](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/120) [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145) [#155](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/155) [#167](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/167)
-    * Reviewed, approved and merged a total of 31 PRs out of ..
-
-
+    * Reviewed, approved and merged a total of 33 PRs out of ..
 * Provided guidelines to aid group members in implementation
     * Example : Aided group member in testing of Edit command [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145)
 
