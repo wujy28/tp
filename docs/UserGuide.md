@@ -24,7 +24,7 @@ Here’s a sneak peek into what A&E offers:
 - Easy-to-follow command summaries and guides for efficient navigation
 
 A&E combines the simplicity of a CLI with the visual cues of a Graphical User Interface (GUI), offering you the best of
-both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is
+both worlds. If you're comfortable typing and looking for speed and efficiency in patient management, A&E is
 tailored just for you.
 
 This User Guide is designed to help you, whether you're a newcomer or an experienced user, to harness the full potential
