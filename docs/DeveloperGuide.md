@@ -395,13 +395,64 @@ to the user. The list of valid departments can be found in the appendix of the U
 #### Implementation of `assign`
 
 The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar
-to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform
+to other commands mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform
 its intended behavior, invoked by the `LogicManager` class. `AssignCommandParser` is responsible for parsing the
-string of arguments containing an IC_NUMBER and department inputted by the user, to create an `AssignCommand` object.
+string of arguments containing an `IC_NUMBER` and `Department` inputted by the user, to create an `AssignCommand` object.
 
-The following sequence diagram summarizes what happens when `AssignCommand#execute` is invoked.
+The following sequence diagrams summarize what happens when `AssignCommand#execute` is invoked.
 
 <puml src="diagrams/AssignSequenceDiagram.puml" alt="AssignSequenceDiagram" />
+
+<puml src="diagrams/AssignSequenceDiagramParserUtil.puml" alt="AssignSequenceDiagramParserUtil" />
+
+### Sort feature
+The sort operation is facilitated by the `SortCommand` and `SortCommandParser` classes, similar
+to other commands mentioned above. `SortCommand` extends `Command` and overrides `Command#execute` to perform
+its intended behavior, invoked by the `LogicManager` class. `SortCommandParser` is responsible for parsing the
+argument string containing a property inputted by the user, to create a `SortCommand` object.
+
+Currently, the sort operation sorts the entire patient list, even if the command is executed when the displayed list
+is filtered (e.g. using the `find` command). This choice will be further elaborated on in the "Design 
+considerations" section below. 
+
+#### Design considerations:
+
+**Aspect: Behavior of sort operation:**
+
+* **Alternative 1 (current choice):** Sort the entire patient list.
+    * Pros: Easy and quick to implement as it only involves calling Java's `sort` method on the underlying
+  `UniquePatientList` stored in `AddressBook`.
+    * Cons: Behavior might be unintuitive as when the user runs this command, they might expect this command to only
+  affect the currently displayed list, which might be filtered.
+
+* **Alternative 2:** Only sort the currently displayed, or filtered, list.
+    * Pros: Allows the user to only alter the visible list, and keep the underlying patient list untouched. 
+  Behavior is possibly more intuitive.
+    * Cons: Implementation is more complicated as the `FilteredList` that stores the currently displayed list and is
+  referenced by the UI to display its contents cannot be modified.
+
+#### Sort order
+`SortOrder` is an enumeration within `SortCommand` representing the properties by which the user can sort the list. 
+As of now, the only `SortOrder`s available are the following:
+1. Name (lexicographically ascending, case-insensitive)
+2. IC Number (lexicographically ascending, case-insensitive)
+3. Department (by ordinal of constant in `Department` enumeration)
+4. Age (numerically ascending, with default age on top)
+5. Priority (descending)
+
+Each `SortOrder` constant value stores a `Comparator<? super Patient>` that is used by Java `List`'s build-in `sort`
+method to compare two `Patient` objects during the execution of the `sort` command. These comparators make use of the
+overridden `compareTo` methods in the related patient attribute classes (i.e. `Name`, `IcNumber`, `AssignedDepartment`, 
+`Age` and `Priority`). Each `SortCommand` object stores a `SortOrder` value, extracted from the input string by the 
+`SortCommandParser` object that created it.
+
+#### Sequence diagram of `SortCommand#execute()`
+As the creation of the `SortCommand` object is very similar to that of `AssignCommand` as shown above, except that
+it parses the property and uses `SortOrder#getSortOrder(String string)` to retrieve the `SortOrder` value, the sequence
+diagram below will only show the execution of the `SortCommand#execute()` method to illustrate how the sort feature 
+works.
+
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 
