@@ -33,7 +33,7 @@ public class RecordCommand extends Command {
         COMMAND_WORD + ": Edits the record of the patient identified " + "by their IC Number. "
             + "Existing values will be overwritten by the input values.\n" + "Parameters: i/IC_NUMBER " + "["
             + PREFIX_INITIAL_OBSERVATION + "INITIAL_OBSERVATIONS] " + "[" + PREFIX_DIAGNOSIS + "DIAGNOSIS] " + "["
-            + PREFIX_TREATMENT_PLAN + "TREATMENT_PLAN] " + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER
+            + PREFIX_TREATMENT_PLAN + "TREATMENT_PLAN]\n" + "Example: " + COMMAND_WORD + " " + PREFIX_IC_NUMBER
             + "T0472687A " + PREFIX_INITIAL_OBSERVATION + "Sneezing " + PREFIX_DIAGNOSIS + "Flu "
             + PREFIX_TREATMENT_PLAN + "Take medicine";
 
