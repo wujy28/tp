@@ -117,8 +117,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+**API**: [`Logic.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -159,8 +158,7 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+**API**: [`Model.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -188,8 +186,7 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -529,9 +526,48 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+The Data Archiving feature in Advanced&Efficient is designed to ensure that historical patient records are maintained in a safe, accessible, and organized manner. This feature is crucial for historical reference and data analysis.
+
+#### Implementation Strategy
+1. **Archive Format**: Patient records will be archived in a compressed JSON format to save space and maintain data confidentiality.
+2. **Trigger and Storage**: Archiving will be triggered automatically. The system will automatically update the JSON file (`AandE.json`) when user modify any patient or record.
+
+#### Example of archived file
+
+An archived file (`AandE.json`) is represented in JSON as follows:
+
+```json
+{
+  "patients" : [ {
+    "name" : "John Doe",
+    "phone" : "00000000",
+    "email" : "default_email@gmail.com",
+    "gender" : "MALE",
+    "icNumber" : "T0123456A",
+    "birthday" : "01/01/1990",
+    "address" : "No address was added",
+    "priority" : "NIL",
+    "assignedDepartment" : "Default",
+    "tags" : [ ],
+    "initialObservations" : "No initial observations given",
+    "diagnosis" : "No diagnosis given",
+    "treatmentPlan" : "No treatment plan given"
+  }]
+}
+```
+
+- **patient**: This field contains the details of the patient associated with the record. The format for a patient is as
+  described in the earlier sections of this guide.
+- **initialObservations**: A string that stores the initial observations made by the medical professional when the
+  patient was examined.
+- **diagnosis**: A string that details the medical diagnosis after thorough examination.
+- **treatmentPlan**: The recommended treatment plan for the diagnosed ailment.
+
+It's worth noting that the default values for `initialObservations`, `diagnosis`, and `treatmentPlan` are set to
+represent that no data was provided. This allows for the record to be initialized even if not all fields are populated
+initially.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1154,43 +1190,7 @@ to ensure the department assigned is saved as well.
 
 1. _{ more test cases …​ }_
 
-### Class `Record` JSON Storage Format
 
-**Format:** A `Record` object is represented in JSON as follows:
-
-```json
-{
-  "patient": {
-    "name": "John Doe",
-    "phone": "98765432",
-    "email": "johnd@example.com",
-    "gender": "MALE",
-    "icNumber": "S2840182A",
-    "birthday": "02/01/1998",
-    "address": "311, Clementi Ave 2, #02-25",
-    "tags": [
-      "friend",
-      "owesMoney"
-    ]
-  },
-  "initialObservations": "Patient complains of a persistent cough for 2 weeks.",
-  "diagnosis": "Common cold, aggravated due to not taking enough rest.",
-  "treatmentPlan": "Rest, Hydration, and prescribed cough syrup."
-}
-```
-
-#### Explanation:
-
-- **patient**: This field contains the details of the patient associated with the record. The format for a patient is as
-  described in the earlier sections of this guide.
-- **initialObservations**: A string that stores the initial observations made by the medical professional when the
-  patient was examined.
-- **diagnosis**: A string that details the medical diagnosis after thorough examination.
-- **treatmentPlan**: The recommended treatment plan for the diagnosed ailment.
-
-It's worth noting that the default values for `initialObservations`, `diagnosis`, and `treatmentPlan` are set to
-represent that no data was provided. This allows for the record to be initialized even if not all fields are populated
-initially.
 
 --------------------------------------------------------------------------------------------------------------------
 
