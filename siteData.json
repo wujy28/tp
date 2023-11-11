@@ -67,10 +67,18 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
+        "adding-a-patient": "Adding a patient",
+        "viewing-a-patient": "Viewing a patient",
         "deleting-a-patient": "Deleting a patient",
         "editing-a-patient": "Editing a patient",
         "class-birthday-and-testing": "Class Birthday and Testing",
         "explanation": "Explanation:",
+        "editing-a-patient-record": "Editing a patient record",
+        "sorting-patients": "Sorting patients",
+        "finding-a-patient-by-name": "Finding a patient by name",
+        "assigning-a-patient-to-a-department": "Assigning a patient to a department",
+        "undoing-a-command": "Undoing a command",
+        "redoing-a-command": "Redoing a command",
         "saving-data": "Saving data",
         "explanation-2": "Explanation:",
         "class-record-json-storage-format": "Class Record JSON Storage Format",
@@ -210,7 +218,12 @@
       "src": "team/wujy28.md",
       "headings": {
         "jingya-s-project-portfolio-page": "Jingya's Project Portfolio Page",
-        "project-advanced-and-amp-efficient-a-and-amp-e": "Project: Advanced&amp;Efficient (A&amp;E)"
+        "project-advanced-and-amp-efficient-a-and-amp-e": "Project: Advanced&amp;Efficient (A&amp;E)",
+        "new-features": "New Features",
+        "enhancements-to-existing-features": "Enhancements To Existing Features",
+        "contributions-to-team-based-tasks": "Contributions to team-based tasks",
+        "review-mentoring-contributions": "Review/mentoring contributions",
+        "contributions-to-documentation": "Contributions to documentation"
       },
       "headingKeywords": {}
     },
