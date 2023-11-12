@@ -97,7 +97,7 @@ in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `RecordPanel`, `StatusBarFooter` etc. All these, including
+e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`, `RecordPanel`, `StatusBarFooter` etc. All these, including
 the `MainWindow`,
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
@@ -113,7 +113,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` or `Record` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Patient` or `Record` object residing in the `Model`.
 
 ### Logic component
 
@@ -165,9 +165,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+* stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
+* stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
@@ -177,8 +177,8 @@ The `Model` component,
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`,
-which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
-each `Person` needing their own `Tag` objects.<br>
+which `Patient` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
+each `Patient` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -406,13 +406,64 @@ to the user. The list of valid departments can be found in the appendix of the U
 #### Implementation of `assign`
 
 The assign department operation is facilitated by the `AssignCommand` and `AssignCommandParser` classes, similar
-to `ViewCommand` as mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform
+to other commands mentioned above. `AssignCommand` extends `Command` and overrides `Command#execute` to perform
 its intended behavior, invoked by the `LogicManager` class. `AssignCommandParser` is responsible for parsing the
-string of arguments containing an IC_NUMBER and department inputted by the user, to create an `AssignCommand` object.
+string of arguments containing an `IC_NUMBER` and `Department` inputted by the user, to create an `AssignCommand` object.
 
-The following sequence diagram summarizes what happens when `AssignCommand#execute` is invoked.
+The following sequence diagrams summarize what happens when `AssignCommand#execute` is invoked.
 
 <puml src="diagrams/AssignSequenceDiagram.puml" alt="AssignSequenceDiagram" />
+
+<puml src="diagrams/AssignSequenceDiagramParserUtil.puml" alt="AssignSequenceDiagramParserUtil" />
+
+### Sort feature
+The sort operation is facilitated by the `SortCommand` and `SortCommandParser` classes, similar
+to other commands mentioned above. `SortCommand` extends `Command` and overrides `Command#execute` to perform
+its intended behavior, invoked by the `LogicManager` class. `SortCommandParser` is responsible for parsing the
+argument string containing a property inputted by the user, to create a `SortCommand` object.
+
+Currently, the sort operation sorts the entire patient list, even if the command is executed when the displayed list
+is filtered (e.g. using the `find` command). This choice will be further elaborated on in the "Design
+considerations" section below.
+
+#### Design considerations:
+
+**Aspect: Behavior of sort operation:**
+
+* **Alternative 1 (current choice):** Sort the entire patient list.
+    * Pros: Easy and quick to implement as it only involves calling Java's `sort` method on the underlying
+  `UniquePatientList` stored in `AddressBook`.
+    * Cons: Behavior might be unintuitive as when the user runs this command, they might expect this command to only
+  affect the currently displayed list, which might be filtered.
+
+* **Alternative 2:** Only sort the currently displayed, or filtered, list.
+    * Pros: Allows the user to only alter the visible list, and keep the underlying patient list untouched.
+  Behavior is possibly more intuitive.
+    * Cons: Implementation is more complicated as the `FilteredList` that stores the currently displayed list and is
+  referenced by the UI to display its contents cannot be modified.
+
+#### Sort order
+`SortOrder` is an enumeration within `SortCommand` representing the properties by which the user can sort the list.
+As of now, the only `SortOrder`s available are the following:
+1. Name (lexicographically ascending, case-insensitive)
+2. IC Number (lexicographically ascending, case-insensitive)
+3. Department (by ordinal of constant in `Department` enumeration)
+4. Age (numerically ascending, with default age on top)
+5. Priority (descending)
+
+Each `SortOrder` constant value stores a `Comparator<? super Patient>` that is used by Java `List`'s build-in `sort`
+method to compare two `Patient` objects during the execution of the `sort` command. These comparators make use of the
+overridden `compareTo` methods in the related patient attribute classes (i.e. `Name`, `IcNumber`, `AssignedDepartment`,
+`Age` and `Priority`). Each `SortCommand` object stores a `SortOrder` value, extracted from the input string by the
+`SortCommandParser` object that created it.
+
+#### Sequence diagram of `SortCommand#execute()`
+As the creation of the `SortCommand` object is very similar to that of `AssignCommand` as shown above, except that
+it parses the property and uses `SortOrder#getSortOrder(String string)` to retrieve the `SortOrder` value, the sequence
+diagram below will only show the execution of the `SortCommand#execute()` method to illustrate how the sort feature
+works.
+
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -921,8 +972,8 @@ Testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+    2. Double-click the jar file.<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -1020,7 +1071,7 @@ Testers are expected to do more *exploratory* testing.
 
 1. Editing a patient's record
 
-   1. Prerequisite: Have our sample patient list loaded OR add a patient with IC number t7654321a. 
+   1. Prerequisite: Have our sample patient list loaded OR add a patient with IC number t7654321a.
    2. Test case: `record i/T7654321A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`<br>
       Expected: Record of the patient with IC number `T7654321A` is edited to have `Broken Arm` as initial observation
       , `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan. Details of the edited record is shown
@@ -1032,7 +1083,7 @@ Testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `record`, `record i/T7654321A o/Broken Pinky o/Dizziness`,
       `record i/T2736487A di/Asthma` (where patient with IC number `T2736487A` does not exist)<br>
-      Expected: Similar to previous.  
+      Expected: Similar to previous.
 
 ### Assigning a patient to a department
 
@@ -1077,7 +1128,7 @@ Testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different
       assigned departments among all patients in the list.
-   
+
    2. Test case: `sort department`<br>
       Expected: Patient list is sorted according to `assigned department`, where patients with default departments are
       placed at the bottom. Details of success of command is shown in the system message. Order of patients in list is

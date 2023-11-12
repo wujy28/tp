@@ -50,8 +50,10 @@ started!
 ## Table of Contents
 
 - [Table-of-contents](#table-of-contents)
-- [Navigate](#navigating-the-user-guide)
-- [Quick-start](#quick-start)
+- [Using this Guide](#navigating-the-user-guide)
+- [Quick Start](#quick-start)
+- [Getting to know A&E](#getting-to-know-ae)
+    - [User Interface](#user-interface)
 - [Features](#features)
     - [Viewing help : `help`](#viewing-help--help)
     - [Listing all patients: `list`](#listing-all-patients--list)
@@ -89,18 +91,21 @@ started!
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
-   __How to check?__
-    1. Open up the Terminal on your computer.
-        1. For Windows users, locate it by typing in “Terminal” in the search bar.
-        2. For Mac users, locate it by typing in “Terminal” in Spotlight.
-    2. Type in java -version and press Enter.
-    3. If you have Java installed, you should see your Java version as shown underlined in the picture below.
-       <img src='images/javaversion.png' width='500'>
-    4. If you do not have Java or your Java version is below 11, install Java
-       11 [here](https://www.oracle.com/java/technologies/downloads/#java11)
+<box type="tip">
 
+***How to check?***
+1. Open up the Terminal on your computer.
+   1. For Windows users, locate it by typing in “Terminal” in the search bar.
+   2. For Mac users, locate it by typing in “Terminal” in Spotlight.
+2. Type in `java -version` and press Enter.
+3. If you have Java installed, you should see your Java version as shown underlined in the picture below.
+<img src='images/javaversion.png' width='500'>
+4. If you do not have Java or your Java version is below 11, install Java
+11 [here](https://www.oracle.com/java/technologies/downloads/#java11) based on your Operating System.
 
-2. Go to your Desktop and create a folder named “A&E”.
+</box>
+
+2. Go to your Desktop and create a folder named “AAndE”.
 
 
 3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.1)
@@ -109,54 +114,174 @@ started!
     <img src='images/jar.png' width='800'>
 
 
-4. After downloading the application, move it into the “A&E” folder created in step 2.
+4. After downloading the application, move it into the “AAndE” folder created in step 2.
 
 
-5. Open Terminal, type in cd Desktop\A&E to navigate to the folder you’ve created, and press Enter. Then, type in `java
-   -jar AdvancedAndEfficient.jar` and press Enter again to run the application.
+5. Open Terminal (as mentioned in step 1 part 1)
+    1. For Windows, type in `cd Desktop\AAndE` to navigate to the folder you’ve created, and press Enter.
+    2. For Mac, type in `cd Desktop/AAndE` to navigate to the folder you’ve created, and press Enter.
+
+   Then, type in `java -jar AdvancedAndEfficient.jar` and press Enter again to run the application.
 
    A GUI similar to the picture below should appear in a few seconds. Note how the app contains some sample data.
-   <img src='images/UI.png' width='500'>
 
+    <img src='images/ug/gettingStartedUi.png' width='700'>
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the
-   help window.
+<box type="tip">
+
+We strongly recommend you to use A&E at a resolution of 1024x640 for the fullest experience. You may also click
+on the fullscreen icon at the top right hand corner to enlarge the window.
+
+</box>
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open
+   the help window.
 
    Some example commands you can try:
 
-   `list` : Lists all patients.
-   `add n/John Doe i/T0384762A p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a patient named
-   John Doe into the system.
-   `clear` : Deletes all patients.
-   `exit` : Exits the app.
+    - `list` : Lists all patients.
+    - `add n/John Doe i/T0384762A p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a patient
+      named
+      John Doe into the system.
+    - `clear` : Deletes all patients.
+    - `exit` : Exits the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Getting to know A&E
+
+### User Interface
+
+Here is an overview of A&E’s user interface and some of its noteworthy components.
+
+<img src='images/ug/labelledUi.png' width='800'>
+
+1. Command Bar
+2. Console
+3. Patient List Panel
+4. Patient Record Panel
+
+### Command Bar
+
+This is where you type in commands for the program to run. Refer to the [Features](#features) or
+[Command Summary](#command-summary) section for the command inputs accepted by the app.
+
+To begin typing, simply select the command bar by clicking the space that says “Enter command here…”. Then, type in
+your command and hit Enter to execute the command!
+
+<img src='images/ug/commandBar.png' width='600'>
+
+### Console
+
+This is where status messages are displayed. Status messages are displayed depending on the user input
+in the command box.
+
+Status messages provide you with feedback such as:
++ What a command does and its format
++ Why a command input is invalid
++ Whether a command is successful
+
+<img src='images/ug/console.png' width='600'>
+
+### Patient List Panel
+
+This is where the list of patients is displayed. It displays either the complete list of all patients in the system
+(after `list` command), a filtered list of patients (after `find` command), or a single patient card
+(after `view` command).
+
+Patients are listed out vertically. You can scroll through the list using the scrollbar on the right side, your mouse’s
+scroll wheel, or your trackpad. To select a patient in the list, simply click on their patient card. The selected
+patient is indicated by the light blue border around their patient card.
+
+<img src='images/ug/patientList.png' width='300'>
+
+Each patient is represented by a patient card in the list. Here is an overview of the information displayed in a
+patient card.
+
+<img src='images/ug/patientListCard.png' width='450'>
+
+1. Full Name
+2. Age
+3. Gender
+4. Birthday
+5. Phone Number
+6. Assigned Department
+7. Tag(s)
+8. Priority Tag
+   <img src='images/ug/prLow.png' height='20'>
+   <img src='images/ug/prMedium.png' height='20'>
+   <img src='images/ug/prHigh.png' height='20'>
+9. IC Number
+
+### Patient Record Panel
+
+This is where the details and record of the selected patient in the list is displayed. It displays all the details of a
+patient and all their patient record information, except for their age. The labels below the patient’s name indicate the
+patient’s priority level and tags respectively.
+
+If there is no selected patient in the list, the panel will be blank. (The selected patient is indicated by the light
+blue border around their patient card in the patient list panel.)
+
+<img src='images/ug/recordPanel.png' width='450'>
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
-<box type="info" seamless>
+<box type="info">
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
+* Items in square brackets are optional.
+  e.g `n/NAME [pr/PRIORITY]` can be used as `n/John Doe pr/HIGH` or as `n/John Doe`
 
-* Items with `...` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `...` after them can be used multiple times including zero times.
+  e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/critical`, `t/critical t/bedrest` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Except for `n/NAME`, all parameters are case-insensitive. e.g. `n/john doe` is different from `n/John Doe`, but
+  `i/t1234567a` is the same as `i/T1234567A`.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `redo`, and
+  `clear`) will be ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+
+</box>
+
+[Back to Table of Contents](#table-of-contents)
+
+### Prefix Summary
+
+For some commands in the subsequent sections, you might come across parameters specified with a prefix
+(e.g. prefix `n/` with parameter `NAME` in `n/NAME`). These parameters refer to patient attributes or record fields that are
+accepted by the command. Certain parameters have constraints and can only take on certain values. The table below
+gives a summary of all parameters, their associated prefixes and their constraints.
+
+| Attribute                                      | Prefix | Parameter        | Constraints/Format                                                                      |
+|------------------------------------------------|--------|------------------|-----------------------------------------------------------------------------------------|
+| Patient’s full name                            | `n/`   | `NAME`           | Only alphanumeric characters and spaces                                                 |
+| Patient’s NRIC number                          | `i/`   | `IC_NUMBER`      | Must be an alphabet, followed by 7 numerical digits, then an alphabet<br>E.g. T0123456A |
+| Patient’s gender                               | `g/`   | `GENDER`         | “Male”, “Female” or “Other”                                                             |
+| Patient’s birthday                             | `b/`   | `BIRTHDAY`       | Date in the format, DD/MM/YYYY                                                          |
+| Patient’s phone number                         | `p/`   | `PHONE`          | Only numbers, at least 3 digits long                                                    |
+| Patient’s email address                        | `e/`   | `EMAIL`          | An email address in the format, username@domain.com                                     |
+| Patient’s home address                         | `a/`   | `ADDRESS`        | Any values                                                                              |
+| Patient’s priority level                       | `pr/`  | `PRIORITY`       | “High”, “Medium”, “Low” or “NIL”                                                        |
+| Patient’s tags                                 | `t/`   | `TAG`            | Alphanumeric characters, no spaces                                                      |
+| Patient’s assigned department                  | `d/`   | `DEPARTMENT`     | Refer to the [appendix](#appendix-departments) for the list of accepted values          |
+| Patient’s initial observations in their record | `o/`   | `OBSERVATION`    | Any values                                                                              |
+| Patient’s diagnosis in their record            | `di/`  | `DIAGNOSIS`      | Any values                                                                              |
+| Patient’s treatment plan in their record       | `tp/`  | `TREATMENT_PLAN` | Any values                                                                              |
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Viewing help: `help`
 
@@ -176,24 +301,42 @@ Format: `list`
 
 ### Adding a patient: `add`
 
-Adds a patient
+Adds a patient into the system
 
 Format: `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY]] [t/TAG]...`
 
-+ Only `NAME` and `IC_NUMBER` fields are **compulsory**.
-+ **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
-+ The order of the input fields does not matter.
-+ `PRIORITY` can take on values `NIL`,`LOW`,`MEDIUM` or `HIGH`.
++ IC number cannot be edited after the patient has been added.
+
+<box type="warning">
+
+**Caution:**
+Duplicate patients are not allowed. Duplicate patients refer to patients with the same name and/or IC
+number.
++ Names are case-sensitive
+  + `Han Bo` is different from `han bo`
++ IC numbers are case-insensitive
+  + `T1234567A` is the same as `t1234567a`
+
+</box>
+
+<box type="info">
+
+**Note:**
+Optional fields not specified while adding the patient will be filled with default values as shown below.
+
+</box>
+
+<img src='images/ug/addPatients.png' width='500'>
 
 Examples:
 
-+ To add a Patient with `NAME` = John Doe, `IC_Number` = T0123456A, `GENDER` = Male, `BIRTHDAY` = 01/01/1990,
++ To add a Patient with name "John Doe", IC number "T0123456A", gender "male", and birthday on 1 Jan 1990<br>
+    `add n/John Doe i/T0123456A g/Male b/01/01/1990 `
 
-`add n/John Doe i/T0123456A g/Male b/01/01/1990 `
+* To add a patient with name "Betsy Crowe", IC number "S0123456B", phone number "90909090", and email "bc@gmail.com"<br>
+    `add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com`
 
-* To add a Patient with Name = Betsy Crowe, IC_Number = S0123456B, PHONE = 90909090, EMAIL = bc@gmail.com
-
-`add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com`
+[Back to Table-of-contents](#table-of-contents)
 
 ### Viewing a patient: `view`
 
@@ -201,14 +344,25 @@ Displays a specific patient’s information and medical record.
 
 Format: `view i/IC_NUMBER`
 
-* `IC_NUMBER` field is **compulsory**.
-* `IC_NUMBER` field is **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
-
 Examples:
 
-+ To view patient with IC_Number = T0123456A
++ To view patient with IC number "T0123456A"<br>
+  `view i/T0201234A`
 
-`view i/T0201234A`
+Expected output when command succeeds:
+
+<img src='images/ug/viewPatient.png' width='500'>
+
+
+<box type="info">
+
+**Note:**
+The command will not display the patient’s record card in the record panel immediately. To view the patient’s
+details and record card, you have to click on their patient card in the list.
+
+</box>
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Editing a patient: `edit`
 
@@ -244,6 +398,7 @@ Examples:
 ### Undoing a command: `undo`
 
 Undoes the most recent state of the following commands:
+
 + `delete`
 + `edit`
 + `clear`
@@ -261,6 +416,7 @@ Examples:
 ### Redoing a command: `redo`
 
 Redoes the most recent state of the following commands:
+
 + `delete`
 + `edit`
 + `clear`
@@ -286,7 +442,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 + The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 + Only the name is searched.
 + Only full words will be matched e.g. `Han` will not match `Hans`
-+ Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
++ Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will
+  return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
@@ -299,31 +456,32 @@ Examples:
 
 Sorts the patient list based on the given property.
 
-Format: `sort PROPERTY`
-
-+ The input field is **case-insensitive** e.g. `name` is the same as `NAME`.
-+ `PROPERTY` can only be `name`, `ic`, `department`, `age`, or `priority`.
-
-Examples:
-
-+ To sort the patient list according to name in lexicographical order<br>
-  `sort name`
-+ To sort the patient list according to IC number in lexicographical order<br>
-  `sort ic`
-+ To sort the patient list according to department<br>
-  `sort department`
-+ To sort the patient list according to ascending age<br>
-  `sort age`
-+ To sort the patient list according to descending priority<br>
-  `sort priority`
-
-<box type="info" seamless>
+<box type="info">
 
 **Note:**
 It sorts both the filtered and full patient list. For example, if you run `find John` followed by `sort age` on the
 list of search results, it will also sort the complete list of patients (displayed using the `list` command).
 
 </box>
+
+Format: `sort PROPERTY`
+
++ `PROPERTY` can only be `name`, `ic`, `department`, `age`, or `priority`.
+
+Examples:
+
++ To sort the patient list according to name in alphanumeric order<br>
+  `sort name`
++ To sort the patient list according to IC number in alphanumeric order<br>
+  `sort ic`
++ To sort the patient list according to department (with default departments at the bottom of the list)<br>
+  `sort department`
++ To sort the patient list according to ascending age (with default age at the top of the list)<br>
+  `sort age`
++ To sort the patient list according to descending priority<br>
+  `sort priority`
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Editing a patient record: `record`
 
@@ -348,15 +506,20 @@ Assigns a patient to a hospital department.
 
 Format: `assign i/IC_NUMBER d/DEPARTMENT`
 
-* All input fields are compulsory.
-* **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
-* `DEPARTMENT` must adhere to British spelling conventions.
-* Refer to the [appendix](#appendix--departments) below for the list of valid departments and their accepted inputs.
+<box type="warning">
+
+**Caution:**
+`DEPARTMENT` must adhere to British spelling conventions. Refer to the [appendix](#appendix-departments)
+below for the list of valid departments and their accepted inputs.
+
+</box>
 
 Examples:
 
-* To assign a patient with IC_NUMBER = T0201234A to the Cardiology department<br>
+* To assign a patient with IC number "T0201234A" to the cardiology department<br>
   `assign i/T0201234A d/cardiology`
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Clearing all entries: `clear`
 
@@ -382,21 +545,45 @@ Advanced&Efficient data are saved automatically as a JSON file `[JAR file locati
 users are
 welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:**
 If your changes to the data file makes its format invalid, Advanced&Efficient will discard all data and start with an
-empty
-data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-Q: How do I transfer my data to another Computer?
-A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
-data of your previous A&E home folder.
+**Q**: I double-clicked the Jar file and it doesn't run, why?\
+**A**: Make sure that Java 11 is installed and do refer to step 5 of [Quick-start](#quick-start) for instructions to run
+application.
+
+**Q**: I have a list of patients, how do I view their details?\
+**A**: Please click on the patient you are interested in viewing. The details will be on the right hand side in the
+Patient Record Panel.
+
+**Q**: The Patient List Panel is cut off, I cant see some details for each patient\
+**A**: Please resize the application by dragging the border of the application window with your mouse. If the appplication is already in full screen mode, please drag the divider between the Patient List Panel and Patient
+Record Panel to the right.
+
+**Q**: I entered a command and there is no response from the application, what do I do?\
+**A**: A critical error might have occured. Please ensure your command is as specified in [Features](#features). Please contact
+the technical team in charge of your department to file a bug report on our [issues](tps://github.com/AY2324S1-CS2103T-T14-2/tp/issues) page.
+
+**Q**: I have accidentally cleared the whole patient record system, can I retrieve the lost details?\
+**A**: Yes, A&E has the [Undo](#undoing-a-command-undo) feature which allows you to retrieve all the lost details.
+
+**Q**: Will my data be saved immediately?\
+**A**: Yes, A&E saves your data after every command executed.
+
+**Q**: How do I transfer my data to another Computer?\
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous AAndE home folder.
+
+[Back to Table-of-contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -434,6 +621,8 @@ application before running the application again.
 
 The table below shows all the hospital departments available in the system and their accepted inputs.
 
+Related commands: [Assign](#assigning-a-patient-to-a-department-assign)
+
 | Department           | Acceptable Input(s)    |
 |----------------------|------------------------|
 | Default              | `Default`              |
@@ -460,3 +649,5 @@ The table below shows all the hospital departments available in the system and t
 | Psychiatry           | `Psychiatry`           |
 | Radiology            | `Radiology`            |
 | Urology              | `Urology`              |
+
+[Back to Table-of-contents](#table-of-contents)
