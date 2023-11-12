@@ -41,6 +41,7 @@
       "title": "Developer Guide",
       "headings": {
         "advanced-and-amp-efficient-a-and-amp-e-developer-guide": "Advanced&amp;Efficient (A&amp;E) Developer Guide",
+        "table-of-contents": "Table of Contents",
         "overview": "Overview",
         "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
@@ -122,8 +123,7 @@
       "headings": {
         "advanced-and-amp-efficient-a-and-amp-e-user-guide": "Advanced&amp;Efficient (A&amp;E) User Guide",
         "table-of-contents": "Table of Contents",
-        "navigating-the-user-guide": "Navigating the user guide",
-        "coming-soon": "[coming soon]",
+        "using-this-guide": "Using this guide",
         "quick-start": "Quick start",
         "getting-to-know-a-and-amp-e": "Getting to know A&amp;E",
         "user-interface": "User Interface",
@@ -208,7 +208,8 @@
       "src": "team/thienmy0.md",
       "headings": {
         "thien-my-s-project-portfolio-page": "Thien My's Project Portfolio Page",
-        "project-advanced-and-amp-efficient-a-and-amp-e": "Project: Advanced&amp;Efficient (A&amp;E)"
+        "project-advanced-and-amp-efficient-a-and-amp-e": "Project: Advanced&amp;Efficient (A&amp;E)",
+        "summary-of-contributions": "Summary of Contributions"
       },
       "headingKeywords": {}
     },
