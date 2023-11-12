@@ -57,7 +57,8 @@ Given below are my contributions to the project.
   * In charge of: Table of Contents, Using this Guide, Feature: Record, Known Issues, Command Summary
   * Assisted in writing, checking and formatting the whole UG as well
   * Relevant Pull Requests: [#57](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/57),
-    [#172](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/172), 
+    [#172](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/172),
+    [#248](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/248)
 
 * **Contributions to the DG**:
   * Added Implementation of Record Command
