@@ -45,7 +45,7 @@ public class AssignCommandTest {
         AssignedDepartment newAssignedDepartment = new AssignedDepartment("emergency department");
         Patient assignedPatient = new PatientBuilder(ALICE)
                 .withAssignedDepartment(newAssignedDepartment.toString())
-                .buildWithDepartment();
+                .buildWithRecord();
         AssignCommand assignCommand = new AssignCommand(ALICE.getIcNumber(), newAssignedDepartment);
 
         String expectedMessage = String.format(AssignCommand.MESSAGE_ASSIGN_PATIENT_SUCCESS,
@@ -66,7 +66,7 @@ public class AssignCommandTest {
         AssignedDepartment newAssignedDepartment = new AssignedDepartment("emergency department");
         Patient assignedPatient = new PatientBuilder(ALICE)
                 .withAssignedDepartment(newAssignedDepartment.toString())
-                .buildWithDepartment();
+                .buildWithRecord();
         AssignCommand assignCommand = new AssignCommand(ALICE.getIcNumber(), newAssignedDepartment);
 
         String expectedMessage = String.format(AssignCommand.MESSAGE_ASSIGN_PATIENT_SUCCESS,

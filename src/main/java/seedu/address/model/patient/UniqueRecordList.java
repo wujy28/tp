@@ -134,4 +134,9 @@ public class UniqueRecordList implements Iterable<Record> {
             super("Operation would result in duplicate records");
         }
     }
+
+    @Override
+    public String toString() {
+        return internalList.toString();
+    }
 }

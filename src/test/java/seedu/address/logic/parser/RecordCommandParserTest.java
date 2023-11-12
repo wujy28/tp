@@ -30,7 +30,6 @@ public class RecordCommandParserTest {
         assertParseFailure(parser, IC_NUMBER_DESC_BOB + IC_NUMBER_DESC_AMY + INITIAL_OBSERVATION_DESC, expectedMessage);
     }
 
-
     @Test
     public void parse_validSingleArgs_returnsRecordCommand() {
         // only initial observation present

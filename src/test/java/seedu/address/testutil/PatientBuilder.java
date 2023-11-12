@@ -197,4 +197,13 @@ public class PatientBuilder {
         return new Patient(name, phone, email, gender, icNumber, birthday, address, priority, tags, assignedDepartment);
     }
 
+    /**
+     * Initializes a {@code Patient} with all fields including department and record
+     *
+     * @return a Patient with all fields specified
+     */
+    public Patient buildWithRecord() {
+        return new Patient(name, phone, email, gender, icNumber, birthday, address, priority, tags, assignedDepartment,
+                record);
+    }
 }

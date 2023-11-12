@@ -4,43 +4,100 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
+    "gender" : "FEMALE",
+    "icNumber" : "T0032415E",
+    "birthday" : "23/09/2000",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "priority" : "MEDIUM",
+    "assignedDepartment" : "Cardiology",
+    "tags" : [ "friends" ],
+    "initialObservations" : "Swollen left ankle",
+    "diagnosis" : "Sprained left ankle",
+    "treatmentPlan" : "Ice area for a week"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
+    "gender" : "MALE",
+    "icNumber" : "S2091742P",
+    "birthday" : "17/03/1987",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "priority" : "HIGH",
+    "assignedDepartment" : "Dermatology",
+    "tags" : [ "owesMoney", "friends" ],
+    "initialObservations" : "No initial observations given",
+    "diagnosis" : "No diagnosis given",
+    "treatmentPlan" : "No treatment plan given"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
+    "gender" : "MALE",
+    "icNumber" : "S2780456R",
+    "birthday" : "08/06/1997",
     "address" : "wall street",
-    "tags" : [ ]
+    "priority" : "LOW",
+    "assignedDepartment" : "Endocrinology",
+    "tags" : [ ],
+    "initialObservations" : "No initial observations given",
+    "diagnosis" : "No diagnosis given",
+    "treatmentPlan" : "No treatment plan given"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
+    "gender" : "MALE",
+    "icNumber" : "T0163826D",
+    "birthday" : "29/01/2001",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "priority" : "LOW",
+    "assignedDepartment" : "Gynaecology",
+    "tags" : [ "friends" ],
+    "initialObservations" : "No initial observations given",
+    "diagnosis" : "No diagnosis given",
+    "treatmentPlan" : "No treatment plan given"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
+    "gender" : "FEMALE",
+    "icNumber" : "S1839267A",
+    "birthday" : "12/11/1995",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "priority" : "HIGH",
+    "assignedDepartment" : "Haematology",
+    "tags" : [ ],
+    "initialObservations" : "No initial observations given",
+    "diagnosis" : "No diagnosis given",
+    "treatmentPlan" : "No treatment plan given"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
+    "gender" : "FEMALE",
+    "icNumber" : "S3729462N",
+    "birthday" : "29/06/1982",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "priority" : "MEDIUM",
+    "assignedDepartment" : "Immunology",
+    "tags" : [ ],
+    "initialObservations" : "No initial observations given",
+    "diagnosis" : "No diagnosis given",
+    "treatmentPlan" : "No treatment plan given"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
+    "gender" : "MALE",
+    "icNumber" : "S4839258F",
+    "birthday" : "03/07/1997",
     "address" : "4th street",
-    "tags" : [ ]
-  } ]
+    "priority" : "MEDIUM",
+    "assignedDepartment" : "Oncology",
+    "tags" : [ ],
+    "initialObservations" : "No initial observations given",
+    "diagnosis" : "No diagnosis given",
+    "treatmentPlan" : "No treatment plan given"
+  } ],
+  "records" : [ ]
 }
