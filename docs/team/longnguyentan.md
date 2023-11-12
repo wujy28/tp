@@ -17,7 +17,7 @@ Given below are my contributions to the project.
   * Improved UI ([#129](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/129))
 
 * **Contributions to the UG**:
-  * Wrote Introduction & resized images ([#165](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/165) 
+  * Wrote Introduction & resized images ([#165](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/165)
   * Updated `list` and `delete` features ([#51](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/51)
 
 * **Contributions to the DG**:

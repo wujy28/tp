@@ -1,7 +1,8 @@
 # Jingya's Project Portfolio Page
 
 ## Project: Advanced&Efficient (A&E)
-Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and connecting patients with relevant departments and doctors under time pressure during an emergency.
+Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and connecting patients with
+relevant departments and doctors under time pressure during an emergency.
 
 Given below are my contributions to the project.
 
@@ -20,7 +21,7 @@ Given below are my contributions to the project.
    + Both of these additions allow the program to store the information required for
    AssignCommand
    + Added testing for these classes
-2. Added the AssignCommand for assigning Patients to Departments 
+2. Added the AssignCommand for assigning Patients to Departments
    ([#135](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/135))
    + A crucial feature that allows the user to assign a Patient to a Department
    (i.e. edit the AssignedDepartment field of a Patient)
@@ -39,20 +40,20 @@ Given below are my contributions to the project.
 ### Enhancements To Existing Features
 
 1. Revamped the UI of the program
-   + Redesigned the UI and created the initial mockup on Figma 
+   + Redesigned the UI and created the initial mockup on Figma
    ([Image](https://github.com/wujy28/tp/blob/28fc1b9cdd7e0bbc0e7b7548fa900aa404761059/docs/images/Ui.png))
-   + Reformatted the UI to accommodate the viewing of patient list and patient record side-by-side, according to the 
-   mockup ([#110](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/110), 
+   + Reformatted the UI to accommodate the viewing of patient list and patient record side-by-side, according to the
+   mockup ([#110](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/110),
    [#166](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/166))
-   + Added the UI components and controllers for patient record 
-   ([#110](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/110), 
+   + Added the UI components and controllers for patient record
+   ([#110](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/110),
    [#173](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/173))
    + Added the functionality to view a patient's record by clicking on a patient in the patient list
      ([#110](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/110))
    + Styled the UI using CSS ([#150](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/150))
 2. Added auto-computation behavior for the Age attribute from a Patient
    + Made modifications to the initially unutilized Age attribute so that it can automatically initialize with the
-   correct value given a patient's birthday ([#161](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/161), 
+   correct value given a patient's birthday ([#161](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/161),
    [#162](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/162))
 
 ----
@@ -62,8 +63,8 @@ Given below are my contributions to the project.
 
 ### Review/mentoring contributions
 
-+ PRs reviewed (with non-trivial review comments): 
-  [#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102), 
++ PRs reviewed (with non-trivial review comments):
+  [#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102),
   [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119),
   [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145),
   [#227](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/227)
@@ -71,12 +72,12 @@ Given below are my contributions to the project.
 ### Contributions to documentation
 
 + User Guide
-  + Added documentation for the features `find` and `sort` 
+  + Added documentation for the features `find` and `sort`
   ([#171](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/171))
   + Added the appendix for the list of available departments
   ([#171](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/171))
 + Developer Guide
-  + Added implementation details for `assign` feature 
+  + Added implementation details for `assign` feature
   ([#137](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/137))
   + Updated the explanation and class diagram for UI Component section
   ([#137](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/137))
