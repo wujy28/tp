@@ -6,43 +6,23 @@ pageNav: 3
 
 # Advanced&Efficient (A&E) User Guide
 
-Welcome to **Advanced&Efficient (A&E)**! Are you an Emergency Department (ED) doctor overwhelmed by the sheer volume of
-patient records to manage? Do you wish for a faster, more efficient way to log patient reports and streamline your
-workflow? A&E is the tool you’ve been waiting for!
+Welcome to **Advanced&Efficient (A&E)**!
 
-Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **ED doctors** who need to *
-*create, update, and manage patient records** swiftly and effectively. This application, with its **Command-Line
-Interface (CLI)** design, caters to fast typists and professionals who prefer typing over mouse interactions,
-significantly speeding up the process of inputting and managing patient data.
+Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **Emergency Department (ED) doctors** who need to **create, update, and manage patients and their records** swiftly and effectively. This application, with its [**Command-Line Interface (CLI)**](#cli) design, caters to fast typists and professionals who prefer typing over mouse interactions, significantly speeding up the process of inputting and managing patient data.
 
 Here’s a sneak peek into what A&E offers:
-
 - Streamlined logging of patient reports in a user-friendly CLI environment
 - Quick connections to relevant hospital departments for patient referrals
 - A comprehensive suite of commands for adding, viewing, editing, and deleting patient records
 - An intuitive system for managing patient priority levels and medical tags
 - Easy-to-follow command summaries and guides for efficient navigation
 
-A&E combines the simplicity of a CLI with the visual cues of a Graphical User Interface (GUI), offering you the best of
-both worlds. If you're comfortable typing and looking for speed and efficiency in patient management, A&E is
-tailored just for you.
+A&E combines the simplicity of a CLI with the visual cues of a [**Graphical User Interface (GUI)**](#gui), offering you the best of both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is tailored just for you.
 
-This User Guide is designed to help you, whether you're a newcomer or an experienced user, to harness the full potential
-of A&E. Here, you'll find everything you need to streamline your patient management tasks, making your role in the ED
-more manageable and effective.
+This User Guide is designed to help you, whether you're a newcomer or an experienced user, to harness the full potential of A&E. Here, you'll find everything you need to streamline your patient management tasks, making your role in the ED more manageable and effective.
 
-If you are a **new user**:
+Embrace the efficiency of A&E and transform the way you manage patient records in your Emergency Department. Let’s get started!
 
-- Begin your journey with A&E by exploring the Quick start and Navigating the user guide sections.
-- If you’re new to CLI or need a refresher, keep an eye out for our upcoming guide.
-
-If you are an **experienced user**:
-
-- Utilize the Table of contents to swiftly navigate to your desired section.
-- Dive into the Features to explore advanced functionalities and optimize your workflow.
-
-Embrace the efficiency of A&E and transform the way you manage patient records in your Emergency Department. Let’s get
-started!
 
 
 <!-- * Table of Contents -->
@@ -285,17 +265,22 @@ gives a summary of all parameters, their associated prefixes and their constrain
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+#### What it does:
+Shows a message explaining how to access the user guide.
+#### Format:
+`help`
+#### Expected output when command succeeds:
 
 <img src='images/ug/helpMessage.png' width='500'>
 
-Format: `help`
-
 ### Listing all patients: `list`
 
+#### What it does:
 Lists all patients in the system.
+#### Format:
+`list`
 
-Format: `list`
+#### Expected output when command succeeds:
 
 <img src='images/ug/listPatients.png' width='300'>
 
@@ -434,23 +419,26 @@ Examples:
 
 ### Finding a patient by name: `find`
 
+#### What it does:
 Finds the patients whose names match any of the given keywords.
+#### Format:
+`find KEYWORD [MORE_KEYWORDS]`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Only the name is searched.
+- Only full words will be matched. e.g. `Han` will not match `Hans`.
+- Persons matching at least one keyword will be returned. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-+ **All** input fields are **case-insensitive** e.g. `hans` is the same as `HANS`.
-+ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-+ Only the name is searched.
-+ Only full words will be matched e.g. `Han` will not match `Hans`
-+ Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will
-  return `Hans Gruber`, `Bo Yang`
+#### Example commands:
+- To find patients whose name matches "John"
 
-Examples:
+    `find john`
+- To find patients whose name matches "Mary" and "Jane"
 
-+ To find patients whose name matches ‘John’<br>
-  `find john`
-+ To find patients whose name matches ‘Mary’ and ‘Jane’<br>
-  `find Mary Jane`
+    `find Mary Jane`
+
+![img.png](images/findPatients.png)
+
 
 ### Sorting the patient list: `sort`
 
@@ -523,15 +511,17 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the system.
-
-Format: `clear`
+#### What it does:
+Clears all patients from the system.
+#### Format:
+`clear`
 
 ### Exiting the program: `exit`
 
+#### What it does:
 Exits the program.
-
-Format: `exit`
+#### Format:
+`exit`
 
 ### Saving the data
 
@@ -592,8 +582,7 @@ the data of your previous AAndE home folder.
 When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
 primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
 application before running the application again.
-<br>
-<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -614,6 +603,24 @@ application before running the application again.
 | **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                           |
 | **Clear**  | `clear`                                                                                                                                                                                                                                 |
 | **Exit**   | `exit`                                                                                                                                                                                                                                  |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+<a id="cli"></a>
+1. **Command-Line Interface**
+
+    A command-line interface (CLI) is a text-based user interface (UI) used to run programs, manage computer files and interact with the computer, involving more typing than clicking.
+<a id="gui"></a>
+2. **Graphical User Interface**
+
+    A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus, often by clicking.
+
+3. **Java 11**
+
+   Java is the programming language used in creating A&E. “11” refers to the version of the language used.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -19,9 +19,10 @@ Given below are my contributions to the project.
 * **Contributions to the UG**:
   * Wrote Introduction & resized images ([#165](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/165)
   * Updated `list` and `delete` features ([#51](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/51)
+  * Updated features: Find, Help, List, Clear, Exit
 
 * **Contributions to the DG**:
-  * *To be included*
+  * Updated Storage & Data archiving part.
 
 * **Contributions to team-based tasks**:
   * Maintaining the issue tracker & website
