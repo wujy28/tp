@@ -8,7 +8,7 @@ pageNav: 3
 
 Welcome to **Advanced&Efficient (A&E)**!
 
-Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **Emergency Department (ED) doctors** who need to **create, update, and manage patients and their records** swiftly and effectively. This application, with its [**Command-Line Interface (CLI)**](#cli) design, caters to fast typists and professionals who prefer typing over mouse interactions, significantly speeding up the process of inputting and managing patient data.
+Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **Emergency Department (ED) doctors** who need to **create, update, and manage patients and their records** swiftly and effectively. This application, with its **Command-Line Interface (CLI)**<sup>[1](#cli)</sup> design, caters to fast typists and professionals who prefer typing over mouse interactions, significantly speeding up the process of inputting and managing patient data.
 
 Here’s a sneak peek into what A&E offers:
 - Streamlined logging of patient reports in a user-friendly CLI environment
@@ -17,7 +17,7 @@ Here’s a sneak peek into what A&E offers:
 - An intuitive system for managing patient priority levels and medical tags
 - Easy-to-follow command summaries and guides for efficient navigation
 
-A&E combines the simplicity of a CLI with the visual cues of a [**Graphical User Interface (GUI)**](#gui), offering you the best of both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is tailored just for you.
+A&E combines the simplicity of a CLI with the visual cues of a **Graphical User Interface (GUI)**<sup>[2](#gui)</sup>, offering you the best of both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is tailored just for you.
 
 This User Guide is designed to help you, whether you're a newcomer or an experienced user, to harness the full potential of A&E. Here, you'll find everything you need to streamline your patient management tasks, making your role in the ED more manageable and effective.
 
@@ -29,54 +29,89 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 
 ## Table of Contents
 
-- [Table-of-contents](#table-of-contents)
-- [Using this Guide](#navigating-the-user-guide)
+- [Table of Contents](#table-of-contents)
+- [Using this guide](#using-this-guide)
 - [Quick Start](#quick-start)
 - [Getting to know A&E](#getting-to-know-ae)
     - [User Interface](#user-interface)
 - [Features](#features)
-    - [Viewing help : `help`](#viewing-help--help)
-    - [Listing all patients: `list`](#listing-all-patients--list)
-    - [Adding a patient: `add`](#adding-a-patient--add)
-    - [Viewing a patient : `view`](#viewing-a-patient--view)
-    - [Editing a patient: `edit`](#editing-a-patient--edit)
-    - [Deleting a patient: `delete`](#deleting-a-patient--delete)
-    - [Undoing a command : `undo`](#undoing-a-command--undo)
-    - [Redoing a command : `redo`](#redoing-a-command--redo)
-    - [Finding a patient by name : `find`](#finding-a-patient-by-name--find)
-    - [Sorting the patient list : `sort`](#sorting-the-patient-list--sort)
-    - [Editing a patient record : `record`](#editing-a-patient-record--record)
-    - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department--assign)
-    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Prefix Summary](#prefix-summary)
+    - [Viewing help : `help`](#viewing-help-help)
+    - [Listing all patients: `list`](#listing-all-patients-list)
+    - [Adding a patient: `add`](#adding-a-patient-add)
+    - [Viewing a patient : `view`](#viewing-a-patient-view)
+    - [Editing a patient: `edit`](#editing-a-patient-edit)
+    - [Deleting a patient: `delete`](#deleting-a-patient-delete)
+    - [Undoing a command : `undo`](#undoing-a-command-undo)
+    - [Redoing a command : `redo`](#redoing-a-command-redo)
+    - [Finding a patient by name : `find`](#finding-a-patient-by-name-find)
+    - [Sorting the patient list : `sort`](#sorting-the-patient-list-sort)
+    - [Editing a patient record : `record`](#editing-a-patient-record-record)
+    - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department-assign)
+    - [Clearing all entries : `clear`](#clearing-all-entries-clear)
+    - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Saving the program](#saving-the-program)
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
-- [Appendix : Departments](#appendix--departments)
 - [Command summary](#command-summary)
+- [Glossary](#glossary)
+- [Appendix : Departments](#appendix--departments)
 
 <page-nav-print />
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Navigating the user guide
+## Using this guide
 
-### [coming soon]
+This user guide contains all of the information you will need in order to use A&E.
+
+For new users:
+* Begin your journey with A&E by exploring the [Quick Start](#quick-start) and
+  [Getting to know A&E](#getting-to-know-ae) sections.
+
+For experienced users:
+* Utilize the [Table of contents](#table-of-contents) to swiftly navigate to your desired section.
+* Dive into the [Features](#features) to explore advanced functionalities and optimize your workflow.
+
+Before you delve further into this guide, do take note of the following highlighted information panels.
+
+<box type="info">
+
+**Note:**
+Used to highlight information you should pay attention to
+
+</box>
+
+<box type="tip">
+
+**Tip:**
+Used to highlight tips which you might find useful
+
+</box>
+
+<box type="warning">
+
+**Caution:**
+Used to highlight issues to look out for
+
+</box>
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java 11 or above installed in your Computer.
+1. Ensure you have Java 11<sup>[3](#java-11)</sup> or above installed in your Computer.
 
 <box type="tip">
 
 ***How to check?***
-1. Open up the Terminal on your computer.
-   1. For Windows users, locate it by typing in “Terminal” in the search bar.
-   2. For Mac users, locate it by typing in “Terminal” in Spotlight.
+1. Open up the Terminal on your computer.<br>
+   i.  For Windows users, locate it by typing in “Terminal” in the search bar.<br>
+   ii. For Mac users, locate it by typing in “Terminal” in Spotlight.
 2. Type in `java -version` and press Enter.
 3. If you have Java installed, you should see your Java version as shown underlined in the picture below.
 <img src='images/javaversion.png' width='500'>
@@ -88,8 +123,8 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 2. Go to your Desktop and create a folder named “AAndE”.
 
 
-3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.1)
-    1. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
+3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.1)<br>
+   i. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
 
     <img src='images/jar.png' width='800'>
 
@@ -97,9 +132,9 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 4. After downloading the application, move it into the “AAndE” folder created in step 2.
 
 
-5. Open Terminal (as mentioned in step 1 part 1)
-    1. For Windows, type in `cd Desktop\AAndE` to navigate to the folder you’ve created, and press Enter.
-    2. For Mac, type in `cd Desktop/AAndE` to navigate to the folder you’ve created, and press Enter.
+5. Open Terminal (as mentioned in step 1 part 1)<br>
+   i.  For Windows, type in `cd Desktop\AAndE` to navigate to the folder you’ve created, and press Enter.<br>
+   ii. For Mac, type in `cd Desktop/AAndE` to navigate to the folder you’ve created, and press Enter.<br>
 
    Then, type in `java -jar AdvancedAndEfficient.jar` and press Enter again to run the application.
 
@@ -125,6 +160,8 @@ on the fullscreen icon at the top right hand corner to enlarge the window.
       John Doe into the system.
     - `clear` : Deletes all patients.
     - `exit` : Exits the app.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -273,6 +310,8 @@ Expected output when command succeeds:
 
 <img src='images/ug/helpMessage.png' width='500'>
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Listing all patients: `list`
 
 Lists all patients in the system.
@@ -282,6 +321,8 @@ Format: `list`
 Expected output when command succeeds:
 
 <img src='images/ug/listPatients.png' width='300'>
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Adding a patient: `add`
 
@@ -355,15 +396,23 @@ Edits the information of a patient with the specified IC number
 Format: `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 + At least one of the optional fields indicated within square brackets must be provided.
 
+<box type="warning">
+
 **Caution:**
 The new name provided cannot be the same as the name of another patient in the list. 
 + Names are case-sensitive
   + `Han Bo` is different from `han bo`
-  
+
+</box>
+
+<box type="info">
+
 **Note:**
 When editing tags, the new tags specified will overwrite the existing tags 
 i.e. all existing tags will be discarded and replaced 
 with the new tags.
+
+</box>
 
 Examples:
 
@@ -379,9 +428,6 @@ Examples:
 Deletes the patient with the specified IC number.
 
 Format: `delete i/IC_NUMBER`
-
-+ **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
-+ The order of the input fields does not matter.
 
 Examples:
 
@@ -433,7 +479,7 @@ Examples:
 
 Finds the patients whose names match any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
@@ -450,6 +496,7 @@ Example commands:
 
 ![img.png](images/ug/findPatients.png)
 
+[Back to Table of Contents](#table-of-contents)
 
 ### Sorting the patient list: `sort`
 
@@ -486,18 +533,16 @@ Examples:
 
 Edits the medical record of the patient with the specified IC number.
 
-Format: `record i/IC_NUMBER [o/OBSERVATION] [d/DIAGNOSIS] [t/TREATMENT_PLAN]`
-
-* At least one of the optional fields indicated within square brackets must be provided
-* **All** input fields are **case-insensitive** e.g. `T1234567A` is the same as `t1234567a`.
-* The order of the input fields does not matter.
+Format: `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [d/DIAGNOSIS] [t/TREATMENT_PLAN]`
 
 Examples:
 
-* To edit the medical record of a patient with `IC_NUMBER = T0201234A`<br>
-  `record i/T0201234A o/Broken Arm d/Hairline fracture t/Cast for 2 days r/Patient stable condition, no need for anesthetics a/Yes`
-* To edit the medical record of a patient with `IC_NUMBER = S2374912B`<br>
+* To edit the medical record of a patient with IC number "T0201234A"<br>
+  `record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`
+* To edit the medical record of a patient with IC number "S2374912B"<br>
   `record i/S2374912B di/Asthma o/Shortness of breath and chest tightness`
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Assigning a patient to a department: `assign`
 
@@ -526,11 +571,15 @@ Clears all patients from the system.
 
 Format: `clear`
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Saving the program
 
@@ -553,6 +602,8 @@ If your changes to the data file makes its format invalid, Advanced&Efficient wi
 empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 
 </box>
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -590,30 +641,55 @@ the data of your previous AAndE home folder.
 
 ## Known issues
 
-When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
-primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
-application before running the application again.
+1. When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
+   primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
+   application before running the application again.
+
+2. Age is not displayed in the Patient Record Panel of UI.
+
+3. The UI of the app might appear ‘squashed’ upon launch i.e. not all details can be visible. To avoid this, we advise
+   users to use our application in full screen.
+
+4. The use of extra and invalid prefixes/parameters will not be detected properly, resulting in the wrong error message
+   being displayed.
+
+5. Long tags cannot be displayed properly in the app and might overlap with other details of patients. As such, we
+   advise against the use of long tags.
+
+6. Some invalid birthdays can be added/edited to a patient e.g. 30 February.
+
+7. For the `view` command, users will have to click on the patient themselves in order to see the patient’s details and
+   record.
+
+8. The minimize button for the help window might not work for some users.
+
+9. Currently, any alphabets are accepted for the start of an IC number. Ideally, only letters "S", "T", "F", "G" or "M"
+   are accepted for the start of an IC number.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                        |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**   | `help`                                                                                                                                                                                                                                  |
-| **List**   | `list`                                                                                                                                                                                                                                  |
-| **Add**    | `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...` <br> e.g., `add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com a/Old Town Road 4 pr/LOW t/Allergic to Medicine`   |
-| **View**   | `view i/IC_NUMBER`<br> e.g., `view i/T0201234A`                                                                                                                                                                                         |
-| **Edit**   | `edit i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`<br> e.g., `edit i/T0201234A g/MALE b/08/08/1999 p/93827836 e/example@email.com a/Old Time Road Block 3 pr/MEDIUM t/Allergic to Fur` |
-| **Delete** | `delete i/IC_NUMBER`<br> e.g., `delete i/T2468012A`                                                                                                                                                                                     |
-| **Undo**   | `undo`                                                                                                                                                                                                                                  |
-| **Redo**   | `redo`                                                                                                                                                                                                                                  |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find Mary Jane`                                                                                                                                                                                |
-| **Sort**   | `sort PROPERTY`<br> e.g., `sort priority`                                                                                                                                                                                               |
-| **Record** | `record i/IC_NUMBER [o/OBSERVATION] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`<br> e.g.,`record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`                                                                              |
-| **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g., `assign i/T0201234A d/cardiology`                                                                                                                                                           |
-| **Clear**  | `clear`                                                                                                                                                                                                                                 |
-| **Exit**   | `exit`                                                                                                                                                                                                                                  |
+| Action     | Format, Examples                                                                                                                                                                                                                                    |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**   | `help`                                                                                                                                                                                                                                              |
+| **List**   | `list`                                                                                                                                                                                                                                              |
+| **Add**    | `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...` <br> e.g., `add n/Betsy Crowe i/S0123456B g/FEMALE b/23/12/1994 p/90909090 e/bc@gmail.com a/Old Town Road 4 pr/low t/stable`       |
+| **View**   | `view i/IC_NUMBER`<br> e.g. `view i/T0201234A`                                                                                                                                                                                                      |
+| **Edit**   | `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`<br> e.g., `edit i/T0201234A n/Moira Crow g/MALE b/08/08/1999 p/93827836 e/example@email.com a/Old Time Road Block 3 pr/high t/bedrest` |
+| **Delete** | `delete i/IC_NUMBER`<br> e.g. `delete i/T2468012A`                                                                                                                                                                                                  |
+| **Undo**   | `undo`                                                                                                                                                                                                                                              |
+| **Redo**   | `redo`                                                                                                                                                                                                                                              |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g. `find Mary Jane`                                                                                                                                                                                         |
+| **Sort**   | `sort PROPERTY`<br> e.g. `sort name`, `sort ic`, `sort department`, `sort age`, `sort priority`                                                                                                                                                     |
+| **Record** | `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`<br> e.g. `record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`                                                                                  |
+| **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g. `assign i/T0201234A d/Cardiology`                                                                                                                                                                        |
+| **Clear**  | `clear`                                                                                                                                                                                                                                             |
+| **Exit**   | `exit`                                                                                                                                                                                                                                              |
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -631,6 +707,7 @@ application before running the application again.
     A graphical user interface (GUI) is a digital interface 
     in which a user interacts with graphical components such as icons, buttons, and menus, often by clicking.
 
+<a id="java-11"></a>
 3. **Java 11**
 
    Java is the programming language used in creating A&E. “11” refers to the version of the language used.
