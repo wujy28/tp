@@ -20,8 +20,8 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE =
-        COMMAND_WORD + ": View the Patient with IcNumber\n" + "Parameters: IC_NUMBER\n" + "Example: " + COMMAND_WORD
-            + " i/t1234567j";
+        COMMAND_WORD + ": View the Patient with specified Ic Number\n" + "Parameters: i/IC_NUMBER\n" + "Example: "
+            + COMMAND_WORD + " i/t1234567j";
 
     private final PatientWithIcNumberPredicate predicate;
     private final IcNumber icNumberToFind;

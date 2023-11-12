@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 * **Contributions to team-based tasks**:
     * Maintaining the issue tracker
     * Updating user/developer docs
-  
+
 * **Review/mentoring contributions**:
   * Reviewed and merged various PRs made by team members
 

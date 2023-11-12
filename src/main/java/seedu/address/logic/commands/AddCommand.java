@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE =
-        COMMAND_WORD + ": Adds a patient to the patient record. " + "Parameters: " + PREFIX_NAME + "NAME "
+        COMMAND_WORD + ": Adds a patient to the patient record.\n" + "Parameters: " + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL " + PREFIX_GENDER + "GENDER "
             + PREFIX_IC_NUMBER + "IC_NUMBER " + PREFIX_BIRTHDAY + "BIRTHDAY " + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_PRIORITY + "PRIORITY " + "[" + PREFIX_TAG + "TAG]...\n" + "Example: "
@@ -38,9 +38,9 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends " + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the patient record!";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the patient record system!";
     public static final String MESSAGE_PATIENT_WITH_IC_NUMBER_ALREADY_EXIST =
-        "The patient with that IC Number " + "already exists in the patient record!";
+        "The patient with that IC Number " + "already exists in the patient record system!";
 
     private final Patient toAdd;
     private final Logger logger = LogsCenter.getLogger(getClass());
