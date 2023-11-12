@@ -49,7 +49,7 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
     - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department--assign)
     - [Clearing all entries : `clear`](#clearing-all-entries--clear)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
-    - [Saving the data](#saving-the-data)
+    - [Saving the program](#saving-the-program)
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
@@ -351,24 +351,33 @@ details and record card, you have to click on their patient card in the list.
 
 ### Editing a patient: `edit`
 
-Edits the attributes of a patient
+Edits the information of a patient with the specified IC number
 
-Format: `edit i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
-
-+ Edits the patient with the specified `i/IC_NUMBER`
+Format: `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 + At least one of the optional fields indicated within square brackets must be provided.
-+ **All** input fields are **case-insensitive** e.g. `john doe` is the same as `JOHN DOE`.
-+ The order of the input fields does not matter.
-+ `PRIORITY` can take on values `NIL`,`LOW`,`MEDIUM` or `HIGH`.
+
+**Caution:**
+The new name provided cannot be the same as the name of another patient in the list. 
++ Names are case-sensitive
+  + `Han Bo` is different from `han bo`
+  
+**Note:**
+When editing tags, the new tags specified will overwrite the existing tags 
+i.e. all existing tags will be discarded and replaced 
+with the new tags.
 
 Examples:
 
-* `edit T0123456A n/John Doe a/33 g/m b/01-01-1990 i/T0123456A p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `edit T6543210F n/Betsy Crowe p/87386298 a/20 g/Female b/02-02-2003 e/betsycrowe@example.com a/Brighton Town i/T6543210F`
+* To edit the birthday of a patient with IC number "T0123456A" to 10 Jan 2000 <br>
+  `edit i/T0123456A b/10/01/2000`
+* To edit the phone number and email of a patient with IC number "S0123456B" to "87621527" and "betsyc@hotmail.com" respectively <br>
+  `edit i/S0123456B b/10/01/2000 e/betsyc@hotmail.com`
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Deleting a patient: `delete`
 
-Deletes the patient with the specified IC number from the system.
+Deletes the patient with the specified IC number.
 
 Format: `delete i/IC_NUMBER`
 
@@ -377,45 +386,49 @@ Format: `delete i/IC_NUMBER`
 
 Examples:
 
-+ `delete i/T1234567A`
-+ `delete i/T2468012a`
+* To delete a patient with IC number "T2468012A" <br>
+  `delete i/T2468012A`
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Undoing a command: `undo`
 
-Undoes the most recent state of the following commands:
+Undos the most recent command. Only applies to the following commands:
 
 + `delete`
 + `edit`
 + `clear`
 + `add`
++ `assign`
 
 Format: `undo`
 
-+ Input command is **case-sensitive** e.g. `undo` is accepted but not `UNDO`.
-
 Examples:
 
-+ `delete i/T1234567A` deletes this patient from the patient list
-+ `undo` restores this patient back into the patient list
++ `delete i/T1234567A` deletes the patient with the IC number "T1234567A" from the patient list.
+`undo` restores this patient back into the patient list
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Redoing a command: `redo`
 
-Redoes the most recent state of the following commands:
+Redos the most recently undone command. Only applies to the following commands:
 
 + `delete`
 + `edit`
 + `clear`
 + `add`
++ `assign`
 
 Format: `redo`
 
-+ Input command is **case-sensitive** e.g. `redo` is accepted but not `REDO`.
-
 Examples:
 
-+ `delete i/T1234567A` deletes this patient from the patient list
-+ `undo` restores this patient back into the patient list
-+ `redo` once again deletes this patient from the patient list
++ `delete i/T1234567A` deletes the patient with IC number "T1234567A" from the patient list
+`undo` restores this patient back into the patient list.
+`redo` once again deletes this patient from the patient list
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Finding a patient by name: `find`
 
@@ -523,11 +536,13 @@ Exits the program.
 #### Format:
 `exit`
 
-### Saving the data
+### Saving the program
 
-Advanced&Efficient data are saved in the hard disk automatically after any command that changes the data. There is no
+Advanced&Efficient data is saved in the hard disk automatically after any command that changes the data. There is no
 need to
 save manually.
+
+[Back to Table-of-contents](#table-of-contents)
 
 ### Editing the data file
 
@@ -610,17 +625,21 @@ application before running the application again.
 
 <a id="cli"></a>
 1. **Command-Line Interface**
+    
+    A command-line interface (CLI) is a text-based user interface (UI) used to run programs, 
+    manage computer files and interact with the computer, involving more typing than clicking.
 
-    A command-line interface (CLI) is a text-based user interface (UI) used to run programs, manage computer files and interact with the computer, involving more typing than clicking.
 <a id="gui"></a>
 2. **Graphical User Interface**
 
-    A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus, often by clicking.
+    A graphical user interface (GUI) is a digital interface 
+    in which a user interacts with graphical components such as icons, buttons, and menus, often by clicking.
 
 3. **Java 11**
 
    Java is the programming language used in creating A&E. “11” refers to the version of the language used.
 
+[Back to Table-of-contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
