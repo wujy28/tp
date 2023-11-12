@@ -7,7 +7,7 @@ relevant departments.
 
 ----------------------------------------------------------------------
 
-## Contribution
+### Contribution
 
 Here are my contributions to the project.
 
@@ -16,64 +16,82 @@ Here are my contributions to the project.
 
 ----------------------------------------------------------------------
 
-## Features implemented
+### Features implemented
 
-### View Feature [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
+#### View Feature [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
+
 **What it does** - Allows users to view the information of a specific patient with `Ic Number`
 
-**Justification** - Currently there is a find command which allows users to find patients by keywords in names. However if a user wants to search for a specific patient with Ic Number, there is no option for that. Since find returns a list of patients with names matching the keyword, the user would have to manually go through the list to find that specific patient.
+**Justification** - Currently there is a find command which allows users to find patients by keywords in names. However
+if a user wants to search for a specific patient with Ic Number, there is no option for that. Since find returns a list
+of patients with names matching the keyword, the user would have to manually go through the list to find that specific
+patient.
 
-
-**Highlights** - Since Add command is enhanced to prevent patients with duplicate `Ic Number` from being added, users can be assured that the displayed user is the one they desired.
+**Highlights** - Since Add command is enhanced to prevent patients with duplicate `Ic Number` from being added, users
+can be assured that the displayed user is the one they desired.
 
 
 ----------------------------------------------------------------------
 
-## Enhancement to existing features:
+### Enhancement to existing features:
 
-### Enhanced Add Feature
+#### Enhanced Add Feature
 
-1. Option to add patients with compulsory fields only [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78),
-    - Previously, users have to fill in all the patient fields for the patient to added.
-    - Currently, users only need to fill in `Name` and `Ic Number` to add a patient
-2. Check for duplicate `Ic Number` before adding a patient [#128](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/128)
-    - Previously the users are able to add patients with `Ic Number` that already exists
-   in another patient in the patient record.
-    - Currently, user will not allowed to add another patient with existing `Ic Number`
-   and an error message will be shown.
+1. Option to add patients with required fields only [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78)
+2. Prevent patient with `IC Number` that already exists in system from being
+   added. [#128](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/128)
 
+#### Enhanced exception / error messages for users
 
-### Enhanced exception / error messages for users
-
-1. `PatientWithFieldNotFoundException` thrown when no patient with user-specified field found [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
+1. `PatientWithFieldNotFoundException` thrown when no patient with user-specified field
+   found [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
     - Previously, when user input an `Ic Number` that does not exist in a patient record,
-   it does not show any helpful message but simply showed an empty list.
+      it does not show any helpful message but simply showed an empty list.
     - Currently, when user input an `Ic Number` that does not exist in a patient record,
-   an exception will be thrown and helpful message will be displayed to inform users about it.
-2. Integrated `PatientWithFieldNotFoundException` into all relevant commands [#153](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/153)
+      an exception will be thrown and helpful message will be displayed to inform users about it.
+2. Integrated `PatientWithFieldNotFoundException` into all relevant
+   commands [#153](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/153)
     - Assign, Delete, Edit, Record - Thrown when user entered an `Ic Number` that does not exist in any patient.
     - Find - Thrown when user entered keyword(s) that does not exist in any patient's name.
 
-
-### Enhanced `ModelManager` [#128](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/128)
+#### Enhanced `ModelManager` [#128](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/128)
 
 1. `isPatientWithIcNumberPresent` method to check if a patient with the `Ic Number` is present
-    - Useful for commands which uses `Ic Number` to find a patient like Find, View, etc.
 2. `getCurrentPatientList` method to get current patients in the patient record rather than filtered list
-    - Useful for commands which aims to perform commands on patients outside of the displayed list.
 3. Testing utilities for the above mentioned methods. in `ModelManagerTest.java`.
 
+#### Enhanced testing utilities
 
-
-### Enhanced testing utilities
-
-1. Account for new Patient attributes [#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102), [#116](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/116)
-   - Refactored testing facilities which utilized patients like `CommandTestUtil`, `TypicalPatients` and `PatientBuilder`
-2. Significantly improved coverage for AddCommandParser & EditCommandParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78), [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
+1. Account for new Patient
+   attributes [#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102), [#116](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/116)
+    - Refactored testing facilities which utilized patients like `CommandTestUtil`, `TypicalPatients`
+      and `PatientBuilder`
+2. Significantly improved coverage for AddCommandParser &
+   EditCommandParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78), [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
 3. Added testing for AssignCommand feature [#163](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/163)
+
 ----------------------------------------------------------------------
 
-## Contributions to team-based task:
+### Contributions to User Guide:
+
+- Added documentation & screenshot for `add` and `view` commands
+- Added `Quick-start` section
+- Added `FAQ` section
+
+### Contributions to Developer Guide:
+
+- Added the `Overview` and `Acknowledgements` section
+- Updated `Setting up, getting started` guide
+- Updated links in `Design` section
+- Added `Add Patient` and `View Patient` feature in `Implementation` section
+- Added & updated
+  whole of `Appendix: Requirements`
+  section -- `Product scope`, `User stories`,`Use cases (UC01-UC09)`,`Non-Functional Requirements`, `Glossary`
+- Added points 1&2 in `Appendix: Planned Enhancements` section
+
+----------------------------------------------------------------------
+
+### Contributions to team-based task:
 
 * tP Team organisation and Repo setup
 * Managed Team Google Docs for ease of use
@@ -83,13 +101,15 @@ Here are my contributions to the project.
 * Managed product demo for v1.2 and v1.3
 * Refactor Person instances to Patient in codebase [#68](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/68)
 
-## Review / mentoring contributions:
+### Review / mentoring contributions:
+
 * Reviewed pull requests by other group members and provided insightful comments
     * Some non-trivial PRs i have
       reviewed [#77](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/77)
       [#89](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/89) [#96](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/96) [#107](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/107) [#120](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/120) [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145) [#155](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/155) [#167](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/167)
     * Reviewed, approved and merged a total of 33 PRs out of ..
 * Provided guidelines to aid group members in implementation
-    * Example : Aided group member in testing of Edit command [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145)
+    * Example : Aided group member in testing of Edit
+      command [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145)
 
 
