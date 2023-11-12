@@ -6,12 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.REC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INITIAL_OBSERVATION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TREATMENT_PLAN_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.RecordCommand.MESSAGE_EDIT_RECORD_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.AMY;
 import static seedu.address.testutil.TypicalPatients.BENSON;
@@ -29,12 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Record;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
-import seedu.address.testutil.EditPatientDescriptorBuilder;
-import seedu.address.testutil.EditRecordDescriptorBuilder;
-import seedu.address.testutil.PatientBuilder;
-import seedu.address.testutil.RecordBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RecordCommand.
