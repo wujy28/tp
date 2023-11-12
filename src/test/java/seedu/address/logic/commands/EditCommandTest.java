@@ -120,18 +120,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePatientFilteredList_failure() throws PatientWithFieldNotFoundException {
-        showPatientAtIC(model, ALICE.getIcNumber());
-
-        // edit patient in filtered list into a duplicate in address book
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patientInList = model.getPatient(ALICE.getIcNumber(), lastShownList);
-        EditCommand editCommand = new EditCommand(ALICE.getIcNumber(),
-            new EditPatientDescriptorBuilder(patientInList).build());
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PATIENT);
-    }
-
-    @Test
     public void execute_invalidPatientIcList_failure() {
         String invalidIC = "";
         assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));

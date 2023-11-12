@@ -140,7 +140,7 @@ on the fullscreen icon at the top right hand corner to enlarge the window.
 
 ## Features
 
-<box type="info" seamless>
+<box type="info">
 
 **Notes about the command format:**<br>
 
@@ -186,17 +186,21 @@ Adds a patient into the system
 
 Format: `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY]] [t/TAG]...`
 
-+ IC number cannot be edited aftet the patient has been added.
++ IC number cannot be edited after the patient has been added.
 
-**Caution:** Duplicate patients are not allowed. Duplicate patients refer to patients with the same name and/or IC
+<box type="warning">
+    Duplicate patients are not allowed. Duplicate patients refer to patients with the same name and/or IC
 number.
-
-- Names are case-sensitive
-    - Han Bo is different from han bo
-- IC numbers are case-insensitive
+    - Names are case-sensitive
+    - `Han Bo` is different from `han bo`
+    - IC numbers are case-insensitive
     - T1234567A is the same as t1234567a
 
+</box>
+
+<box type="info">
 **Note:** Optional fields not specified while adding the patient will be filled with default values as shown below.
+</box>
 
 <img src='images/ug/addPatients.png' width='500'>
 
@@ -228,8 +232,10 @@ Expected output when command succeeds:
 
 <img src='images/ug/viewPatient.png' width='500'>
 
+<box type="info">
 **Note:** The command will not display the patient’s record card in the record panel immediately. To view the patient’s
 details and record card, you have to click on their patient card in the list.
+</box>
 
 [Back to Table-of-contents](#table-of-contents)
 
@@ -420,33 +426,33 @@ data file at the next run. Hence, it is recommended to take a backup of the file
 
 ## FAQ
 
-**Q**: I double-clicked the Jar file and it doesnt run, why?\
+**Q**: I double-clicked the Jar file and it doesn't run, why?\
 **A**: Make sure that Java 11 is installed and do refer to step 5 of [Quick-start](#quick-start) for instructions to run
 application.
 
-**Q**: I have a list of patients, how do i view their details?\
+**Q**: I have a list of patients, how do I view their details?\
 **A**: Please click on the patient you are interested in viewing. The details will be on the right hand side in the
 Patient Record Panel.
 
-**Q**: The Patient List Panel is cut off, i cant see some details for each patient\
-**A**: Please resize the application by dragging the border of the application window with your mouse.
-If the appplication is already in full screen mode, please drag the divider between the Patient List Panel and Patient
+**Q**: The Patient List Panel is cut off, I cant see some details for each patient\
+**A**: Please resize the application by dragging the border of the application window with your mouse. If the appplication is already in full screen mode, please drag the divider between the Patient List Panel and Patient
 Record Panel to the right.
 
-**Q**: I entered a command and there is no response from the application, what do i do?\
+**Q**: I entered a command and there is no response from the application, what do I do?\
 **A**: A critical error might have occured. Please ensure your command is as specified in [Features](#features). Please contact
 the technical team in charge of your department to file a bug report on our [issues](tps://github.com/AY2324S1-CS2103T-T14-2/tp/issues) page.
 
-**Q**: I have accidentally cleared the whole patient record system, can i retrieve the lost details?\
-**A**: Yes, A&E has the [Undo](#undoing-a-command--undo) feature which allows you to retrieve all the lost details.
+**Q**: I have accidentally cleared the whole patient record system, can I retrieve the lost details?\
+**A**: Yes, A&E has the [Undo](#undoing-a-command-undo) feature which allows you to retrieve all the lost details.
 
 **Q**: Will my data be saved immediately?\
-**A**: Yes, A&E saved your data after every command executed.
+**A**: Yes, A&E saves your data after every command executed.
 
 **Q**: How do I transfer my data to another Computer?\
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AAndE home folder.
 
+[Back to Table-of-contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
