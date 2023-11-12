@@ -76,8 +76,6 @@
         "assigning-a-patient-to-a-department": "Assigning a patient to a department",
         "sorting-patients": "Sorting patients",
         "undoing-and-redoing-a-command": "Undoing and Redoing a command",
-        "saving-data": "Saving data",
-        "explanation": "Explanation:",
         "appendix-planned-enhancements": "Appendix: Planned Enhancements"
       },
       "headingKeywords": {}
@@ -149,12 +147,12 @@
         "assigning-a-patient-to-a-department-assign": "Assigning a patient to a department: assign",
         "clearing-all-entries-clear": "Clearing all entries: clear",
         "exiting-the-program-exit": "Exiting the program: exit",
-        "saving-the-data": "Saving the data",
+        "saving-the-program": "Saving the program",
         "editing-the-data-file": "Editing the data file",
         "faq": "FAQ",
         "known-issues": "Known issues",
-        "when-using-multiple-screens-if-you-move-the-application-to-a-secondary-screen-and-later-switch-to-using-only-the-primary-screen-the-gui-will-open-off-screen-the-remedy-is-to-delete-the-preferences-json-file-created-by-the-application-before-running-the-application-again": "When using multiple screens, if you move the application to a secondary screen, and later switch to using only the\nprimary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the\napplication before running the application again.\n\n",
         "command-summary": "Command summary",
+        "glossary": "Glossary",
         "appendix-departments": "Appendix: Departments"
       },
       "headingKeywords": {}
