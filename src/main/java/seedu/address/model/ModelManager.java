@@ -115,7 +115,6 @@ public class ModelManager implements Model {
         return null;
     }
 
-
     @Override
     public void addPatient(Patient patient, String command) {
         addressBook.addPatient(patient);
@@ -146,6 +145,7 @@ public class ModelManager implements Model {
         }
         return false;
     }
+
     @Override
     public void commitAddressBook(String command) {
         versionedAddressBook.commit(addressBook.copy(), command);
@@ -158,7 +158,6 @@ public class ModelManager implements Model {
         addressBook.resetData(newData);
         return nextCommand;
     }
-
 
     /**
      * Converts to the previous state of the patient data

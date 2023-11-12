@@ -54,7 +54,7 @@ public class PatientTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Patient aliceCopy = new PatientBuilder(ALICE).build();
+        Patient aliceCopy = new PatientBuilder(ALICE).buildWithRecord();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true

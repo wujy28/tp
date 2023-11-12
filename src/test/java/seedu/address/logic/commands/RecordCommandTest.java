@@ -31,6 +31,9 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Record;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
+import seedu.address.testutil.EditRecordDescriptorBuilder;
+import seedu.address.testutil.PatientBuilder;
+import seedu.address.testutil.RecordBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RecordCommand.
@@ -38,7 +41,31 @@ import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 public class RecordCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        List<Patient> lastShownList = model.getFilteredPatientList();
+        Patient patientToEdit = model.getPatient(ALICE.getIcNumber(), lastShownList);
+        PatientBuilder patientInList = new PatientBuilder(patientToEdit);
+        Patient editedPatient = patientInList.withAssignedDepartment(ALICE.getAssignedDepartment().toString())
+                .withRecord(VALID_INITIAL_OBSERVATION_BOB, VALID_DIAGNOSIS_BOB, VALID_TREATMENT_PLAN_BOB)
+                .buildWithRecord();
+        RecordBuilder recordBuilder = new RecordBuilder(patientInList);
+        Record editedRecord = recordBuilder.withInitialObservations(VALID_INITIAL_OBSERVATION_BOB)
+                .withDiagnosis(VALID_DIAGNOSIS_BOB).withTreatmentPlan(VALID_TREATMENT_PLAN_BOB).build();
+
+        RecordCommand.EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder()
+                .withInitialObservations(VALID_INITIAL_OBSERVATION_BOB)
+                .withDiagnosis(VALID_DIAGNOSIS_BOB).withTreatmentPlan(VALID_TREATMENT_PLAN_BOB).build();
+        RecordCommand recordCommand = new RecordCommand(ALICE.getIcNumber(), descriptor);
+
+        String expectedMessage = String.format(MESSAGE_EDIT_RECORD_SUCCESS, Messages.formatRecord(editedPatient,
+                editedRecord));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPatient(patientToEdit, editedPatient, "");
+
+        assertCommandSuccess(recordCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
@@ -64,6 +91,7 @@ public class RecordCommandTest {
 
         RecordCommand command = new RecordCommand(testIcNumber1, testEditRecordDescriptor);
 
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
         Record expectedRecord = ALICE.getRecord();

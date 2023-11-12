@@ -43,6 +43,9 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Patient editedPatient = new PatientBuilder().build();
+        editedPatient = new PatientBuilder(editedPatient).withAssignedDepartment(ALICE.getAssignedDepartment()
+                .toString()).withRecord(ALICE.getRecord().getInitialObservations().toString(), ALICE.getRecord()
+                .getDiagnosis().toString(), ALICE.getRecord().getTreatmentPlan().toString()).buildWithRecord();
         EditCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditCommand editCommand = new EditCommand(ALICE.getIcNumber(), descriptor);
 
@@ -63,6 +66,9 @@ public class EditCommandTest {
         PatientBuilder patientInList = new PatientBuilder(patientToEdit);
         Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withTags(VALID_TAG_HUSBAND).build();
+        editedPatient = new PatientBuilder(editedPatient).withAssignedDepartment(ALICE.getAssignedDepartment()
+                .toString()).withRecord(ALICE.getRecord().getInitialObservations().toString(), ALICE.getRecord()
+                .getDiagnosis().toString(), ALICE.getRecord().getTreatmentPlan().toString()).buildWithRecord();
 
         EditCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
@@ -97,6 +103,9 @@ public class EditCommandTest {
         List<Patient> lastShownList = model.getFilteredPatientList();
         Patient patientInFilteredList = model.getPatient(ALICE.getIcNumber(), lastShownList);
         Patient editedPatient = new PatientBuilder(patientInFilteredList).withName(VALID_NAME_BOB).build();
+        editedPatient = new PatientBuilder(editedPatient).withAssignedDepartment(ALICE.getAssignedDepartment()
+                .toString()).withRecord(ALICE.getRecord().getInitialObservations().toString(), ALICE.getRecord()
+                .getDiagnosis().toString(), ALICE.getRecord().getTreatmentPlan().toString()).buildWithRecord();
         EditCommand editCommand = new EditCommand(ALICE.getIcNumber(),
             new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 

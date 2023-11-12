@@ -1220,29 +1220,6 @@ Testers are expected to do more *exploratory* testing.
        Expected: Patient list is cleared again. Details of success of command is shown in the system message. UI is
        updated to display an empty patient list.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. Saving Assigned Department to Storage
-
-### Explanation:
-
-**Storage**: Storage classes are to save the details of the patients upon exiting the app. While the basic attributes of
-the patients like IC_NUMBER,
-Gender and all were being saved, complicated attributes like Assigned Department were not.
-
-**Assigned Department**: The patient will be assigned to a department when being admitted.
-
-**Enhancement**: Made changes to the storage and RecordBuilder classes and the tests
-to ensure the department assigned is saved as well.
-
-1. _{ more test cases …​ }_
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
