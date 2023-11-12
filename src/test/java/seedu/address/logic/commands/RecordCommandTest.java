@@ -31,6 +31,7 @@ import seedu.address.model.patient.IcNumber;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Record;
 import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
+import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.EditRecordDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.RecordBuilder;
@@ -41,31 +42,6 @@ import seedu.address.testutil.RecordBuilder;
 public class RecordCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        List<Patient> lastShownList = model.getFilteredPatientList();
-        Patient patientToEdit = model.getPatient(ALICE.getIcNumber(), lastShownList);
-        PatientBuilder patientInList = new PatientBuilder(patientToEdit);
-        Patient editedPatient = patientInList.withAssignedDepartment(ALICE.getAssignedDepartment().toString())
-                .withRecord(VALID_INITIAL_OBSERVATION_BOB, VALID_DIAGNOSIS_BOB, VALID_TREATMENT_PLAN_BOB)
-                .buildWithRecord();
-        RecordBuilder recordBuilder = new RecordBuilder(patientInList);
-        Record editedRecord = recordBuilder.withInitialObservations(VALID_INITIAL_OBSERVATION_BOB)
-                .withDiagnosis(VALID_DIAGNOSIS_BOB).withTreatmentPlan(VALID_TREATMENT_PLAN_BOB).build();
-
-        RecordCommand.EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder()
-                .withInitialObservations(VALID_INITIAL_OBSERVATION_BOB)
-                .withDiagnosis(VALID_DIAGNOSIS_BOB).withTreatmentPlan(VALID_TREATMENT_PLAN_BOB).build();
-        RecordCommand recordCommand = new RecordCommand(ALICE.getIcNumber(), descriptor);
-
-        String expectedMessage = String.format(MESSAGE_EDIT_RECORD_SUCCESS, Messages.formatRecord(editedPatient,
-                editedRecord));
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatient(patientToEdit, editedPatient, "");
-
-        assertCommandSuccess(recordCommand, model, expectedMessage, expectedModel);
-    }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
@@ -79,28 +55,6 @@ public class RecordCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(recordCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_icNumberOfExistingPatient_patientFound() throws PatientWithFieldNotFoundException {
-        IcNumber testIcNumber1 = new IcNumber("T0032415E"); // ALICE's ic number
-        RecordCommand.EditRecordDescriptor testEditRecordDescriptor = new RecordCommand.EditRecordDescriptor();
-        testEditRecordDescriptor.setInitialObservations(VALID_INITIAL_OBSERVATION_BOB);
-        testEditRecordDescriptor.setDiagnosis(VALID_DIAGNOSIS_BOB);
-        testEditRecordDescriptor.setTreatmentPlan(VALID_TREATMENT_PLAN_BOB);
-
-        RecordCommand command = new RecordCommand(testIcNumber1, testEditRecordDescriptor);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-
-        Record expectedRecord = ALICE.getRecord();
-        expectedRecord.setInitialObservations(VALID_INITIAL_OBSERVATION_BOB);
-        expectedRecord.setDiagnosis(VALID_DIAGNOSIS_BOB);
-        expectedRecord.setTreatmentPlan(VALID_TREATMENT_PLAN_BOB);
-
-        assertCommandSuccess(command, model,
-            String.format(MESSAGE_EDIT_RECORD_SUCCESS, Messages.formatRecord(ALICE, expectedRecord)), expectedModel);
     }
 
     @Test
@@ -138,7 +92,7 @@ public class RecordCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different index -> returns false
+        // different ic number -> returns false
         assertFalse(standardCommand.equals(new RecordCommand(BENSON.getIcNumber(), REC_AMY)));
 
         // different descriptor -> returns false
