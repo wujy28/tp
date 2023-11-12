@@ -20,7 +20,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Record;
-import seedu.address.model.patient.UniqueRecordList;
 import seedu.address.model.patient.exceptions.DuplicatePatientException;
 import seedu.address.testutil.PatientBuilder;
 
@@ -88,12 +87,8 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        UniqueRecordList records = new UniqueRecordList();
-        for (int i = 0; i < addressBook.getRecordList().size(); i++) {
-            records.add(addressBook.getRecordList().get(i));
-        }
         String expected = AddressBook.class.getCanonicalName() + "{patients=" + addressBook.getPatientList()
-                + ", records=" + records + "}";
+                + ", records=" + addressBook.getRecordList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 

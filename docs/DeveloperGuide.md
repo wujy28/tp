@@ -7,6 +7,46 @@ pageNav: 3
 # Advanced&Efficient (A&E) Developer Guide
 
 <!-- * Table of Contents -->
+
+## Table of Contents
+
+* [**Overview**](#overview)
+* [**Acknowledgements**](#acknowledgements)
+* [**Setting up, getting started**](#setting-up-getting-started)
+* [**Design**](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+* [**Implementation**](#implementation)
+  * [Add patient feature](#add-patient-feature)
+  * [View patient feature](#view-patient-feature)
+  * [Edit Record feature](#edit-record-feature)
+  * [Assign department feature](#assign-department-feature)
+  * [Sort feature](#sort-feature)
+  * [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+  * [Data archiving](#data-archiving)
+* [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+* [**Appendix: Requirements**](#appendix-requirements)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Adding a patient](#adding-a-patient)
+  * [Viewing a patient](#viewing-a-patient)
+  * [Deleting a patient](#deleting-a-patient)
+  * [Editing a patient](#editing-a-patient)
+  * [Editing a patient record](#editing-a-patient-record)
+  * [Assigning a patient to a department](#assigning-a-patient-to-a-department)
+  * [Sorting patients](#sorting-patients)
+  * [Undoing and Redoing a command](#undoing-and-redoing-a-command)
+* [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
+  
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -991,10 +1031,10 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `add n/You Wen Ti i/T0374628Z`<br>
       Expected: Patient with name `You Wen Ti` and IC number `T0374628Z` is added. Details of the added patient is shown
-      in the system message. UI is updated to display newly added patient.
+      in the status message. UI is updated to display newly added patient.
 
    3. Test case: `add n/Wo Meiyou`<br>
-      Expected: No patient is added. Error details shown in the system message. Patient list remains the same.
+      Expected: No patient is added. Error details shown in the status message. Patient list remains the same.
 
    4. Other incorrect add commands to try: `add`, `add Wo Meiyou T0365867F`<br>
       Expected: Similar to previous.
@@ -1008,10 +1048,10 @@ Testers are expected to do more *exploratory* testing.
       pr/HIGH t/critical`<br>
       Expected: Patient with name `Ingot Gold`, IC number `T0482756J`, gender `MALE`, birthday `20/05/2004`, phone
       number `87654487`, email `goldie@email.com`, address `Old Town Road 1`, priority `HIGH`, and tag `critical` is
-      added. Details of the added patient is shown in the system message. UI is updated to display newly added patient.
+      added. Details of the added patient is shown in the status message. UI is updated to display newly added patient.
 
    3. Test case: `add n/Betty Crocker i/T0826789S a/Downtown East a/Lowcoast West`<br>
-      Expected: No patient is added. Error details shown in the system message. Patient list remains the same.
+      Expected: No patient is added. Error details shown in the status message. Patient list remains the same.
 
    4. Other incorrect add commands to try: `add`, `add n/Beckham Low pr/high`<br>
       Expected: Similar to previous.
@@ -1024,10 +1064,10 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `view i/T7654321A`<br>
       Expected: Patient with IC number `T7654321A` will be displayed in patient list. Details of success of command is
-      shown in the system message. Patient list is updated in UI.
+      shown in the status message. Patient list is updated in UI.
 
    3. Test case: `view I/T7654321A`<br>
-      Expected: No patient is viewed. Error details shown in the system message. Patient list remains the same.
+      Expected: No patient is viewed. Error details shown in the status message. Patient list remains the same.
 
    4. Other incorrect view commands to try: `view`, `view i/T8374829X`(where a patient with ic number `T8374829X` does
       not exist)<br>
@@ -1040,11 +1080,11 @@ Testers are expected to do more *exploratory* testing.
     1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number `T7654321A`.
 
     2. Test case: `delete i/T7654321A`<br>
-       Expected: Patient with IC number `T7654321A` is deleted. Details of the deleted patient is shown in the system
+       Expected: Patient with IC number `T7654321A` is deleted. Details of the deleted patient is shown in the status
        message. Patient list is updated in UI.
 
     3. Test case: `delete I/T7654321A`<br>
-       Expected: No patient is deleted. Error details shown in the system message. Patient list remains the same.
+       Expected: No patient is deleted. Error details shown in the status message. Patient list remains the same.
 
     4. Other incorrect delete commands to try: `delete`, `delete i/T9384758D` (where a patient with ic number
        `T9384758D` does not exist)<br>
@@ -1058,10 +1098,10 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `edit i/T7654321A n/John Doe`<br>
       Expected: Patient with IC number `T7654321A` will have their name edited to `John Doe`. Details of the edited
-      patient is shown in the system message. UI is updated to display patient's new details.
+      patient is shown in the status message. UI is updated to display patient's new details.
 
    3. Test case: `edit i/T7654321A`<br>
-      Expected: No patient is edited. Error details shown in the system message. Patient's details remains the same.
+      Expected: No patient is edited. Error details shown in the status message. Patient's details remains the same.
 
    4. Other incorrect edit commands to try: `edit`, `edit i/T0264782A n/Mary Jane` (where a patient with ic number
       `T0264782A` does not exist)<br>
@@ -1075,10 +1115,10 @@ Testers are expected to do more *exploratory* testing.
    2. Test case: `record i/T7654321A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`<br>
       Expected: Record of the patient with IC number `T7654321A` is edited to have `Broken Arm` as initial observation
       , `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan. Details of the edited record is shown
-      in the system message. Patient's record is updated in UI.
+      in the status message. Patient's record is updated in UI.
 
    3. Test case: `record i/T7654321A`<br>
-      Expected: No patient record is edited. Error details shown in the system message. Patient's record remains the
+      Expected: No patient record is edited. Error details shown in the status message. Patient's record remains the
       same.
 
    4. Other incorrect delete commands to try: `record`, `record i/T7654321A o/Broken Pinky o/Dizziness`,
@@ -1093,10 +1133,10 @@ Testers are expected to do more *exploratory* testing.
 
     2. Test case: `assign i/T7654321A d/cardiology`<br>
        Expected: Patient IC number `T7654321A` is assigned to department `Cardiology`. Details of the assigned
-       department is shown in the system message. Patient's assigned department is updated in UI.
+       department is shown in the status message. Patient's assigned department is updated in UI.
 
     3. Test case: `assign i/T7654321A`<br>
-       Expected: Patient is not assigned a department. Error details shown in the system message. Patient's assigned
+       Expected: Patient is not assigned a department. Error details shown in the status message. Patient's assigned
        department remains the same.
 
     4. Other incorrect assign commands to try: `assign`, `assign i/T7654321A d/Cardio` (department is not spelt fully),
@@ -1111,10 +1151,10 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `sort name`<br>
       Expected: Patient list is sorted according to `name` in alphanumerical order. Details of success of command is
-      shown in the system message. Order of patients in list is updated in UI.
+      shown in the status message. Order of patients in list is updated in UI.
 
    3. Test case: `sort`<br>
-      Expected: Patient list is not sorted. Error details shown in the system message. Patient list remains the same.
+      Expected: Patient list is not sorted. Error details shown in the status message. Patient list remains the same.
 
 2. Sorting patients by IC number
 
@@ -1122,7 +1162,7 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `sort ic`<br>
       Expected: Patient list is sorted according to `IC number`, in alphanumerical order. Details of success of command
-      is shown in the system message. Order of patients in list is updated in UI.
+      is shown in the status message. Order of patients in list is updated in UI.
 
 3. Sorting patients by assigned department
 
@@ -1131,7 +1171,7 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `sort department`<br>
       Expected: Patient list is sorted according to `assigned department`, where patients with default departments are
-      placed at the bottom. Details of success of command is shown in the system message. Order of patients in list is
+      placed at the bottom. Details of success of command is shown in the status message. Order of patients in list is
       updated in UI.
 
 4. Sorting patients by age
@@ -1141,7 +1181,7 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `sort age`<br>
       Expected: Patient list is sorted according to `age`, where patients with default birthdays/ages are placed on top,
-      followed by the remaining ages in increasing order. Details of success of command is shown in the system message.
+      followed by the remaining ages in increasing order. Details of success of command is shown in the status message.
       Order of patients in list is updated in UI.
 
 5. Sorting patients by priority
@@ -1151,7 +1191,7 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `sort priority`<br>
       Expected: Patient list is sorted according to descending `priority`. Details of success of command is shown in the
-      system message. Order of patients in list is updated in UI.
+      status message. Order of patients in list is updated in UI.
 
 ### Undoing and Redoing a command
 
@@ -1162,11 +1202,11 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `add n/Shen Qi Feng i/S0473859D` then `undo`<br>
       Expected: Patient with name `Shen Qi Feng` and IC number `S0473859D` is added, then removed. Details of success of
-      command is shown in the system message. Patient list remains the same in UI after both commands are executed.
+      command is shown in the status message. Patient list remains the same in UI after both commands are executed.
 
    3. Test case: `redo` (after executing the previous test case)<br>
       Expected: Patient with name `Shen Qi Feng` and IC number `S0473859D` is added back. Details of success of command
-      is shown in the system message. Patient list is updated in UI.
+      is shown in the status message. Patient list is updated in UI.
 
 2. Undoing and Redoing edit command
 
@@ -1175,12 +1215,12 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `edit i/T7654321A a/Dummy Address Test Street 1` then `undo`
       Expected: Address of patient with IC number `T7654321A` is changed to `Dummy Address Test Street 1`, then changed
-      back to initial address. Details of success of command is shown in the system message. Patient list remains the
+      back to initial address. Details of success of command is shown in the status message. Patient list remains the
       same in UI after both commands are executed.
 
    3. Test case: `redo` (after executing the previous test case)<br>
       Expected: Address of patient with IC number `T7654321A` is changed back to `Dummy Address Test Street 1`. Details
-      of success of command is shown in the system message. Patient's details is updated in UI.
+      of success of command is shown in the status message. Patient's details is updated in UI.
 
 3. Undoing and Redoing delete command
 
@@ -1188,11 +1228,11 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `delete i/T6789031Q` then `undo`<br>
       Expected: Patient with IC number `T6789031Q` is deleted, then added back. Details of success of command is shown
-      in the system message. Patient list remains the same in UI after both commands are executed.
+      in the status message. Patient list remains the same in UI after both commands are executed.
 
    3. Test case: `redo` (after executing the previous test case)<br>
       Expected: Patient with IC number `T6789031Q` is deleted again. Details of success of command is shown in the
-      system message. Patient list is updated in UI.
+      status message. Patient list is updated in UI.
 
 4. Undoing and Redoing assign command
 
@@ -1201,23 +1241,23 @@ Testers are expected to do more *exploratory* testing.
 
    2. Test case: `assign i/T7654321A d/Endocrinology` then `undo`<br>
       Expected: Patient with IC number `T7654321A` is assigned to department `Endocrinology`, then assigned back to
-      initial department. Details of success of command is shown in the system message. Patient list remains the same in
+      initial department. Details of success of command is shown in the status message. Patient list remains the same in
       UI after both commands are executed.
 
    3. Test case: `redo` (after executing the previous test case)<br>
       Expected: Patient with IC number `T7654321A` is assigned back to department `Endocrinology`. Details of success of
-      command is shown in the system message. Patient's assigned department is updated in UI.
+      command is shown in the status message. Patient's assigned department is updated in UI.
 
 5. Undoing and Redoing clear command
 
     1. Prerequisites: Have at least one patient in the system.
 
     2. Test case: `clear` then `undo`<br>
-       Expected: Patient list is cleared, then restored. Details of success of command is shown in the system message.
+       Expected: Patient list is cleared, then restored. Details of success of command is shown in the status message.
        Patient list remains the same in UI after both commands are executed.
 
     3. Test case: `redo` (after executing the previous test case)<br>
-       Expected: Patient list is cleared again. Details of success of command is shown in the system message. UI is
+       Expected: Patient list is cleared again. Details of success of command is shown in the status message. UI is
        updated to display an empty patient list.
 
 --------------------------------------------------------------------------------------------------------------------
