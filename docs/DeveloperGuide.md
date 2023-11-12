@@ -46,8 +46,8 @@ pageNav: 3
   * [Sorting patients](#sorting-patients)
   * [Undoing and Redoing a command](#undoing-and-redoing-a-command)
 * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
-  
-<page-nav-print />
+
+<page-nav />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ pageNav: 3
 Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and connecting patients with
 relevant departments. It leverages on ED doctors fast typing skill by using the Command Line Interface (CLI).
 
-This developer guide aims to guide future developers / maintainers of **Advanced&Efficient** by providing the
+This developer guide aims to guide future developers and maintainers of **Advanced&Efficient** by providing the
 implementation philosophy of the software design and features.
 
 
@@ -67,8 +67,8 @@ implementation philosophy of the software design and features.
 - Advanced&Efficient is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project by SE-EDU
   initiative.
 
-- Libraries
-  used [JavaFx](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson), [PlantUML](https://plantuml.com/)
+- Libraries used [JavaFx](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5),
+  [Jackson](https://github.com/FasterXML/jackson), [PlantUML](https://plantuml.com/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
-  API `interface` mentioned in the previous point.
+  API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
@@ -206,7 +206,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
-* stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which
+* stores the currently displayed `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
@@ -243,7 +243,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -263,10 +263,10 @@ and creates the `AddCommand` to be executed by the `LogicManager`. `AddCommand` 
 
 Given below is an example usage scenario and how the add patient operation is handled in A&E.
 
-Step 1. Assuming the application has been launched, the user enters the required fields followed by any optional fields.
+**Step 1.** Assuming the application has been launched, the user enters the required fields followed by any optional fields.
 
 For adding **only** required fields, the user enters `add n/John Tan i/t7654321j`, which is to add
-a patient with `NAME = John Tan` and `IC_NUMBER = t1234567j`,
+a patient with `NAME = John Tan` and `IC_NUMBER = t7654321j`.
 
 For adding **additional** optional fields, the user enters `add n/John Tan i/t7654321j p/90909090`, which is to add the
 optional field `Phone = 90909090`.
@@ -277,19 +277,19 @@ optional field `Phone = 90909090`.
 
 </box>
 
-Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
+**Step 2.** `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
 command word `add` and the argument `n/John Tan i/t7654321j`. After splitting, `AddressBookParser#parseCommand` would
 identify
 that the command is `Add` and instantiate `AddCommandParser` and call its `AddCommandParser#parse` to parse the
 argument accordingly.
 
-Step 3. `AddCommandParser#parse` will call `AddCommandParser#createPatient` method to create the patient with the
+**Step 3.** `AddCommandParser#parse` will call `AddCommandParser#createPatient` method to create the patient with the
 relevant fields and fills all optional fields
 with default values otherwise. It is then passed as an argument to instantiate the `AddCommand`, which is then returned
 by
-`AddCommandParser#parse`
+`AddCommandParser#parse`.
 
-Step 4. `LogicManager#execute` now invokes `AddCommand#execute` which checks for duplicate `Patient`. `model#addPatient`
+**Step 4.** `LogicManager#execute` now invokes `AddCommand#execute` which checks for duplicate `Patient`. `model#addPatient`
 is then called to add the `Patient` into the address book. It then returns a `CommandResult` stating the patient has
 been listed.
 
@@ -305,6 +305,7 @@ been listed.
     * Cons: Since default values have to be valid as well, default values may seem too similar to actual value.
       Eg. Default value for `Gender` is `OTHER`, which is an actual value as well.
 
+<br>
 
 * **Alternative 2:** Use Java `Optional` class to handle fields.
     * Pros: Implementation is neater and fields with no values can be represented by a warning message instead
@@ -322,20 +323,20 @@ and creates the `ViewCommand` to be executed by the `LogicManager`. `ViewCommand
 
 Given below is an example usage scenario and how the view patient operation is handled in A&E.
 
-Step 1. Assuming the application has been launched, the user enters `view i/t1234567j`, which is to find
+**Step 1.** Assuming the application has been launched, the user enters `view i/t1234567j`, which is to find
 the specific patient with `IC_NUMBER = t1234567j`. This invokes `LogicManager#execute` to execute the logic of the
 command.
 
-Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
+**Step 2.** `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the
 command word `view` and the argument `i/t1234567j`. After splitting, `AddressBookParser#parseCommand` would identify
 that the command is `View` and instantiate `ViewCommandParser` and call its `ViewCommandParser#parse` to parse the
 argument accordingly.
 
-Step 3. `PatientWithIcNumberPredicate` predicate, which checks if a `Patient` has the `IC_NUMBER` is created. It is
+**Step 3.** `PatientWithIcNumberPredicate`, which checks if a `Patient` has the `IC_NUMBER`, is created. It is
 then passed as an argument along with `IC_NUMBER` to instantiate the `ViewCommand`, which is then returned by
-`ViewCommandParser#parse`
+`ViewCommandParser#parse`.
 
-Step 5. `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
+**Step 4.** `LogicManager#execute` now invokes `ViewCommand#execute` which calls `model#updateFilteredPatientList` with
 `PatientWithIcNumberPredicate` as an argument. This will update the displayed filter list to the predicate.
 It then returns a `CommandResult` stating the patient has been listed.
 
@@ -350,14 +351,15 @@ It then returns a `CommandResult` stating the patient has been listed.
     * Pros: Easy to implement.
     * Cons: Similar way in displaying of patient(s) may lead to confusion between commands.
 
+<br>
 
 * **Alternative 2:** Create a new set of JavaFx controls to display that patient differently
   from the current filteredPatientList display.
-    * Pros: New display can be customisable for users' needs.
-      Cons: New display have to be implemented correctly to integrate with
+    * Pros: New display can be customisable for users' needs. 
+    * Cons: New display have to be implemented correctly to integrate with
       existing displays.
 
-### Edit Record feature
+### Edit record feature
 
 #### Implementation
 
@@ -367,29 +369,29 @@ the `Command#execute` method.
 
 Given below is an example usage scenario and how the edit record operation is handled in A&E.
 
-Step 1. Assuming the application has been launched, the user enters `record i/T0201234A o/Broken Arm di/Hairline
+**Step 1.** Assuming the application has been launched, the user enters `record i/T0201234A o/Broken Arm di/Hairline
 fracture tp/Cast for 2 days`, which is to edit the record of the specific patient with `IC_NUMBER = T0201234A` such that
 `Initial Observations = Broken Arm`, `Diagnosis = Hairline fracture`, and `Treatment Plan = Cast for 2 days`. This
 invokes `LogicManager#execute` to execute the logic of the command.
 
-Step 2. `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the command word
+**Step 2.** `LogicManager#execute` would first invoke `AddressBookParser#parseCommand` which splits the command word
 `record` and the arguments `i/T0201234A`, `o/Broken Arm`, `di/Hairline fracture`, and `tp/Cast for 2 days`. After
 splitting, `AddressBookParser#parseCommand` would identify that the command is `Record` and instantiate
 `RecordCommandParser` and call its `RecordCommandParser#parse` to parse the arguments accordingly.
 
-Step 3. `RecordCommandParser#parse` would instantiate `EditRecordDescriptor` from `RecordCommand` and map the
-`IC_NUMBER` prefix to its argument, `T0201234A`, the `INITIAL_OBSERVATIONS` prefix to its argument `Broken Arm`, the
+**Step 3.** `RecordCommandParser#parse` would instantiate `EditRecordDescriptor` from `RecordCommand` and map the
+`IC_NUMBER` prefix to its argument `T0201234A`, the `INITIAL_OBSERVATIONS` prefix to its argument `Broken Arm`, the
 `DIAGNOSIS` prefix to its argument `Hairline fracture`, and the `TREATMENT_PLAN` prefix to its argument
 `Cast for 2 days` using `ArgumentMultimap`. The `ArgumentMultimap` would then be used to identify the `IC_NUMBER` and a
 `ParseException` is thrown if command inputs are invalid. The `ArgumentMultimap` also invokes
 `ArgumentMultimap#isPresent` to check if the other prefixes for `INITIAL_OBSERVATIONS`, `DIAGNOSIS` and `TREATMENT_PLAN`
 are present. If `true` is returned, the arguments will be passed into the `EditRecordDescriptor` object.
 
-Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the
+**Step 4.** The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the
 fields of Record has been edited, and throws a `ParseException` if `false` is returned. It is then passed as an argument
 along with `IC_NUMBER` to instantiate the `RecordCommand`, which is then returned by `RecordCommandParser#parse`.
 
-Step 5. `LogicManager#execute` now invokes `RecordCommand#execute` which gets the specified Patient and their Record
+**Step 5.** `LogicManager#execute` now invokes `RecordCommand#execute` which gets the specified Patient and their Record
 according to the `IC_NUMBER`. Then, `RecordCommand#createEditedRecord` is called with the specified Patient's `Record`
 and the `EditRecordDescriptor` object which contains the values of fields to be edited. Record fields to be edited are
 replaced by values stored in the `EditRecordDescriptor`. Meanwhile, fields that are not to be edited will keep their
@@ -410,10 +412,12 @@ The following sequence diagram summarizes the above-mentioned steps.
     * Pros: Ensures that previous inputs are kept if user does not edit a specific field.
     * Cons: Implementation would be a little more troublesome.
 
+<br>
+
 * **Alternative 2:** Directly use `Patient` constructor with user input and replace non-given fields with default
     values.
     * Pros: Easy to implement.
-    * Cons: This would overwrite all fields in the previous Record even if user did not specify to edit a certain field
+    * Cons: This would overwrite all fields in the previous `Record` even if user did not specify to edit a certain field
       in their input.
 
 ### Assign department feature
@@ -422,7 +426,8 @@ The following sequence diagram summarizes the above-mentioned steps.
 
 The `AssignedDepartment` attribute of a patient in A&E is represented by a stored `Department` value. `Department` is
 an enumeration that encapsulates all the predefined hospital department values stored by the system and available
-to the user. The list of valid departments can be found in the appendix of the User Guide.
+to the user. The list of valid departments can be found in the
+[appendix](https://ay2324s1-cs2103t-t14-2.github.io/tp/UserGuide.html#appendix-departments) of the User Guide.
 
 #### Design considerations:
 
@@ -433,11 +438,15 @@ to the user. The list of valid departments can be found in the appendix of the U
       to easily categorize patients in future features.
     * Cons: Does not support user-defined categories or departments.
 
+<br>
+
 * **Alternative 2:** Using an abstract Department class and inheritance.
     * Pros: Can be made to support user-defined departments. Can specify different behavior for different
       types of departments.
     * Cons: Implementation is more complicated when it comes to storing and keeping track of all the different
       subclasses or limiting valid department values.
+
+<br>
 
 * **Alternative 3:** Using Strings.
     * Pros: Very easy to implement.
@@ -463,8 +472,7 @@ its intended behavior, invoked by the `LogicManager` class. `SortCommandParser` 
 argument string containing a property inputted by the user, to create a `SortCommand` object.
 
 Currently, the sort operation sorts the entire patient list, even if the command is executed when the displayed list
-is filtered (e.g. using the `find` command). This choice will be further elaborated on in the "Design
-considerations" section below.
+is filtered (e.g. using the `find` command). This choice will be further elaborated on below.
 
 #### Design considerations:
 
@@ -476,6 +484,8 @@ considerations" section below.
     * Cons: Behavior might be unintuitive as when the user runs this command, they might expect this command to only
   affect the currently displayed list, which might be filtered.
 
+<br>
+
 * **Alternative 2:** Only sort the currently displayed, or filtered, list.
     * Pros: Allows the user to only alter the visible list, and keep the underlying patient list untouched.
   Behavior is possibly more intuitive.
@@ -485,8 +495,8 @@ considerations" section below.
 #### Sort order
 `SortOrder` is an enumeration within `SortCommand` representing the properties by which the user can sort the list.
 As of now, the only `SortOrder`s available are the following:
-1. Name (lexicographically ascending, case-insensitive)
-2. IC Number (lexicographically ascending, case-insensitive)
+1. Name (alphanumerically ascending, case-insensitive)
+2. IC Number (alphanumerically ascending, case-insensitive)
 3. Department (by ordinal of constant in `Department` enumeration)
 4. Age (numerically ascending, with default age on top)
 5. Priority (descending)
@@ -497,10 +507,10 @@ overridden `compareTo` methods in the related patient attribute classes (i.e. `N
 `Age` and `Priority`). Each `SortCommand` object stores a `SortOrder` value, extracted from the input string by the
 `SortCommandParser` object that created it.
 
-#### Sequence diagram of `SortCommand#execute()`
+#### Sequence diagram of `SortCommand#execute`
 As the creation of the `SortCommand` object is very similar to that of `AssignCommand` as shown above, except that
 it parses the property and uses `SortOrder#getSortOrder(String string)` to retrieve the `SortOrder` value, the sequence
-diagram below will only show the execution of the `SortCommand#execute()` method to illustrate how the sort feature
+diagram below will only show the execution of the `SortCommand#execute` method to illustrate how the sort feature
 works.
 
 <puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
@@ -619,7 +629,8 @@ _{more aspects and alternatives to be added}_
 
 ### Data archiving
 
-The Data Archiving feature in Advanced&Efficient is designed to ensure that historical patient records are maintained in a safe, accessible, and organized manner. This feature is crucial for historical reference and data analysis.
+The data archiving feature in Advanced&Efficient is designed to ensure that historical patient records are maintained
+in a safe, accessible, and organized manner. This feature is crucial for historical reference and data analysis.
 
 #### Implementation Strategy
 1. **Archive Format**: Patient records will be archived in a compressed JSON format to save space and maintain data confidentiality.
@@ -737,19 +748,12 @@ unless specified otherwise)
 
    Use case ends.
 
-**Extensions**
-
-* 1a. Advanced&Efficient detects that list is empty.
-    * 1a1. Advanced&Efficient shows message saying list is empty.
-
-      Use case resumes from step 2.
-
 \
 **Use case: UC02 - Add a patient**
 
 **Guarantees**
 
-- Patient added will not have same `NAME` or `IC_NUMBER` as any existing patients.
+- Patient added will not have same name or IC number as any existing patients.
 
 **MSS**
 
@@ -788,19 +792,19 @@ unless specified otherwise)
 
 **MSS**
 
-1. ED doctor requests to view a patient’s details by `IC_NUMBER`.
+1. ED doctor requests to view a patient’s details by their IC number.
 2. Advanced&Efficient shows the patient’s details.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
-    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
-    * 1a3. ED doctor enters the `IC_NUMBER`.
+* 1a. Advanced&Efficient detects that the given IC number is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given IC number is invalid.
+    * 1a2. Advanced&Efficient requests for valid IC number.
+    * 1a3. ED doctor enters the IC number.
 
-      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+      Steps 1a1-1a3 are repeated until the IC number is valid.
 
       Use case resumes from step 2.
 
@@ -814,19 +818,19 @@ unless specified otherwise)
 
 **MSS**
 
-1. ED doctor requests to edit a patient’s details by `IC_NUMBER`.
-2. Advanced&Efficient edits the patient’s details as ED doctor specifies.
+1. ED doctor requests to edit a patient’s details by their IC number.
+2. Advanced&Efficient edits the patient’s details as specified.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
-    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
-    * 1a3. ED doctor enters the `IC_NUMBER`.
+* 1a. Advanced&Efficient detects that the given IC number is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given IC number is invalid.
+    * 1a2. Advanced&Efficient requests for valid IC number.
+    * 1a3. ED doctor enters the IC number.
 
-      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+      Steps 1a1-1a3 are repeated until the IC number is valid.
 
       Use case resumes from step 2.
 
@@ -849,19 +853,19 @@ unless specified otherwise)
 
 **MSS**
 
-1. ED doctor requests to delete a patient by `IC_NUMBER`.
+1. ED doctor requests to delete a patient by their IC number.
 2. Advanced&Efficient deletes the patient from the system.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
-    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
-    * 1a3. ED doctor enters the `IC_NUMBER`.
+* 1a. Advanced&Efficient detects that the given IC number is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given IC number is invalid.
+    * 1a2. Advanced&Efficient requests for valid IC number.
+    * 1a3. ED doctor enters the IC number.
 
-      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+      Steps 1a1-1a3 are repeated until the IC number is valid.
 
       Use case resumes from step 2.
 
@@ -871,21 +875,14 @@ unless specified otherwise)
       Use case ends.
 
 \
-**Use case: UC06 - Find patient(s) by `NAME`**
+**Use case: UC06 - Find patient(s) by name**
 
 **MSS**
 
-1. ED doctor requests to find patient(s) by `NAME`.
-2. Advanced&Efficient shows the list of filtered patient(s).
+1. ED doctor requests to find patient(s) by name.
+2. Advanced&Efficient shows a filtered list of matching patient(s).
 
    Use case ends.
-
-**Extensions**
-
-* 1a. Advanced&Efficient detects no patient(s) with that `NAME`.
-    * 1a1. Advanced&Efficient shows an error message saying no patient(s) with that `NAME` exist.
-
-      Use case ends.
 
 \
 **Use case: UC07 - Sort a patient list**
@@ -913,19 +910,19 @@ unless specified otherwise)
 
 **MSS**
 
-1. ED doctor requests to edit a patient’s `Record` by `IC_NUMBER`.
-2. Advanced&Efficient edits the patient’s `Record` as ED doctor specifies.
+1. ED doctor requests to edit a patient’s record by their IC number.
+2. Advanced&Efficient edits the patient’s record as specified.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
-    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
-    * 1a3. ED doctor enters the `IC_NUMBER`.
+* 1a. Advanced&Efficient detects that the given IC number is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given IC number is invalid.
+    * 1a2. Advanced&Efficient requests for valid IC number.
+    * 1a3. ED doctor enters the IC number.
 
-      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+      Steps 1a1-1a3 are repeated until the IC number is valid.
 
       Use case resumes from step 2.
 
@@ -934,33 +931,33 @@ unless specified otherwise)
 
       Use case ends.
 
-* 1c. Advanced&Efficient detects that the given `Record` details are invalid.
-    * 1c1. Advanced&Efficient shows an error message saying the given `Record` details are invalid.
-    * 1c2. Advanced&Efficient requests for valid `Record` details.
-    * 1c3. ED doctor enters the `Record` details.
+* 1c. Advanced&Efficient detects that the given record details are invalid.
+    * 1c1. Advanced&Efficient shows an error message saying the given record details are invalid.
+    * 1c2. Advanced&Efficient requests for valid record details.
+    * 1c3. ED doctor enters the record details.
 
-      Steps 1c1-1c3 are repeated until the `Record` details are valid.
+      Steps 1c1-1c3 are repeated until the record details are valid.
 
       Use case resumes from step 2.
 
 \
-**Use case: UC09 - Assign a patient to `Department`**
+**Use case: UC09 - Assign a patient to department**
 
 **MSS**
 
-1. ED doctor requests to assign a patient to a `Department` by `IC_NUMBER`.
-2. Advanced&Efficient assigns the patient to the `Department`.
+1. ED doctor requests to assign a patient to a department by their IC number.
+2. Advanced&Efficient assigns the patient to the department.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
-    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
-    * 1a3. ED doctor enters the `IC_NUMBER`.
+* 1a. Advanced&Efficient detects that the given IC number is invalid.
+    * 1a1. Advanced&Efficient shows an error message saying the given IC number is invalid.
+    * 1a2. Advanced&Efficient requests for valid IC number.
+    * 1a3. ED doctor enters the IC number.
 
-      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+      Steps 1a1-1a3 are repeated until the IC number is valid.
 
       Use case resumes from step 2.
 
@@ -969,12 +966,12 @@ unless specified otherwise)
 
       Use case ends.
 
-* 1c. Advanced&Efficient detects that the given `Department` is invalid.
-    * 1c1. Advanced&Efficient shows an error message saying the given `Department` is invalid.
-    * 1c2. Advanced&Efficient requests for valid `Department`.
-    * 1c3. ED doctor enters the `Department`.
+* 1c. Advanced&Efficient detects that the given department is invalid.
+    * 1c1. Advanced&Efficient shows an error message saying the given department is invalid.
+    * 1c2. Advanced&Efficient requests for valid department.
+    * 1c3. ED doctor enters the department.
 
-      Steps 1c1-1c3 are repeated until the `Department` is valid.
+      Steps 1c1-1c3 are repeated until the department is valid.
 
       Use case resumes from step 2.
 *
@@ -1013,11 +1010,11 @@ Testers are expected to do more *exploratory* testing.
     1. Download the jar file and copy into an empty folder
 
     2. Double-click the jar file.<br>
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 2. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
@@ -1027,7 +1024,7 @@ Testers are expected to do more *exploratory* testing.
 1. Adding a patient with only required prefixes
 
    1. Prerequisites: None of existing patients have either name `You Wen Ti` and/or IC number `T0374628Z`. (else you may
-      replace the name and/or ic number specified in the test cases)
+      replace the name and/or IC number specified in the test cases)
 
    2. Test case: `add n/You Wen Ti i/T0374628Z`<br>
       Expected: Patient with name `You Wen Ti` and IC number `T0374628Z` is added. Details of the added patient is shown
@@ -1037,12 +1034,12 @@ Testers are expected to do more *exploratory* testing.
       Expected: No patient is added. Error details shown in the status message. Patient list remains the same.
 
    4. Other incorrect add commands to try: `add`, `add Wo Meiyou T0365867F`<br>
-      Expected: Similar to previous.
+      Expected: Similar to the previous case.
 
 2. Adding a patient with both required and optional prefixes
 
    1. Prerequisites: None of existing patients have either name `Ingot Gold` or IC number `T0482756J`. (else you may
-      replace the name and/or ic number specified in the test cases)
+      replace the name and/or IC number specified in the test cases)
 
    2. Test case: `add n/Ingot Gold i/T0482756J g/MALE b/20/05/2004 p/87654487 e/goldie@email.com a/Old Town Road 1
       pr/HIGH t/critical`<br>
@@ -1054,7 +1051,7 @@ Testers are expected to do more *exploratory* testing.
       Expected: No patient is added. Error details shown in the status message. Patient list remains the same.
 
    4. Other incorrect add commands to try: `add`, `add n/Beckham Low pr/high`<br>
-      Expected: Similar to previous.
+      Expected: Similar to the previous case.
 
 ### Viewing a patient
 
@@ -1071,7 +1068,7 @@ Testers are expected to do more *exploratory* testing.
 
    4. Other incorrect view commands to try: `view`, `view i/T8374829X`(where a patient with ic number `T8374829X` does
       not exist)<br>
-      Expected: Similar to previous.
+      Expected: Similar to the previous case.
 
 ### Deleting a patient
 
@@ -1086,9 +1083,9 @@ Testers are expected to do more *exploratory* testing.
     3. Test case: `delete I/T7654321A`<br>
        Expected: No patient is deleted. Error details shown in the status message. Patient list remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete i/T9384758D` (where a patient with ic number
+    4. Other incorrect delete commands to try: `delete`, `delete i/T9384758D` (where a patient with IC number
        `T9384758D` does not exist)<br>
-       Expected: Similar to previous.
+       Expected: Similar to the previous case.
 
 ### Editing a patient
 
@@ -1103,18 +1100,19 @@ Testers are expected to do more *exploratory* testing.
    3. Test case: `edit i/T7654321A`<br>
       Expected: No patient is edited. Error details shown in the status message. Patient's details remains the same.
 
-   4. Other incorrect edit commands to try: `edit`, `edit i/T0264782A n/Mary Jane` (where a patient with ic number
+   4. Other incorrect edit commands to try: `edit`, `edit i/T0264782A n/Mary Jane` (where a patient with IC number
       `T0264782A` does not exist)<br>
-      Expected: Similar to previous.
+      Expected: Similar to the previous case.
 
 ### Editing a patient record
 
 1. Editing a patient's record
 
-   1. Prerequisite: Have our sample patient list loaded OR add a patient with IC number t7654321a.
+   1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number `T7654321A`.
+
    2. Test case: `record i/T7654321A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`<br>
-      Expected: Record of the patient with IC number `T7654321A` is edited to have `Broken Arm` as initial observation
-      , `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan. Details of the edited record is shown
+      Expected: Record of the patient with IC number `T7654321A` is edited to have `Broken Arm` as initial observation,
+      `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan. Details of the edited record is shown
       in the status message. Patient's record is updated in UI.
 
    3. Test case: `record i/T7654321A`<br>
@@ -1123,7 +1121,7 @@ Testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `record`, `record i/T7654321A o/Broken Pinky o/Dizziness`,
       `record i/T2736487A di/Asthma` (where patient with IC number `T2736487A` does not exist)<br>
-      Expected: Similar to previous.
+      Expected: Similar to the previous case.
 
 ### Assigning a patient to a department
 
@@ -1139,9 +1137,9 @@ Testers are expected to do more *exploratory* testing.
        Expected: Patient is not assigned a department. Error details shown in the status message. Patient's assigned
        department remains the same.
 
-    4. Other incorrect assign commands to try: `assign`, `assign i/T7654321A d/Cardio` (department is not spelt fully),
+    4. Other incorrect assign commands to try: `assign`, `assign i/T7654321A d/Cardio` (department is not fully spelt),
        `assign i/T7654321A d/Anesthesiology` (department follows American spelling)<br>
-       Expected: Similar to previous.
+       Expected: Similar to the previous case.
 
 ### Sorting patients
 
@@ -1150,7 +1148,7 @@ Testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
    2. Test case: `sort name`<br>
-      Expected: Patient list is sorted according to `name` in alphanumerical order. Details of success of command is
+      Expected: Patient list is sorted according to `name` in alphanumeric order. Details of success of command is
       shown in the status message. Order of patients in list is updated in UI.
 
    3. Test case: `sort`<br>
@@ -1161,7 +1159,7 @@ Testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
    2. Test case: `sort ic`<br>
-      Expected: Patient list is sorted according to `IC number`, in alphanumerical order. Details of success of command
+      Expected: Patient list is sorted according to `IC number`, in alphanumeric order. Details of success of command
       is shown in the status message. Order of patients in list is updated in UI.
 
 3. Sorting patients by assigned department
@@ -1177,7 +1175,7 @@ Testers are expected to do more *exploratory* testing.
 4. Sorting patients by age
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different
-      ages (i.e. birthday) among all patients in the list.
+      ages (i.e. birth years in birthdays) among all patients in the list.
 
    2. Test case: `sort age`<br>
       Expected: Patient list is sorted according to `age`, where patients with default birthdays/ages are placed on top,
@@ -1197,8 +1195,8 @@ Testers are expected to do more *exploratory* testing.
 
 1. Undoing and Redoing add command
 
-   1. Prerequisites: Have no patient with name `Shen Qi Feng` and/or ic number `S0473859D` in the patient list. (else
-      you may replace the name and/or ic number specified in the test cases)
+   1. Prerequisites: Have no patient with name `Shen Qi Feng` and/or IC number `S0473859D` in the patient list. (else
+      you may replace the name and/or IC number specified in the test cases)
 
    2. Test case: `add n/Shen Qi Feng i/S0473859D` then `undo`<br>
       Expected: Patient with name `Shen Qi Feng` and IC number `S0473859D` is added, then removed. Details of success of
@@ -1265,11 +1263,35 @@ Testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancements**
 
 1. Currently, when `View` command is executed, it only shows that `Patient` in the display panel instead of their
-   details in the information tab. Users would have to click that `Patient` again to display its details.
-   Since `IC_NUMBER` is unique for every `Patient`, we plan to show the `Patient` detail
+   details and record in the record panel. Users would have to click that `Patient` again to display their record.
+   Since `IC_NUMBER` is unique for every `Patient`, we plan to show the `Patient` details and record
    directly in the information tab.
 
 2. Since our project is adapted from the [AddressBook3](https://se-education.org/addressbook-level3/) project
    by SE-EDU initiative, there are multiple usage of `AddressBook` terms in our namings of methods and files. We plan
    to completely refactor all instances of `AddressBook` into `PatientRecordSystem`. For example,
    `AddressBookParser.java` would be renamed to `PatientRecordSystemParser.java`.
+
+3. Currently, age is not displayed in a patient's record card in the record panel, but only the patient card in the
+   patient list panel in the UI. This is inconsistent and might make it inconvenient for users to have to look back to
+   the patient card for this crucial piece of patient information. We plan to include it as a label in every patient's
+   record card subsequently.
+
+4. Invalid parameters/prefixes currently cannot be detected properly by the program. For example, if the user inputs
+   `add n/John Doe i/T0123456S bt/O+` to try to add a patient with name "John Doe", IC number "T0123456S" and blood type
+   "O+", the program will display the error message "IC Number should start and end with an alphabet with non negative
+   numbers in between" instead of indicating that the prefix `bt/` does not exist. We plan to modify parsing-related
+   classes (e.g. `ArgumentTokenizer`) so that extraneous or invalid prefixes can be detected in the future.
+
+5. Invalid dates can currently be added as birthdays for patients (e.g. 30 February). This is an issue trickled down
+   from Java's `LocalDate`, which does not appear to have built-in checks for invalid dates like these. We plan on
+   enhancing our `Birthday` class by manually adding checks in `isValidBirthday` to detect invalid dates.
+
+6. Currently, any alphabet is accepted for the start of an IC number.
+   Ideally, only letters "S", "T", "F", "G" or "M" are accepted for the start of an IC number. Therefore, we plan on
+   enhancing our `IcNumber` class by manually adding checks to ensure the first alphabet of an IC number is valid.
+
+7. Currently, a patient having too many tags or tags that are too long will cause their tags in the UI to overflow and
+   overlap with other UI elements, causing their patient card in the patient list to be unreadable. Therefore, we plan
+   on adjusting the UI component containing these tags so that tags are only allowed to take up a certain amount of
+   space in the UI and are truncated otherwise.

@@ -58,7 +58,7 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 - [Glossary](#glossary)
 - [Appendix : Departments](#appendix--departments)
 
-<page-nav-print />
+<page-nav />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -178,7 +178,7 @@ Here is an overview of A&E’s user interface and some of its noteworthy compone
 3. Patient List Panel
 4. Patient Record Panel
 
-### Command Bar
+#### Command Bar
 
 This is where you type in commands for the program to run. Refer to the [Features](#features) or
 [Command Summary](#command-summary) section for the command inputs accepted by the app.
@@ -188,7 +188,7 @@ your command and hit Enter to execute the command!
 
 <img src='images/ug/commandBar.png' width='600'>
 
-### Console
+#### Console
 
 This is where status messages are displayed. Status messages are displayed depending on the user input
 in the command box.
@@ -200,7 +200,7 @@ Status messages provide you with feedback such as:
 
 <img src='images/ug/console.png' width='600'>
 
-### Patient List Panel
+#### Patient List Panel
 
 This is where the list of patients is displayed. It displays either the complete list of all patients in the system
 (after `list` command), a filtered list of patients (after `find` command), or a single patient card
@@ -230,7 +230,7 @@ patient card.
    <img src='images/ug/prHigh.png' height='20'>
 9. IC Number
 
-### Patient Record Panel
+#### Patient Record Panel
 
 This is where the details and record of the selected patient in the list is displayed. It displays all the details of a
 patient and all their patient record information, except for their age. The labels below the patient’s name indicate the
@@ -282,21 +282,21 @@ For some commands in the subsequent sections, you might come across parameters s
 accepted by the command. Certain parameters have constraints and can only take on certain values. The table below
 gives a summary of all parameters, their associated prefixes and their constraints.
 
-| Attribute                                      | Prefix | Parameter        | Constraints/Format                                                                      |
-|------------------------------------------------|--------|------------------|-----------------------------------------------------------------------------------------|
-| Patient’s full name                            | `n/`   | `NAME`           | Only alphanumeric characters and spaces                                                 |
-| Patient’s NRIC number                          | `i/`   | `IC_NUMBER`      | Must be an alphabet, followed by 7 numerical digits, then an alphabet<br>E.g. T0123456A |
-| Patient’s gender                               | `g/`   | `GENDER`         | “Male”, “Female” or “Other”                                                             |
-| Patient’s birthday                             | `b/`   | `BIRTHDAY`       | Date in the format, DD/MM/YYYY                                                          |
-| Patient’s phone number                         | `p/`   | `PHONE`          | Only numbers, at least 3 digits long                                                    |
-| Patient’s email address                        | `e/`   | `EMAIL`          | An email address in the format, username@domain.com                                     |
-| Patient’s home address                         | `a/`   | `ADDRESS`        | Any values                                                                              |
-| Patient’s priority level                       | `pr/`  | `PRIORITY`       | “High”, “Medium”, “Low” or “NIL”                                                        |
-| Patient’s tags                                 | `t/`   | `TAG`            | Alphanumeric characters, no spaces                                                      |
-| Patient’s assigned department                  | `d/`   | `DEPARTMENT`     | Refer to the [appendix](#appendix-departments) for the list of accepted values          |
-| Patient’s initial observations in their record | `o/`   | `OBSERVATION`    | Any values                                                                              |
-| Patient’s diagnosis in their record            | `di/`  | `DIAGNOSIS`      | Any values                                                                              |
-| Patient’s treatment plan in their record       | `tp/`  | `TREATMENT_PLAN` | Any values                                                                              |
+| Attribute                                      | Prefix | Parameter              | Constraints/Format                                                                      |
+|------------------------------------------------|--------|------------------------|-----------------------------------------------------------------------------------------|
+| Patient’s full name                            | `n/`   | `NAME`                 | Only alphanumeric characters and spaces                                                 |
+| Patient’s NRIC number                          | `i/`   | `IC_NUMBER`            | Must be an alphabet, followed by 7 numerical digits, then an alphabet<br>E.g. T0123456A |
+| Patient’s gender                               | `g/`   | `GENDER`               | “Male”, “Female” or “Other”                                                             |
+| Patient’s birthday                             | `b/`   | `BIRTHDAY`             | Date in the format, DD/MM/YYYY                                                          |
+| Patient’s phone number                         | `p/`   | `PHONE`                | Only numbers, at least 3 digits long                                                    |
+| Patient’s email address                        | `e/`   | `EMAIL`                | An email address in the format, username@domain.com                                     |
+| Patient’s home address                         | `a/`   | `ADDRESS`              | Any values                                                                              |
+| Patient’s priority level                       | `pr/`  | `PRIORITY`             | “High”, “Medium”, “Low” or “NIL”                                                        |
+| Patient’s tags                                 | `t/`   | `TAG`                  | Alphanumeric characters, no spaces                                                      |
+| Patient’s assigned department                  | `d/`   | `DEPARTMENT`           | Refer to the [appendix](#appendix-departments) for the list of accepted values          |
+| Patient’s initial observations in their record | `o/`   | `INITIAL_OBSERVATIONS` | Any values                                                                              |
+| Patient’s diagnosis in their record            | `di/`  | `DIAGNOSIS`            | Any values                                                                              |
+| Patient’s treatment plan in their record       | `tp/`  | `TREATMENT_PLAN`       | Any values                                                                              |
 
 [Back to Table of Contents](#table-of-contents)
 
