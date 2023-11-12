@@ -135,10 +135,6 @@ public class CommandTestUtil {
             .withDiagnosis("Asthma").withTreatmentPlan("Rest").build();
     }
 
-    public static String getUserInputForBob() {
-        return NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + IC_NUMBER_DESC_BOB
-            + BIRTHDAY_DESC_BOB + ADDRESS_DESC_BOB + PRIORITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND;
-    }
 
     /**
      * Executes the given {@code command}, confirms that <br>

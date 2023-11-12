@@ -29,6 +29,7 @@ public class ViewCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         // follow heuristic on at most one invalid input for each negative test case
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+
     }
 
     @Test

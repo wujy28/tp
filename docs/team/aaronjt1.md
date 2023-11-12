@@ -56,8 +56,8 @@ can be assured that the displayed user is the one they desired.
 
 1. Account for new Patient
    attributes [#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102), [#116](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/116)
-2. Significantly improved coverage for AddCommandParser &
-   EditCommandParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78), [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
+2. Significantly improved coverage for AddCommandParser, EditCommandParser,
+   AddressBookParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78), [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
 3. Added testing for AssignCommand feature [#163](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/163)
 
 ----------------------------------------------------------------------
