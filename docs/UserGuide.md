@@ -265,22 +265,21 @@ gives a summary of all parameters, their associated prefixes and their constrain
 
 ### Viewing help: `help`
 
-#### What it does:
 Shows a message explaining how to access the user guide.
-#### Format:
-`help`
-#### Expected output when command succeeds:
+
+Format: `help`
+
+Expected output when command succeeds:
 
 <img src='images/ug/helpMessage.png' width='500'>
 
 ### Listing all patients: `list`
 
-#### What it does:
 Lists all patients in the system.
-#### Format:
-`list`
 
-#### Expected output when command succeeds:
+Format: `list`
+
+Expected output when command succeeds:
 
 <img src='images/ug/listPatients.png' width='300'>
 
@@ -432,17 +431,16 @@ Examples:
 
 ### Finding a patient by name: `find`
 
-#### What it does:
 Finds the patients whose names match any of the given keywords.
-#### Format:
-`find KEYWORD [MORE_KEYWORDS]`
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched. e.g. `Han` will not match `Hans`.
 - Persons matching at least one keyword will be returned. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-#### Example commands:
+Example commands:
 - To find patients whose name matches "John"
 
     `find john`
@@ -450,7 +448,7 @@ Finds the patients whose names match any of the given keywords.
 
     `find Mary Jane`
 
-![img.png](images/findPatients.png)
+![img.png](images/ug/findPatients.png)
 
 
 ### Sorting the patient list: `sort`
@@ -524,17 +522,15 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-#### What it does:
 Clears all patients from the system.
-#### Format:
-`clear`
+
+Format: `clear`
 
 ### Exiting the program: `exit`
 
-#### What it does:
 Exits the program.
-#### Format:
-`exit`
+
+Format: `exit`
 
 ### Saving the program
 
@@ -546,7 +542,7 @@ save manually.
 
 ### Editing the data file
 
-Advanced&Efficient data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced
+Advanced&Efficient data are saved automatically as a JSON file `[JAR file location]/data/aande.json`. Advanced
 users are
 welcome to update data directly by editing that data file.
 
