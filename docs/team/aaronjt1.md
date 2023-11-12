@@ -9,16 +9,14 @@ relevant departments.
 
 ### Contribution
 
-Here are my contributions to the project.
-
-* Code contributed
-  [View my code!](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=aaronjt1&breakdown=true)
+Here are my [contributions](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=aaronjt1&breakdown=true) to the
+project.
 
 ----------------------------------------------------------------------
 
 ### Features implemented
 
-#### View Feature [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
+View Feature [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
 
 **What it does** - Allows users to view the information of a specific patient with `Ic Number`
 
@@ -45,14 +43,8 @@ can be assured that the displayed user is the one they desired.
 
 1. `PatientWithFieldNotFoundException` thrown when no patient with user-specified field
    found [#119](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/119)
-    - Previously, when user input an `Ic Number` that does not exist in a patient record,
-      it does not show any helpful message but simply showed an empty list.
-    - Currently, when user input an `Ic Number` that does not exist in a patient record,
-      an exception will be thrown and helpful message will be displayed to inform users about it.
 2. Integrated `PatientWithFieldNotFoundException` into all relevant
    commands [#153](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/153)
-    - Assign, Delete, Edit, Record - Thrown when user entered an `Ic Number` that does not exist in any patient.
-    - Find - Thrown when user entered keyword(s) that does not exist in any patient's name.
 
 #### Enhanced `ModelManager` [#128](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/128)
 
@@ -64,10 +56,8 @@ can be assured that the displayed user is the one they desired.
 
 1. Account for new Patient
    attributes [#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102), [#116](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/116)
-    - Refactored testing facilities which utilized patients like `CommandTestUtil`, `TypicalPatients`
-      and `PatientBuilder`
-2. Significantly improved coverage for AddCommandParser &
-   EditCommandParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78), [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
+2. Significantly improved coverage for AddCommandParser, EditCommandParser,
+   AddressBookParser [#78](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/78), [#160](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/160)
 3. Added testing for AssignCommand feature [#163](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/163)
 
 ----------------------------------------------------------------------
@@ -95,16 +85,14 @@ can be assured that the displayed user is the one they desired.
 
 * tP Team organisation and Repo setup
 * Managed Team Google Docs for ease of use
-* Managed GitHub issues tracker
-* Managed GitHub Milestones v1.1-v1.4
-* Managed GitHub Releases v1.2, v1.3.trial and v1.3.1
+* Managed GitHub issues tracker, Milestones v1.1-v1.4, Releases v1.2, v1.3.trial and v1.3.1
 * Managed product demo for v1.2 and v1.3
 * Refactor Person instances to Patient in codebase [#68](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/68)
 
 ### Review / mentoring contributions:
 
 * Reviewed pull requests by other group members and provided insightful comments
-    * Some non-trivial PRs i have
+    * Some non-trivial PRs I have
       reviewed [#77](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/77)
       [#89](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/89) [#96](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/96) [#107](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/107) [#120](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/120) [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145) [#155](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/155) [#167](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/167)
     * Reviewed, approved and merged a total of 33 PRs out of ..
