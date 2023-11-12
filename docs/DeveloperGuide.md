@@ -224,15 +224,15 @@ each `Patient` needing their own `Tag` objects.<br>
 
 </box>
 
-### Storage component
 
+### Storage component
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding
+* can save both address book data and user preference data in JSON format (e.g., `aande.json`), and read them back into corresponding
   objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
