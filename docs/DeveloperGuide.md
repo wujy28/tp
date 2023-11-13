@@ -489,6 +489,10 @@ Step 3. `RecordCommandParser#parse` would instantiate `EditRecordDescriptor` fro
 `ArgumentMultimap#isPresent` to check if the other prefixes for `INITIAL_OBSERVATIONS`, `DIAGNOSIS` and `TREATMENT_PLAN`
 are present. If `true` is returned, the arguments will be passed into the `EditRecordDescriptor` object.
 
+The following activity diagram roughly demonstrates how `RecordCommand#parse` works.
+
+<puml src="diagrams/RecordCommandParserActivityDiagram.puml" alt=RecordCommandParserActivityDiagram" />
+
 Step 4. The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the
 fields of Record has been edited, and throws a `ParseException` if `false` is returned. It is then passed as an argument
 along with `IC_NUMBER` to instantiate the `RecordCommand`, which is then returned by `RecordCommandParser#parse`.
