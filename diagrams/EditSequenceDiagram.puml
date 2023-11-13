@@ -18,7 +18,7 @@ end box
 'edit the name from John Doe to Jonathan Tan
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("edit i/T0000000A n/Jon Doe")
+LogicManager -> AddressBookParser : parseCommand("edit i/T0000000A n/Jonathan Tan")
 activate AddressBookParser
 
 create EditCommandParser
@@ -28,7 +28,10 @@ activate EditCommandParser
 EditCommandParser --> AddressBookParser
 deactivate EditCommandParser
 
-AddressBookParser -> EditCommandParser : parse("i/T0000000A n/Jon Doe")
+AddressBookParser -> EditCommandParser : parse("i/T0000000A n/Jonathan Tan")
+activate EditCommandParser
+
+EditCommandParser -> EditCommandParser : createEditPatientDescriptor
 activate EditCommandParser
 
 create EditCommand
@@ -51,6 +54,8 @@ LogicManager -> EditCommand : execute()
 activate EditCommand
 
 EditCommand -> Model : getPatient(new IcNumber("T0000000A"), List<Patient> patientList)
+EditCommand -> EditCommand : createEditedPatient
+'edited patient object being Jonathan Tan in this case
 Model -> Model : setPatient(John Doe, Jonathan Tan, editCommand)
 'setPatient contains target patient, edited patient, and command
 activate Model
