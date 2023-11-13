@@ -147,7 +147,7 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 

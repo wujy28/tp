@@ -4,6 +4,8 @@ title: "User Guide"
 pageNav: 3
 ---
 
+<img src='images/ug/logoFull.png' width='300' class='center'>
+
 # Advanced&Efficient (A&E) User Guide
 
 Welcome to **Advanced&Efficient (A&E)**!
@@ -57,8 +59,6 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 - [Command summary](#command-summary)
 - [Glossary](#glossary)
 - [Appendix : Departments](#appendix--departments)
-
-<page-nav />
 
 
 --------------------------------------------------------------------------------------------------------------------
