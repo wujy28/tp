@@ -265,7 +265,7 @@ This is where the details and record of the selected patient in the list is disp
 patient and all their patient record information, except for their age. The labels below the patient’s name indicate the
 patient’s priority level and tags respectively. If there is no selected patient in the list, the panel will be blank.
 
-<img src='images/ug/recordPanel.png' width='450'>
+<img src='images/ug/recordPanel.png' width='400'>
 <br>
 
 <br>
@@ -336,8 +336,6 @@ provides a summary of all prefixes.
 [Back to Table of Contents](#table-of-contents)
 
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 
@@ -503,6 +501,7 @@ Deletes the patient with the specified IC number.
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
 <div style="page-break-after: always;"></div>
 
 ### Finding a patient by name: `find`
