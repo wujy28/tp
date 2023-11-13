@@ -65,7 +65,7 @@ public class Age implements Comparable<Age> {
     }
 
     public static int getDefaultAgeValue() {
-        return getDefaultAgeValue();
+        return defaultAgeValue;
     }
 
     @Override

@@ -68,6 +68,7 @@ public class AgeTest {
         assertFalse(Age.isValidAge("21y")); // alphabets within digits
         assertFalse(Age.isValidAge("21.5")); // characters within digits
         assertFalse(Age.isValidAge("2 1")); // spaces within digits
+        assertFalse(Age.isValidAge(String.valueOf(Age.getDefaultAgeValue()))); // default age value
 
         // valid ages
         assertTrue(Age.isValidAge("0"));

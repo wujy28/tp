@@ -8,7 +8,7 @@ pageNav: 3
 
 Welcome to **Advanced&Efficient (A&E)**!
 
-Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **Emergency Department (ED) doctors** who need to **create, update, and manage patients and their records** swiftly and effectively. This application, with its **Command-Line Interface (CLI)**<sup>[1](#cli)</sup> design, caters to fast typists and professionals who prefer typing over mouse interactions, significantly speeding up the process of inputting and managing patient data.
+Advanced&Efficient (A&E) is a powerful **desktop application** designed specifically for **Emergency Department (ED) doctors** who need to **create, update, and manage patients and their records** swiftly and effectively. This application, with its **Command-Line Interface (CLI)**<sup>[1](#glossary)</sup> design, caters to fast typists and professionals who prefer typing over mouse interactions, significantly speeding up the process of inputting and managing patient data.
 
 Here’s a sneak peek into what A&E offers:
 - Streamlined logging of patient reports in a user-friendly CLI environment
@@ -17,7 +17,7 @@ Here’s a sneak peek into what A&E offers:
 - An intuitive system for managing patient priority levels and medical tags
 - Easy-to-follow command summaries and guides for efficient navigation
 
-A&E combines the simplicity of a CLI with the visual cues of a **Graphical User Interface (GUI)**<sup>[2](#gui)</sup>, offering you the best of both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is tailored just for you.
+A&E combines the simplicity of a CLI with the visual cues of a **Graphical User Interface (GUI)**<sup>[2](#glossary)</sup>, offering you the best of both worlds. If you're comfortable with typing and looking for speed and efficiency in patient management, A&E is tailored just for you.
 
 This User Guide is designed to help you, whether you're a newcomer or an experienced user, to harness the full potential of A&E. Here, you'll find everything you need to streamline your patient management tasks, making your role in the ED more manageable and effective.
 
@@ -56,7 +56,7 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 - [Known Issues](#known-issues)
 - [Command summary](#command-summary)
 - [Glossary](#glossary)
-- [Appendix : Departments](#appendix--departments)
+- [Appendix : Departments](#appendix-departments)
 
 <page-nav />
 
@@ -67,11 +67,11 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 
 This user guide contains all of the information you will need in order to use A&E.
 
-For new users:
+**For new users:**
 * Begin your journey with A&E by exploring the [Quick Start](#quick-start) and
   [Getting to know A&E](#getting-to-know-a-and-amp-e) sections.
 
-For experienced users:
+**For experienced users:**
 * Utilize the [Table of contents](#table-of-contents) to swiftly navigate to your desired section.
 * Dive into the [Features](#features) to explore advanced functionalities and optimize your workflow.
 
@@ -104,7 +104,7 @@ Used to highlight issues to look out for
 
 ## Quick Start
 
-1. Ensure you have Java 11<sup>[3](#java-11)</sup> or above installed in your Computer.
+1. Ensure you have Java 11<sup>[3](#glossary)</sup> or above installed in your Computer.
 
 <box type="tip">
 
@@ -123,10 +123,10 @@ Used to highlight issues to look out for
 2. Go to your Desktop and create a folder named “AAndE”.
 
 
-3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.3.1)<br>
+3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.4)<br>
    i. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
 
-    <img src='images/jar.png' width='800'>
+    <img src='images/ug/jar.png' width='800'>
 
 
 4. After downloading the application, move it into the “AAndE” folder created in step 2.
@@ -400,7 +400,7 @@ Format: `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/E
 <box type="warning">
 
 **Caution:**
-The new name provided cannot be the same as the name of another patient in the list. 
+The new name provided cannot be the same as the name of another patient in the list.
 + Names are case-sensitive
   + `Han Bo` is different from `han bo`
 
@@ -409,8 +409,8 @@ The new name provided cannot be the same as the name of another patient in the l
 <box type="info">
 
 **Note:**
-When editing tags, the new tags specified will overwrite the existing tags 
-i.e. all existing tags will be discarded and replaced 
+When editing tags, the new tags specified will overwrite the existing tags
+i.e. all existing tags will be discarded and replaced
 with the new tags.
 
 </box>
@@ -456,7 +456,7 @@ Example commands:
 
     `find Mary Jane`
 
-![img.png](images/ug/findPatients.png)
+<img src='images/ug/findPatients.png' width='300'>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -496,6 +496,7 @@ Examples:
 Edits the medical record of the patient with the specified IC number.
 
 Format: `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`
++ At least one of the optional fields indicated within square brackets must be provided.
 
 Examples:
 
@@ -696,19 +697,16 @@ the data of your previous AAndE home folder.
 
 ## Glossary
 
-<a id="cli"></a>
 1. **Command-Line Interface**
-    
-    A command-line interface (CLI) is a text-based user interface (UI) used to run programs, 
+
+    A command-line interface (CLI) is a text-based user interface (UI) used to run programs,
     manage computer files and interact with the computer, involving more typing than clicking.
 
-<a id="gui"></a>
 2. **Graphical User Interface**
 
     A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as
     icons, buttons, and menus, often by clicking.
 
-<a id="java-11"></a>
 3. **Java 11**
 
    Java is the programming language used in creating A&E. “11” refers to the version of the language used.
