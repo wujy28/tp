@@ -50,10 +50,10 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : getPatient(new IcNumber("T0000000A"), List<Patient> patientList)
+DeleteCommand -> Model : getPatient(new IcNumber("T0000000A"), \nList<Patient> patientList)
 'obtain patient to be deleted using getPatient() method)
 
-Model -> Model : deletePatient(patient, deleteCommand)
+Model -> Model : deletePatient(patient, \ndeleteCommand)
 activate Model
 
 Model --> DeleteCommand
