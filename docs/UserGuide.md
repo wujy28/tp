@@ -400,7 +400,7 @@ Format: `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/E
 <box type="warning">
 
 **Caution:**
-The new name provided cannot be the same as the name of another patient in the list. 
+The new name provided cannot be the same as the name of another patient in the list.
 + Names are case-sensitive
   + `Han Bo` is different from `han bo`
 
@@ -409,8 +409,8 @@ The new name provided cannot be the same as the name of another patient in the l
 <box type="info">
 
 **Note:**
-When editing tags, the new tags specified will overwrite the existing tags 
-i.e. all existing tags will be discarded and replaced 
+When editing tags, the new tags specified will overwrite the existing tags
+i.e. all existing tags will be discarded and replaced
 with the new tags.
 
 </box>
@@ -698,8 +698,8 @@ the data of your previous AAndE home folder.
 ## Glossary
 
 1. **Command-Line Interface**
-    
-    A command-line interface (CLI) is a text-based user interface (UI) used to run programs, 
+
+    A command-line interface (CLI) is a text-based user interface (UI) used to run programs,
     manage computer files and interact with the computer, involving more typing than clicking.
 
 2. **Graphical User Interface**
