@@ -503,6 +503,7 @@ Deletes the patient with the specified IC number.
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
 <div style="page-break-after: always;"></div>
 
 ### Finding a patient by name: `find`
