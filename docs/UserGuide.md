@@ -144,6 +144,7 @@ Used to highlight issues to look out for
 
 <box type="tip">
 
+**Tip:**
 We strongly recommend you to use A&E at a resolution of 1024x640 for the fullest experience. You may also click
 on the fullscreen icon at the top right hand corner to enlarge the window.
 
@@ -494,7 +495,7 @@ Examples:
 
 Edits the medical record of the patient with the specified IC number.
 
-Format: `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [d/DIAGNOSIS] [t/TREATMENT_PLAN]`
+Format: `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`
 
 Examples:
 
