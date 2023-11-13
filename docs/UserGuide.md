@@ -27,6 +27,7 @@ This User Guide is designed to help you, whether you're a newcomer or an experie
 
 Embrace the efficiency of A&E and transform the way you manage patient records in your Emergency Department. Let’s get started!
 
+<br>
 <div style="page-break-after: always;"></div>
 
 <!-- * Table of Contents -->
@@ -34,9 +35,9 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Using this guide](#using-this-guide)
+- [Using This Guide](#using-this-guide)
 - [Quick Start](#quick-start)
-- [Getting to know A&E](#getting-to-know-a-and-amp-e)
+- [Getting to Know A&E](#getting-to-know-a-and-amp-e)
     - [User Interface](#user-interface)
 - [Features](#features)
     - [Prefix Summary](#prefix-summary)
@@ -58,23 +59,23 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
-- [Command summary](#command-summary)
+- [Command Summary](#command-summary)
 - [Glossary](#glossary)
 - [Appendix : Departments](#appendix-departments)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Using this guide
+## Using This Guide
 
 This user guide contains all of the information you will need in order to use A&E.
 
 **For new users:**
 * Begin your journey with A&E by exploring the [Quick Start](#quick-start) and
-  [Getting to know A&E](#getting-to-know-a-and-amp-e) sections.
+  [Getting to Know A&E](#getting-to-know-a-and-amp-e) sections.
 
 **For experienced users:**
-* Utilize the [Table of contents](#table-of-contents) to swiftly navigate to your desired section.
+* Utilize the [Table of Contents](#table-of-contents) to swiftly navigate to your desired section.
 * Dive into the [Features](#features) to explore advanced functionalities and optimize your workflow.
 
 Before you delve further into this guide, do take note of the following highlighted information panels.
@@ -130,7 +131,7 @@ Used to highlight issues to look out for
 3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.4)<br>
    i. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
 
-    <img src='images/ug/jar.png' width='500'> 
+    <img src='images/ug/jar.png' width='600'> 
 <br>
 
 4. After downloading the application, move it into the “AAndE” folder created in step 2.
@@ -142,9 +143,11 @@ Used to highlight issues to look out for
 
    Then, type in `java -jar AdvancedAndEfficient.jar` and press Enter again to run the application.
 
+    <div style="page-break-after: always;"></div>
+
    A GUI similar to the picture below should appear in a few seconds. Note how the app contains some sample data.
 
-    <img src='images/ug/gettingStartedUi.png' width='500'>
+    <img src='images/ug/gettingStartedUi.png' width='600'>
 <br>
 
 <box type="tip">
@@ -172,18 +175,20 @@ on the fullscreen icon at the top right hand corner to enlarge the window.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Getting to know A&E
+## Getting to Know A&E
 
 ### User Interface
 
 Here is an overview of A&E’s user interface and some of its noteworthy components.
 
-<img src='images/ug/labelledUi.png' width='500'>
+<img src='images/ug/labelledUi.png' width='600'>
 
 1. Command Bar
 2. Console
 3. Patient List Panel
 4. Patient Record Panel
+
+<br>
 
 #### Command Bar
 
@@ -194,7 +199,11 @@ To begin typing, simply select the command bar by clicking the space that says �
 your command and hit Enter to execute the command!
 
 <img src='images/ug/commandBar.png' width='500'>
+
 <br>
+
+<br>
+
 <div style="page-break-after: always;"></div>
 
 #### Console
@@ -210,6 +219,8 @@ Status messages provide you with feedback such as:
 <img src='images/ug/console.png' width='500'>
 <br>
 
+<br>
+
 #### Patient List Panel
 
 This is where the list of patients is displayed. It displays either the complete list of all patients in the system
@@ -221,6 +232,8 @@ scroll wheel, or your trackpad. To select a patient in the list, simply click on
 patient is indicated by the light blue border around their patient card.
 
 <img src='images/ug/patientList.png' width='300'>
+<br>
+
 <br>
 
 <div style="page-break-after: always;"></div>
@@ -244,16 +257,17 @@ patient card.
    <img src='images/ug/prHigh.png' height='20'>
 9. IC Number
 
+<br>
+
 #### Patient Record Panel
 
 This is where the details and record of the selected patient in the list is displayed. It displays all the details of a
 patient and all their patient record information, except for their age. The labels below the patient’s name indicate the
-patient’s priority level and tags respectively.
-
-If there is no selected patient in the list, the panel will be blank. (The selected patient is indicated by the light
-blue border around their patient card in the patient list panel.)
+patient’s priority level and tags respectively. If there is no selected patient in the list, the panel will be blank.
 
 <img src='images/ug/recordPanel.png' width='450'>
+<br>
+
 <br>
 
 [Back to Table of Contents](#table-of-contents)
@@ -292,6 +306,8 @@ blue border around their patient card in the patient list panel.)
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+
 <div style="page-break-after: always;"></div>
 
 ### Prefix Summary
@@ -299,7 +315,7 @@ blue border around their patient card in the patient list panel.)
 For some commands in the subsequent sections, you might come across parameters specified with a prefix
 (e.g. prefix `n/` with parameter `NAME` in `n/NAME`). These parameters refer to patient attributes or record fields that are
 accepted by the command. Certain parameters have constraints and can only take on certain values. The table below
-gives a summary of all parameters, their associated prefixes and their constraints.
+provides a summary of all prefixes.
 
 | Attribute                                      | Prefix | Parameter              | Constraints/Format                                                                      |
 |------------------------------------------------|--------|------------------------|-----------------------------------------------------------------------------------------|
@@ -319,6 +335,8 @@ gives a summary of all parameters, their associated prefixes and their constrain
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+
 <div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
@@ -330,9 +348,14 @@ Shows a message explaining how to access the user guide.
 **Expected output when command succeeds:**
 
 <img src='images/ug/helpMessage.png' width='500'>
+
+<br>
+
 <br>
 
 [Back to Table of Contents](#table-of-contents)
+
+<br>
 
 ### Listing all patients: `list`
 
@@ -343,9 +366,14 @@ Lists all patients in the system.
 **Expected output when command succeeds:**
 
 <img src='images/ug/listPatients.png' width='300'>
+
+<br>
+
 <br>
 
 [Back to Table of Contents](#table-of-contents)
+
+<br>
 
 <div style="page-break-after: always;"></div>
 
@@ -374,10 +402,11 @@ number.
 **Note:**
 Optional fields not specified while adding the patient will be filled with default values as shown below.
 
+<img src='images/ug/addPatients.png' width='500'>
+
 </box>
 
-<img src='images/ug/addPatients.png' width='500'>
-<br>
+<div style="page-break-after: always;"></div>
 
 **Examples:**
 
@@ -389,6 +418,8 @@ Optional fields not specified while adding the patient will be filled with defau
 
 [Back to Table of Contents](#table-of-contents)
 
+
+<br>
 <div style="page-break-after: always;"></div>
 
 ### Viewing a patient: `view`
@@ -404,7 +435,10 @@ Displays a specific patient’s information and medical record.
 
 **Expected output when command succeeds:**
 
-<img src='images/ug/viewPatient.png' width='500'>
+<img src='images/ug/viewPatient.png' width='600'>
+
+<br>
+
 <br>
 
 <box type="info">
@@ -417,6 +451,7 @@ details and record card, you have to click on their patient card in the list.
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
 <div style="page-break-after: always;"></div>
 
 ### Editing a patient: `edit`
@@ -453,6 +488,8 @@ with the new tags.
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+
 ### Deleting a patient: `delete`
 
 Deletes the patient with the specified IC number.
@@ -480,18 +517,19 @@ Finds the patients whose names match any of the given keywords.
 - Persons matching at least one keyword will be returned. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 **Examples:**
-- To find patients whose name matches "John"
+* To find patients whose name matches "John" <br>
+  `find john`
+* To find patients whose name matches "Mary" and "Jane" <br>
+  `find Mary Jane`
 
-    `find john`
-- To find patients whose name matches "Mary" and "Jane"
+<img src='images/ug/findPatients.png' width='600'>
+<br>
 
-    `find Mary Jane`
-
-<img src='images/ug/findPatients.png' width='500'>
 <br>
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
 <div style="page-break-after: always;"></div>
 
 ### Sorting the patient list: `sort`
@@ -525,6 +563,7 @@ list of search results, it will also sort the complete list of patients (display
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
 <div style="page-break-after: always;"></div>
 
 ### Editing a patient record: `record`
@@ -542,6 +581,8 @@ Edits the medical record of the patient with the specified IC number.
   `record i/S2374912B di/Asthma o/Shortness of breath and chest tightness`
 
 [Back to Table of Contents](#table-of-contents)
+
+<br>
 
 ### Assigning a patient to a department: `assign`
 
@@ -564,6 +605,9 @@ below for the list of valid departments and their accepted inputs.
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+<div style="page-break-after: always;"></div>
+
 ### Undoing a command: `undo`
 
 Undos the most recent command. Only applies to the following commands:
@@ -583,7 +627,7 @@ Undos the most recent command. Only applies to the following commands:
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
+<br>
 
 ### Redoing a command: `redo`
 
@@ -605,6 +649,9 @@ Redos the most recently undone command. Only applies to the following commands:
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries: `clear`
 
 Clears all patients from the system.
@@ -612,6 +659,8 @@ Clears all patients from the system.
 **Format:** `clear`
 
 [Back to Table of Contents](#table-of-contents)
+
+<br>
 
 ### Exiting the program: `exit`
 
@@ -621,6 +670,8 @@ Exits the program.
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+
 ### Saving the program
 
 Advanced&Efficient data is saved in the hard disk automatically after any command that changes the data. There is no
@@ -628,7 +679,7 @@ need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
+<br>
 
 ### Editing the data file
 
@@ -646,6 +697,7 @@ empty data file at the next run. Hence, it is recommended to take a backup of th
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -712,7 +764,7 @@ the data of your previous AAndE home folder.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## Command Summary
 
 | Action     | Format, Examples                                                                                                                                                                                                                                   |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -755,6 +807,7 @@ the data of your previous AAndE home folder.
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Departments
 
