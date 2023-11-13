@@ -64,7 +64,7 @@ Given below are my contributions to the project.
   * Added Implementation of Record Command
     * Wrote implementation details
     * Wrote design considerations and alternatives
-    * Created UML sequence diagram
+    * Created UML sequence and activity diagram
     * Relevant Pull Requests: [#136](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/136),
       [#235](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/235)
   * Edited Appendix: instructions for manual testing
