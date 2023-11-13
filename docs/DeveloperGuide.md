@@ -85,7 +85,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="250" />
 
 The ***Architecture Diagram*** given above explains the high-level design of Advanced&Efficient.
 
@@ -110,14 +110,12 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-<div style="page-break-after: always;"></div>
-
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
 the command `delete i/T0012345A`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="520" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
