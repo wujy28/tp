@@ -85,7 +85,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="250" />
 
 The ***Architecture Diagram*** given above explains the high-level design of Advanced&Efficient.
 
@@ -128,7 +128,7 @@ the `LogicManager.java` class which follows the `Logic` interface. Other compone
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
 implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="270" />
 
 The sections below give more details of each component.
 
@@ -324,6 +324,7 @@ been listed.
       with other components of the codebase.
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Delete patient feature
 
@@ -378,6 +379,7 @@ been deleted.
       look for the specific patient's index position in the list.
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Edit patient feature
 
@@ -426,6 +428,7 @@ It then returns a `CommandResult` stating that the patient has been edited.
 **Note: Similar considerations as mentioned in the `Delete` feature above**
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### View patient feature
 
@@ -474,6 +477,7 @@ It then returns a `CommandResult` stating the patient has been listed.
       existing displays.
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Edit record feature
 
@@ -541,6 +545,7 @@ The following sequence diagram summarizes the above-mentioned steps.
       in their input.
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Assign department feature
 
@@ -588,6 +593,7 @@ The following sequence diagrams summarize what happens when `AssignCommand#execu
 <puml src="diagrams/AssignSequenceDiagramParserUtil.puml" alt="AssignSequenceDiagramParserUtil" />
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Sort feature
 The sort operation is facilitated by the `SortCommand` and `SortCommandParser` classes, similar
@@ -640,6 +646,7 @@ works.
 <puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Undo/redo feature
 
@@ -764,6 +771,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Data archiving
 
@@ -1137,6 +1145,7 @@ unless specified otherwise)
 
       Use case ends.
 
+<br>
 
 ### Non-Functional Requirements
 
