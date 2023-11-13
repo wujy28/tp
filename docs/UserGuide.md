@@ -3,8 +3,10 @@ layout: default.md
 title: "User Guide"
 pageNav: 3
 ---
-
-<img src='images/ug/logoFull.png' width='300' class='center'>
+<p align="center">
+    <img src='images/ug/AELogo.png' width='300'>
+</p>
+<br>
 
 # Advanced&Efficient (A&E) User Guide
 
@@ -25,7 +27,7 @@ This User Guide is designed to help you, whether you're a newcomer or an experie
 
 Embrace the efficiency of A&E and transform the way you manage patient records in your Emergency Department. Let’s get started!
 
-
+<div style="page-break-after: always;"></div>
 
 <!-- * Table of Contents -->
 
@@ -60,8 +62,8 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 - [Glossary](#glossary)
 - [Appendix : Departments](#appendix-departments)
 
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Using this guide
 
@@ -101,6 +103,7 @@ Used to highlight issues to look out for
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -115,6 +118,7 @@ Used to highlight issues to look out for
 2. Type in `java -version` and press Enter.
 3. If you have Java installed, you should see your Java version as shown underlined in the picture below.
 <img src='images/javaversion.png' width='500'>
+<br>
 4. If you do not have Java or your Java version is below 11, install Java
 11 [here](https://www.oracle.com/java/technologies/downloads/#java11) based on your Operating System.
 
@@ -126,8 +130,8 @@ Used to highlight issues to look out for
 3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.4)<br>
    i. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
 
-    <img src='images/ug/jar.png' width='800'>
-
+    <img src='images/ug/jar.png' width='500'> 
+<br>
 
 4. After downloading the application, move it into the “AAndE” folder created in step 2.
 
@@ -140,7 +144,8 @@ Used to highlight issues to look out for
 
    A GUI similar to the picture below should appear in a few seconds. Note how the app contains some sample data.
 
-    <img src='images/ug/gettingStartedUi.png' width='700'>
+    <img src='images/ug/gettingStartedUi.png' width='500'>
+<br>
 
 <box type="tip">
 
@@ -165,6 +170,7 @@ on the fullscreen icon at the top right hand corner to enlarge the window.
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Getting to know A&E
 
@@ -172,7 +178,7 @@ on the fullscreen icon at the top right hand corner to enlarge the window.
 
 Here is an overview of A&E’s user interface and some of its noteworthy components.
 
-<img src='images/ug/labelledUi.png' width='800'>
+<img src='images/ug/labelledUi.png' width='500'>
 
 1. Command Bar
 2. Console
@@ -187,7 +193,9 @@ This is where you type in commands for the program to run. Refer to the [Feature
 To begin typing, simply select the command bar by clicking the space that says “Enter command here…”. Then, type in
 your command and hit Enter to execute the command!
 
-<img src='images/ug/commandBar.png' width='600'>
+<img src='images/ug/commandBar.png' width='500'>
+<br>
+<div style="page-break-after: always;"></div>
 
 #### Console
 
@@ -199,7 +207,8 @@ Status messages provide you with feedback such as:
 + Why a command input is invalid
 + Whether a command is successful
 
-<img src='images/ug/console.png' width='600'>
+<img src='images/ug/console.png' width='500'>
+<br>
 
 #### Patient List Panel
 
@@ -212,11 +221,15 @@ scroll wheel, or your trackpad. To select a patient in the list, simply click on
 patient is indicated by the light blue border around their patient card.
 
 <img src='images/ug/patientList.png' width='300'>
+<br>
+
+<div style="page-break-after: always;"></div>
 
 Each patient is represented by a patient card in the list. Here is an overview of the information displayed in a
 patient card.
 
 <img src='images/ug/patientListCard.png' width='450'>
+<br>
 
 1. Full Name
 2. Age
@@ -241,10 +254,13 @@ If there is no selected patient in the list, the panel will be blank. (The selec
 blue border around their patient card in the patient list panel.)
 
 <img src='images/ug/recordPanel.png' width='450'>
+<br>
 
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <box type="info">
@@ -276,6 +292,8 @@ blue border around their patient card in the patient list panel.)
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Prefix Summary
 
 For some commands in the subsequent sections, you might come across parameters specified with a prefix
@@ -301,15 +319,18 @@ gives a summary of all parameters, their associated prefixes and their constrain
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help: `help`
 
 Shows a message explaining how to access the user guide.
 
-Format: `help`
+**Format:** `help`
 
-Expected output when command succeeds:
+**Expected output when command succeeds:**
 
 <img src='images/ug/helpMessage.png' width='500'>
+<br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -317,19 +338,22 @@ Expected output when command succeeds:
 
 Lists all patients in the system.
 
-Format: `list`
+**Format:** `list`
 
-Expected output when command succeeds:
+**Expected output when command succeeds:**
 
 <img src='images/ug/listPatients.png' width='300'>
+<br>
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a patient: `add`
 
 Adds a patient into the system
 
-Format: `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
+**Format:** `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 
 + IC number cannot be edited after the patient has been added.
 
@@ -353,8 +377,9 @@ Optional fields not specified while adding the patient will be filled with defau
 </box>
 
 <img src='images/ug/addPatients.png' width='500'>
+<br>
 
-Examples:
+**Examples:**
 
 + To add a Patient with name "John Doe", IC number "T0123456A", gender "male", and birthday on 1 Jan 1990<br>
     `add n/John Doe i/T0123456A g/Male b/01/01/1990 `
@@ -364,21 +389,23 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing a patient: `view`
 
 Displays a specific patient’s information and medical record.
 
-Format: `view i/IC_NUMBER`
+**Format:** `view i/IC_NUMBER`
 
-Examples:
+**Examples:**
 
 + To view patient with IC number "T0201234A"<br>
   `view i/T0201234A`
 
-Expected output when command succeeds:
+**Expected output when command succeeds:**
 
 <img src='images/ug/viewPatient.png' width='500'>
-
+<br>
 
 <box type="info">
 
@@ -390,11 +417,13 @@ details and record card, you have to click on their patient card in the list.
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a patient: `edit`
 
 Edits the information of a patient with the specified IC number
 
-Format: `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
+**Format:** `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 + At least one of the optional fields indicated within square brackets must be provided.
 
 <box type="warning">
@@ -415,7 +444,7 @@ with the new tags.
 
 </box>
 
-Examples:
+**Examples:**
 
 * To edit the birthday of a patient with IC number "T0123456A" to 10 Jan 2000 <br>
   `edit i/T0123456A b/10/01/2000`
@@ -428,27 +457,29 @@ Examples:
 
 Deletes the patient with the specified IC number.
 
-Format: `delete i/IC_NUMBER`
+**Format:** `delete i/IC_NUMBER`
 
-Examples:
+**Examples:**
 
 * To delete a patient with IC number "T2468012A" <br>
   `delete i/T2468012A`
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Finding a patient by name: `find`
 
 Finds the patients whose names match any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]...`
+**Format:** `find KEYWORD [MORE_KEYWORDS]...`
 
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched. e.g. `Han` will not match `Hans`.
 - Persons matching at least one keyword will be returned. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-Example commands:
+**Examples:**
 - To find patients whose name matches "John"
 
     `find john`
@@ -456,9 +487,12 @@ Example commands:
 
     `find Mary Jane`
 
-<img src='images/ug/findPatients.png' width='300'>
+<img src='images/ug/findPatients.png' width='500'>
+<br>
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting the patient list: `sort`
 
@@ -472,11 +506,11 @@ list of search results, it will also sort the complete list of patients (display
 
 </box>
 
-Format: `sort PROPERTY`
+**Format:** `sort PROPERTY`
 
 + `PROPERTY` can only be `name`, `ic`, `department`, `age`, or `priority`.
 
-Examples:
+**Examples:**
 
 + To sort the patient list according to name in alphanumeric order<br>
   `sort name`
@@ -491,14 +525,16 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a patient record: `record`
 
 Edits the medical record of the patient with the specified IC number.
 
-Format: `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`
+**Format:** `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`
 + At least one of the optional fields indicated within square brackets must be provided.
 
-Examples:
+**Examples:**
 
 * To edit the medical record of a patient with IC number "T0201234A"<br>
   `record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`
@@ -511,7 +547,7 @@ Examples:
 
 Assigns a patient to a hospital department.
 
-Format: `assign i/IC_NUMBER d/DEPARTMENT`
+**Format:** `assign i/IC_NUMBER d/DEPARTMENT`
 
 <box type="warning">
 
@@ -521,7 +557,7 @@ below for the list of valid departments and their accepted inputs.
 
 </box>
 
-Examples:
+**Examples:**
 
 * To assign a patient with IC number "T0201234A" to the cardiology department<br>
   `assign i/T0201234A d/cardiology`
@@ -538,14 +574,16 @@ Undos the most recent command. Only applies to the following commands:
 + `add`
 + `assign`
 
-Format: `undo`
+**Format:** `undo`
 
-Examples:
+**Examples:**
 
 + `delete i/T1234567A` deletes the patient with the IC number "T1234567A" from the patient list.
   `undo` restores this patient back into the patient list.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Redoing a command: `redo`
 
@@ -557,9 +595,9 @@ Redos the most recently undone command. Only applies to the following commands:
 + `add`
 + `assign`
 
-Format: `redo`
+**Format:** `redo`
 
-Examples:
+**Examples:**
 
 + `delete i/T1234567A` deletes the patient with IC number "T1234567A" from the patient list
   `undo` restores this patient back into the patient list.
@@ -571,7 +609,7 @@ Examples:
 
 Clears all patients from the system.
 
-Format: `clear`
+**Format:** `clear`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -579,23 +617,23 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+**Format:** `exit`
 
 [Back to Table of Contents](#table-of-contents)
 
 ### Saving the program
 
 Advanced&Efficient data is saved in the hard disk automatically after any command that changes the data. There is no
-need to
-save manually.
+need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
 Advanced&Efficient data are saved automatically as a JSON file `[JAR file location]/data/aande.json`. Advanced
-users are
-welcome to update data directly by editing that data file.
+users are welcome to update data directly by editing that data file.
 
 <box type="warning">
 
@@ -624,7 +662,7 @@ Patient Record Panel.
 Record Panel to the right.
 
 **Q**: I entered a command and there is no response from the application, what do I do?\
-**A**: A critical error might have occured. Please ensure your command is as specified in [Features](#features). Please contact
+**A**: A critical error might have occurred. Please ensure your command is as specified in [Features](#features). Please contact
 the technical team in charge of your department to file a bug report on our [issues](https://github.com/AY2324S1-CS2103T-T14-2/tp/issues) page.
 
 **Q**: I have accidentally cleared the whole patient record system, can I retrieve the lost details?\
@@ -640,6 +678,7 @@ the data of your previous AAndE home folder.
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
@@ -671,6 +710,7 @@ the data of your previous AAndE home folder.
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
@@ -694,6 +734,7 @@ the data of your previous AAndE home folder.
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
