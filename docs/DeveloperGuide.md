@@ -22,11 +22,13 @@ pageNav: 3
   * [Common classes](#common-classes)
 * [**Implementation**](#implementation)
   * [Add patient feature](#add-patient-feature)
+  * [Delete patient feature](#delete-patient-feature)
+  * [Edit patient feature](#edit-patient-feature)
   * [View patient feature](#view-patient-feature)
-  * [Edit Record feature](#edit-record-feature)
+  * [Edit record feature](#edit-record-feature)
   * [Assign department feature](#assign-department-feature)
   * [Sort feature](#sort-feature)
-  * [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+  * [Undo/redo feature](#undoredo-feature)
   * [Data archiving](#data-archiving)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
@@ -46,8 +48,6 @@ pageNav: 3
   * [Sorting patients](#sorting-patients)
   * [Undoing and Redoing a command](#undoing-and-redoing-a-command)
 * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
-
-<page-nav />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -78,6 +78,8 @@ implementation philosophy of the software design and features.
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -111,7 +113,7 @@ The bulk of the app's work is done by the following four components:
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete 1`.
+the command `delete i/T0012345A`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -129,6 +131,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -156,6 +160,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Patient` or `Record` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API**: [`Logic.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -164,25 +170,23 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
-call as an example.
-
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the Delete Command" />
+For examples illustrating the interactions within the `Logic` component, please refer to the
+[Implementation](#implementation) section for the implementation of various commands.
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
-PlantUML, the lifeline reaches the end of diagram.
+**Note:** For the explanations below, we'll use the command `XYZCommand` and parser `XYZCommandParser`. `XYZ` is a
+placeholder for the specific command name e.g., `AddCommandParser`.
 
 </box>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+   a parser that matches the command (e.g., `XYZCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `XYZCommand`) which
    is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a patient).
+3. The command can communicate with the `Model` when it is executed (e.g. to perform the operation in `XYZCommand`).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -191,12 +195,13 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
-  a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` which uses the 
+  other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the
+  `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 
@@ -226,6 +231,7 @@ each `Patient` needing their own `Tag` objects.<br>
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -248,6 +254,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -315,6 +323,8 @@ been listed.
     * Cons: Implementation is difficult and `Optional` class have to be implemented correctly to ensure it works
       with other components of the codebase.
 
+<br>
+
 ### Delete patient feature
 
 #### Implementation
@@ -367,6 +377,8 @@ been deleted.
     * Cons: Not as user-friendly in extremely large databases where it may be very inconvenient to 
       look for the specific patient's index position in the list.
 
+<br>
+
 ### Edit patient feature
 
 #### Implementation
@@ -412,7 +424,9 @@ It then returns a `CommandResult` stating that the patient has been edited.
 **Aspect: How should users edit a patient from the patient list**
 
 **Note: Similar considerations as mentioned in the `Delete` feature above**
-  
+
+<br>
+
 ### View patient feature
 
 #### Implementation
@@ -459,6 +473,8 @@ It then returns a `CommandResult` stating the patient has been listed.
     * Cons: New display have to be implemented correctly to integrate with
       existing displays.
 
+<br>
+
 ### Edit record feature
 
 #### Implementation
@@ -489,7 +505,7 @@ are present. If `true` is returned, the arguments will be passed into the `EditR
 
 The following activity diagram roughly demonstrates how `RecordCommand#parse` works.
 
-<puml src="diagrams/RecordCommandParserActivityDiagram.puml" alt="RecordCommandParserActivityDiagram" />
+<puml src="diagrams/RecordCommandParserActivityDiagram.puml" alt="RecordCommandParserActivityDiagram" height="800"/>
 
 **Step 4.** The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the
 fields of Record has been edited, and throws a `ParseException` if `false` is returned. It is then passed as an argument
@@ -523,6 +539,8 @@ The following sequence diagram summarizes the above-mentioned steps.
     * Pros: Easy to implement.
     * Cons: This would overwrite all fields in the previous `Record` even if user did not specify to edit a certain field
       in their input.
+
+<br>
 
 ### Assign department feature
 
@@ -568,6 +586,8 @@ The following sequence diagrams summarize what happens when `AssignCommand#execu
 <puml src="diagrams/AssignSequenceDiagram.puml" alt="AssignSequenceDiagram" />
 
 <puml src="diagrams/AssignSequenceDiagramParserUtil.puml" alt="AssignSequenceDiagramParserUtil" />
+
+<br>
 
 ### Sort feature
 The sort operation is facilitated by the `SortCommand` and `SortCommandParser` classes, similar
@@ -618,6 +638,8 @@ diagram below will only show the execution of the `SortCommand#execute` method t
 works.
 
 <puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
+
+<br>
 
 ### Undo/redo feature
 
@@ -741,6 +763,8 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+<br>
+
 ### Data archiving
 
 The data archiving feature in Advanced&Efficient is designed to ensure that historical patient records are maintained
@@ -798,6 +822,8 @@ initially.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -815,6 +841,8 @@ initially.
 **Value proposition**: Advanced&Efficient helps Emergency Department (ED) doctors in logging patient reports and
 assigning patients to relevant departments under time pressure during an emergency, using the CLI.
 
+<br>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -828,9 +856,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | ED Doctor | Add a patient to the list                                                                          | -                                                                                                                                                     |
 | `* * *`  | ED Doctor | View the list of patients                                                                          | -                                                                                                                                                     |
 | `* *`    | ED Doctor | Undo my latest action                                                                              | Quickly revert a mistake I made                                                                                                                       |
-| `* *`    | ED Doctor | Redo my latest action                                                                              | Quickly redo any change I may have wrongly undone.                                                                                                    |
+| `* *`    | ED Doctor | Redo my latest action                                                                              | Quickly redo any change I may have wrongly undone                                                                                                     |
 | `* *`    | ED Doctor | Tag patients                                                                                       | Better organize patients into categories so as to better keep track of them                                                                           |
-| `* *`    | ED Doctor | Assign the priority to the patient with respect to the severity of the case                        | keep track of the more critical cases                                                                                                                 |
+| `* *`    | ED Doctor | Assign the priority to the patient with respect to the severity of the case                        | Keep track of the more critical cases                                                                                                                 |
 | `* *`    | ED Doctor | Find patients from the list that match a given property (e.g. `NAME`, `IC_NUMBER`, `PRIORITY`)     | Quickly narrow down the list to view the patients of my interest                                                                                      |
 | `*`      | ED Doctor | Quickly view the availability status of a doctor                                                   | Assign them patients                                                                                                                                  |
 | `*`      | ED Doctor | Message and communicate with other healthcare staff                                                | Coordinate patient care effectively                                                                                                                   |
@@ -844,9 +872,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | ED Doctor | View real-time vitals of patients                                                                  | Monitor patient’s condition efficiently                                                                                                               |
 | `*`      | ED Doctor | Receive notifications for critical situations                                                      | Provide timely intervention and efficiently handle critical patient conditions                                                                        |
 | `*`      | ED Doctor | Save a draft of a message I am writing into the local repository                                   | Return to work on it after an emergency call                                                                                                          |
-| `*`      | ED Doctor | Filter a list of doctors according to their department                                             | easily identify doctors to assign to from a specific department                                                                                       |
-| `*`      | ED Doctor | View the list of doctors                                                                           | know who I can refer my patients for further treatment to                                                                                             |
+| `*`      | ED Doctor | Filter a list of doctors according to their department                                             | Easily identify doctors to assign to from a specific department                                                                                       |
+| `*`      | ED Doctor | View the list of doctors                                                                           | Know who I can refer my patients for further treatment to                                                                                             |
 | `*`      | ED Doctor | View a list of commands                                                                            | Know the commands needed to carry out my action                                                                                                       |
+
+<br>
 
 ### Use cases
 
@@ -1107,22 +1137,6 @@ unless specified otherwise)
 
       Use case ends.
 
-\
-**Use case: UC11 - Redoing a command**
-
-**MSS**
-
-1. ED doctor requests to redo the previous undone command.
-2. Advanced&Efficient redos the previous undone command.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Advanced&Efficient detects that there are no undone commands to redo.
-  * 1a1. Advanced&Efficient shows an error message saying that there are no undone commands to redo.
-
-    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -1139,6 +1153,8 @@ unless specified otherwise)
 * **Department**: A sector of the hospital responsible for a type of healthcare treatment.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -1407,6 +1423,8 @@ Testers are expected to do more *exploratory* testing.
        updated to display an empty patient list.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
