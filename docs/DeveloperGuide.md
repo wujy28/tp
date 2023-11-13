@@ -49,6 +49,7 @@ pageNav: 3
 
 <page-nav />
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Overview**
@@ -166,12 +167,13 @@ Here's a (partial) class diagram of the `Logic` component:
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
 call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the Delete Command" />
 
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -237,7 +239,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
+  that belong to the `Model`).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -322,27 +324,23 @@ The `Command#execute` method is then called.
 
 Given below is an example usage scenario and how the mechanism of deleting a patient is performed in Advanced&Efficient.
 
-Step 1. Assuming the application has been launched and the records contain the details of the patient to be deleted,
+**Step 1.** Assuming the application has been launched and the records contain the details of the patient to be deleted,
 the user enters the required field which is the `IC_NUMBER` of the patient intended to be deleted.
 
 For instance, the user wishes to delete the patient whose IC Number is "S1234567A".
-The user enters `delete i/S1234567A`, which is to delete the patient with the corresponding IC Number
+The user enters `delete i/S1234567A`, which is to delete the patient with the corresponding IC Number.
 
-<box type="info" seamless>
-
-</box>
-
-Step 2. `LogicManager#execute` would call `AddressBookParser#parseCommand` to parse the user input, splitting the 
+**Step 2.** `LogicManager#execute` would call `AddressBookParser#parseCommand` to parse the user input, splitting the 
 command word `delete` and the argument `i/S1234567A`. After which, the `AddressBookParser#parseCommand` is called, parsing
 the command word and activating `DeleteCommandParser` to parse the argument 
 which is the IC number of the patient to be deleted.
 
-Step 3. This `DeleteCommandParser#parse` method will then be called to parse the argument `i/S1234567A` 
-to create an IcNumber object. If the IcNumber is in an invalid format, a parse exception would be thrown,
-giving the user the message on the right expected format of the IC Number.
-The IcNumber object created is then passed as an argument to instantiate the `DeleteCommand`
+**Step 3.** This `DeleteCommandParser#parse` method will then be called to parse the argument `i/S1234567A` 
+to create an `IcNumber` object. If the IC number is in an invalid format, a parse exception would be thrown,
+giving the user the message on the right expected format of the IC number.
+The `IcNumber` object created is then passed as an argument to instantiate the `DeleteCommand`.
 
-Step 4. `LogicManager#execute` will now call `DeleteCommand#execute` to execute the command. The `DeleteCommand#execute`
+**Step 4.** `LogicManager#execute` will now call `DeleteCommand#execute` to execute the command. The `DeleteCommand#execute`
 will then call `model#getPatient` which retrieves the Patient with the matching IC Number as specified by the user.
 This Patient object is then passed into the `model#deletePatient` method to delete the target Patient
 from the AddressBook. It then returns a `CommandResult` stating the patient has
@@ -354,14 +352,16 @@ been deleted.
 
 **Aspect: How should users delete a patient from the patient list**
 
-* **Alternative 1 (current choice):** Accept the `IC Number` as the argument and use that to iterate through the patient,
-    search for the patient with the specified IC Number and delete it.
+* **Alternative 1 (current choice):** Accept `IC_NUMBER` as the argument and use that to iterate through the patient
+    list, search for the patient with the specified IC number and delete it.
     * Pros: Easy and user-friendly in extremely large databases.
     * Cons: Potential pitfalls to consider include methods to search for the IC Number which may return null.
       This may be dangerous for large scale systems, and as such, other exceptions have to be thrown in place of null 
       as part of defensive programming.
 
-* **Alternative 2:** Accept indices in place of IC Numbers for deleting a patient from the list
+<br>
+
+* **Alternative 2:** Accept indices in place of IC numbers for deleting a patient from the list
     * Pros: Easier and neater implementation as out-of-bounds indices of patients 
       are easier to handle compared to a null Patient object which may be introduced in Alternative 1.
     * Cons: Not as user-friendly in extremely large databases where it may be very inconvenient to 
@@ -376,36 +376,32 @@ The `Command#execute` method is then called.
 
 Given below is an example usage scenario and how the mechanism of editing a patient is performed in Advanced&Efficient.
 
-Step 1. Assuming the application has been launched and the records contain the details of the patient to be edited,
+**Step 1.** Assuming the application has been launched and the records contain the details of the patient to be edited,
 the user enters the required field which is the `IC_NUMBER` and other fields which are to be edited of the target patient.
 
 For instance, the user wishes to edit the patient's name, whose IC Number is "T0000000A".
 The user enters `edit i/T0000000A n/Jonathan Tan`, which is to 
 edit the name of the patient with the corresponding IC Number from John Doe to Jonathan Tan.
 
-<box type="info" seamless>
-
-</box>
-
-Step 2. `LogicManager#execute` would call `AddressBookParser#parseCommand` to parse the user input, splitting the
+**Step 2.** `LogicManager#execute` would call `AddressBookParser#parseCommand` to parse the user input, splitting the
 command word `edit` and the argument `i/T0000000A`. After which, the `AddressBookParser#parseCommand` is called, parsing
 the command word and activating `EditCommandParser` to parse the argument
 which is the IC number of the patient to be edited and other fields of the target patient which are to be edited.
 
-Step 3. This `EditCommandParser#parse` method will then be called to parse the argument `i/T0000000A n/Jonathan Tan`
-to create an IcNumber object. If the IcNumber is in an invalid format, a parse exception would be thrown,
+**Step 3.** This `EditCommandParser#parse` method will then be called to parse the argument `i/T0000000A n/Jonathan Tan`
+to create an `IcNumber` object. If the IcNumber is in an invalid format, a parse exception would be thrown,
 giving the user the message on the right expected format of the IC Number. 
 In addition, `EditCommandParser#parse` will invoke `EditCommandParser#createEditPatientDescriptor` method to 
 create the edited descriptor of the patient. 
-The IcNumber object and the patient descriptor is then passed as an argument to instantiate the `EditCommand`
+The IcNumber object and the patient descriptor is then passed as an argument to instantiate the `EditCommand`.
 
-Step 4. `LogicManager#execute` will now call `EditCommand#execute` to execute the command. The `EditCommand#execute`
-will then call `model#getPatient` which retrieves the target Patient with the matching IC Number 
+**Step 4.** `LogicManager#execute` will now call `EditCommand#execute` to execute the command. The `EditCommand#execute`
+will then call `model#getPatient` which retrieves the target `Patient` with the matching IC Number 
 as specified by the user, in this case the Patient being John Doe.
-`EditCommand#execute` will also call `EditCommand#createEditedPatient` to create the edited Patient object based on
-the patient descriptor created in Step 3, in this case being Jonathan Tan (as the name of the patient was edited)
+`EditCommand#execute` will also call `EditCommand#createEditedPatient` to create the edited `Patient` object based on
+the patient descriptor created in Step 3, in this case being Jonathan Tan (as the name of the patient was edited).
 
-Step 5. The edited Patient object (Jonathan Tan), along with the
+**Step 5.** The edited `Patient` object (Jonathan Tan), along with the
 target Patient to be edited (John Doe) from the AddressBook is then passed into the `model#setPatient` method. 
 It then returns a `CommandResult` stating that the patient has been edited.
 
@@ -493,7 +489,7 @@ are present. If `true` is returned, the arguments will be passed into the `EditR
 
 The following activity diagram roughly demonstrates how `RecordCommand#parse` works.
 
-<puml src="diagrams/RecordCommandParserActivityDiagram.puml" alt=RecordCommandParserActivityDiagram" />
+<puml src="diagrams/RecordCommandParserActivityDiagram.puml" alt="RecordCommandParserActivityDiagram" />
 
 **Step 4.** The `EditRecordDescriptor` object calls `EditRecordDescriptor#isAnyFieldEdited`, which checks if any of the
 fields of Record has been edited, and throws a `ParseException` if `false` is returned. It is then passed as an argument
@@ -640,19 +636,19 @@ and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
+**Step 1.** The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
 initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete i/S1234567A` command to delete the patient with IC number "S1234567A" from the address book. The `delete` command
+**Step 2.** The user executes `delete i/S1234567A` command to delete the patient with IC number "S1234567A" from the address book. The `delete` command
 calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete i/S1234567A` command executes
 to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new patient. The `add` command also
+**Step 3.** The user executes `add n/David …​` to add a new patient. The `add` command also
 calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
 the `addressBookStateList`.
 
@@ -665,7 +661,7 @@ not be saved into the `addressBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing
+**Step 4.** The user now decides that adding the patient was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
@@ -706,11 +702,11 @@ to check if this is the case. If so, it will return an error to the user rather 
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
+**Step 5.** The user then decides to execute the command `list`. Commands that do not modify the address book, such
 as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
 Thus, the `addressBookStateList` remains unchanged.
 
-Step 6. The user then decides to execute another command, `record`. Commands such as editing patient record 
+**Step 6.** The user then decides to execute another command, `record`. Commands such as editing patient record 
 do not use an inherent method in Model which would modify the state of the addressBook. 
 For instance, simple commands like `edit` and `add` call methods in Model like
 `Model#setPatient` and `Model#addPatient` respectively, modifying the state of the AddressBook
@@ -719,7 +715,7 @@ that both modify the addressBook and commit its state.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 7. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
+**Step 7.** The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
 pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
 purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
 desktop applications follow.
@@ -738,12 +734,12 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
+<br>
+
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Data archiving
 
@@ -1093,35 +1089,40 @@ unless specified otherwise)
       Steps 1c1-1c3 are repeated until the department is valid.
 
       Use case resumes from step 2.
+
 \
-**Use case: UC10 - Undo the action of deleting a patient with a specific IC Number from the patient records
+**Use case: UC10 - Undoing a command**
+
 **MSS**
 
-1. ED doctor requests deleting the patient with the specified IC Number
-2. Advanced&Efficient deletes the patient from the Advanced&Efficient.
-3. ED doctor wishes to undo this action as this patient was mistakenly deleted
-4. Advanced&Efficient undos the latest action performed and restores this patient back into the list.
+1. ED doctor requests to undo the previous command.
+2. Advanced&Efficient undos the previous command.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Advanced&Efficient detects that the given `IC_NUMBER` is invalid.
-    * 1a1. Advanced&Efficient shows an error message saying the given `IC_NUMBER` is invalid.
-    * 1a2. Advanced&Efficient requests for valid `IC_NUMBER`.
-    * 1a3. ED doctor enters the `IC_NUMBER`.
+* 1a. Advanced&Efficient detects that there are no previous commands to undo.
+    * 1a1. Advanced&Efficient shows an error message saying that there are no previous commands to undo.
 
-      Steps 1a1-1a3 are repeated until the `IC_NUMBER` is valid.
+      Use case ends.
 
-      Use case resumes from step 2.
-  
-* 3a. ED doctor accidentally closes the app.
-    * 3a1. Advanced&Efficient shows an error message saying there are no recent commands to undo  
-    * 3a2. The details of the patient would have to be manually added using the `add` command 
-      as the delete command cannot be undone after the app has been closed.
+\
+**Use case: UC11 - Redoing a command**
+
+**MSS**
+
+1. ED doctor requests to redo the previous undone command.
+2. Advanced&Efficient redos the previous undone command.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Advanced&Efficient detects that there are no undone commands to redo.
+  * 1a1. Advanced&Efficient shows an error message saying that there are no undone commands to redo.
 
     Use case ends.
-
 
 ### Non-Functional Requirements
 
@@ -1449,3 +1450,7 @@ Testers are expected to do more *exploratory* testing.
    overlap with other UI elements, causing their patient card in the patient list to be unreadable. Therefore, we plan
    on adjusting the UI component containing these tags so that tags are only allowed to take up a certain amount of
    space in the UI and are truncated otherwise.
+
+8. Currently, the `Record` command cannot be undone, which might be unintuitive to users as it updates the field of a 
+   patient's record, and users will find it helpful to be able to undo a command like this. We plan on modifying the 
+   `RecordCommand` class to support the `undo` behavior in the future.
