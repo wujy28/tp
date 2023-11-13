@@ -436,45 +436,6 @@ Examples:
 
 [Back to Table-of-contents](#table-of-contents)
 
-### Undoing a command: `undo`
-
-Undos the most recent command. Only applies to the following commands:
-
-+ `delete`
-+ `edit`
-+ `clear`
-+ `add`
-+ `assign`
-
-Format: `undo`
-
-Examples:
-
-+ `delete i/T1234567A` deletes the patient with the IC number "T1234567A" from the patient list.
-`undo` restores this patient back into the patient list
-
-[Back to Table-of-contents](#table-of-contents)
-
-### Redoing a command: `redo`
-
-Redos the most recently undone command. Only applies to the following commands:
-
-+ `delete`
-+ `edit`
-+ `clear`
-+ `add`
-+ `assign`
-
-Format: `redo`
-
-Examples:
-
-+ `delete i/T1234567A` deletes the patient with IC number "T1234567A" from the patient list
-`undo` restores this patient back into the patient list.
-`redo` once again deletes this patient from the patient list
-
-[Back to Table-of-contents](#table-of-contents)
-
 ### Finding a patient by name: `find`
 
 Finds the patients whose names match any of the given keywords.
@@ -562,6 +523,45 @@ Examples:
 
 * To assign a patient with IC number "T0201234A" to the cardiology department<br>
   `assign i/T0201234A d/cardiology`
+
+[Back to Table-of-contents](#table-of-contents)
+
+### Undoing a command: `undo`
+
+Undos the most recent command. Only applies to the following commands:
+
++ `delete`
++ `edit`
++ `clear`
++ `add`
++ `assign`
+
+Format: `undo`
+
+Examples:
+
++ `delete i/T1234567A` deletes the patient with the IC number "T1234567A" from the patient list.
+  `undo` restores this patient back into the patient list
+
+[Back to Table-of-contents](#table-of-contents)
+
+### Redoing a command: `redo`
+
+Redos the most recently undone command. Only applies to the following commands:
+
++ `delete`
++ `edit`
++ `clear`
++ `add`
++ `assign`
+
+Format: `redo`
+
+Examples:
+
++ `delete i/T1234567A` deletes the patient with IC number "T1234567A" from the patient list
+  `undo` restores this patient back into the patient list.
+  `redo` once again deletes this patient from the patient list
 
 [Back to Table-of-contents](#table-of-contents)
 
