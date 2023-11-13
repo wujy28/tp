@@ -195,7 +195,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` which uses the 
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` which uses the
   other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the
   `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
@@ -330,7 +330,7 @@ been listed.
 
 #### Implementation
 The delete mechanism is facilitated by `DeleteCommandParser`. `DeleteCommandParser` parses the user input
-and creates the `DeleteCommand`. This `DeleteCommand` extends `Command` and is then executed by the `LogicManager`. 
+and creates the `DeleteCommand`. This `DeleteCommand` extends `Command` and is then executed by the `LogicManager`.
 The `Command#execute` method is then called.
 
 Given below is an example usage scenario and how the mechanism of deleting a patient is performed in Advanced&Efficient.
@@ -341,12 +341,12 @@ the user enters the required field which is the `IC_NUMBER` of the patient inten
 For instance, the user wishes to delete the patient whose IC Number is "S1234567A".
 The user enters `delete i/S1234567A`, which is to delete the patient with the corresponding IC Number.
 
-**Step 2.** `LogicManager#execute` would call `AddressBookParser#parseCommand` to parse the user input, splitting the 
+**Step 2.** `LogicManager#execute` would call `AddressBookParser#parseCommand` to parse the user input, splitting the
 command word `delete` and the argument `i/S1234567A`. After which, the `AddressBookParser#parseCommand` is called, parsing
-the command word and activating `DeleteCommandParser` to parse the argument 
+the command word and activating `DeleteCommandParser` to parse the argument
 which is the IC number of the patient to be deleted.
 
-**Step 3.** This `DeleteCommandParser#parse` method will then be called to parse the argument `i/S1234567A` 
+**Step 3.** This `DeleteCommandParser#parse` method will then be called to parse the argument `i/S1234567A`
 to create an `IcNumber` object. If the IC number is in an invalid format, a parse exception would be thrown,
 giving the user the message on the right expected format of the IC number.
 The `IcNumber` object created is then passed as an argument to instantiate the `DeleteCommand`.
@@ -367,15 +367,15 @@ been deleted.
     list, search for the patient with the specified IC number and delete it.
     * Pros: Easy and user-friendly in extremely large databases.
     * Cons: Potential pitfalls to consider include methods to search for the IC Number which may return null.
-      This may be dangerous for large scale systems, and as such, other exceptions have to be thrown in place of null 
+      This may be dangerous for large scale systems, and as such, other exceptions have to be thrown in place of null
       as part of defensive programming.
 
 <br>
 
 * **Alternative 2:** Accept indices in place of IC numbers for deleting a patient from the list
-    * Pros: Easier and neater implementation as out-of-bounds indices of patients 
+    * Pros: Easier and neater implementation as out-of-bounds indices of patients
       are easier to handle compared to a null Patient object which may be introduced in Alternative 1.
-    * Cons: Not as user-friendly in extremely large databases where it may be very inconvenient to 
+    * Cons: Not as user-friendly in extremely large databases where it may be very inconvenient to
       look for the specific patient's index position in the list.
 
 <br>
@@ -394,7 +394,7 @@ Given below is an example usage scenario and how the mechanism of editing a pati
 the user enters the required field which is the `IC_NUMBER` and other fields which are to be edited of the target patient.
 
 For instance, the user wishes to edit the patient's name, whose IC Number is "T0000000A".
-The user enters `edit i/T0000000A n/Jonathan Tan`, which is to 
+The user enters `edit i/T0000000A n/Jonathan Tan`, which is to
 edit the name of the patient with the corresponding IC Number from John Doe to Jonathan Tan.
 
 **Step 2.** `LogicManager#execute` would call `AddressBookParser#parseCommand` to parse the user input, splitting the
@@ -404,19 +404,19 @@ which is the IC number of the patient to be edited and other fields of the targe
 
 **Step 3.** This `EditCommandParser#parse` method will then be called to parse the argument `i/T0000000A n/Jonathan Tan`
 to create an `IcNumber` object. If the IcNumber is in an invalid format, a parse exception would be thrown,
-giving the user the message on the right expected format of the IC Number. 
-In addition, `EditCommandParser#parse` will invoke `EditCommandParser#createEditPatientDescriptor` method to 
-create the edited descriptor of the patient. 
+giving the user the message on the right expected format of the IC Number.
+In addition, `EditCommandParser#parse` will invoke `EditCommandParser#createEditPatientDescriptor` method to
+create the edited descriptor of the patient.
 The IcNumber object and the patient descriptor is then passed as an argument to instantiate the `EditCommand`.
 
 **Step 4.** `LogicManager#execute` will now call `EditCommand#execute` to execute the command. The `EditCommand#execute`
-will then call `model#getPatient` which retrieves the target `Patient` with the matching IC Number 
+will then call `model#getPatient` which retrieves the target `Patient` with the matching IC Number
 as specified by the user, in this case the Patient being John Doe.
 `EditCommand#execute` will also call `EditCommand#createEditedPatient` to create the edited `Patient` object based on
 the patient descriptor created in Step 3, in this case being Jonathan Tan (as the name of the patient was edited).
 
 **Step 5.** The edited `Patient` object (Jonathan Tan), along with the
-target Patient to be edited (John Doe) from the AddressBook is then passed into the `model#setPatient` method. 
+target Patient to be edited (John Doe) from the AddressBook is then passed into the `model#setPatient` method.
 It then returns a `CommandResult` stating that the patient has been edited.
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
@@ -472,7 +472,7 @@ It then returns a `CommandResult` stating the patient has been listed.
 
 * **Alternative 2:** Create a new set of JavaFx controls to display that patient differently
   from the current filteredPatientList display.
-    * Pros: New display can be customisable for users' needs. 
+    * Pros: New display can be customisable for users' needs.
     * Cons: New display have to be implemented correctly to integrate with
       existing displays.
 
@@ -738,7 +738,7 @@ Thus, the `addressBookStateList` remains unchanged.
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 **Step 6.** The user then decides to execute another command, `record`. Commands such as editing patient record
-do not use an inherent method in Model which would modify the state of the addressBook. 
+do not use an inherent method in Model which would modify the state of the addressBook.
 For instance, simple commands like `edit` and `add` call methods in Model like
 `Model#setPatient` and `Model#addPatient` respectively, modifying the state of the AddressBook
 and committing that state using `Model#commitAddressBook`. Hence, the `undo` and `redo` commands only work for operations
@@ -1442,10 +1442,10 @@ Testers are expected to do more *exploratory* testing.
    Since `IC_NUMBER` is unique for every `Patient`, we plan to show the `Patient` details and record
    directly in the information tab.
 
-2. Currently, the `undo` and `redo` command do not work as expected for `record` command 
+2. Currently, the `undo` and `redo` command do not work as expected for `record` command
    which is meant for editing patient record. `record` command modifies the state of the AddressBook.
    However, it does not commit the modified state of the AddressBook. As such, this new state of the AddressBook is not
-   stored in the addressBookStateList which contains all the states of the addressBook. Hence, modifications will be made 
+   stored in the addressBookStateList which contains all the states of the addressBook. Hence, modifications will be made
    to commands like `record` to ensure all modified states of the AddressBook are committed and stored properly. Hence,
    `undo` and `redo` will work on any operation which modifies the AddressBook.
 
@@ -1454,30 +1454,30 @@ Testers are expected to do more *exploratory* testing.
    to completely refactor all instances of `AddressBook` into `PatientRecordSystem`. For example,
    `AddressBookParser.java` would be renamed to `PatientRecordSystemParser.java`.
 
-3. Currently, age is not displayed in a patient's record card in the record panel, but only the patient card in the
+4. Currently, age is not displayed in a patient's record card in the record panel, but only the patient card in the
    patient list panel in the UI. This is inconsistent and might make it inconvenient for users to have to look back to
    the patient card for this crucial piece of patient information. We plan to include it as a label in every patient's
    record card subsequently.
 
-4. Invalid parameters/prefixes currently cannot be detected properly by the program. For example, if the user inputs
+5. Invalid parameters/prefixes currently cannot be detected properly by the program. For example, if the user inputs
    `add n/John Doe i/T0123456S bt/O+` to try to add a patient with name "John Doe", IC number "T0123456S" and blood type
    "O+", the program will display the error message "IC Number should start and end with an alphabet with non negative
    numbers in between" instead of indicating that the prefix `bt/` does not exist. We plan to modify parsing-related
    classes (e.g. `ArgumentTokenizer`) so that extraneous or invalid prefixes can be detected in the future.
 
-5. Invalid dates can currently be added as birthdays for patients (e.g. 30 February). This is an issue trickled down
+6. Invalid dates can currently be added as birthdays for patients (e.g. 30 February). This is an issue trickled down
    from Java's `LocalDate`, which does not appear to have built-in checks for invalid dates like these. We plan on
    enhancing our `Birthday` class by manually adding checks in `isValidBirthday` to detect invalid dates.
 
-6. Currently, any alphabet is accepted for the start of an IC number.
+7. Currently, any alphabet is accepted for the start of an IC number.
    Ideally, only letters "S", "T", "F", "G" or "M" are accepted for the start of an IC number. Therefore, we plan on
    enhancing our `IcNumber` class by manually adding checks to ensure the first alphabet of an IC number is valid.
 
-7. Currently, a patient having too many tags or tags that are too long will cause their tags in the UI to overflow and
+8. Currently, a patient having too many tags or tags that are too long will cause their tags in the UI to overflow and
    overlap with other UI elements, causing their patient card in the patient list to be unreadable. Therefore, we plan
    on adjusting the UI component containing these tags so that tags are only allowed to take up a certain amount of
    space in the UI and are truncated otherwise.
 
-8. Currently, the `Record` command cannot be undone, which might be unintuitive to users as it updates the field of a 
-   patient's record, and users will find it helpful to be able to undo a command like this. We plan on modifying the 
+9. Currently, the `Record` command cannot be undone, which might be unintuitive to users as it updates the field of a
+   patient's record, and users will find it helpful to be able to undo a command like this. We plan on modifying the
    `RecordCommand` class to support the `undo` behavior in the future.

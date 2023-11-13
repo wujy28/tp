@@ -27,18 +27,26 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
+  * [Table of Contents]({{ baseUrl }}/UserGuide.html#table-of-contents)
+  * [Using this guide]({{ baseUrl }}/UserGuide.html#using-this-guide)
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
+  * [Getting to know A&E]({{ baseUrl }}/UserGuide.html#getting-to-know-a-and-amp-e)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
+  * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
+  * [Appendix : Departments]({{ baseUrl }}/UserGuide.html#appendix-departments)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
+  * [Overview]({{ baseUrl }}/DeveloperGuide.html#overview)
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
-  * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
+  * [Setting up, getting started]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
+  * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
 * Tutorials
   * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
   * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
