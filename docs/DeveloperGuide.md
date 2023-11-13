@@ -905,6 +905,8 @@ unless specified otherwise)
 
    Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 \
 **Use case: UC02 - Add a patient**
 
@@ -944,6 +946,8 @@ unless specified otherwise)
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 \
 **Use case: UC03 - View a patient's details**
 
@@ -969,6 +973,8 @@ unless specified otherwise)
     * 1b1. Advanced&Efficient shows message saying the patient does not exist.
 
       Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 \
 **Use case: UC04 - Edit a patient's details**
@@ -1004,6 +1010,8 @@ unless specified otherwise)
       Steps 1c1-1c3 are repeated until the details are valid.
 
       Use case resumes from step 2.
+
+<div style="page-break-after: always;"></div>
 
 \
 **Use case: UC05 - Delete a patient**
@@ -1041,6 +1049,8 @@ unless specified otherwise)
 
    Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 \
 **Use case: UC07 - Sort a patient list**
 
@@ -1061,6 +1071,8 @@ unless specified otherwise)
       Steps 1a1-1a3 are repeated until the property is valid.
 
       Use case resumes from step 2.
+
+<div style="page-break-after: always;"></div>
 
 \
 **Use case: UC08 - Edit a patient's record**
@@ -1097,6 +1109,8 @@ unless specified otherwise)
 
       Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
+
 \
 **Use case: UC09 - Assign a patient to department**
 
@@ -1131,6 +1145,8 @@ unless specified otherwise)
       Steps 1c1-1c3 are repeated until the department is valid.
 
       Use case resumes from step 2.
+
+<div style="page-break-after: always;"></div>
 
 \
 **Use case: UC10 - Undoing a command**
@@ -1213,6 +1229,8 @@ Testers are expected to do more *exploratory* testing.
    4. Other incorrect add commands to try: `add`, `add Wo Meiyou T0365867F`<br>
       Expected: Similar to the previous case.
 
+<div style="page-break-after: always;"></div>
+
 2. Adding a patient with both required and optional prefixes
 
    1. Prerequisites: None of existing patients have either name `Ingot Gold` or IC number `T0482756J`. (else you may
@@ -1247,6 +1265,8 @@ Testers are expected to do more *exploratory* testing.
       not exist)<br>
       Expected: Similar to the previous case.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a patient
 
 1. Deleting a patient
@@ -1280,6 +1300,8 @@ Testers are expected to do more *exploratory* testing.
    4. Other incorrect edit commands to try: `edit`, `edit i/T0264782A n/Mary Jane` (where a patient with IC number
       `T0264782A` does not exist)<br>
       Expected: Similar to the previous case.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a patient record
 
@@ -1317,6 +1339,8 @@ Testers are expected to do more *exploratory* testing.
     4. Other incorrect assign commands to try: `assign`, `assign i/T7654321A d/Cardio` (department is not fully spelt),
        `assign i/T7654321A d/Anesthesiology` (department follows American spelling)<br>
        Expected: Similar to the previous case.
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting patients
 
@@ -1359,6 +1383,8 @@ Testers are expected to do more *exploratory* testing.
       followed by the remaining ages in increasing order. Details of success of command is shown in the status message.
       Order of patients in list is updated in UI.
 
+<div style="page-break-after: always;"></div>
+
 5. Sorting patients by priority
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list. At least 2 different
@@ -1396,6 +1422,8 @@ Testers are expected to do more *exploratory* testing.
    3. Test case: `redo` (after executing the previous test case)<br>
       Expected: Address of patient with IC number `T7654321A` is changed back to `Dummy Address Test Street 1`. Details
       of success of command is shown in the status message. Patient's details is updated in UI.
+
+<div style="page-break-after: always;"></div>
 
 3. Undoing and Redoing delete command
 
@@ -1476,6 +1504,8 @@ Testers are expected to do more *exploratory* testing.
 7. Currently, any alphabet is accepted for the start of an IC number.
    Ideally, only letters "S", "T", "F", "G" or "M" are accepted for the start of an IC number. Therefore, we plan on
    enhancing our `IcNumber` class by manually adding checks to ensure the first alphabet of an IC number is valid.
+
+<div style="page-break-after: always;"></div>
 
 8. Currently, a patient having too many tags or tags that are too long will cause their tags in the UI to overflow and
    overlap with other UI elements, causing their patient card in the patient list to be unreadable. Therefore, we plan
