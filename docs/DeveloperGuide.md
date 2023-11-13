@@ -85,7 +85,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="250" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of Advanced&Efficient.
 
@@ -110,6 +110,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
@@ -128,7 +130,7 @@ the `LogicManager.java` class which follows the `Logic` interface. Other compone
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
 implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="270" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -458,6 +460,8 @@ then passed as an argument along with `IC_NUMBER` to instantiate the `ViewComman
 It then returns a `CommandResult` stating the patient has been listed.
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 

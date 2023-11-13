@@ -60,6 +60,7 @@ Given below are my contributions to the project.
 ### Contributions to team-based tasks
 
 + Consolidated and organized bugs from PE-D
++ Helped in preparing documentation for final submission (proofreading and formatting)
 
 ### Review/mentoring contributions
 
@@ -72,12 +73,23 @@ Given below are my contributions to the project.
 ### Contributions to documentation
 
 + User Guide
-  + Added documentation for the features `find` and `sort`
-  ([#171](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/171))
+  + Added documentation for the features `assign` and `sort`
+  ([#171](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/171),
+  [#243](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/243))
   + Added the appendix for the list of available departments
   ([#171](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/171))
+  + Wrote the 'Getting to know A&E' section
+  ([#243](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/243))
+  + Wrote the 'Prefix Summary' section
+  ([#243](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/243))
 + Developer Guide
   + Added implementation details for `assign` feature
   ([#137](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/137))
+  + Added implementation details for `sort` feature
+  ([#241](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/241))
   + Updated the explanation and class diagram for UI Component section
   ([#137](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/137))
+  + Updated the diagram for Model Component section
+  ([#241](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/241))
+  + Added on to the 'Planned Enhancements' appendix
+  ([#254](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/254))
