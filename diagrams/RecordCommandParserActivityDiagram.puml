@@ -9,12 +9,15 @@ if () then ([IC number prefix present])
         :Create EditRecordDescriptor;
         if () then ([Initial observations prefix is present])
             :Set initial observations of EditRecordDescriptor;
+        else ([else])
         endif
         if () then ([Diagnosis prefix is present])
             :Set diagnosis of EditRecordDescriptor;
+        else ([else])
         endif
         if () then ([Treatment plan prefix is present])
             :Set treatment plan of EditRecordDescriptor;
+        else ([else])
         endif
         if () then ([Any of the EditRecordDescriptor fields is edited])
             :Return new RecordCommand with details;
