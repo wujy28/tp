@@ -51,7 +51,7 @@ activate EditRecordDescriptor
 EditRecordDescriptor --> RecordCommandParser : e
 deactivate EditRecordDescriptor
 
-ref over EditRecordDescriptor : Set values of e with parsed input values
+ref over EditRecordDescriptor, RecordCommandParser : Set values of e with parsed input values
 
 create RecordCommand
 RecordCommandParser -> RecordCommand

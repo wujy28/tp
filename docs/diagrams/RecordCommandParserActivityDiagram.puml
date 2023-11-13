@@ -1,0 +1,34 @@
+@startuml
+
+start
+:Tokenize arguments to relevant prefixes;
+if () then ([IC number prefix present])
+    if () then ([Argument Multimap preamble non-empty])
+        :Parse IC number;
+        :Check that there are no duplicate prefixes;
+        :Create EditRecordDescriptor;
+        if () then ([Initial observations prefix is present])
+            :Set initial observations of EditRecordDescriptor;
+        endif
+        if () then ([Diagnosis prefix is present])
+            :Set diagnosis of EditRecordDescriptor;
+        endif
+        if () then ([Treatment plan prefix is present])
+            :Set treatment plan of EditRecordDescriptor;
+        endif
+        if () then ([Any of the EditRecordDescriptor fields is edited])
+            :Return new RecordCommand with details;
+        else ([else])
+            :throw ParseException for not edited;
+            stop
+        endif
+        stop
+    else ([else])
+    endif
+else ([else])
+endif
+->;
+:throw ParseException for invalid command;
+stop
+
+@enduml

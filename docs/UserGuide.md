@@ -32,7 +32,7 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
 - [Table of Contents](#table-of-contents)
 - [Using this guide](#using-this-guide)
 - [Quick Start](#quick-start)
-- [Getting to know A&E](#getting-to-know-ae)
+- [Getting to know A&E](#getting-to-know-a-and-amp-e)
     - [User Interface](#user-interface)
 - [Features](#features)
     - [Prefix Summary](#prefix-summary)
@@ -42,12 +42,12 @@ Embrace the efficiency of A&E and transform the way you manage patient records i
     - [Viewing a patient : `view`](#viewing-a-patient-view)
     - [Editing a patient: `edit`](#editing-a-patient-edit)
     - [Deleting a patient: `delete`](#deleting-a-patient-delete)
-    - [Undoing a command : `undo`](#undoing-a-command-undo)
-    - [Redoing a command : `redo`](#redoing-a-command-redo)
     - [Finding a patient by name : `find`](#finding-a-patient-by-name-find)
     - [Sorting the patient list : `sort`](#sorting-the-patient-list-sort)
     - [Editing a patient record : `record`](#editing-a-patient-record-record)
     - [Assigning a patient to a department : `assign`](#assigning-a-patient-to-a-department-assign)
+    - [Undoing a command : `undo`](#undoing-a-command-undo)
+    - [Redoing a command : `redo`](#redoing-a-command-redo)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Saving the program](#saving-the-program)
@@ -69,7 +69,7 @@ This user guide contains all of the information you will need in order to use A&
 
 For new users:
 * Begin your journey with A&E by exploring the [Quick Start](#quick-start) and
-  [Getting to know A&E](#getting-to-know-ae) sections.
+  [Getting to know A&E](#getting-to-know-a-and-amp-e) sections.
 
 For experienced users:
 * Utilize the [Table of contents](#table-of-contents) to swiftly navigate to your desired section.
@@ -102,7 +102,7 @@ Used to highlight issues to look out for
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java 11<sup>[3](#java-11)</sup> or above installed in your Computer.
 
@@ -144,6 +144,7 @@ Used to highlight issues to look out for
 
 <box type="tip">
 
+**Tip:**
 We strongly recommend you to use A&E at a resolution of 1024x640 for the fullest experience. You may also click
 on the fullscreen icon at the top right hand corner to enlarge the window.
 
@@ -328,7 +329,7 @@ Expected output when command succeeds:
 
 Adds a patient into the system
 
-Format: `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY]] [t/TAG]...`
+Format: `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 
 + IC number cannot be edited after the patient has been added.
 
@@ -361,7 +362,7 @@ Examples:
 * To add a patient with name "Betsy Crowe", IC number "S0123456B", phone number "90909090", and email "bc@gmail.com"<br>
     `add n/Betsy Crowe i/S0123456B p/90909090 e/bc@gmail.com`
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Viewing a patient: `view`
 
@@ -371,7 +372,7 @@ Format: `view i/IC_NUMBER`
 
 Examples:
 
-+ To view patient with IC number "T0123456A"<br>
++ To view patient with IC number "T0201234A"<br>
   `view i/T0201234A`
 
 Expected output when command succeeds:
@@ -387,7 +388,7 @@ details and record card, you have to click on their patient card in the list.
 
 </box>
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Editing a patient: `edit`
 
@@ -421,7 +422,7 @@ Examples:
 * To edit the phone number and email of a patient with IC number "S0123456B" to "87621527" and "betsyc@hotmail.com" respectively <br>
   `edit i/S0123456B b/10/01/2000 e/betsyc@hotmail.com`
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Deleting a patient: `delete`
 
@@ -434,46 +435,7 @@ Examples:
 * To delete a patient with IC number "T2468012A" <br>
   `delete i/T2468012A`
 
-[Back to Table-of-contents](#table-of-contents)
-
-### Undoing a command: `undo`
-
-Undos the most recent command. Only applies to the following commands:
-
-+ `delete`
-+ `edit`
-+ `clear`
-+ `add`
-+ `assign`
-
-Format: `undo`
-
-Examples:
-
-+ `delete i/T1234567A` deletes the patient with the IC number "T1234567A" from the patient list.
-`undo` restores this patient back into the patient list
-
-[Back to Table-of-contents](#table-of-contents)
-
-### Redoing a command: `redo`
-
-Redos the most recently undone command. Only applies to the following commands:
-
-+ `delete`
-+ `edit`
-+ `clear`
-+ `add`
-+ `assign`
-
-Format: `redo`
-
-Examples:
-
-+ `delete i/T1234567A` deletes the patient with IC number "T1234567A" from the patient list
-`undo` restores this patient back into the patient list.
-`redo` once again deletes this patient from the patient list
-
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Finding a patient by name: `find`
 
@@ -527,13 +489,13 @@ Examples:
 + To sort the patient list according to descending priority<br>
   `sort priority`
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Editing a patient record: `record`
 
 Edits the medical record of the patient with the specified IC number.
 
-Format: `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [d/DIAGNOSIS] [t/TREATMENT_PLAN]`
+Format: `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`
 
 Examples:
 
@@ -563,7 +525,46 @@ Examples:
 * To assign a patient with IC number "T0201234A" to the cardiology department<br>
   `assign i/T0201234A d/cardiology`
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
+
+### Undoing a command: `undo`
+
+Undos the most recent command. Only applies to the following commands:
+
++ `delete`
++ `edit`
++ `clear`
++ `add`
++ `assign`
+
+Format: `undo`
+
+Examples:
+
++ `delete i/T1234567A` deletes the patient with the IC number "T1234567A" from the patient list.
+  `undo` restores this patient back into the patient list.
+
+[Back to Table of Contents](#table-of-contents)
+
+### Redoing a command: `redo`
+
+Redos the most recently undone command. Only applies to the following commands:
+
++ `delete`
++ `edit`
++ `clear`
++ `add`
++ `assign`
+
+Format: `redo`
+
+Examples:
+
++ `delete i/T1234567A` deletes the patient with IC number "T1234567A" from the patient list
+  `undo` restores this patient back into the patient list.
+  `redo` once again deletes this patient from the patient list.
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Clearing all entries: `clear`
 
@@ -587,7 +588,7 @@ Advanced&Efficient data is saved in the hard disk automatically after any comman
 need to
 save manually.
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Editing the data file
 
@@ -610,7 +611,7 @@ empty data file at the next run. Hence, it is recommended to take a backup of th
 ## FAQ
 
 **Q**: I double-clicked the Jar file and it doesn't run, why?\
-**A**: Make sure that Java 11 is installed and do refer to step 5 of [Quick-start](#quick-start) for instructions to run
+**A**: Make sure that Java 11 is installed and do refer to step 5 of [Quick Start](#quick-start) for instructions to run
 application.
 
 **Q**: I have a list of patients, how do I view their details?\
@@ -623,7 +624,7 @@ Record Panel to the right.
 
 **Q**: I entered a command and there is no response from the application, what do I do?\
 **A**: A critical error might have occured. Please ensure your command is as specified in [Features](#features). Please contact
-the technical team in charge of your department to file a bug report on our [issues](tps://github.com/AY2324S1-CS2103T-T14-2/tp/issues) page.
+the technical team in charge of your department to file a bug report on our [issues](https://github.com/AY2324S1-CS2103T-T14-2/tp/issues) page.
 
 **Q**: I have accidentally cleared the whole patient record system, can I retrieve the lost details?\
 **A**: Yes, A&E has the [Undo](#undoing-a-command-undo) feature which allows you to retrieve all the lost details.
@@ -635,7 +636,7 @@ the technical team in charge of your department to file a bug report on our [iss
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AAndE home folder.
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -672,22 +673,22 @@ the data of your previous AAndE home folder.
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                                    |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**   | `help`                                                                                                                                                                                                                                              |
-| **List**   | `list`                                                                                                                                                                                                                                              |
-| **Add**    | `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...` <br> e.g., `add n/Betsy Crowe i/S0123456B g/FEMALE b/23/12/1994 p/90909090 e/bc@gmail.com a/Old Town Road 4 pr/low t/stable`       |
-| **View**   | `view i/IC_NUMBER`<br> e.g. `view i/T0201234A`                                                                                                                                                                                                      |
-| **Edit**   | `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`<br> e.g., `edit i/T0201234A n/Moira Crow g/MALE b/08/08/1999 p/93827836 e/example@email.com a/Old Time Road Block 3 pr/high t/bedrest` |
-| **Delete** | `delete i/IC_NUMBER`<br> e.g. `delete i/T2468012A`                                                                                                                                                                                                  |
-| **Undo**   | `undo`                                                                                                                                                                                                                                              |
-| **Redo**   | `redo`                                                                                                                                                                                                                                              |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g. `find Mary Jane`                                                                                                                                                                                         |
-| **Sort**   | `sort PROPERTY`<br> e.g. `sort name`, `sort ic`, `sort department`, `sort age`, `sort priority`                                                                                                                                                     |
-| **Record** | `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`<br> e.g. `record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`                                                                                  |
-| **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g. `assign i/T0201234A d/Cardiology`                                                                                                                                                                        |
-| **Clear**  | `clear`                                                                                                                                                                                                                                             |
-| **Exit**   | `exit`                                                                                                                                                                                                                                              |
+| Action     | Format, Examples                                                                                                                                                                                                                                   |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**   | `help`                                                                                                                                                                                                                                             |
+| **List**   | `list`                                                                                                                                                                                                                                             |
+| **Add**    | `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...` <br> e.g. `add n/Betsy Crowe i/S0123456B g/FEMALE b/23/12/1994 p/90909090 e/bc@gmail.com a/Old Town Road 4 pr/low t/stable`       |
+| **View**   | `view i/IC_NUMBER`<br> e.g. `view i/T0201234A`                                                                                                                                                                                                     |
+| **Edit**   | `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`<br> e.g. `edit i/T0201234A n/Moira Crow g/MALE b/08/08/1999 p/93827836 e/example@email.com a/Old Time Road Block 3 pr/high t/bedrest` |
+| **Delete** | `delete i/IC_NUMBER`<br> e.g. `delete i/T2468012A`                                                                                                                                                                                                 |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g. `find Mary Jane`                                                                                                                                                                                        |
+| **Sort**   | `sort PROPERTY`<br> e.g. `sort name`, `sort ic`, `sort department`, `sort age`, `sort priority`                                                                                                                                                    |
+| **Record** | `record i/IC_NUMBER [o/INITAL_OBSERVATIONS] [di/DIAGNOSIS] [tp/TREATMENT_PLAN]`<br> e.g. `record i/T0201234A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`                                                                                 |
+| **Assign** | `assign i/IC_NUMBER d/DEPARTMENT`<br> e.g. `assign i/T0201234A d/Cardiology`                                                                                                                                                                       |
+| **Undo**   | `undo`                                                                                                                                                                                                                                             |
+| **Redo**   | `redo`                                                                                                                                                                                                                                             |
+| **Clear**  | `clear`                                                                                                                                                                                                                                            |
+| **Exit**   | `exit`                                                                                                                                                                                                                                             |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -704,15 +705,15 @@ the data of your previous AAndE home folder.
 <a id="gui"></a>
 2. **Graphical User Interface**
 
-    A graphical user interface (GUI) is a digital interface 
-    in which a user interacts with graphical components such as icons, buttons, and menus, often by clicking.
+    A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as
+    icons, buttons, and menus, often by clicking.
 
 <a id="java-11"></a>
 3. **Java 11**
 
    Java is the programming language used in creating A&E. “11” refers to the version of the language used.
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -749,4 +750,4 @@ Related commands: [Assign](#assigning-a-patient-to-a-department-assign)
 | Radiology            | `Radiology`            |
 | Urology              | `Urology`              |
 
-[Back to Table-of-contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
