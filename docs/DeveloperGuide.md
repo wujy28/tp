@@ -85,7 +85,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="250" />
 
 The ***Architecture Diagram*** given above explains the high-level design of Advanced&Efficient.
 
@@ -130,7 +130,7 @@ the `LogicManager.java` class which follows the `Logic` interface. Other compone
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
 implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="270" />
 
 The sections below give more details of each component.
 
