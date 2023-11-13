@@ -706,14 +706,14 @@ to check if this is the case. If so, it will return an error to the user rather 
 as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
 Thus, the `addressBookStateList` remains unchanged.
 
-**Step 6.** The user then decides to execute another command, `record`. Commands such as editing patient record 
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+
+**Step 6.** The user then decides to execute another command, `record`. Commands such as editing patient record
 do not use an inherent method in Model which would modify the state of the addressBook. 
 For instance, simple commands like `edit` and `add` call methods in Model like
 `Model#setPatient` and `Model#addPatient` respectively, modifying the state of the AddressBook
 and committing that state using `Model#commitAddressBook`. Hence, the `undo` and `redo` commands only work for operations
 that both modify the addressBook and commit its state.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 **Step 7.** The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
 pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
